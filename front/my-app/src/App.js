@@ -8,7 +8,6 @@ class App extends Component {
         <header className="App-header">
             <h1 className="App-title">Les ateliers du héron bleu</h1>
         </header>
-
       </div>
     );
   }
