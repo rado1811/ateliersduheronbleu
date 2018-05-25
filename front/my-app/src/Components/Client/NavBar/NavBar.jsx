@@ -9,9 +9,8 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Grid from '@material-ui/core/Grid';
-
-// Aller sur le lien ci-dessous pour tester une navbar responsive
-// https://github.com/TarikHuber/material-ui-responsive-drawer
+import { Link } from 'react-router-dom';
+import Hidden from '@material-ui/core/Hidden';
 
 const styles = {
   root: {
@@ -36,6 +35,11 @@ const styles = {
   },
 };
 
+const MyHome = props => <Link to="/" {...props} />;
+const Mytest = props => <Link to="/test" {...props} />;
+const MyPage2 = props => <Link to="/page2" {...props} />;
+const MyContact = props => <Link to="/" {...props} />;
+
 function ButtonAppBar(props) {
   const { classes } = props;
   return (
@@ -44,25 +48,42 @@ function ButtonAppBar(props) {
         <Grid item xs={12}>
           <AppBar position="static">
             <Toolbar>
-              <IconButton
-                className={classes.menuButton}
-                color="inherit"
-                aria-label="Menu"
-              >
-                <MenuIcon />
-              </IconButton>
+              <Hidden smUp>
+                <IconButton
+                  className={classes.menuButton}
+                  color="inherit"
+                  aria-label="Menu"
+                >
+                  <MenuIcon />
+                </IconButton>
+              </Hidden>
               <Typography
                 variant="title"
                 color="inherit"
                 className={classes.flex}
               >
-                Title
+                Atelier du Héron Bleu
               </Typography>
-              <Button color="inherit">Accueil</Button>
-              <Button color="inherit">Ateliers</Button>
-              <Button color="inherit">Concept</Button>
-              <Button color="inherit">Intervenants</Button>
-              <Button color="inherit">Contact</Button>
+              <Hidden xsDown>
+                <Button color="inherit" component={MyHome}>
+                  Home
+                </Button>
+              </Hidden>
+              <Hidden xsDown>
+                <Button color="inherit" component={Mytest}>
+                  Test
+                </Button>
+              </Hidden>
+              <Hidden xsDown>
+                <Button color="inherit" component={MyPage2}>
+                  Page 2
+                </Button>
+              </Hidden>
+              <Hidden xsDown>
+                <Button color="inherit" component={MyContact}>
+                  Contact{' '}
+                </Button>
+              </Hidden>
             </Toolbar>
           </AppBar>
         </Grid>

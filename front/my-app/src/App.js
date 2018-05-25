@@ -1,18 +1,24 @@
 // React
 import React from 'react';
-// React
+import { BrowserRouter, Route } from 'react-router-dom';
+// CSS
 import './App.css';
 // Components
-import ButtonAppBar from './Components/Client/NavBar/NavBar';
-import Navigation from './Components/Client/Navigation/Navigation';
+import PersistentDrawer from './Components/Client/NavBar/PersistentDrawer';
+import Test from './Components/Admin/Test';
+import Page2 from './Components/Admin/Page2';
+import Home from './Components/Admin/Home';
 
 const App = () => (
-  <div className="App">
-    <Navigation />
-    <ButtonAppBar />
-    <div className="App-header">
-      <h2>Atelier du Heron bleu</h2>
-    </div>
+  <div>
+    <BrowserRouter>
+      <PersistentDrawer />
+      <switch>
+        <Route extact path="/" component={Home} />
+        <Route path="/test" component={Test} />
+        <Route path="/page2" component={Page2} />
+      </switch>
+    </BrowserRouter>
   </div>
 );
 
