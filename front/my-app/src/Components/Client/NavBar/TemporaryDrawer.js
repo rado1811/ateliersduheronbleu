@@ -18,6 +18,7 @@ const styles = {
   list: {
     width: 250,
   },
+
   fullList: {
     width: 'auto',
   },
@@ -46,7 +47,7 @@ class TemporaryDrawer extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <Toolbar>
+        <Toolbar position="sticky">
           <Hidden smUp>
             <IconButton
               color="inherit"
@@ -56,27 +57,32 @@ class TemporaryDrawer extends React.Component {
               <MenuIcon />
             </IconButton>
           </Hidden>
-          <Typography variant="title" color="inherit" noWrap>
+          <Typography
+            variant="title"
+            style={{ flex: 1 }}
+            color="inherit"
+            noWrap
+          >
             Atelier du Héron Bleu
           </Typography>
           <Hidden xsDown>
             <Button color="inherit" component={MyHome}>
-              Home
+              Accueil
             </Button>
           </Hidden>
           <Hidden xsDown>
             <Button color="inherit" component={Mytest}>
-              Test
+              Ateliers
             </Button>
           </Hidden>
           <Hidden xsDown>
             <Button color="inherit" component={MyPage2}>
-              Page 2
+              Intervenants
             </Button>
           </Hidden>
           <Hidden xsDown>
             <Button color="inherit" component={MyContact}>
-              Contact{' '}
+              Contact
             </Button>
           </Hidden>
         </Toolbar>
@@ -88,15 +94,15 @@ class TemporaryDrawer extends React.Component {
           <Divider />
           <List>
             <ListItem button component={MyHome}>
-              Home
+              Accueil
               <ListItemText />
             </ListItem>
             <ListItem button component={Mytest}>
-              Test
+              Atelier
               <ListItemText />
             </ListItem>
             <ListItem button component={MyPage2}>
-              Page 2
+              Intervenants
               <ListItemText />
             </ListItem>
             <ListItem button component={MyPage2}>
