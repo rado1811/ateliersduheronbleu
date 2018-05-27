@@ -1,14 +1,13 @@
 // React
 import React from 'react';
-// React
 // Components
 
-const Page2 = () => (
+const Ateliers = () => (
   <div className="App">
     <div className="App-header">
-      <h2>Coucou Page2</h2>
+      <h2>Ateliers</h2>
     </div>
   </div>
 );
 
-export default Page2;
+export default Ateliers;

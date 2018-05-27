@@ -2,12 +2,12 @@
 import React from 'react';
 // Components
 
-const Test = () => (
+const Concept = () => (
   <div className="App">
     <div className="App-header">
-      <h2>Coucou Test</h2>
+      <h2>Concept</h2>
     </div>
   </div>
 );
 
-export default Test;
+export default Concept;

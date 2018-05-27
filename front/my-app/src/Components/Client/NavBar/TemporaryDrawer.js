@@ -23,12 +23,17 @@ const styles = {
     width: 'auto',
   },
 };
-
-const MyHome = props => <Link to="/" {...props} />;
-const Mytest = props => <Link to="/test" {...props} />;
-const MyPage2 = props => <Link to="/page2" {...props} />;
-const MyContact = props => <Link to="/" {...props} />;
-
+/*
+======= ROUTING =========
+*/
+const MyAccueil = props => <Link to="/" {...props} />;
+const MyAteliers = props => <Link to="/ateliers" {...props} />;
+const MyIntervenants = props => <Link to="/intervenants" {...props} />;
+const MyContact = props => <Link to="/contact" {...props} />;
+const MyConcept = props => <Link to="/concept" {...props} />;
+/*
+======= ROUTING ========
+*/
 class TemporaryDrawer extends React.Component {
   state = {
     top: false,
@@ -66,18 +71,23 @@ class TemporaryDrawer extends React.Component {
             Atelier du Héron Bleu
           </Typography>
           <Hidden xsDown>
-            <Button color="inherit" component={MyHome}>
+            <Button color="inherit" component={MyAccueil}>
               Accueil
             </Button>
           </Hidden>
           <Hidden xsDown>
-            <Button color="inherit" component={Mytest}>
+            <Button color="inherit" component={MyAteliers}>
               Ateliers
             </Button>
           </Hidden>
           <Hidden xsDown>
-            <Button color="inherit" component={MyPage2}>
+            <Button color="inherit" component={MyIntervenants}>
               Intervenants
+            </Button>
+          </Hidden>
+          <Hidden xsDown>
+            <Button color="inherit" component={MyConcept}>
+              Concept
             </Button>
           </Hidden>
           <Hidden xsDown>
@@ -93,25 +103,29 @@ class TemporaryDrawer extends React.Component {
           <div className={classes.drawerHeader} />
           <Divider />
           <List>
-            <ListItem button component={MyHome}>
+            <ListItem button component={MyAccueil}>
               Accueil
               <ListItemText />
             </ListItem>
-            <ListItem button component={Mytest}>
+            <ListItem button component={MyAteliers}>
               Atelier
               <ListItemText />
             </ListItem>
-            <ListItem button component={MyPage2}>
+            <ListItem button component={MyIntervenants}>
               Intervenants
               <ListItemText />
             </ListItem>
-            <ListItem button component={MyPage2}>
+            <ListItem button component={MyConcept}>
+            Concept
+            <ListItemText />
+          </ListItem>
+            <ListItem button component={MyContact}>
               Contact
               <ListItemText />
             </ListItem>
           </List>
           <Divider />
-          <Button color="inherit" component={MyHome}>
+          <Button color="inherit" component={MyAccueil}>
             Connexion
           </Button>
         </Drawer>
