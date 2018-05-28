@@ -35,15 +35,12 @@ const AtelierVignette = (props) => {
         />
         <CardContent>
           <Typography gutterBottom variant="headline" component="h2">
-          {props.name}
+            {props.name}
           </Typography>
-          <Typography component="h3">
-            {props.date}
-          </Typography>
+          <Typography component="h3">{props.date}</Typography>
           <Typography component="h3">
             Co-animation: {props.intervenant}, Isabelle Jono
           </Typography>
-
         </CardContent>
         <CardActions>
           <Button size="small" color="primary" onClick={props.booking}>
@@ -55,8 +52,7 @@ const AtelierVignette = (props) => {
         </CardActions>
       </Card>
     </Grid>
-
-  )
+  );
 };
 
 export default withStyles(styles)(AtelierVignette);
