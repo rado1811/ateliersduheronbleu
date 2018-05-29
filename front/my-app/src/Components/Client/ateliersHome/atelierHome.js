@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 
-const styles = theme => ({
+const styles = (theme) => ({
   button: {
     margin: theme.spacing.unit,
   },
@@ -85,9 +85,10 @@ class AtelierHome extends Component {
     let firstAteliers = this.state.atelier.slice(0, 3);
     let upcomingAteliers = (
       <Grid container justify="center">
-        {firstAteliers.map(atelier => {
+        {firstAteliers.map((atelier) => {
           return (
             <AtelierVignette
+              key={atelier.name}
               name={atelier.name}
               date={atelier.date}
               image={atelier.image}
@@ -110,7 +111,7 @@ class AtelierHome extends Component {
     if (this.state.showAteliers) {
       upcomingAteliers = (
         <Grid container justify="center">
-          {this.state.atelier.map(atelier => {
+          {this.state.atelier.map((atelier) => {
             return (
               <AtelierVignette
                 name={atelier.name}

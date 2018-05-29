@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -24,7 +25,6 @@ const styles = {
 
 const AtelierVignette = (props) => {
   const { classes } = props;
-
   return (
     <Grid item md={4} sm={12}>
       <Card className={classes.card} justify="center">
@@ -55,4 +55,17 @@ const AtelierVignette = (props) => {
   );
 };
 
+AtelierVignette.propTypes = {
+  image: PropTypes.string.isRequired,
+  intervenant: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  classes: PropTypes.shape({
+    item: PropTypes.string.isRequired,
+    card: PropTypes.string.isRequired,
+    media: PropTypes.string.isRequired,
+  }).isRequired,
+  //  booking: PropTypes.func,isRequired
+  // moreDetails: PropTypes.func,isRequired
+};
 export default withStyles(styles)(AtelierVignette);
