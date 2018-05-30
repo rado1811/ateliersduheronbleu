@@ -29,7 +29,6 @@ const AtelierVignette = (props) => {
     <Grid item md={4} sm={12}>
       <Card
         className={classes.card}
-        justify="center"
         style={{
           marginLeft: 'auto',
           marginRight: 'auto',
