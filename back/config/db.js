@@ -8,10 +8,6 @@ const connection = mysql.createConnection({
   database: 'sql7239441'
 });
 
-connection.connect((err) => {
-  database: 'sql7239441',
-});
-
 connection.connect(function(err) {
   if (!err) {
     console.log('Database connected');

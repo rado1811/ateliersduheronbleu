@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import AteliersReducer from './users';
+import AteliersReducer from './ateliers';
 import ActiveAteliersReducer from './active-user';
 
 // combine all reducers 
