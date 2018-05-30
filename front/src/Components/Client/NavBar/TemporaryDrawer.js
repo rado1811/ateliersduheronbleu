@@ -26,21 +26,24 @@ const styles = {
 /*
 ======= ROUTING =========
 */
-const MyAccueil = props => <Link to="/" {...props} />;
-const MyAteliers = props => <Link to="/ateliers" {...props} />;
-const MyIntervenants = props => <Link to="/intervenants" {...props} />;
-const MyContact = props => <Link to="/contact" {...props} />;
-const MyConcept = props => <Link to="/concept" {...props} />;
+const MyAccueil = (props) => <Link to="/" {...props} />;
+const MyAteliers = (props) => <Link to="/ateliers" {...props} />;
+const MyIntervenants = (props) => <Link to="/intervenants" {...props} />;
+const MyContact = (props) => <Link to="/contact" {...props} />;
+const MyConcept = (props) => <Link to="/concept" {...props} />;
 /*
 ======= ROUTING ========
 */
 class TemporaryDrawer extends React.Component {
-  state = {
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      top: false,
+      left: false,
+      bottom: false,
+      right: false,
+    };
+  }
 
   toggleDrawer = (side, open) => () => {
     this.setState({
@@ -116,9 +119,9 @@ class TemporaryDrawer extends React.Component {
               <ListItemText />
             </ListItem>
             <ListItem button component={MyConcept}>
-            Concept
-            <ListItemText />
-          </ListItem>
+              Concept
+              <ListItemText />
+            </ListItem>
             <ListItem button component={MyContact}>
               Contact
               <ListItemText />
