@@ -1,24 +1,28 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
 import Button from '@material-ui/core/Button';
 
-const AteliersDetail = ({ateliers}) => {
+const AteliersDetail = ({ ateliers }) => {
   return (
     <div className="AteliersDetail">
       {(!ateliers)
         ? <div>Choisissez un atelier</div>
         : <div>
-          <Grid container style={{
-            height: '100%'
-          }}>
+          <Grid
+            container
+            style={{
+            height: '100%',
+          }}
+          >
 
             <Grid className='Details' item md={6}>
               <div margin='40px' >
                 <img
                   src={ateliers.image}
                   width="100%"
-                  alt="heron"/>
+                  alt="heron"
+                />
               </div>
             </Grid>
 
@@ -30,7 +34,8 @@ const AteliersDetail = ({ateliers}) => {
                   <img
                     src="https://cdn4.iconfinder.com/data/icons/birds-1/154/bird-stork-heron-pelican-512.png"
                     width="5%"
-                    alt="heron"/>
+                    alt="heron"
+                  />
                   En chemin, vous trouverez :
                 </b>
                 <p>
@@ -43,8 +48,9 @@ const AteliersDetail = ({ateliers}) => {
                   <img
                     src="https://cdn4.iconfinder.com/data/icons/birds-1/154/bird-stork-heron-pelican-512.png"
                     width="5%"
-                    alt="iconHeron"/>
-                    Programme : 
+                    alt="iconHeron"
+                  />
+                    Programme :
                 </b>
                 <p>{ateliers.programme}</p>
                 <b>
@@ -60,11 +66,12 @@ const AteliersDetail = ({ateliers}) => {
                 variant="raised"
                 id="resa"
                 buttonStyle={{
-                borderRadius: 25
+                borderRadius: 25,
               }}
                 style={{
-                borderRadius: 25
-              }}>
+                borderRadius: 25,
+              }}
+              >
 
                 Pré-réserver
               </Button>
@@ -73,8 +80,8 @@ const AteliersDetail = ({ateliers}) => {
           </Grid>
         </div>}
     </div>
-  )
-}
+  );
+};
 
 // "state.activeUser" is set in reducers/index.js
 function mapStateToProps(state) {

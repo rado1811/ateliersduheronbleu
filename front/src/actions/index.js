@@ -1,4 +1,6 @@
-export const selectAteliers = (ateliers) => ({
+export const selectAteliers = (ateliers) => {
+  return {
   type: 'ATELIERS_SELECTED',
   ateliers
-});
+  }
+};

@@ -6,11 +6,12 @@ import './App.css';
 // Components
 import TemporaryDrawer from './Components/Client/NavBar/TemporaryDrawer';
 import Ateliers from './Components/Client/pageAteliers/Ateliers';
-import AtelierHome from './Components/Client/ateliersHome/atelierHome';
+import AtelierHome from './containers/atelierHome';
 import Concept from './Components/Client/NavBar/FakeComponents/Concept';
 import Intervenants from './Components/Client/NavBar/FakeComponents/Intervenants';
 import Contact from './Components/Client/NavBar/FakeComponents/Contact';
-
+import MenuAdmin from './Components/Admin/MenuAdmin/MenuAdmin';
+import Admin from './Components/Admin/FormulaireIntervenant/Admin';
 
 const App = () => (
   <div>
@@ -21,6 +22,8 @@ const App = () => (
       <Route path="/concept" component={Concept} />
       <Route path="/intervenants" component={Intervenants} />
       <Route path="/contact" component={Contact} />
+      <Route exact path="/admin" component={MenuAdmin} />
+      <Route path="/admin/administration" component={Admin} />
     </Switch>
   </div>
 );

@@ -26,7 +26,14 @@ const styles = {
 const AtelierVignette = (props) => {
   const { classes } = props;
   return (
-    <Grid item md={4} sm={12}>
+    <Grid
+      item
+      md={4}
+      sm={12}
+      style={{
+        padding: 10,
+      }}
+    >
       <Card
         className={classes.card}
         justify="center"

@@ -71,7 +71,7 @@ class TemporaryDrawer extends React.Component {
             color="inherit"
             noWrap
           >
-            Atelier du Héron Bleu
+            Les Ateliers du Héron Bleu
           </Typography>
           <Hidden xsDown>
             <Button color="inherit" component={MyAccueil}>
