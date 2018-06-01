@@ -7,7 +7,7 @@ import path from 'path';
 // import favicon from 'serve-favicon';
 
 import index from './routes/index';
-
+// import FormulaireIntervenant from './routes/FormulaireIntervenant';
 const connection = require('./config/db.js');
 
 const app = express();
@@ -25,7 +25,16 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+  next();
+});
+
 app.use('/', index);
+// app.use('/admin', FormulaireIntervenant);
+// app.use('/administration', FormulaireIntervenant);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -42,6 +51,7 @@ app.use((err, req, res, next) => {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   // render the error page
   res.status(err.status || 500);
+  res.send('error');
   res.json(err);
 });
 
