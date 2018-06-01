@@ -6,9 +6,10 @@ import logger from 'morgan';
 import path from 'path';
 // import favicon from 'serve-favicon';
 
-import index from './routes/index';
+import indexRouter from './routes/index';
 
-const connection = require('./config/db.js');
+import connection from './config/db.js';
+import prereservation from './routes/Prereservation';
 
 const app = express();
 const debug = Debug('back:app');
@@ -17,15 +18,19 @@ const debug = Debug('back:app');
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+  })
+);
 
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use('/', indexRouter);
+
+app.use('/client', prereservation);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

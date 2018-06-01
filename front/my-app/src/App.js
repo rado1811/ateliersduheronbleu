@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 // CSS
 import './App.css';
@@ -11,8 +11,38 @@ import Intervenants from './Components/Client/NavBar/FakeComponents/Intervenants
 import Contact from './Components/Client/NavBar/FakeComponents/Contact';
 import Ateliers from './Components/Client/NavBar/FakeComponents/Ateliers';
 
+/*
+======== Fonctions
+*/
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isLogin: true };
+  }
+  render() {
+    const { isLogin } = this.state;
+    const witchBar = isLogin ? (
+      <TemporaryDrawer />
+    ) : (
+      <TemporaryDrawer test={1} />
+    );
+    return (
+      <div>
+        {witchBar}
+        <Switch>
+          <Route exact path="/" component={AtelierHome} />
+          <Route path="/ateliers" component={Ateliers} />
+          <Route path="/concept" component={Concept} />
+          <Route path="/intervenants" component={Intervenants} />
+          <Route path="/contact" component={Contact} />
+        </Switch>
+      </div>
+    );
+  }
+}
 
-const App = () => (
+export default App;
+/* const App = () => (
   <div>
     <TemporaryDrawer />
     <Switch>
@@ -25,4 +55,4 @@ const App = () => (
   </div>
 );
 
-export default App;
+export default App; */

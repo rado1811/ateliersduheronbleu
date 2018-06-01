@@ -1,14 +1,10 @@
-const mysql = require('mysql');
+import mysql from 'mysql';
 
 const connection = mysql.createConnection({
   multipleStatements: true,
   host: 'sql7.freemysqlhosting.net',
   user: 'sql7239441',
   password: 'lI1KZJjzVK',
-  database: 'sql7239441'
-});
-
-connection.connect((err) => {
   database: 'sql7239441',
 });
 
@@ -19,5 +15,4 @@ connection.connect(function(err) {
     console.log('No connection with database');
   }
 });
-
-module.exports = connection;
+export default connection;
