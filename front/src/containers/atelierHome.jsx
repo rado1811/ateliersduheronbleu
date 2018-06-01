@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
-// import './atelierHome.css';
 import AtelierVignette from '../Components/Client/ateliersHome/atelierVignette';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -18,18 +17,13 @@ class AtelierHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showAteliers: false,
+      toggleAteliers: false,
     };
   }
 
-  showAteliers = () => {
-    const doesShow = this.state.showAteliers;
-    this.setState({ showAteliers: !doesShow });
-  };
-
-  hideAteliers = () => {
-    const doesShow = this.state.showAteliers;
-    this.setState({ showAteliers: !doesShow });
+  toggleAteliers = () => {
+    const doesShow = this.state.toggleAteliers;
+    this.setState({ toggleAteliers: !doesShow });
   };
 
   render() {
@@ -52,14 +46,14 @@ class AtelierHome extends Component {
           variant="fab"
           color="primary"
           aria-label="add"
-          onClick={this.showAteliers}
+          onClick={this.toggleAteliers}
         >
           <AddIcon />
         </Button>
       </Grid>
     );
 
-    if (this.state.showAteliers) {
+    if (this.state.toggleAteliers) {
       upcomingAteliers = (
         <Grid container justify="center">
           {this.props.ateliers.map((ateliers) => {
@@ -79,7 +73,7 @@ class AtelierHome extends Component {
             variant="fab"
             color="secondary"
             aria-label="add"
-            onClick={this.hideAteliers}
+            onClick={this.toggleAteliers}
           >
             <AddIcon />
           </Button>
