@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
 import Button from '@material-ui/core/Button';
 
+
 const AteliersDetail = ({ ateliers }) => (
   <div className="AteliersDetail">
     {(!ateliers)
@@ -15,7 +16,7 @@ const AteliersDetail = ({ ateliers }) => (
           }}
           >
 
-            <Grid className="Details" item md={6}>
+            <Grid className="Details" item md={6} xs={1}>
               <div margin="40px" >
                 <img
                   src={ateliers.image}
@@ -25,7 +26,7 @@ const AteliersDetail = ({ ateliers }) => (
               </div>
             </Grid>
 
-            <Grid item md={6} key={ateliers.key}>
+            <Grid item md={6} xs={1} key={ateliers.key}>
               <div>
                 <h2>{ateliers.nom_atelier}</h2>
                 <h3>{ateliers.date}</h3>
@@ -62,20 +63,6 @@ const AteliersDetail = ({ ateliers }) => (
                 </b>
                 <p>{ateliers.intervenants}</p>
               </div>
-              <Button
-                variant="raised"
-                id="resa"
-                buttonStyle={{
-                borderRadius: 25,
-              }}
-                style={{
-                borderRadius: 25,
-              }}
-              >
-
-                Pré-réserver
-              </Button>
-
             </Grid>
           </Grid>
         </div>}

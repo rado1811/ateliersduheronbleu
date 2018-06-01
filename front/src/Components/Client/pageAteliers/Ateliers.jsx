@@ -2,24 +2,28 @@ import React, { Component } from 'react';
 import UserList from '../../../containers/AtelierList';
 import UserDetail from '../../../containers/AtelierDetail';
 import Grid from 'material-ui/Grid';
-import SimpleForm from '../../../containers/form';
+import SimpleForm from '../../../containers/Form';
 
 
 
 class Ateliers extends Component {
   render() {
     return (
-      <div>
+      <div style={{background: '#F2F2F2'}}>
         <div>
           <Grid container>
-            <Grid item xs={2}>
+            <Grid item md={2}>
               <UserList />
             </Grid>
-            <Grid item xs={10}>
+            <Grid item md={10}>
               <UserDetail />
             </Grid>
           </Grid>
-          <SimpleForm />
+          <Grid style={{height: 400,}} container spacing={24} direction="column" align="center" >
+            <Grid item xs={12} style={{background: '#234423'}}>
+            <SimpleForm />
+            </Grid>
+          </Grid>
         </div>
         <div />
       </div>
