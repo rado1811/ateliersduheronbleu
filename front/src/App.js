@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 // CSS
-import './App.css';
 // Components
 import TemporaryDrawer from './Components/Client/NavBar/TemporaryDrawer';
 import Ateliers from './Components/Client/pageAteliers/Ateliers';
