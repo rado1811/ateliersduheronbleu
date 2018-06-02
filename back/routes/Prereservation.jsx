@@ -1,5 +1,4 @@
 import express from 'express';
-const app = express();
 const router = express.Router();
 import mysql from 'mysql';
 import http from 'http';
@@ -8,10 +7,10 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import connection from '../config/db.js';
 
-console.log('dans le fichier');
+console.log('dans le /.routes./Prereservation.jsx');
 
 router.post('/montest', (req, res) => {
-  console.log(`dans le post montest`);
+  console.log('dans le post montest');
 });
 
 router.post('/signup', (req, res, next) => {
@@ -19,13 +18,13 @@ router.post('/signup', (req, res, next) => {
   ('${req.body.Macoemail}', '${req.body.Macopassword}', '${
     req.body.Maconame
   }', '${req.body.Macolastname}');`;
-  connection.query(select, (err, rows, fields) => {
+  connection.query(select, (err, rows) => {
     if (err) {
       res.status(500);
-      console.log(`500 bro`);
+      console.log('500 bro');
     } else {
       res.status(200);
-      console.log(`Keep going this way`);
+      console.log('Keep going this way');
       res.end();
     }
   });
