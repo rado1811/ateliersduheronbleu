@@ -3,13 +3,12 @@ import UserList from '../../../containers/AtelierList';
 import UserDetail from '../../../containers/AtelierDetail';
 import Grid from 'material-ui/Grid';
 import SimpleForm from '../../../containers/Form';
-
-
+import addParticipants from '../../../actions/index';
 
 class Ateliers extends Component {
   render() {
     return (
-      <div style={{background: '#F2F2F2'}}>
+      <div style={{ background: '#F2F2F2' }}>
         <div>
           <Grid container>
             <Grid item md={2}>
@@ -19,9 +18,15 @@ class Ateliers extends Component {
               <UserDetail />
             </Grid>
           </Grid>
-          <Grid style={{height: 400,}} container spacing={24} direction="column" align="center" >
-            <Grid item xs={12} style={{background: '#234423'}}>
-            <SimpleForm />
+          <Grid
+            style={{ height: 400 }}
+            container
+            spacing={24}
+            direction="column"
+            align="center"
+          >
+            <Grid item xs={12} style={{ background: '#234423' }}>
+              <SimpleForm onSubmit={addParticipants} />
             </Grid>
           </Grid>
         </div>
@@ -32,4 +37,3 @@ class Ateliers extends Component {
 }
 
 export default Ateliers;
-

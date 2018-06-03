@@ -1,38 +1,21 @@
+// React
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
 import Grid from 'material-ui/Grid';
 import Paper from '@material-ui/core/Paper';
+// Redux
+import { Field, reduxForm } from 'redux-form';
+import formValueSelector from 'redux-form/lib/formValueSelector';
+import { connect } from 'react-redux';
 
-const SimpleForm = (props) => {
-  const { handleSubmit, pristine, reset, submitting } = props;
-
-  updateName = (event) => {
-    this.setState({
-      checkPassWord: event.target.value,
-    });
-  };
-
-  updatePrenom = (event) => {
-    this.setState({
-      name: event.target.value,
-    });
-  };
-  updateAdresse = (event) => {
-    this.setState({
-      lastname: event.target.value,
-    });
-  };
-  updateTelephone = (event) => {
-    this.setState({
-      lastname: event.target.value,
-    });
-  };
-
-  updateEmailField = (event) => {
-    this.setState({
-      lastname: event.target.value,
-    });
-  };
+let SimpleForm = (props) => {
+  const {
+    handleSubmit,
+    pristine,
+    submitting,
+    hasEmailValue,
+    hasNameValue,
+    fullName,
+  } = props;
 
   return (
     <Grid
@@ -52,7 +35,6 @@ const SimpleForm = (props) => {
                   component="input"
                   type="text"
                   placeholder="Nom"
-                  onChange={this.updateName}
                 />
               </div>
             </div>
@@ -64,7 +46,6 @@ const SimpleForm = (props) => {
                   component="input"
                   type="text"
                   placeholder="Prénom"
-                  onChange={this.updatePrenom}
                 />
               </div>
             </div>
@@ -76,7 +57,6 @@ const SimpleForm = (props) => {
                   component="input"
                   type="text"
                   placeholder="Adresse"
-                  onChange={this.updateAdresse}
                 />
               </div>
             </div>
@@ -88,7 +68,6 @@ const SimpleForm = (props) => {
                   component="input"
                   type="text"
                   placeholder="telephone"
-                  onChange={this.updateTelephone}
                 />
               </div>
             </div>
@@ -100,7 +79,6 @@ const SimpleForm = (props) => {
                   component="input"
                   type="email"
                   placeholder="E-mail"
-                  onChange={this.updateEmailField}
                 />
               </div>
             </div>
@@ -139,7 +117,20 @@ const SimpleForm = (props) => {
     </Grid>
   );
 };
-
+const selector = formValueSelector(SimpleForm);
+SimpleForm = connect((state) => {
+  // can select values individually
+  const hasEmailValue = selector(state, 'email');
+  const hasNameValue = selector(state, 'nom');
+  // or together as a group
+  const { firstName, lastName } = selector(state, 'nom', 'prenom');
+  return {
+    hasEmailValue,
+    hasNameValue,
+    fullName: `${firstName || ''} ${lastName || ''}`,
+  };
+})(SimpleForm);
+// Ok les valeurs sont en props
 export default reduxForm({
   form: 'simple', // a unique identifier for this form
 })(SimpleForm);
