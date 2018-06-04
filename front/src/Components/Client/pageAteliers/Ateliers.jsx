@@ -20,7 +20,7 @@ class Ateliers extends Component {
             </Grid>
           </Grid>
           <Grid style={{height: 400,}} container spacing={24} direction="column" align="center" >
-            <Grid item xs={12} style={{background: '#234423'}}>
+            <Grid item xs={12} style={{background: '#F2F2F2'}}>
             <SimpleForm />
             </Grid>
           </Grid>
