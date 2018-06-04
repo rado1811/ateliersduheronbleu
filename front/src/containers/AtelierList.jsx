@@ -27,7 +27,6 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
       </ul>
     </div>
   </div>
-
 );
 
 function mapStateToProps(state) {

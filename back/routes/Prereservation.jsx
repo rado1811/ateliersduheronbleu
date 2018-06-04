@@ -7,17 +7,16 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import connection from '../config/db.js';
 
-console.log('dans le /.routes./Prereservation.jsx');
+console.log('dans la /.routes./Prereservation.jsx');
 
 router.post('/montest', (req, res) => {
   console.log('dans le post montest');
 });
 
-router.post('/signup', (req, res, next) => {
-  let select = `INSERT INTO Participants (email_participant, tel_participant, prenom_participant, nom_participant) VALUES 
-  ('${req.body.Macoemail}', '${req.body.Macopassword}', '${
-    req.body.Maconame
-  }', '${req.body.Macolastname}');`;
+router.post('/participants', (req, res) => {
+  console.log(req.body);
+  let select = `INSERT INTO Participants (email, tel, prenom, nom) VALUES 
+  ('${req.body.email}', '${req.body.telephone}', '${req.body.prenom}', '${req.body.nom}');`;
   connection.query(select, (err, rows) => {
     if (err) {
       res.status(500);

@@ -1,30 +1,32 @@
+const REQUEST_POSTS = 'REQUEST_POSTS';
+
 export const selectAteliers = (ateliers) => ({
   type: 'ATELIERS_SELECTED',
   ateliers,
 });
 
-
 export default (async function addParticipants(values) {
-  window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
-});
-/*   return {
-    type: 'PARTICIPANT_POST',
-    payload: event,
-  }; */
-// alert(JSON.stringify(values));
-
-/*   fetch('/client/participants', {
+  window.alert(`${JSON.stringify(values, null, 2)} et ${values.email}`);
+  fetch('/client/participants', {
     method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json',
     }),
-    body: JSON.stringify(this.state),
-  }).then((res) => res.json()); */
-/*     .then(
-      (res) =>
-        this.setState({
-        }),
-      (err) =>
-        this.setState({
-        })
-    ) */
+    body: JSON.stringify(values),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      return {
+        type: REQUEST_POSTS,
+        values,
+      };
+    });
+});
+/* export function fetchNews(values) {
+  console.log('presend');
+  return (dispatch) => {
+    return fetch('/client/participants').then((response) => {
+      console.log(response, values);
+    });
+  };
+} */
