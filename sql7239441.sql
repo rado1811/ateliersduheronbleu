@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : sql7.freemysqlhosting.net
--- Généré le :  mer. 23 mai 2018 à 16:55
+-- Généré le :  ven. 25 mai 2018 à 13:23
 -- Version du serveur :  5.5.58-0ubuntu0.14.04.1
 -- Version de PHP :  7.0.30-0ubuntu0.16.04.1
 
@@ -33,14 +33,22 @@ CREATE TABLE `Ateliers` (
   `nom_atelier` varchar(200) DEFAULT NULL,
   `id_intervenant` int(11) DEFAULT NULL,
   `debut_atelier` date DEFAULT NULL,
-  `fin_atelier` date DEFAULT NULL,
   `participants_atelier` int(11) NOT NULL,
   `prix_atelier` varchar(25) DEFAULT NULL,
-  `contenu_atelier` varchar(25) DEFAULT NULL,
+  `contenu_atelier` varchar(1000) DEFAULT NULL,
   `formule_atelier` varchar(100) DEFAULT NULL,
   `lieu_atelier` varchar(100) DEFAULT NULL,
   `photo_atelier` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `Ateliers`
+--
+
+INSERT INTO `Ateliers` (`id_atelier`, `nom_atelier`, `id_intervenant`, `debut_atelier`, `participants_atelier`, `prix_atelier`, `contenu_atelier`, `formule_atelier`, `lieu_atelier`, `photo_atelier`) VALUES
+(1, 'hello', 1, '2018-05-17', 4, '100', 'kdopekpodkd', 'week end', 'PARIS', 'undefined'),
+(3, 'heron', 1, '2018-05-30', 2, '22345', 'efzrgthyuj', 'week end', 'bordeaux', 'undefined'),
+(4, 'bien etre', 1, '2018-05-30', 32, '200', 'hello', 'week end', 'teich', 'undefined');
 
 -- --------------------------------------------------------
 
@@ -50,13 +58,23 @@ CREATE TABLE `Ateliers` (
 
 CREATE TABLE `Intervenants` (
   `id_intervenant` int(11) NOT NULL,
-  `nom_intervenant` int(255) NOT NULL,
-  `prenom_intervenant` int(255) NOT NULL,
-  `tel_intervenant` int(255) NOT NULL,
-  `email_intervenant` int(255) NOT NULL,
-  `parcours_intervenant` varchar(255) DEFAULT NULL,
-  `photo_intervenant` varchar(255) DEFAULT NULL
+  `nom_intervenant` varchar(255) NOT NULL,
+  `prenom_intervenant` varchar(255) NOT NULL,
+  `tel_intervenant` varchar(255) NOT NULL,
+  `email_intervenant` varchar(255) NOT NULL,
+  `parcours_intervenant` varchar(1000) DEFAULT NULL,
+  `photo_intervenant` varchar(255) DEFAULT NULL,
+  `metier_intervenant` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `Intervenants`
+--
+
+INSERT INTO `Intervenants` (`id_intervenant`, `nom_intervenant`, `prenom_intervenant`, `tel_intervenant`, `email_intervenant`, `parcours_intervenant`, `photo_intervenant`, `metier_intervenant`) VALUES
+(0, 'chene', 'frederic', '01338888', 'john@doe.fr', 'DEA', 'picto', NULL),
+(1, '0', '664173338', '0', '0', 'chene', 'photo', NULL),
+(3, 'dupuy', 'paul', '0664173338', 'toto@gmail.fr', 'etudiant', 'portrait', NULL);
 
 -- --------------------------------------------------------
 
@@ -145,7 +163,7 @@ ALTER TABLE `Reservations`
 -- AUTO_INCREMENT pour la table `Ateliers`
 --
 ALTER TABLE `Ateliers`
-  MODIFY `id_atelier` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_atelier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `Newsletter`
 --
