@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
-import Button from '@material-ui/core/Button';
-
 
 const AteliersDetail = ({ ateliers }) => (
   <div className="AteliersDetail">

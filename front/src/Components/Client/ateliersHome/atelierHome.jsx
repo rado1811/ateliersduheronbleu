@@ -75,12 +75,7 @@ class AtelierHome extends Component {
     };
   }
 
-  showAteliers = () => {
-    const doesShow = this.state.showAteliers;
-    this.setState({ showAteliers: !doesShow });
-  };
-
-  hideAteliers = () => {
+  toggleAteliers = () => {
     const doesShow = this.state.showAteliers;
     this.setState({ showAteliers: !doesShow });
   };
@@ -105,7 +100,7 @@ class AtelierHome extends Component {
           variant="fab"
           color="primary"
           aria-label="add"
-          onClick={this.showAteliers}
+          onClick={this.toggleAteliers}
         >
           <AddIcon />
         </Button>
@@ -131,7 +126,7 @@ class AtelierHome extends Component {
             variant="fab"
             color="secondary"
             aria-label="add"
-            onClick={this.hideAteliers}
+            onClick={this.toggleAteliers}
           >
             <AddIcon />
           </Button>

@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 
 const SimpleForm = (props) => {
   const {
-    handleSubmit, pristine, reset, submitting,
+    handleSubmit, pristine, submitting,
   } = props;
   return (
     <Grid
