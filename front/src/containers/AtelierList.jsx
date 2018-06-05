@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'material-ui';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -16,12 +17,14 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
     >
       <ul className="AteliersList">
         {ateliers.map(atelier => (
-          <li key={atelier.key} onClick={() => selectAteliers(atelier)}>
-            {atelier.nom_atelier}
-            <br />
-            {atelier.date}
-            <hr />
-          </li>
+          <Button key={atelier.key} onClick={() => selectAteliers(atelier)}>
+            <li >
+              {atelier.nom_atelier}
+              <br />
+              {atelier.date}
+              <hr />
+            </li>
+          </Button>
 
       ))
 }
@@ -41,7 +44,9 @@ function matchDispatchToProps(dispatch) {
   }, dispatch);
 }
 
-
-;
+AteliersList.propTypes = {
+  ateliers: PropTypes.arrayOf(Array).isRequired,
+  selectAteliers: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, matchDispatchToProps)(AteliersList);

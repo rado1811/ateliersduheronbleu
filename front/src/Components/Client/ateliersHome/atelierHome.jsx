@@ -140,9 +140,6 @@ class AtelierHome extends Component {
           <video id="background-video" style={{height: 'auto',
           width:'100%' }} loop muted autoPlay>
             <source src="../images/video.mp4" type="video/mp4"/>
-            <source
-              src="http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4"
-              type="video/ogg"/>
             Your browser does not support the video tag.
           </video>
         </div>
