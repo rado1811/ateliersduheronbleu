@@ -6,7 +6,6 @@ export const selectAteliers = (ateliers) => ({
 });
 
 export default (async function addParticipants(values) {
-  window.alert(`${JSON.stringify(values, null, 2)} et ${values.email}`);
   fetch('/client/participants', {
     method: 'POST',
     headers: new Headers({
@@ -22,4 +21,3 @@ export default (async function addParticipants(values) {
       };
     });
 });
-
