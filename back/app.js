@@ -8,7 +8,7 @@ import path from 'path';
 
 import index from './routes/index';
 
-const connection = require('./config/db.js');
+import connection from './config/db.js';
 
 const app = express();
 const debug = Debug('back:app');

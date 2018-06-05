@@ -24,10 +24,9 @@ class Ateliers extends Component {
             </Grid>
           </Grid>
         </div>
-        <div />
       </div>
-    );
-  }
+  );
+};
 }
 
 export default Ateliers;
