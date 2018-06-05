@@ -22,11 +22,4 @@ export default (async function addParticipants(values) {
       };
     });
 });
-/* export function fetchNews(values) {
-  console.log('presend');
-  return (dispatch) => {
-    return fetch('/client/participants').then((response) => {
-      console.log(response, values);
-    });
-  };
-} */
+

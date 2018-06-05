@@ -2,20 +2,12 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
 import Paper from '@material-ui/core/Paper';
+import PropTypes from 'prop-types';
 // Redux
 import { Field, reduxForm } from 'redux-form';
-import formValueSelector from 'redux-form/lib/formValueSelector';
-import { connect } from 'react-redux';
 
-let SimpleForm = (props) => {
-  const {
-    handleSubmit,
-    pristine,
-    submitting,
-    hasEmailValue,
-    hasNameValue,
-    fullName,
-  } = props;
+const SimpleForm = (props) => {
+  const { handleSubmit, pristine, submitting } = props;
 
   return (
     <Grid
@@ -42,7 +34,7 @@ let SimpleForm = (props) => {
               <label>Prénom</label>
               <div>
                 <Field
-                  name="prénom"
+                  name="prenom"
                   component="input"
                   type="text"
                   placeholder="Prénom"
@@ -117,20 +109,12 @@ let SimpleForm = (props) => {
     </Grid>
   );
 };
-const selector = formValueSelector(SimpleForm);
-SimpleForm = connect((state) => {
-  // can select values individually
-  const hasEmailValue = selector(state, 'email');
-  const hasNameValue = selector(state, 'nom');
-  // or together as a group
-  const { firstName, lastName } = selector(state, 'nom', 'prenom');
-  return {
-    hasEmailValue,
-    hasNameValue,
-    fullName: `${firstName || ''} ${lastName || ''}`,
-  };
-})(SimpleForm);
-// Ok les valeurs sont en props
 export default reduxForm({
-  form: 'simple', // a unique identifier for this form
+  form: 'simple',
 })(SimpleForm);
+
+SimpleForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  pristine: PropTypes.bool.isRequired,
+  submitting: PropTypes.bool.isRequired,
+};

@@ -13,7 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import { ListItem, ListItemText } from 'material-ui/List';
-
+import AppBar from '@material-ui/core/AppBar';
 const styles = {
   list: {
     width: 250,
@@ -53,52 +53,56 @@ class TemporaryDrawer extends React.Component {
 
   render() {
     const { classes } = this.props;
+    console.log(classes.root);
     return (
-      <div>
-        <Toolbar position="sticky">
-          <Hidden smUp>
-            <IconButton
+      <div className={classes.root}>
+        <AppBar position="fixed">
+          <Toolbar>
+            <Hidden smUp>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={this.toggleDrawer('left', true)}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Hidden>
+            <Typography
+              variant="title"
+              style={{ flex: 1 }}
               color="inherit"
-              aria-label="open drawer"
-              onClick={this.toggleDrawer('left', true)}
+              noWrap
             >
-              <MenuIcon />
-            </IconButton>
-          </Hidden>
-          <Typography
-            variant="title"
-            style={{ flex: 1 }}
-            color="inherit"
-            noWrap
-          >
-            Atelier du Héron Bleu
-          </Typography>
-          <Hidden xsDown>
-            <Button color="inherit" component={MyAccueil}>
-              Accueil
-            </Button>
-          </Hidden>
-          <Hidden xsDown>
-            <Button color="inherit" component={MyAteliers}>
-              Ateliers
-            </Button>
-          </Hidden>
-          <Hidden xsDown>
-            <Button color="inherit" component={MyIntervenants}>
-              Intervenants
-            </Button>
-          </Hidden>
-          <Hidden xsDown>
-            <Button color="inherit" component={MyConcept}>
-              Concept
-            </Button>
-          </Hidden>
-          <Hidden xsDown>
-            <Button color="inherit" component={MyContact}>
-              Contact
-            </Button>
-          </Hidden>
-        </Toolbar>
+              Atelier du Héron Bleu
+            </Typography>
+            <Hidden xsDown>
+              <Button color="inherit" component={MyAccueil}>
+                Accueil
+              </Button>
+            </Hidden>
+            <Hidden xsDown>
+              <Button color="inherit" component={MyAteliers}>
+                Ateliers
+              </Button>
+            </Hidden>
+            <Hidden xsDown>
+              <Button color="inherit" component={MyIntervenants}>
+                Intervenants
+              </Button>
+            </Hidden>
+            <Hidden xsDown>
+              <Button color="inherit" component={MyConcept}>
+                Concept
+              </Button>
+            </Hidden>
+            <Hidden xsDown>
+              <Button color="inherit" component={MyContact}>
+                Contact
+              </Button>
+            </Hidden>
+          </Toolbar>
+        </AppBar>
+
         <Drawer
           open={this.state.left}
           onClose={this.toggleDrawer('left', false)}
