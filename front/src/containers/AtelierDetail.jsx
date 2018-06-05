@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
-import Button from '@material-ui/core/Button';
+import './details.css';
 
 
 const AteliersDetail = ({ ateliers }) => (
@@ -16,20 +16,19 @@ const AteliersDetail = ({ ateliers }) => (
           }}
           >
 
-            <Grid className="Details" item md={6} xs={1}>
-              <div margin="40px" >
+            <Grid className="details" item md={6} xs={1}>
+              <div>
                 <img
                   src={ateliers.image}
-                  width="100%"
                   alt="heron"
                 />
               </div>
             </Grid>
 
-            <Grid item md={6} xs={1} key={ateliers.key}>
+            <Grid className="contenu" item md={6} xs={1} key={ateliers.key}>
               <div>
-                <h2>{ateliers.nom_atelier}</h2>
-                <h3>{ateliers.date}</h3>
+                <h3>{ateliers.nom_atelier}</h3>
+                <h4>{ateliers.date}</h4>
                 <b>
                   <img
                     src="https://cdn4.iconfinder.com/data/icons/birds-1/154/bird-stork-heron-pelican-512.png"
@@ -38,11 +37,9 @@ const AteliersDetail = ({ ateliers }) => (
                   />
                   En chemin, vous trouverez :
                 </b>
-                <p>
-                  <p>
-                    {ateliers.chemin}
-                  </p>
 
+                <p>
+                  {ateliers.chemin}
                 </p>
                 <b>
                   <img

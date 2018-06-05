@@ -1,25 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectAteliers } from '../actions/index';
-import Drawer from 'material-ui/Drawer';
 
 const AteliersList = ({ ateliers, selectAteliers }) => (
   <div style={{ display: 'flex' }}>
     <div
       style={{
-          padding: '10px',
+
           width: '100%',
           height: '100%',
           background: '#f0f0f0',
         }}
     >
       <ul className="AteliersList">
-        {ateliers.map(ateliers => (
-          <li key={ateliers.key} onClick={() => selectAteliers(ateliers)}>
-            {ateliers.nom_atelier}
+        {ateliers.map(atelier => (
+          <li key={atelier.key} onClick={() => selectAteliers(atelier)}>
+            {atelier.nom_atelier}
             <br />
-            {ateliers.date}
+            {atelier.date}
             <hr />
           </li>
 
@@ -40,5 +40,8 @@ function matchDispatchToProps(dispatch) {
     selectAteliers,
   }, dispatch);
 }
+
+
+;
 
 export default connect(mapStateToProps, matchDispatchToProps)(AteliersList);

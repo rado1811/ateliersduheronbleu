@@ -2,109 +2,71 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Grid from 'material-ui/Grid';
 import Paper from '@material-ui/core/Paper';
+import './details.css';
 
 const SimpleForm = (props) => {
-  const {
-    handleSubmit, pristine, reset, submitting,
-  } = props;
+  const { handleSubmit, pristine, submitting } = props;
   return (
     <Grid
       container
-      style={{
-    height: '100%',
-  }}
+      spacing={24}
     >
-      <Grid item md={12} style={{ padding: 15 }} spacing={24}>
+      <Grid item md={12}>
 
-      <Paper>
+        <Paper>
 
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>Nom</label>
+          <form onSubmit={handleSubmit}>
             <div>
-              <Field
-                name="nom"
-                component="input"
-                type="text"
-                placeholder="Nom"
-              />
+              <label>Nom</label>
+              <div>
+                <Field name="nom" component="input" type="text" placeholder="Nom" />
+              </div>
             </div>
-          </div>
-          <div>
-            <label>Prénom</label>
             <div>
-              <Field
-                name="prénom"
-                component="input"
-                type="text"
-                placeholder="Prénom"
-              />
+              <label>Prénom</label>
+              <div>
+                <Field name="prénom" component="input" type="text" placeholder="Prénom" />
+              </div>
             </div>
-          </div>
-          <div>
-            <label>Adresse</label>
             <div>
-              <Field
-                name="adresse"
-                component="input"
-                type="text"
-                placeholder="Adresse"
-              />
+              <label>Adresse</label>
+              <div>
+                <Field name="adresse" component="input" type="text" placeholder="Adresse" />
+              </div>
             </div>
-          </div>
-          <div>
-            <label>Numéro de Téléphone</label>
             <div>
-              <Field
-                name="telephone"
-                component="input"
-                type="text"
-                placeholder="telephone"
-              />
+              <label>Numéro de Téléphone</label>
+              <div>
+                <Field name="telephone" component="input" type="text" placeholder="telephone" />
+              </div>
             </div>
-          </div>
-          <div>
-            <label>E-mail</label>
             <div>
-              <Field
-                name="email"
-                component="input"
-                type="email"
-                placeholder="E-mail"
-              />
+              <label>E-mail</label>
+              <div>
+                <Field name="email" component="input" type="email" placeholder="E-mail" />
+              </div>
             </div>
-          </div>
-          <div>
-            <label>Choix Atelier</label>
             <div>
-              <label>
-                <Field
-                        name="atelier"
-                        component="input"
-                        type="radio"
-                        value="atelier1"
-                      />{' '}
-            Atelier1
-              </label>
-              <label>
-                <Field
-                        name="atelier"
-                        component="input"
-                        type="radio"
-                        value="atelier2"
-                      />{' '}
-            Atelier2
-              </label>
+              <label>Choix Atelier</label>
+              <div>
+                <label>
+                  <Field name="atelier" component="input" type="radio" value="atelier1" />{' '}
+                  Atelier1
+                </label>
+                <label>
+                  <Field name="atelier" component="input" type="radio" value="atelier2" />{' '}
+                  Atelier2
+                </label>
+              </div>
             </div>
-          </div>
 
-          <div>
-            <button type="submit" disabled={pristine || submitting}>
-          Envoyer
-            </button>
-          </div>
-        </form>
-          </Paper>
+            <div>
+              <button type="submit" disabled={pristine || submitting}>
+                Envoyer
+              </button>
+            </div>
+          </form>
+        </Paper>
       </Grid>
     </Grid>
   );
