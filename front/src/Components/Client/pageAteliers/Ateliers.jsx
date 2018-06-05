@@ -1,27 +1,31 @@
-import React, { Component } from 'react';
-import UserList from '../../../containers/UserList';
-import UserDetail from '../../../containers/UserDetail';
+import React from 'react';
 import Grid from 'material-ui/Grid';
+import AtelierList from '../../../containers/AtelierList';
+import AtelierDetail from '../../../containers/AtelierDetail';
+import SimpleForm from '../../../containers/Form';
+import './Ateliers.css';
 
-class Ateliers extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    return (
-          <div>
-              <Grid container>
-                  <Grid item xs={2}>
-                      <UserList />
-                    </Grid>
-                  <Grid item xs={10}>
-                      <UserDetail />
-                    </Grid>
-                </Grid>
-            </div>
-    );
-  }
-}
+const Ateliers = () => (
+
+  <div style={{ background: '#F2F2F2' }}>
+    <div>
+      <Grid container>
+        <Grid item md={2}>
+          <AtelierList />
+        </Grid>
+        <Grid item md={10}>
+          <AtelierDetail />
+        </Grid>
+      </Grid>
+      <Grid className="form" container spacing={24} direction="column" align="center" >
+        <Grid item xs={12} style={{ background: '#F2F2F2' }}>
+          <SimpleForm />
+        </Grid>
+      </Grid>
+    </div>
+  </div>
+);
+
 
 export default Ateliers;
+

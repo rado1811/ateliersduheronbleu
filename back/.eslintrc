@@ -10,9 +10,6 @@
     "classes": true,
     "modules": true
   },
-  "rules": {
-    "comma-dangle": 0
-  },
   "import/no-extraneous-dependencies": ["error", {
     "devDependencies": ["test/"]}]
 }

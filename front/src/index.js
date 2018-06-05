@@ -8,14 +8,15 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import allReducers from './reducers';
 
+
 const store = createStore(allReducers);
 
 
 ReactDOM.render(
   <Provider store={store}>
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root'),
 );
