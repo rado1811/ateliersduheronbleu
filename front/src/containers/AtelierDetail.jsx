@@ -76,5 +76,4 @@ function mapStateToProps(state) {
   return { ateliers: state.activeAteliers };
 }
 
-
 export default connect(mapStateToProps)(AteliersDetail);

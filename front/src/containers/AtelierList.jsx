@@ -3,7 +3,7 @@ import { Button } from 'material-ui';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectAteliers } from '../actions/index';
+import { selectAteliers } from '../actions/Index';
 
 const AteliersList = ({ ateliers, selectAteliers }) => (
   <div style={{ display: 'flex' }}>
