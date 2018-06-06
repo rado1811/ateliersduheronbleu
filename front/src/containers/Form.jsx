@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import Grid from 'material-ui/Grid';
 import Paper from '@material-ui/core/Paper';
-import './Details.css';
+import './details.css';
 
 const SimpleForm = (props) => {
   const { handleSubmit, pristine, submitting } = props;

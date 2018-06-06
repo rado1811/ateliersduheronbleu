@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
-import './Details.css';
+import './details.css';
 
 const AteliersDetail = (props) => {
   const { ateliers } = props;

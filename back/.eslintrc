@@ -10,10 +10,6 @@
     "classes": true,
     "modules": true
   },
-  /* "import/no-extraneous-dependencies": [
-    "error",
-    {
-      "devDependencies": ["test/"]
-    }
-  ] */
+  "import/no-extraneous-dependencies": ["error", {
+    "devDependencies": ["test/"]}]
 }
