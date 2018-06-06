@@ -7,7 +7,6 @@ import Concept from './components/client/navBar/fakeComponents/Concept';
 import Intervenants from './components/client/navBar/fakeComponents/Intervenants';
 import Contact from './components/client/navBar/fakeComponents/Contact';
 
-
 const App = () => (
   <div>
     <TemporaryDrawer />
