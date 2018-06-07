@@ -1,4 +1,5 @@
 import express from 'express';
+import connection from '../config/db';
 
 const router = express.Router();
 
@@ -9,18 +10,15 @@ router.get('/', (req, res) => {
   });
 });
 
-let selectQuery = 'SELECT * FROM ateliers';
 //sur get lancement de la requête sql sur index
 router.get('/ateliers', (req, res, next) => {
-  sqlConnexion.query(selectQuery, function(err, rows) {
-    if (err)
-      throw err;
-    let ateliers = rows[0];
-    res.render('index', {
-      ateliers
-    }); //envoi du rendu de la vue et de la variable contenant les données joueurs et staff
+  const select = 'SELECT * FROM Ateliers';
+  connection.query(select, (err, result) => {
+    if (err) throw err;
+    res.send(result);
   });
 })
+
 
 
 export default router;
