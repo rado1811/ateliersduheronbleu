@@ -5,8 +5,8 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import allReducers from './reducers';
+import RegisterServiceWorker from './RegisterServiceWorker';
+import allReducers from './reducers/Index';
 
 
 const store = createStore(allReducers);
@@ -14,10 +14,10 @@ const store = createStore(allReducers);
 
 ReactDOM.render(
   <Provider store={store}>
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root'),
 );
-registerServiceWorker();
+RegisterServiceWorker();

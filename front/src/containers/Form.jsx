@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 // Redux
 import { Field, reduxForm } from 'redux-form';
 
-const SimpleForm = (props) => {
+const SimpleForm = props => {
   const { handleSubmit, pristine, submitting } = props;
 
   return (
