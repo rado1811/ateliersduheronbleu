@@ -6,9 +6,8 @@ import PropTypes from 'prop-types';
 // Redux
 import { Field, reduxForm } from 'redux-form';
 
-const SimpleForm = props => {
+const SimpleForm = (props) => {
   const { handleSubmit, pristine, submitting } = props;
-
   return (
     <Grid
       container
@@ -18,7 +17,7 @@ const SimpleForm = props => {
     >
       <Grid item md={12} style={{ padding: 15 }} spacing={24}>
         <Paper>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={alert(JSON.stringify(values, null, 2))}>
             <div>
               <label>Nom</label>
               <div>
