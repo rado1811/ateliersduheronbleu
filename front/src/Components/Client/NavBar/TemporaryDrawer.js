@@ -53,7 +53,6 @@ class TemporaryDrawer extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log(classes.root);
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
