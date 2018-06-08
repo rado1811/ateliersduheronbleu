@@ -8,8 +8,8 @@ import path from 'path';
 
 import indexRouter from './routes/index';
 
-import connection from './config/db.js';
-import prereservation from './routes/Prereservation';
+import connection from './config/db';
+import prereservation from './routes/prereservation';
 
 const app = express();
 const debug = Debug('back:app');
@@ -51,7 +51,7 @@ app.use((err, req, res, next) => {
 });
 
 // Handle uncaughtException
-process.on('uncaughtException', (err) => {
+process.on('uncaughtException', err => {
   debug('Caught exception: %j', err);
   process.exit(1);
 });
