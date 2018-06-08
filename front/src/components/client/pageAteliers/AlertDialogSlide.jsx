@@ -12,8 +12,6 @@ function Transition(props) {
   return <Slide direction="right" {...props} />;
 }
 
- 
-
 class AlertDialogSlide extends React.Component {
   render() {
     return (
@@ -53,7 +51,7 @@ class AlertDialogSlide extends React.Component {
 
 AlertDialogSlide.propTypes = {
   hideDialogueBox: PropTypes.func.isRequired,
-  messageDialogue: PropTypes.array.isRequired,
+  messageDialogue: PropTypes.arrayOf(PropTypes.string).isRequired,
   showDialogueBox: PropTypes.bool.isRequired,
 };
 export default AlertDialogSlide;

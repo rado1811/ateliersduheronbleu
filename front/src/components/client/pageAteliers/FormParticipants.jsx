@@ -164,7 +164,7 @@ class FormParticipants extends Component {
                 type="text"
                 className="form-control"
                 name="tel"
-                placeholder="06695026......."
+                placeholder="06695026.."
                 onChange={this.updatePhoneField}
                 fullWidth
                 margin="normal"
