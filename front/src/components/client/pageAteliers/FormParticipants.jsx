@@ -22,9 +22,7 @@ class FormParticipants extends Component {
       atelier2: false,
     };
   }
-  /*
-======== FONCTIONS =======
-*/
+
   formSend = () => {
     let whatIsMissing = [];
     if (this.state.email === '') {
@@ -74,7 +72,6 @@ class FormParticipants extends Component {
     console.log(this.state);
     event.preventDefault();
     if (this.formSend()) {
-      console.log('dans le if')
       fetch('/client/participants', {
         method: 'POST',
         headers: new Headers({
@@ -94,6 +91,7 @@ class FormParticipants extends Component {
               flash: err.flash,
             })
         );
+      this.setState({ flash: 'Formulaire envoyé', open: true });
     } else {
       this.setState({ flash: 'Formulaire incomplet', open: true });
     }
@@ -121,9 +119,6 @@ class FormParticipants extends Component {
     });
   };
 
-  /*
-======== RENDER ==========
-*/
   render() {
     return (
       <div>
@@ -143,7 +138,6 @@ class FormParticipants extends Component {
               />
             </div>
             <div>
-              {/* Prénom */}
               <TextField
                 type="text"
                 className="form-control"
@@ -155,7 +149,6 @@ class FormParticipants extends Component {
               />
             </div>
             <div>
-              {/* Nom */}
               <TextField
                 type="text"
                 className="form-control"
@@ -167,7 +160,6 @@ class FormParticipants extends Component {
               />
             </div>
             <div>
-              {/* Nom */}
               <TextField
                 type="text"
                 className="form-control"

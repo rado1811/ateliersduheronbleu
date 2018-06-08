@@ -12,6 +12,8 @@ function Transition(props) {
   return <Slide direction="right" {...props} />;
 }
 
+ 
+
 class AlertDialogSlide extends React.Component {
   render() {
     return (
