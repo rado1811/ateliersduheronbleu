@@ -7,19 +7,19 @@ const AteliersDetail = (props) => {
   const { ateliers } = props;
   return (
     <div className="AteliersDetail">
-      {(!ateliers)
-        ? <div>
+      {!ateliers ? (
+        <div>
           <h3>Les Ateliers du Héron Bleu</h3>
-            Choisissez un atelier
-          </div>
-        : <div>
+          Choisissez un atelier
+        </div>
+      ) : (
+        <div>
           <Grid
             container
             style={{
-            height: '100%',
-          }}
+              height: '100%',
+            }}
           >
-
             <Grid className="details" item md={6} xs={1}>
               <div>
                 <img src={ateliers.image} alt="heron" />
@@ -39,9 +39,7 @@ const AteliersDetail = (props) => {
                   En chemin, vous trouverez :
                 </b>
 
-                <p>
-                  {ateliers.chemin}
-                </p>
+                <p>{ateliers.chemin}</p>
                 <b>
                   <img
                     src="https://cdn4.iconfinder.com/data/icons/birds-1/154/bird-stork-heron-pelican-512.png"
@@ -63,8 +61,8 @@ const AteliersDetail = (props) => {
               </div>
             </Grid>
           </Grid>
-          </div>
-};
+        </div>
+      )};
     </div>
   );
 };

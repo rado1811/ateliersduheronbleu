@@ -1,12 +1,15 @@
-import express from 'express';
 
-const router = express.Router();
-
-/* GET index page. */
-router.get('/', (req, res) => {
-  res.json({
-    title: 'Express'
+let selectQuery = 'SELECT * FROM ateliers';
+router.get('/ateliers', (req, res, next) => {
+  sqlConnexion.query(selectQuery, function(err, rows) {
+    if (err)
+      throw err;
+    let ateliers = rows[0];
+    res.render('index', {
+      ateliers
+    }); 
   });
-});
+})
+
 
 export default router;

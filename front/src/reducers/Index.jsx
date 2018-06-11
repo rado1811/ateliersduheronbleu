@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import { reducer as reduxFormReducer } from 'redux-form';
-import AteliersReducer from './Ateliers';
-import ActiveAteliersReducer from './Active-user';
+import AteliersReducer from './ateliers';
+import ActiveAteliersReducer from './active-user';
 
+
+// combine all reducers
 const allReducers = combineReducers({
   ateliers: AteliersReducer,
   activeAteliers: ActiveAteliersReducer,
