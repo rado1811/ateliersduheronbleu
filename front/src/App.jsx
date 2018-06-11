@@ -2,12 +2,12 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 // Components
-import TemporaryDrawer from './components/client/NavBar/TemporaryDrawer';
+import TemporaryDrawer from './components/client/navbar/TemporaryDrawer';
 import Ateliers from './components/client/pageAteliers/Ateliers';
 import AtelierHome from './components/client/ateliersHome/atelierHome';
-import Concept from './components/client/NavBar/FakeComponents/Concept';
-import Intervenants from './components/client/NavBar/FakeComponents/Intervenants';
-import Contact from './components/client/NavBar/FakeComponents/Contact';
+import Concept from './components/client/navbar/fakeComponents/Concept';
+import Intervenants from './components/client/navbar/fakeComponents/Intervenants';
+import Contact from './components/client/navbar/fakeComponents/Contact';
 
 
 const App = () => (
