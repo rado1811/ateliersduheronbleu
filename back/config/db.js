@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+import mysql from 'mysql';
 
 const connection = mysql.createConnection({
   multipleStatements: true,
@@ -15,5 +15,4 @@ connection.connect(function(err) {
     console.log('No connection with database');
   }
 });
-
-module.exports = connection;
+export default connection;
