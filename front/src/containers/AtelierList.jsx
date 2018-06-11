@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectAteliers } from '../actions/index';
 
+
 const AteliersList = ({ ateliers, selectAteliers }) => (
   <div style={{ display: 'flex' }}>
     <div
@@ -32,6 +33,7 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
     </div>
   </div>
 );
+
 
 function mapStateToProps(state) {
   return { ateliers: state.ateliers };

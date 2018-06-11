@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
-import './details.css';
+import './AteliersDetails.css';
 
-const AteliersDetail = props => {
+const AteliersDetail = (props) => {
   const { ateliers } = props;
   return (
     <div className="AteliersDetail">
