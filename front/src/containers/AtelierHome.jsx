@@ -21,6 +21,14 @@ class AtelierHome extends Component {
     };
   }
 
+componentWillMount() {
+  console.log(this.props)
+}
+
+componentDidMount() {
+  
+}
+
   toggleAteliers = () => {
     const doesShow = this.state.toggleAteliers;
     this.setState({ toggleAteliers: !doesShow });
@@ -54,7 +62,7 @@ class AtelierHome extends Component {
     );
 
     if (this.state.toggleAteliers) {
-      upcomingAteliers = (
+      let upcomingAteliers = (
         <Grid container justify="center">
           {this.props.ateliers.map((ateliers) => {
             return (
@@ -83,10 +91,14 @@ class AtelierHome extends Component {
     return (
       <div>
         <div style={{marginBottom: 100}}>
-          <video id="background-video" style={{height: 'auto',
-          width:'100%' }} loop muted autoPlay>
-            <source src="../images/video.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
+          <video 
+            id="background-video" 
+            style={{height: 'auto', width:'100%' }} 
+            loop 
+            muted 
+            autoPlay>
+              <source src="../images/video.mp4" type="video/mp4"/>
+              Your browser does not support the video tag.
           </video>
         </div>
         <Grid container spacing={16}>
