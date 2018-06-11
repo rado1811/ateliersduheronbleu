@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import Grid from 'material-ui/Grid';
 import Paper from '@material-ui/core/Paper';
-import './details.css';
+import './AteliersDetails.css';
 
 const SimpleForm = (props) => {
   const { handleSubmit, pristine, submitting } = props;
@@ -13,7 +13,7 @@ const SimpleForm = (props) => {
 
         <Paper>
 
-          <form onSubmit={handleSubmit}>
+          <form className="formulaireAteliers" onSubmit={handleSubmit}>
             <div>
               <label>
                 Nom
