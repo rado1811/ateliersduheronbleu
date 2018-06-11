@@ -21,12 +21,12 @@ class AtelierHome extends Component {
     };
   }
 
-  toggleAteliers = () => {
+  toggleAteliers() {
     const doesShow = this.state.toggleAteliers;
     this.setState({ toggleAteliers: !doesShow });
-  };
+  }
 
-  render() {
+  render() {    
     let firstAteliers = this.props.ateliers.slice(0, 3);
     let upcomingAteliers = (
       <Grid container justify="center">
@@ -46,7 +46,7 @@ class AtelierHome extends Component {
           variant="fab"
           color="primary"
           aria-label="add"
-          onClick={this.toggleAteliers}
+          onClick={() => this.toggleAteliers()}
         >
           <AddIcon />
         </Button>

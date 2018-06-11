@@ -1,6 +1,6 @@
-// React
 import express from 'express';
 import connection from '../config/db';
+
 const router = express.Router();
 
 router.post('/participants', (req, res) => {

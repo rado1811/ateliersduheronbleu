@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
-import './details.css';
+import './AteliersDetails.css';
 
-const AteliersDetail = props => {
+const AteliersDetail = (props) => {
   const { ateliers } = props;
   return (
     <div className="AteliersDetail">
@@ -25,7 +25,6 @@ const AteliersDetail = props => {
                 <img src={ateliers.image} alt="heron" />
               </div>
             </Grid>
-
             <Grid className="contenu" item md={6} xs={1} key={ateliers.key}>
               <div>
                 <h3>{ateliers.nom_atelier}</h3>
@@ -38,7 +37,6 @@ const AteliersDetail = props => {
                   />
                   En chemin, vous trouverez :
                 </b>
-
                 <p>{ateliers.chemin}</p>
                 <b>
                   <img
