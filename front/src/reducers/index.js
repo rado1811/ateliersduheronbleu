@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { reducer as reduxFormReducer } from 'redux-form';
 import AteliersReducer from './ateliers';
-import ActiveAteliersReducer from './active-user';
+import ActiveAteliersReducer from './activeAteliers';
 
 
 // combine all reducers

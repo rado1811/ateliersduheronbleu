@@ -1,8 +1,10 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+
+// Components
 import TemporaryDrawer from './components/client/navbar/TemporaryDrawer';
 import Ateliers from './components/client/pageAteliers/Ateliers';
-import AtelierHome from './components/client/ateliersHome/atelierHome';
+import AtelierHome from './containers/AtelierHome';
 import Concept from './components/client/navbar/fakeComponents/Concept';
 import Intervenants from './components/client/navbar/fakeComponents/Intervenants';
 import Contact from './components/client/navbar/fakeComponents/Contact';

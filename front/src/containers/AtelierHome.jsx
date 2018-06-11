@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
-import AtelierVignette from '../components/client/ateliersHome/AtelierVignette';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import AtelierVignette from '../components/client/ateliersHome/AtelierVignette';
 
 const styles = (theme) => ({
   button: {
@@ -21,12 +21,12 @@ class AtelierHome extends Component {
     };
   }
 
-  toggleAteliers = () => {
+  toggleAteliers() {
     const doesShow = this.state.toggleAteliers;
     this.setState({ toggleAteliers: !doesShow });
-  };
+  }
 
-  render() {
+  render() {    
     let firstAteliers = this.props.ateliers.slice(0, 3);
     let upcomingAteliers = (
       <Grid container justify="center">
@@ -46,7 +46,7 @@ class AtelierHome extends Component {
           variant="fab"
           color="primary"
           aria-label="add"
-          onClick={this.toggleAteliers}
+          onClick={() => this.toggleAteliers()}
         >
           <AddIcon />
         </Button>
@@ -103,10 +103,6 @@ function mapStateToProps(state) {
     ateliers: state.ateliers
   };
 }
-
-// function matchDispatchToProps(dispatch) {
-//   return bindActionCreators({selectUser: selectUser}, dispatch)
-// }
 
 export default compose(
   withStyles(styles),

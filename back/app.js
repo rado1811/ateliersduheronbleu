@@ -4,12 +4,9 @@ import Debug from 'debug';
 import express from 'express';
 import logger from 'morgan';
 import path from 'path';
-// import favicon from 'serve-favicon';
 
-import indexRouter from './routes/index';
-
-import connection from './config/db';
-import prereservation from './routes/prereservation';
+import ateliersRouter from './routes/ateliers';
+import prereservationRouter from './routes/prereservation';
 
 const app = express();
 const debug = Debug('back:app');
@@ -21,16 +18,17 @@ app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
     extended: false,
-  })
+  }),
 );
 
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
 
-app.use('/client', prereservation);
+/** ROUTES */
+app.use('/ateliers', ateliersRouter);
+app.use('/client', prereservationRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

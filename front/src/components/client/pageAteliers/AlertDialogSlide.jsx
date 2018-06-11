@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -12,7 +12,7 @@ function Transition(props) {
   return <Slide direction="right" {...props} />;
 }
 
-class AlertDialogSlide extends React.Component {
+class AlertDialogSlide extends Component {
   render() {
     return (
       <div>
