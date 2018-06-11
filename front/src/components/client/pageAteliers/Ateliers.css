@@ -1,8 +1,8 @@
-.Grid{
+.shapeAteliers{
     padding: 0;
     margin: 0;
 }
-ul {
+.AteliersList {
     background-color: #F2F2F2;
     height: auto;
     margin: 0 auto;
@@ -18,7 +18,7 @@ ul {
     padding: 0 ;
 }
 
-.form {
+.formulaireAteliers {
 background-color:    #F2F2F2;
 height: auto;
 padding-top: 10vh;
