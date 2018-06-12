@@ -6,7 +6,11 @@ import logger from 'morgan';
 import path from 'path';
 
 import ateliersRouter from './routes/ateliers';
-import prereservationRouter from './routes/prereservation';
+
+import indexRouter from './routes/index';
+
+import prereservation from './routes/prereservation';
+import adminAteliers from './routes/adminateliers';
 
 const app = express();
 const debug = Debug('back:app');
@@ -15,23 +19,22 @@ const debug = Debug('back:app');
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(
-  bodyParser.urlencoded({
-    extended: false,
-  }),
-);
+app.use(bodyParser.urlencoded({extended: false}),);
 
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 /** ROUTES */
 app.use('/ateliers', ateliersRouter);
-app.use('/client', prereservationRouter);
+
+app.use('/', indexRouter);
+
+app.use('/client', prereservation);
+app.use('/admin', adminAteliers);
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
+app.use((next) => {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -39,17 +42,22 @@ app.use((req, res, next) => {
 
 // error handler
 /* eslint no-unused-vars: 0 */
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req
+    .app
+    .get('env') === 'development'
+    ? err
+    : {};
   // render the error page
   res.status(err.status || 500);
   res.json(err);
 });
 
 // Handle uncaughtException
-process.on('uncaughtException', err => {
+process.on('uncaughtException', (err) => {
+
   debug('Caught exception: %j', err);
   process.exit(1);
 });

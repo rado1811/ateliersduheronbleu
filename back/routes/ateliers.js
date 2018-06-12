@@ -3,12 +3,8 @@ import connexion from '../config/db';
 
 const router = express.Router();
 
-const selectQuery = 'SELECT * FROM ateliers';
-router.get('/', (req, res) => {
-  connexion.query(selectQuery, (err, rows) => {
-    if (err) throw err;
-    res.json(rows);
-  });
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
 });
 
 export default router;

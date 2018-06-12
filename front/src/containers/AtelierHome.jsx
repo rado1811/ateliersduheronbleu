@@ -73,6 +73,7 @@ class AtelierHome extends Component {
             );
           })}
           <Button
+            textAlign='center'
             variant="fab"
             color="secondary"
             aria-label="add"
