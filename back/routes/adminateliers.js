@@ -4,13 +4,11 @@ import connection from '../config/db';
 const router = express.Router();
 
 router.get('/ateliers', (req, res, next) => {
-  console.log('je suis dans /ateliers');
   connection.query('SELECT * FROM Intervenants', (err, data) => {
         if (err) {
             res.send(err)
         } else {
             res.json(data);
-            console.log(data)
         }
     });
 });
@@ -27,7 +25,6 @@ router.post('/ateliers', (req, res, next) => {
   const programme = req.body.programme;
 
   const sql = `INSERT INTO Ateliers (nom, id_intervenant, debut, nb_participants, prix, contenu, formule, lieu, programme) VALUES ("${req.body.nom}", ${req.body.id_intervenant}, ${req.body.debut}, ${req.body.nb_participants}, ${req.body.prix}, "${req.body.contenu}", "${req.body.formule}", "${req.body.lieu}", "${req.body.programme}")`;
-  console.log(sql);
 
   connection.query(sql, (err, result) => {
     res.send((err === null)

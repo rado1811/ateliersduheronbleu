@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { NavLink } from 'react-router-dom';
-// import FormulaireIntervenant from '../FormulaireIntervenant/FormulaireIntervenant';
 
 const drawerWidth = 240;
 
@@ -32,7 +31,7 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
-    minWidth: 0, // So the Typography noWrap works
+    minWidth: 0, 
   },
   toolbar: theme.mixins.toolbar,
 });

@@ -134,7 +134,6 @@ class FormAtelier extends Component {
 
       <Grid>
         <div>
-          {/* <h1>{JSON.stringify(this.state,1,1)}</h1> */}
           <h1 className="text-center">Ajouter un Atelier</h1>
           <form onSubmit={this.handleSubmit}>
             <Grid container spacing={24}>
@@ -236,7 +235,6 @@ class FormAtelier extends Component {
               } 
           </Select>
         
-        {/* <Intervenant list={this.state.intervenants} /> */}
         <br />
         <TextField
         name="programme"

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 
-// Composants
-// import BouttonPhoto from './bouttonphoto/BouttonPhoto';
 import ButtonFormulaireIntervenant from './ButtonFormulaireIntervenant';
 
 
@@ -30,7 +28,6 @@ class FormulaireIntervenant extends Component {
     this.setState(change);
   }
   handleSubmit(e) {
-    // console.log(this.state);
     e.preventDefault();
     fetch(
       '/admin/dashboard/administration',
@@ -51,7 +48,6 @@ class FormulaireIntervenant extends Component {
 
       <Grid>
         <div>
-          {/* <h1>{JSON.stringify(this.state,1,1)}</h1> */}
           <h1 className="text-center">Ajouter un intervenant</h1>
           <form onSubmit={this.handleSubmit}>
             <Grid container spacing={24}>
@@ -109,8 +105,6 @@ class FormulaireIntervenant extends Component {
               value={this.state.metier}
               onChange={this.handleChange}
             /><br />
-            {/* <BouttonPhoto /> */}
-
             <ButtonFormulaireIntervenant />
           </form>
         </div>

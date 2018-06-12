@@ -6,9 +6,6 @@ import logger from 'morgan';
 import path from 'path';
 
 import ateliersRouter from './routes/ateliers';
-
-import indexRouter from './routes/index';
-
 import prereservation from './routes/prereservation';
 import adminAteliers from './routes/adminateliers';
 
@@ -27,9 +24,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 /** ROUTES */
 app.use('/ateliers', ateliersRouter);
-
-app.use('/', indexRouter);
-
 app.use('/client', prereservation);
 app.use('/admin', adminAteliers);
 
