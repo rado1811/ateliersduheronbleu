@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import AtelierVignette from '../components/client/ateliersHome/AtelierVignette';
+import { fetchAteliers } from '../actions/ateliers';
 
 const styles = (theme) => ({
   button: {
@@ -20,6 +21,10 @@ class AtelierHome extends Component {
       toggleAteliers: false,
     };
   }
+
+componentDidMount() {
+  fetchAteliers()
+}
 
   toggleAteliers() {
     const doesShow = this.state.toggleAteliers;
@@ -75,7 +80,7 @@ class AtelierHome extends Component {
             onClick={this.toggleAteliers}
           >
             <AddIcon />
-          </Button>
+          </Button >
         </Grid>
       );
     }
