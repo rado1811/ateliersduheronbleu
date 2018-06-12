@@ -6,6 +6,10 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import AtelierVignette from '../components/client/ateliersHome/AtelierVignette';
+import { HashLink as Link } from 'react-router-hash-link';
+
+
+import './AtelierHome.css';
 
 const styles = (theme) => ({
   button: {
@@ -21,7 +25,7 @@ class AtelierHome extends Component {
     };
   }
 
-  toggleAteliers() {
+  toggleAteliers= () => {
     const doesShow = this.state.toggleAteliers;
     this.setState({ toggleAteliers: !doesShow });
   }
@@ -29,7 +33,7 @@ class AtelierHome extends Component {
   render() {    
     let firstAteliers = this.props.ateliers.slice(0, 3);
     let upcomingAteliers = (
-      <Grid container justify="center">
+      <Grid id='ateliers' container justify="center">
         {firstAteliers.map((ateliers) => {
           return (
             <AtelierVignette
@@ -69,6 +73,7 @@ class AtelierHome extends Component {
             );
           })}
           <Button
+            textAlign='center'
             variant="fab"
             color="secondary"
             aria-label="add"
@@ -88,6 +93,10 @@ class AtelierHome extends Component {
             <source src="../images/video.mp4" type="video/mp4"/>
             Your browser does not support the video tag.
           </video>
+          <p className='overlay'>Ateliers "Bien-être et Créativité"</p>
+          <Link to='#ateliers'><i className="fas fa-angle-double-down" ></i>
+          </Link>
+
         </div>
         <Grid container spacing={16}>
           {upcomingAteliers}
