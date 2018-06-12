@@ -37,7 +37,7 @@ const Footer = () => (
           <li style={{ listStyleType: 'none', textAlign: 'center' }}>
             <a href="https://www.facebook.com/lesateliers.heronbleu/" target="_blank" rel="noreferrer noopener" style={{ textDecoration: 'none' }}>
               <i className="icon icon-fb">
-                <img src="/fb2.svg" alt="LogoFB" />
+                <img src="/icones/fb2.svg" alt="LogoFB" />
               </i>
             </a>
           </li>
