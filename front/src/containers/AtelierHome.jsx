@@ -25,7 +25,7 @@ class AtelierHome extends Component {
     };
   }
 
-  toggleAteliers() {
+  toggleAteliers= () => {
     const doesShow = this.state.toggleAteliers;
     this.setState({ toggleAteliers: !doesShow });
   }
@@ -33,7 +33,7 @@ class AtelierHome extends Component {
   render() {    
     let firstAteliers = this.props.ateliers.slice(0, 3);
     let upcomingAteliers = (
-      <Grid container justify="center">
+      <Grid id='ateliers' container justify="center">
         {firstAteliers.map((ateliers) => {
           return (
             <AtelierVignette
