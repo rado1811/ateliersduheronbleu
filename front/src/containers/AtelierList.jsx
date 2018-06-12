@@ -3,7 +3,8 @@ import { Button } from 'material-ui';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectAteliers } from '../actions/Index';
+import { selectAteliers } from '../actions/index';
+
 
 const AteliersList = ({ ateliers, selectAteliers }) => (
   <div style={{ display: 'flex' }}>
@@ -31,8 +32,8 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
       </ul>
     </div>
   </div>
-
 );
+
 
 function mapStateToProps(state) {
   return { ateliers: state.ateliers };

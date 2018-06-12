@@ -2,12 +2,13 @@ import React from 'react';
 import Grid from 'material-ui/Grid';
 import AtelierList from '../../../containers/AtelierList';
 import AtelierDetail from '../../../containers/AtelierDetail';
-import SimpleForm from '../../../containers/Form';
+import FormParticipants from './FormParticipants';
+
 import './Ateliers.css';
 
 const Ateliers = () => (
   <div style={{ background: '#F2F2F2' }}>
-    <div>
+    <div className="shapeAteliers">
       <Grid container>
         <Grid item md={2}>
           <AtelierList />
@@ -24,7 +25,7 @@ const Ateliers = () => (
         align="center"
       >
         <Grid item xs={12} style={{ background: '#F2F2F2' }}>
-          <SimpleForm />
+          <FormParticipants />
         </Grid>
       </Grid>
     </div>
