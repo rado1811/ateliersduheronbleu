@@ -23,6 +23,7 @@ class AtelierHome extends Component {
 
 componentWillMount() {
   console.log(this.props)
+  
 }
 
 componentDidMount() {
