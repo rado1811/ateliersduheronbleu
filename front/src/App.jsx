@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 // Components
 import TemporaryDrawer from './components/client/navbar/TemporaryDrawer';
+import Footer from './components/client/footer/Footer';
 import Ateliers from './components/client/pageAteliers/Ateliers';
 import AtelierHome from './containers/AtelierHome';
 import Concept from './components/client/navbar/fakeComponents/Concept';
@@ -24,8 +25,8 @@ const App = () => (
       <Route path="/admin/ateliers" component={AdminAtelier} />
       <Route exact path="/admin/dashboard" component={MenuAdmin} />
       <Route exact path="/admin/intervenant" component={Admin} />
-
     </Switch>
+    <Footer />
   </div>
 );
 
