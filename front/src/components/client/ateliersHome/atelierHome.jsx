@@ -5,6 +5,8 @@ import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import { HashLink as Link } from 'react-router-hash-link';
+
 
 const styles = (theme) => ({
   button: {
@@ -136,14 +138,19 @@ class AtelierHome extends Component {
 
     return (
       <div>
-        <div style={{marginBottom: 100}}>
+        <div className='video-container' style={{marginBottom: 100}}>
           <video id="background-video" style={{height: 'auto',
           width:'100%' }} loop muted autoPlay>
             <source src="../images/video.mp4" type="video/mp4"/>
             Your browser does not support the video tag.
           </video>
+          <p className='overlay'>Ateliers "Bien-être et Créativité"</p>
+          <Link to='#ateliers'><i className="fas fa-angle-double-down" ></i>
+          </Link>
+
+
         </div>
-        <Grid container spacing={16}>
+        <Grid id='ateliers' container spacing={16}>
           {upcomingAteliers}
         </Grid>
       </div>
