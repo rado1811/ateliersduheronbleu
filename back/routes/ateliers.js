@@ -1,13 +1,12 @@
 import express from 'express';
-import connexion from '../config/db';
+import connection from '../config/db';
 
 const router = express.Router();
 
-const selectQuery = 'SELECT * FROM ateliers';
 router.get('/', (req, res) => {
-  connexion.query(selectQuery, (err, rows) => {
+  connection.query('SELECT * FROM Ateliers', (err, data) => {
     if (err) throw err;
-    res.json(rows);
+    res.json(data);
   });
 });
 
