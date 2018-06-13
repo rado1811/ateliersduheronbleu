@@ -28,7 +28,7 @@ class FormulaireIntervenant extends Component {
   handleSubmit(e) {
     e.preventDefault();
     fetch(
-      '/intervenant',
+      '/api/intervenant',
       {
 
         method: 'POST',

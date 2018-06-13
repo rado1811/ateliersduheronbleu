@@ -19,15 +19,15 @@ router.get('/intervenant', (req, res, next) => {
       });
   });
 
-router.post('/intervenant', (req, res) => {
-  let addIntervenant = 'INSERT INTO Intervenants SET ?';
-  let query = connection.query(addIntervenant, req.body, (err, result) => {
-    if (err) {
-      throw err;
-    }
-    res.send(`${result.insertId}`);
+  router.post('/intervenant', (req, res) => {
+    let sql = 'INSERT INTO Intervenants SET ?';
+    let query = connection.query(sql, req.body, (err, result) => {
+      if (err) {
+        throw err;
+      }
+      res.send(`${result.insertId}`);
+    });
   });
-});
 
 router.delete('/intervenant/:id', (req, res) => {
   let deletedIntervenant = `DELETE FROM Intervenants WHERE id=${req.params.id}`
