@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -31,22 +32,20 @@ class AtelierHome extends Component {
     this.setState({ toggleAteliers: !doesShow });
   }
 
-  render() {    
+  render() {
     const firstAteliers = this.props.ateliers.slice(0, 3);
     let upcomingAteliers = (
       <Grid container justify="center">
-        {firstAteliers.map((ateliers) => {
-          return (
-            <AtelierVignette
-              key={ateliers.id_atelier}
-              name={ateliers.nom}
-              date={ateliers.debut}
-              image={ateliers.photo}
-              intervenant={ateliers.id_intervenant}
-              places_disponibles={ateliers.place_disponibles}
-            />
-          );
-        })}
+        {firstAteliers.map(ateliers => (
+          <AtelierVignette
+            key={ateliers.id_atelier}
+            name={ateliers.nom}
+            date={ateliers.debut}
+            image={ateliers.photo}
+            intervenant={ateliers.id_intervenant}
+            places_disponibles={ateliers.place_disponibles}
+          />
+        ))}
         <Button
           variant="fab"
           color="primary"
@@ -61,18 +60,16 @@ class AtelierHome extends Component {
     if (this.state.toggleAteliers) {
       upcomingAteliers = (
         <Grid container justify="center">
-          {this.props.ateliers.map((ateliers) => {
-            return (
-              <AtelierVignette
-                key={ateliers.key}
-                name={ateliers.nom_atelier}
-                date={ateliers.date}
-                image={ateliers.image}
-                intervenant={ateliers.intervenants}
-                descriptif={ateliers.programme}
-              />
-            );
-          })}
+          {this.props.ateliers.map(ateliers => (
+            <AtelierVignette
+              key={ateliers.id_atelier}
+              name={ateliers.nom}
+              date={ateliers.debut}
+              image={ateliers.photo}
+              intervenant={ateliers.id_intervenant}
+              places_disponibles={ateliers.place_disponibles}
+            />
+          ))}
           <Button
             variant="fab"
             color="secondary"
@@ -92,8 +89,11 @@ class AtelierHome extends Component {
             id="background-video" 
             style={{height: 'auto',
               width:'100%' }} 
-            loop muted autoPlay>
-            <source src="../images/video.mp4" type="video/mp4"/>
+            loop 
+            muted 
+            autoPlay
+          >
+            <source src="../images/video.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
@@ -105,8 +105,12 @@ class AtelierHome extends Component {
   }
 }
 
+AtelierHome.propTypes = {
+  ateliers: PropTypes.arrayOf(Array).isRequired,
+  fetchAteliers: PropTypes.func.isRequired,
+};
+
 function mapStateToProps(state) {
-  console.log(state.ateliers.ateliers)
   return {
     ateliers: state.ateliers.ateliers,
   };
@@ -114,7 +118,5 @@ function mapStateToProps(state) {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, {
-    fetchAteliers,
-  }),
+  connect(mapStateToProps, { fetchAteliers }),
 )(AtelierHome);

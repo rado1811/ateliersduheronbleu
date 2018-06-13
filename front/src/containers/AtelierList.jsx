@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectAteliers } from '../actions/index';
 
-
 const AteliersList = ({ ateliers, selectAteliers }) => (
   <div style={{ display: 'flex' }}>
     <div
@@ -17,8 +16,8 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
         }}
     >
       <ul className="AteliersList">
-        {this.props.ateliers.map(atelier => (
-          <Button key={atelier.id_atelier} onClick={() => selectAteliers(atelier)}>
+        {ateliers.map(atelier => (
+          <Button key={ateliers.id_atelier} onClick={() => selectAteliers(atelier)}>
             <li >
               {atelier.nom}
               <br />
@@ -34,10 +33,7 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
   </div>
 );
 
-
 function mapStateToProps(state) {
-  console.log(state.ateliers.ateliers)
-
   return { ateliers: state.ateliers.ateliers };
 }
 
