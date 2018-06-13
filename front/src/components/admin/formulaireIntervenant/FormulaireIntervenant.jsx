@@ -28,7 +28,7 @@ class FormulaireIntervenant extends Component {
   handleSubmit(e) {
     e.preventDefault();
     fetch(
-      '/admin/intervenant',
+      '/intervenant',
       {
 
         method: 'POST',

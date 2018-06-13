@@ -7,7 +7,7 @@ import path from 'path';
 
 import prereservation from './routes/prereservation';
 import adminAteliers from './routes/adminateliers';
-import formulaireIntervenant from './routes/formulaireIntervenant';
+import intervenant from './routes/intervenant';
 
 const app = express();
 const debug = Debug('back:app');
@@ -24,8 +24,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 /** ROUTES */
 app.use('/client', prereservation);
+app.use('/api', intervenant);
+app.use('/api/intervenant', intervenant);
 app.use('/admin', adminAteliers);
-app.use('/admin', formulaireIntervenant);
+
 
 // catch 404 and forward to error handler
 app.use(next => {

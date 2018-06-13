@@ -3,16 +3,6 @@ import connection from '../config/db';
 
 const router = express.Router();
 
-router.get('/ateliers', (req, res, next) => {
-  connection.query('SELECT * FROM Intervenants', (err, data) => {
-        if (err) {
-            res.send(err)
-        } else {
-            res.json(data);
-        }
-    });
-});
-
 router.post('/ateliers', (req, res, next) => {
   const nom = req.body.nom;
   const id_intervenant = req.body.id_intervenant;

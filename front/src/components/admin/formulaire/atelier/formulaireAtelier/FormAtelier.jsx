@@ -33,7 +33,7 @@ class FormAtelier extends Component {
 }
   };
     componentDidMount(){
-      fetch("/admin/ateliers")
+      fetch("/api/intervenant")
         .then(response => response.json())
         .then(data =>{
           console.log(data);
