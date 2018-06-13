@@ -7,9 +7,11 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import AtelierVignette from '../components/client/ateliersHome/AtelierVignette';
 import { HashLink as Link } from 'react-router-hash-link';
+import BoutonContact from '../components/client/BoutonContact';
 
 
 import './AtelierHome.css';
+
 
 const styles = (theme) => ({
   button: {
@@ -36,6 +38,7 @@ class AtelierHome extends Component {
       <Grid id='ateliers' container justify="center">
         {firstAteliers.map((ateliers) => {
           return (
+            
             <AtelierVignette
               key={ateliers.key}
               name={ateliers.nom_atelier}
@@ -96,7 +99,7 @@ class AtelierHome extends Component {
           <p className='overlay'>Ateliers "Bien-être et Créativité"</p>
           <Link to='#ateliers'><i className="fas fa-angle-double-down" ></i>
           </Link>
-
+          <BoutonContact />
         </div>
         <Grid container spacing={16}>
           {upcomingAteliers}
