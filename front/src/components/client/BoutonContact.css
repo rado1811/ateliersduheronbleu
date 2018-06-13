@@ -1,4 +1,5 @@
 .BoutonContact {
+    display: flex;
     position: fixed;
     right: 5%;
     bottom: 10%;
@@ -19,4 +20,11 @@
     padding-top: 10px;
     padding-bottom: 10px;
     
+}
+@media (max-width: 750px) {
+    .BoutonContact {
+        width: 70px;
+        height: 70px;
+        font-size: 15px;
+    }
 }
