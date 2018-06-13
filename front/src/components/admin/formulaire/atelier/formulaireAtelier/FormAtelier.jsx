@@ -33,7 +33,7 @@ class FormAtelier extends Component {
 }
   };
     componentDidMount(){
-      fetch("/admin/ateliers")
+      fetch("/api/atelier")
         .then(response => response.json())
         .then(data =>{
           console.log(data);
@@ -114,7 +114,7 @@ class FormAtelier extends Component {
     let data = {...this.state,
       id_intervenant: this.state.intervenant}
     
-    fetch("/admin/ateliers",
+    fetch("/api/atelier",
     {
         method:  'POST',
         headers:  new  Headers({

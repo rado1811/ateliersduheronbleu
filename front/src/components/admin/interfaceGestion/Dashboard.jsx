@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import DashboardAteliers from './DashboardAteliers';
-import MenuAdmin from '../menuadmin/MenuAdmin';
+import MenuAdmin from '../menuAdmin/MenuAdmin';
 
 class Dashboard extends Component {
     constructor(props) {

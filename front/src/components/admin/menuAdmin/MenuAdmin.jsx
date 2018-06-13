@@ -57,8 +57,12 @@ function MenuAdmin(props) {
       >
         <div className={classes.toolbar} />
         <MenuList >
-          <br />
-          <MenuItem >Gestion</MenuItem>
+          <br />         
+          <MenuItem key="/admin/gestion">
+            <NavLink to="/admin/gestion">
+          Gestion
+            </NavLink>
+          </MenuItem>
           <br />
           <MenuItem key="/admin/intervenant">
             <NavLink to="/admin/intervenant">

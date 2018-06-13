@@ -11,6 +11,7 @@ import Contact from './components/client/navbar/fakeComponents/Contact';
 import AdminAtelier from './components/admin/formulaire/atelier/formulaireAtelier/AdminAtelier';
 import MenuAdmin from './components/admin/menuAdmin/MenuAdmin';
 import Admin from './components/admin/formulaireIntervenant/Admin';
+import Dashboard from './components/admin/interfaceGestion/Dashboard'
 
 const App = () => (
   <div>
@@ -24,6 +25,8 @@ const App = () => (
       <Route path="/admin/ateliers" component={AdminAtelier} />
       <Route exact path="/admin/dashboard" component={MenuAdmin} />
       <Route exact path="/admin/intervenant" component={Admin} />
+      <Route exact path="/admin/gestion" component={Dashboard} />
+
 
     </Switch>
   </div>
