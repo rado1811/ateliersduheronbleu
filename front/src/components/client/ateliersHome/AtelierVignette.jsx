@@ -52,6 +52,7 @@ const AtelierVignette = (props) => {
           </Typography>
           <Typography component="h3">{props.date}</Typography>
           <Typography component="h3">
+            Places disponibles: {props.places_disponibles} <br />
             Co-animation: {props.intervenant}, Isabelle Jono
           </Typography>
         </CardContent>
@@ -81,4 +82,7 @@ AtelierVignette.propTypes = {
   //  booking: PropTypes.func,isRequired
   // moreDetails: PropTypes.func,isRequired
 };
+
+
+
 export default withStyles(styles)(AtelierVignette);

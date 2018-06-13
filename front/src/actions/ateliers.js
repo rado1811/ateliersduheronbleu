@@ -18,19 +18,17 @@ export const fetchAteliersFailure = error => ({
 });
 
 export function fetchAteliers() {
-  console.log('fetch start');
   return (dispatch) => {
-    console.log('dispatch start');
     dispatch(fetchAteliersBegin());
-    return fetch('/')
+    return fetch('/api/ateliers')
       .then((res) => {
         if (!res.ok) {
           throw Error(res.statusText);
         }
         dispatch(fetchAteliersBegin(false));
-        return res;
+        return res.json();
       })
-      .then(res => res.json())
+      // .then(res => res.json())
       .then(ateliers => dispatch(fetchAteliersSuccess(ateliers)))
       .catch(error => dispatch(fetchAteliersFailure(error)));
   };

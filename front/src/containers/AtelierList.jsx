@@ -17,12 +17,12 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
         }}
     >
       <ul className="AteliersList">
-        {ateliers.map(atelier => (
-          <Button key={atelier.key} onClick={() => selectAteliers(atelier)}>
+        {this.props.ateliers.map(atelier => (
+          <Button key={atelier.id_atelier} onClick={() => selectAteliers(atelier)}>
             <li >
-              {atelier.nom_atelier}
+              {atelier.nom}
               <br />
-              {atelier.date}
+              {atelier.debut}
               <hr />
             </li>
           </Button>
@@ -36,7 +36,9 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
 
 
 function mapStateToProps(state) {
-  return { ateliers: state.ateliers };
+  console.log(state.ateliers.ateliers)
+
+  return { ateliers: state.ateliers.ateliers };
 }
 
 function matchDispatchToProps(dispatch) {

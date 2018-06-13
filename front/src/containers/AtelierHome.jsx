@@ -22,14 +22,8 @@ class AtelierHome extends Component {
     };
   }
 
-  // componentWillMount() {
-  //   fetchAteliers();
-  //   console.log('componentWillMount');
-  // }
-
   componentDidMount() {
-    fetchAteliers();
-    console.log('componentDidMount');
+    this.props.fetchAteliers();
   }
 
   toggleAteliers() {
@@ -38,19 +32,18 @@ class AtelierHome extends Component {
   }
 
   render() {    
-    console.log(this.props.ateliers);
     const firstAteliers = this.props.ateliers.slice(0, 3);
     let upcomingAteliers = (
       <Grid container justify="center">
         {firstAteliers.map((ateliers) => {
           return (
             <AtelierVignette
-              key={ateliers.key}
-              name={ateliers.nom_atelier}
-              date={ateliers.date}
-              image={ateliers.image}
-              intervenant={ateliers.intervenants}
-              descriptif={ateliers.programme}
+              key={ateliers.id_atelier}
+              name={ateliers.nom}
+              date={ateliers.debut}
+              image={ateliers.photo}
+              intervenant={ateliers.id_intervenant}
+              places_disponibles={ateliers.place_disponibles}
             />
           );
         })}
@@ -108,18 +101,20 @@ class AtelierHome extends Component {
           {upcomingAteliers}
         </Grid>
       </div>
-
     );
   }
 }
 
 function mapStateToProps(state) {
+  console.log(state.ateliers.ateliers)
   return {
-    ateliers: state.ateliers, 
+    ateliers: state.ateliers.ateliers,
   };
 }
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { fetchAteliers }),
+  connect(mapStateToProps, {
+    fetchAteliers,
+  }),
 )(AtelierHome);

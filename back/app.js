@@ -5,9 +5,8 @@ import express from 'express';
 import logger from 'morgan';
 import path from 'path';
 
-import ateliersRouter from './routes/ateliers';
+import ateliers from './routes/ateliers';
 import prereservationRouter from './routes/prereservation';
-
 
 const app = express();
 const debug = Debug('back:app');
@@ -26,7 +25,7 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 /** ROUTES */
-app.use('/ateliers', ateliersRouter);
+app.use('/api', ateliers);
 app.use('/client', prereservationRouter);
 
 // catch 404 and forward to error handler
