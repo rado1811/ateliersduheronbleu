@@ -8,7 +8,7 @@ import AddIcon from '@material-ui/icons/Add';
 import AtelierVignette from '../components/client/ateliersHome/AtelierVignette';
 import { fetchAteliers } from '../actions/ateliers';
 
-const styles = (theme) => ({
+const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
   },
@@ -22,9 +22,15 @@ class AtelierHome extends Component {
     };
   }
 
-componentDidMount() {
-  fetchAteliers()
-}
+  // componentWillMount() {
+  //   fetchAteliers();
+  //   console.log('componentWillMount');
+  // }
+
+  componentDidMount() {
+    fetchAteliers();
+    console.log('componentDidMount');
+  }
 
   toggleAteliers() {
     const doesShow = this.state.toggleAteliers;
@@ -32,7 +38,8 @@ componentDidMount() {
   }
 
   render() {    
-    let firstAteliers = this.props.ateliers.slice(0, 3);
+    console.log(this.props.ateliers);
+    const firstAteliers = this.props.ateliers.slice(0, 3);
     let upcomingAteliers = (
       <Grid container justify="center">
         {firstAteliers.map((ateliers) => {
@@ -87,9 +94,12 @@ componentDidMount() {
 
     return (
       <div>
-        <div style={{marginBottom: 100}}>
-          <video id="background-video" style={{height: 'auto',
-          width:'100%' }} loop muted autoPlay>
+        <div style={{ marginBottom: 100 }}>
+          <video 
+            id="background-video" 
+            style={{height: 'auto',
+              width:'100%' }} 
+            loop muted autoPlay>
             <source src="../images/video.mp4" type="video/mp4"/>
             Your browser does not support the video tag.
           </video>
@@ -105,11 +115,11 @@ componentDidMount() {
 
 function mapStateToProps(state) {
   return {
-    ateliers: state.ateliers
+    ateliers: state.ateliers, 
   };
 }
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps)
+  connect(mapStateToProps, { fetchAteliers }),
 )(AtelierHome);

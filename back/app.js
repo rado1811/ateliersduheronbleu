@@ -25,10 +25,8 @@ app.use(
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 /** ROUTES */
-app.use('/', ateliersRouter);
+app.use('/ateliers', ateliersRouter);
 app.use('/client', prereservationRouter);
 
 // catch 404 and forward to error handler

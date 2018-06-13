@@ -18,9 +18,11 @@ export const fetchAteliersFailure = error => ({
 });
 
 export function fetchAteliers() {
+  console.log('fetch start');
   return (dispatch) => {
+    console.log('dispatch start');
     dispatch(fetchAteliersBegin());
-    return fetch('/ateliers')
+    return fetch('/')
       .then((res) => {
         if (!res.ok) {
           throw Error(res.statusText);
