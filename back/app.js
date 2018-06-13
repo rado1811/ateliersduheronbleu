@@ -8,6 +8,7 @@ import path from 'path';
 import ateliersRouter from './routes/ateliers';
 import prereservationRouter from './routes/prereservation';
 
+
 const app = express();
 const debug = Debug('back:app');
 
@@ -27,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 /** ROUTES */
-app.use('/ateliers', ateliersRouter);
+app.use('/', ateliersRouter);
 app.use('/client', prereservationRouter);
 
 // catch 404 and forward to error handler

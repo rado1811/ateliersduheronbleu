@@ -4,9 +4,12 @@ import connection from '../config/db';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  connection.query('SELECT * FROM Ateliers', (err, data) => {
-    if (err) throw err;
-    res.json(data);
+  connection.query('SELECT * FROM Ateliers', (error, result) => {
+    if (error) {
+      res.send(error);
+    } else {
+      res.json(result);
+    }
   });
 });
 
