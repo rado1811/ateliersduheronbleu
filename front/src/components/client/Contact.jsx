@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { TextField, Button, Snackbar } from 'material-ui';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import AlertDialogSlide from '../../pageAteliers/AlertDialogSlide';
+import AlertDialogSlide from './pageAteliers/AlertDialogSlide';
 
 class Contact extends Component {
   constructor(props) {

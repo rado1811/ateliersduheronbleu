@@ -7,7 +7,7 @@ import Ateliers from './components/client/pageAteliers/Ateliers';
 import AtelierHome from './containers/AtelierHome';
 import Concept from './components/client/navbar/fakeComponents/Concept';
 import Intervenants from './components/client/navbar/fakeComponents/Intervenants';
-import Contact from './components/client/navbar/fakeComponents/Contact';
+import Contact from './components/client/Contact';
 import AdminAtelier from './components/admin/formulaire/atelier/formulaireAtelier/AdminAtelier';
 import MenuAdmin from './components/admin/menuAdmin/MenuAdmin';
 import Admin from './components/admin/formulaireIntervenant/Admin';
