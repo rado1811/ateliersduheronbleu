@@ -1,0 +1,29 @@
+video {
+    filter:  brightness(60%);
+}
+
+.video-container { position:relative; }
+.video-container video {
+    position:relative;
+    z-index:0;
+}
+.overlay {
+    color: aliceblue;
+    font-size: 2rem;
+    margin: 0;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}   
+.fas {
+    color: aliceblue;
+    font-size: 2rem;
+    margin: 0;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}   

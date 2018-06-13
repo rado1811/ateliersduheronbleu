@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import AtelierVignette from '../components/client/ateliersHome/AtelierVignette';
 import { fetchAteliers } from '../actions/ateliers';
+import BoutonContact from '../components/client/BoutonContact';
 
 const styles = theme => ({
   button: {
@@ -100,6 +101,7 @@ class AtelierHome extends Component {
         <Grid container spacing={16}>
           {upcomingAteliers}
         </Grid>
+        <BoutonContact />
       </div>
     );
   }

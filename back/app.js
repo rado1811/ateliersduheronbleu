@@ -15,11 +15,7 @@ const debug = Debug('back:app');
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(
-  bodyParser.urlencoded({
-    extended: false,
-  }),
-);
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 
@@ -29,7 +25,7 @@ app.use('/api', ateliers);
 app.use('/client', prereservationRouter);
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
+app.use(next => {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -37,7 +33,7 @@ app.use((req, res, next) => {
 
 // error handler
 /* eslint no-unused-vars: 0 */
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

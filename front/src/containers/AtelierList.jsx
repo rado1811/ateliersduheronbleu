@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectAteliers } from '../actions/index';
+import BoutonContact from '../components/client/BoutonContact';
 
 const AteliersList = ({ ateliers, selectAteliers }) => (
   <div style={{ display: 'flex' }}>
+    <BoutonContact />
     <div
       style={{
-
           width: '100%',
           height: '100%',
           background: '#f0f0f0',
@@ -25,9 +26,7 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
               <hr />
             </li>
           </Button>
-
-      ))
-}
+        ))}
       </ul>
     </div>
   </div>
