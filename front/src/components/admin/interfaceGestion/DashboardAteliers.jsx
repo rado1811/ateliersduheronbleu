@@ -24,6 +24,8 @@ class DashboardAteliers extends Component {
 
     render() {
         return (
+            <div>
+            <h1 className="text-center">Tableau de bord des ateliers</h1>
             <Paper>
                 <Table style={{marginTop:50}} >
                     <TableHead>
@@ -42,6 +44,9 @@ class DashboardAteliers extends Component {
                                     <TableCell component="th" scope="row">
                                     {atelier.nom}
                                     </TableCell>
+                                    <TableCell numeric>{atelier.nb_participants}</TableCell>
+                                    <TableCell numeric></TableCell>
+                                    <TableCell numeric>{atelier.place_disponible}</TableCell>
                                     </TableRow>
 
                                 );                               
@@ -50,6 +55,7 @@ class DashboardAteliers extends Component {
                     </TableBody>
                 </Table>
             </Paper>
+            </div>
         );
     }
 }
