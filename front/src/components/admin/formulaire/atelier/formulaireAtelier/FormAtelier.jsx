@@ -16,7 +16,6 @@ class FormAtelier extends Component {
     super(props);
     this.state = {
         nom:'',
-        intervenant:'',
         id_intervenant: [],
         debut: '',
         nb_participants: '',
@@ -38,13 +37,13 @@ class FormAtelier extends Component {
         .then(data =>{
           console.log(data);
           this.setState({
-           id_intervenant: data,
+            id_intervenant: data,
             // selectdIntervenant : data[0].prenom_intervenant
           })}
         )
         .catch(err => console.error(err))
     }
-   
+
   updateNomField = (event) => {
     this.setState({
       nom: event.target.value
@@ -57,7 +56,7 @@ class FormAtelier extends Component {
   }
   updateNbField = (event) => {
     this.setState({
-     nb_participants: event.target.value
+      nb_participants: event.target.value
 		})
   }
   updatePrixField = (event) => {
@@ -130,8 +129,6 @@ class FormAtelier extends Component {
   render() {
     const { vertical, horizontal, open } = this.state;
     return (
-      
-
       <Grid>
         <div>
           <h1 className="text-center">Ajouter un Atelier</h1>
@@ -234,7 +231,6 @@ class FormAtelier extends Component {
                 </MenuItem>)
               } 
           </Select>
-        
         <br />
         <TextField
         name="programme"

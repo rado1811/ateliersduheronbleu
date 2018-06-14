@@ -71,7 +71,7 @@ class FormParticipants extends Component {
   handleSubmit = event => {
     event.preventDefault();
     if (this.formSend()) {
-      fetch('/client/participants', {
+      fetch('/api/participant', {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json',
