@@ -4,9 +4,8 @@ import Debug from 'debug';
 import express from 'express';
 import logger from 'morgan';
 import path from 'path';
-
-import prereservation from './routes/prereservation';
-import adminAteliers from './routes/adminateliers';
+import ateliers from './routes/ateliers';
+import prereservationRouter from './routes/prereservation';
 import nodemailer from './routes/nodemailer';
 
 const app = express();
@@ -21,12 +20,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
-
 /** ROUTES */
-app.use('/client', prereservation);
-app.use('/admin', adminAteliers);
+app.use('/api', ateliers);
+app.use('/api', prereservationRouter);
 app.use('/mail', nodemailer);
-
 // catch 404 and forward to error handler
 app.use(next => {
   const err = new Error('Not Found');
