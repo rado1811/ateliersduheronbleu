@@ -238,7 +238,7 @@ class Contact extends Component {
               </form>
             </Grid>
             <Grid item xs={12} sm={6} style={{ width: '80' }}>
-              <img
+              <img style={{height:'auto', maxWidth:'80' }}
                 src="https://images.unsplash.com/photo-1520534827997-83397f6aac19?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=48b0b26b5f8b4acfed3b9d11e3181d92&auto=format&fit=crop&w=500&q=60"
                 alt="groupe"
               />
