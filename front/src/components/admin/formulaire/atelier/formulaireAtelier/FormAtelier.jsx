@@ -16,7 +16,6 @@ class FormAtelier extends Component {
     super(props);
     this.state = {
         nom:'',
-        intervenant:'',
         id_intervenant: [],
         debut: '',
         nb_participants: '',

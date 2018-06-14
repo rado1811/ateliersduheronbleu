@@ -25,6 +25,7 @@ router.post('/atelier', (req, res) => {
   let sql = 'INSERT INTO Ateliers SET ?';
   console.log(sql)
   let query = connection.query(sql, req.body, (err, result) => {
+    console.log(err);
     console.log(req.body)
     if (err) {
       res.sendStatus(500);
