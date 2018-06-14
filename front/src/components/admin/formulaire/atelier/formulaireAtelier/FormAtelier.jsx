@@ -16,7 +16,6 @@ class FormAtelier extends Component {
     super(props);
     this.state = {
         nom:'',
-        intervenant:'',
         id_intervenant: [],
         debut: '',
         nb_participants: '',
@@ -26,10 +25,7 @@ class FormAtelier extends Component {
         lieu:'',
         photo:'',
         programme:'',
-        flash:'',
-        open: false,
-        vertical: null,
-        horizontal: null,
+
 }
   };
     componentDidMount(){
@@ -114,7 +110,7 @@ class FormAtelier extends Component {
     let data = {...this.state,
       id_intervenant: this.state.intervenant}
     
-    fetch("/admin/ateliers",
+    fetch("/api/atelier",
     {
         method:  'POST',
         headers:  new  Headers({
