@@ -214,8 +214,6 @@ class Contact extends Component {
                 />
               </div>
             </Grid>
-            {/*End Grid container Prénom et Nom*/}
-
             <div>
               <Button
                 onClick={this.handleSubmit}
