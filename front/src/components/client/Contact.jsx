@@ -166,6 +166,7 @@ class Contact extends Component {
                 <TextField
                   type="text"
                   className={classes.textField}
+                  label="Prénom"
                   name="prenom"
                   placeholder="Victor"
                   onChange={this.updateFirstNameField}
@@ -177,6 +178,7 @@ class Contact extends Component {
                 <TextField
                   type="text"
                   className={classes.textField}
+                  label='Nom'
                   name="nom"
                   placeholder="Leroy"
                   onChange={this.updateLastNameField}
@@ -190,6 +192,7 @@ class Contact extends Component {
                 <TextField
                   type="text"
                   className={classes.textField}
+                  label='Téléphone'
                   name="tel"
                   placeholder="06695026.."
                   onChange={this.updatePhoneField}
@@ -202,6 +205,7 @@ class Contact extends Component {
                   id="email"
                   type="email"
                   className={classes.textField}
+                  label='Email'
                   name="email"
                   placeholder="victor.leroy@gmail.com"
                   onChange={this.updateEmailField}
