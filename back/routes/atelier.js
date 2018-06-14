@@ -25,12 +25,12 @@ router.post('/atelier', (req, res) => {
   let sql = 'INSERT INTO Ateliers SET ?';
   console.log(sql)
   let query = connection.query(sql, req.body, (err, result) => {
-    console.log(query)
+    console.log(req.body)
     if (err) {
       res.sendStatus(500);
-    }
+    } else {
     res.send(`${result.insertId}`);
-  });
+  }});
 });
 
 router.delete('/atelier/:id', (req, res, next) => {

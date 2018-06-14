@@ -26,10 +26,6 @@ class FormAtelier extends Component {
         lieu:'',
         photo:'',
         programme:'',
-        flash:'',
-        open: false,
-        vertical: null,
-        horizontal: null,
 }
   };
     componentDidMount(){
@@ -39,7 +35,6 @@ class FormAtelier extends Component {
           console.log(data);
           this.setState({
            id_intervenant: data,
-            // selectdIntervenant : data[0].prenom_intervenant
           })}
         )
         .catch(err => console.error(err))
@@ -127,6 +122,8 @@ class FormAtelier extends Component {
         err  =>  this.setState({"flash":  err.flash})
     )
   }
+
+
   render() {
     const { vertical, horizontal, open } = this.state;
     return (
