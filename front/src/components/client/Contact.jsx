@@ -3,6 +3,22 @@ import { TextField, Button, Snackbar } from 'material-ui';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import AlertDialogSlide from './pageAteliers/AlertDialogSlide';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+  menu: {
+    width: 200,
+  },
+});
 
 class Contact extends Component {
   constructor(props) {
@@ -24,19 +40,19 @@ class Contact extends Component {
   formSend = () => {
     let whatIsMissing = [];
     if (this.state.email === '') {
-      whatIsMissing.push('Adresse mail requise');
+      whatIsMissing.push('Adresse mail');
     }
     if (this.state.nom === '') {
-      whatIsMissing.push('Nom de famille est requis');
+      whatIsMissing.push('Nom de famille');
     }
     if (this.state.prenom === '') {
-      whatIsMissing.push('Prénom est requis');
+      whatIsMissing.push('Prénom');
     }
     if (this.state.tel === '') {
-      whatIsMissing.push('Numéro de téléphone est requis');
+      whatIsMissing.push('Numéro de téléphone');
     }
     if (this.state.message === '') {
-      whatIsMissing.push('Un message est requis');
+      whatIsMissing.push('Votre message');
     }
     if (whatIsMissing.length > 0) {
       this.showDialogueBox(whatIsMissing);
@@ -124,105 +140,95 @@ class Contact extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <div>
-        <form onSubmit={this.handleSubmit} style={{ margin: 40 }}>
+        <form
+          className={classes.container}
+          onSubmit={this.handleSubmit}
+          style={{ margin: 40 }}
+        >
           <Paper elevation={4} style={{ padding: 40 }}>
             <h2 style={{ textAlign: 'center' }}>Une question ?</h2>
-            <Grid container spacing={24} align="center">
-              <Grid item xs={12} sm={6} style={{ width: '80' }}>
-                <div>
-                  <TextField
-                    id="email"
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    placeholder="victor.leroy@gmail.com"
-                    onChange={this.updateEmailField}
-                    fullWidth
-                    margin="normal"
-                  />
-                </div>
-                <div>
-                  <TextField
-                    type="text"
-                    className="form-control"
-                    name="prenom"
-                    placeholder="Victor"
-                    onChange={this.updateFirstNameField}
-                    fullWidth
-                    margin="normal"
-                  />
-                </div>
-                <div>
-                  <TextField
-                    type="text"
-                    className="form-control"
-                    name="nom"
-                    placeholder="Leroy"
-                    onChange={this.updateLastNameField}
-                    fullWidth
-                    margin="normal"
-                  />
-                </div>
-                <div>
-                  <TextField
-                    type="text"
-                    className="form-control"
-                    name="tel"
-                    placeholder="06695026.."
-                    onChange={this.updatePhoneField}
-                    fullWidth
-                    margin="normal"
-                  />
-                </div>
+            <TextField
+              id="multiline-static"
+              name="message"
+              label="Entrez votre texte"
+              multiline
+              fullWidth
+              rows="4"
+              placeholder="Je souhaiterais savoir..."
+              margin="normal"
+              onChange={this.updateMessageField}
+            />
+            <Grid container>
+              <div>
                 <TextField
-                  id="multiline-static"
-                  name="message"
-                  label="Entre votre texte"
-                  multiline
+                  type="text"
+                  className={classes.textField}
+                  name="prenom"
+                  placeholder="Victor"
+                  onChange={this.updateFirstNameField}
                   fullWidth
-                  rows="4"
-                  placeholder="Je souhaiterais savoir..."
                   margin="normal"
-                  onChange={this.updateMessageField}
                 />
+              </div>
+              <div>
+                <TextField
+                  type="text"
+                  className={classes.textField}
+                  name="nom"
+                  placeholder="Leroy"
+                  onChange={this.updateLastNameField}
+                  fullWidth
+                  margin="normal"
+                />
+              </div>
+            </Grid>
+            <Grid container>
+              <div>
+                <TextField
+                  type="text"
+                  className={classes.textField}
+                  name="tel"
+                  placeholder="06695026.."
+                  onChange={this.updatePhoneField}
+                  fullWidth
+                  margin="normal"
+                />
+              </div>
+              <div>
+                <TextField
+                  id="email"
+                  type="email"
+                  className={classes.textField}
+                  name="email"
+                  placeholder="victor.leroy@gmail.com"
+                  onChange={this.updateEmailField}
+                  fullWidth
+                  margin="normal"
+                />
+              </div>
+            </Grid>
+            {/*End Grid container Prénom et Nom*/}
 
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Button
-                    onClick={this.handleSubmit}
-                    type="submit"
-                    value="Submit"
-                    variant="raised"
-                    color="secondary"
-                    style={{ margin: 'auto' }}
-                  >
-                    Envoyer
-                  </Button>
-                </div>
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                container
-                alignItems="center"
-                style={{ height: '100%' }}
+            <div>
+              <Button
+                onClick={this.handleSubmit}
+                type="submit"
+                value="Submit"
+                variant="raised"
+                color="secondary"
+                style={{ margin: 'auto' }}
               >
-                <Grid container alignContent="center">
-                  <Grid style={{ textAlign: 'center' }} align="center">
-                    <img
-                      src="https://images.unsplash.com/photo-1520534827997-83397f6aac19?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=48b0b26b5f8b4acfed3b9d11e3181d92&auto=format&fit=crop&w=500&q=60"
-                      alt="groupe"
-                    />
-                  </Grid>
-                </Grid>
-              </Grid>
+                Envoyer
+              </Button>
+            </div>
+            <Grid item xs={6}>
+              <img
+                src="https://images.unsplash.com/photo-1520534827997-83397f6aac19?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=48b0b26b5f8b4acfed3b9d11e3181d92&auto=format&fit=crop&w=500&q=60"
+                alt="groupe"
+              />
             </Grid>
           </Paper>
         </form>
@@ -242,4 +248,4 @@ class Contact extends Component {
   }
 }
 
-export default Contact;
+export default withStyles(styles)(Contact);
