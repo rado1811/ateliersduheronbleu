@@ -13,4 +13,15 @@ router.get('/ateliers', (req, res) => {
   });
 });
 
+router.post('/ateliers', (req, res) => {
+  connection.query('INSERT INTO Ateliers SET ?', req.body, (err, result) => {
+    if (err)
+      res.send(err);
+    else {
+      res.status(200).send();
+      console.log('new atelier inserted');
+    }
+  });
+});
+
 export default router;

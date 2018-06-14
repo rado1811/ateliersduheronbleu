@@ -74,7 +74,7 @@ AtelierVignette.propTypes = {
   intervenant: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  places_disponibles: PropTypes.string.isRequired,
+  places_disponibles: PropTypes.number.isRequired,
   classes: PropTypes.shape({
     item: PropTypes.string.isRequired,
     card: PropTypes.string.isRequired,

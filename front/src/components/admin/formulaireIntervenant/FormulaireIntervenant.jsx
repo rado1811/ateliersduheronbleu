@@ -4,7 +4,6 @@ import TextField from '@material-ui/core/TextField';
 
 import ButtonFormulaireIntervenant from './ButtonFormulaireIntervenant';
 
-
 class FormulaireIntervenant extends Component {
   constructor(props) {
     super(props);

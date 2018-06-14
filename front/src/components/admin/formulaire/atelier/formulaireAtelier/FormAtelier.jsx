@@ -114,7 +114,7 @@ class FormAtelier extends Component {
     let data = {...this.state,
       id_intervenant: this.state.intervenant}
     
-    fetch("/admin/ateliers",
+    fetch("/api/ateliers",
     {
         method:  'POST',
         headers:  new  Headers({
@@ -166,7 +166,7 @@ class FormAtelier extends Component {
             value={this.state.nb_participants}
             onChange={this.updateNbField.bind(this)}
             /><br />
-             </Grid>
+              </Grid>
               <Grid item xs={12} sm={6}>
             <TextField
             name="prix"
@@ -176,7 +176,7 @@ class FormAtelier extends Component {
             onChange={this.updatePrixField.bind(this)}
     
           /><br />
-             </Grid>
+            </Grid>
             </Grid>
             <TextField
               fullWidth
@@ -243,7 +243,6 @@ class FormAtelier extends Component {
         value={this.state.programme}
         onChange={this.updateProgrammeField.bind(this)}
       /><br />
-
         <br />
                 <div> 
                 <Button type="submit" value="Submit" variant="raised" color="primary">
