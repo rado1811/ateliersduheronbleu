@@ -143,97 +143,108 @@ class Contact extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <form
-          className={classes.container}
-          onSubmit={this.handleSubmit}
-          style={{ margin: 40 }}
-        >
-          <Paper elevation={4} style={{ padding: 40 }}>
-            <h2 style={{ textAlign: 'center' }}>Une question ?</h2>
-            <TextField
-              id="multiline-static"
-              name="message"
-              label="Entrez votre texte"
-              multiline
-              fullWidth
-              rows="4"
-              placeholder="Je souhaiterais savoir..."
-              margin="normal"
-              onChange={this.updateMessageField}
-            />
-            <Grid container>
-              <div>
-                <TextField
-                  type="text"
-                  className={classes.textField}
-                  label="Prénom"
-                  name="prenom"
-                  placeholder="Victor"
-                  onChange={this.updateFirstNameField}
-                  fullWidth
-                  margin="normal"
-                />
-              </div>
-              <div>
-                <TextField
-                  type="text"
-                  className={classes.textField}
-                  label='Nom'
-                  name="nom"
-                  placeholder="Leroy"
-                  onChange={this.updateLastNameField}
-                  fullWidth
-                  margin="normal"
-                />
-              </div>
-            </Grid>
-            <Grid container>
-              <div>
-                <TextField
-                  type="text"
-                  className={classes.textField}
-                  label='Téléphone'
-                  name="tel"
-                  placeholder="06695026.."
-                  onChange={this.updatePhoneField}
-                  fullWidth
-                  margin="normal"
-                />
-              </div>
-              <div>
-                <TextField
-                  id="email"
-                  type="email"
-                  className={classes.textField}
-                  label='Email'
-                  name="email"
-                  placeholder="victor.leroy@gmail.com"
-                  onChange={this.updateEmailField}
-                  fullWidth
-                  margin="normal"
-                />
-              </div>
-            </Grid>
-            <div>
-              <Button
-                onClick={this.handleSubmit}
-                type="submit"
-                value="Submit"
-                variant="raised"
-                color="secondary"
-                style={{ margin: 'auto' }}
+        <Paper elevation={4} style={{ padding: 40, margin:40 }}>
+          <Grid container spacing={24} align="center">
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              container
+              alignItems="center"
+              style={{ height: '100%' }}
+            >
+              <form
+                className={classes.container}
+                onSubmit={this.handleSubmit}
+                style={{ margin: 40 }}
               >
-                Envoyer
-              </Button>
-            </div>
-            <Grid item xs={6}>
+                <h2 style={{ textAlign: 'center' }}>Une question ?</h2>
+                <TextField
+                  id="multiline-static"
+                  name="message"
+                  label="Entrez votre texte"
+                  multiline
+                  fullWidth
+                  rows="4"
+                  placeholder="Je souhaiterais savoir..."
+                  margin="normal"
+                  onChange={this.updateMessageField}
+                />
+                <Grid container>
+                  <div>
+                    <TextField
+                      type="text"
+                      className={classes.textField}
+                      label="Prénom"
+                      name="prenom"
+                      placeholder="Victor"
+                      onChange={this.updateFirstNameField}
+                      fullWidth
+                      margin="normal"
+                    />
+                  </div>
+                  <div>
+                    <TextField
+                      type="text"
+                      className={classes.textField}
+                      label="Nom"
+                      name="nom"
+                      placeholder="Leroy"
+                      onChange={this.updateLastNameField}
+                      fullWidth
+                      margin="normal"
+                    />
+                  </div>
+                </Grid>
+                <Grid container>
+                  <div>
+                    <TextField
+                      type="text"
+                      className={classes.textField}
+                      label="Téléphone"
+                      name="tel"
+                      placeholder="06695026.."
+                      onChange={this.updatePhoneField}
+                      fullWidth
+                      margin="normal"
+                    />
+                  </div>
+                  <div>
+                    <TextField
+                      id="email"
+                      type="email"
+                      className={classes.textField}
+                      label="Email"
+                      name="email"
+                      placeholder="victor.leroy@gmail.com"
+                      onChange={this.updateEmailField}
+                      fullWidth
+                      margin="normal"
+                    />
+                  </div>
+                </Grid>
+                <div>
+                  <Button
+                    onClick={this.handleSubmit}
+                    type="submit"
+                    value="Submit"
+                    color="secondary"
+                    style={{ textAlign: 'center' }}
+                    variant='raised'
+                  >
+                    Envoyer
+                  </Button>
+                </div>
+              </form>
+            </Grid>
+            <Grid item xs={12} sm={6} style={{ width: '80' }}>
               <img
                 src="https://images.unsplash.com/photo-1520534827997-83397f6aac19?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=48b0b26b5f8b4acfed3b9d11e3181d92&auto=format&fit=crop&w=500&q=60"
                 alt="groupe"
               />
             </Grid>
-          </Paper>
-        </form>
+          </Grid>
+        </Paper>
         <Snackbar
           open={this.state.open}
           message={this.state.flash}
