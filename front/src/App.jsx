@@ -1,7 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-
-// Components
 import TemporaryDrawer from './components/client/navbar/TemporaryDrawer';
 import Ateliers from './components/client/pageAteliers/Ateliers';
 import AtelierHome from './containers/AtelierHome';
@@ -11,7 +9,6 @@ import Contact from './components/client/navbar/fakeComponents/Contact';
 import AdminAtelier from './components/admin/formulaire/atelier/formulaireAtelier/AdminAtelier';
 import MenuAdmin from './components/admin/menuAdmin/MenuAdmin';
 import Admin from './components/admin/formulaireIntervenant/Admin';
-
 
 const App = () => (
   <div>

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-
 import ButtonFormulaireIntervenant from './ButtonFormulaireIntervenant';
-
 
 class FormulaireIntervenant extends Component {
   constructor(props) {
