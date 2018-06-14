@@ -38,7 +38,6 @@ class FormAtelier extends Component {
           console.log(data);
           this.setState({
             id_intervenant: data,
-            // selectdIntervenant : data[0].prenom_intervenant
           })}
         )
         .catch(err => console.error(err))
