@@ -25,7 +25,7 @@ class AlertDialogSlide extends Component {
           aria-describedby="alert-dialog-slide-description"
         >
           <DialogTitle id="alert-dialog-slide-title">
-            {this.props.messageDialogue > 1
+            {this.props.messageDialogue.length > 1
               ? 'Informations manquantes'
               : 'Information manquante'}
           </DialogTitle>

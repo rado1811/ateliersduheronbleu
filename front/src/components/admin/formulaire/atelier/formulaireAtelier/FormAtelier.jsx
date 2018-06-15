@@ -34,13 +34,12 @@ class FormAtelier extends Component {
         .then(data =>{
           console.log(data);
           this.setState({
-           id_intervenant: data,
-            // selectdIntervenant : data[0].prenom_intervenant
+            id_intervenant: data,
           })}
         )
         .catch(err => console.error(err))
     }
-   
+
   updateNomField = (event) => {
     this.setState({
       nom: event.target.value
@@ -53,7 +52,7 @@ class FormAtelier extends Component {
   }
   updateNbField = (event) => {
     this.setState({
-     nb_participants: event.target.value
+      nb_participants: event.target.value
 		})
   }
   updatePrixField = (event) => {
@@ -110,7 +109,7 @@ class FormAtelier extends Component {
     let data = {...this.state,
       id_intervenant: this.state.intervenant}
     
-    fetch("/api/atelier",
+    fetch("/api/ateliers",
     {
         method:  'POST',
         headers:  new  Headers({
@@ -126,8 +125,6 @@ class FormAtelier extends Component {
   render() {
     const { vertical, horizontal, open } = this.state;
     return (
-      
-
       <Grid>
         <div>
           <h1 className="text-center">Ajouter un Atelier</h1>
@@ -162,7 +159,7 @@ class FormAtelier extends Component {
             value={this.state.nb_participants}
             onChange={this.updateNbField.bind(this)}
             /><br />
-             </Grid>
+              </Grid>
               <Grid item xs={12} sm={6}>
             <TextField
             name="prix"
@@ -172,7 +169,7 @@ class FormAtelier extends Component {
             onChange={this.updatePrixField.bind(this)}
     
           /><br />
-             </Grid>
+            </Grid>
             </Grid>
             <TextField
               fullWidth
@@ -230,7 +227,6 @@ class FormAtelier extends Component {
                 </MenuItem>)
               } 
           </Select>
-        
         <br />
         <TextField
         name="programme"
@@ -239,7 +235,6 @@ class FormAtelier extends Component {
         value={this.state.programme}
         onChange={this.updateProgrammeField.bind(this)}
       /><br />
-
         <br />
                 <div> 
                 <Button type="submit" value="Submit" variant="raised" color="primary">

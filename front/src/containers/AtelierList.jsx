@@ -6,13 +6,11 @@ import { bindActionCreators } from 'redux';
 import { selectAteliers } from '../actions/index';
 import BoutonContact from '../components/client/BoutonContact';
 
-
 const AteliersList = ({ ateliers, selectAteliers }) => (
   <div style={{ display: 'flex' }}>
-  <BoutonContact />
+    <BoutonContact />
     <div
       style={{
-
           width: '100%',
           height: '100%',
           background: '#f0f0f0',
@@ -20,25 +18,22 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
     >
       <ul className="AteliersList">
         {ateliers.map(atelier => (
-          <Button key={atelier.key} onClick={() => selectAteliers(atelier)}>
+          <Button key={ateliers.id_atelier} onClick={() => selectAteliers(atelier)}>
             <li >
-              {atelier.nom_atelier}
+              {atelier.nom}
               <br />
-              {atelier.date}
+              {atelier.debut}
               <hr />
             </li>
           </Button>
-
-      ))
-}
+        ))}
       </ul>
     </div>
   </div>
 );
 
-
 function mapStateToProps(state) {
-  return { ateliers: state.ateliers };
+  return { ateliers: state.ateliers.ateliers };
 }
 
 function matchDispatchToProps(dispatch) {

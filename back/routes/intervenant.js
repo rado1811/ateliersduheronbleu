@@ -16,7 +16,7 @@ router.get('/intervenant', (req, res, next) => {
 router.post('/intervenant', (req, res) => {
   const sql = 'INSERT INTO Intervenants SET ?';
   connection.query(sql, req.body, (err, result) => {
-    if (err) {
+    if (err) { console.log(err);
       throw err;
     }
     res.send(`${result.insertId}`);
