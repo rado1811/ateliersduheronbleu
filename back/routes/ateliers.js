@@ -24,4 +24,12 @@ router.post('/ateliers', (req, res) => {
   });
 });
 
+router.delete('/atelier/:id', (req, res, next) => {
+  let deleted = `DELETE FROM Ateliers WHERE id=${req.params.id}`
+  connection.query(deleted, function (err, rows) {
+    if (err)
+      throw err;
+  });
+});
+
 export default router;

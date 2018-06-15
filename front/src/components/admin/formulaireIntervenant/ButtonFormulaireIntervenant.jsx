@@ -1,4 +1,3 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -15,15 +14,21 @@ const styles = theme => ({
 function ButtonFormulaireIntervenant(props) {
   const { classes } = props;
   return (
-    <Button type="submit" variant="raised" color="primary" className={classes.button}>
-        Submit
+    <Button
+      type="submit"
+      variant="raised"
+      color="primary"
+      className={classes.button}
+    >
+      Submit
     </Button>
-
   );
 }
-
 ButtonFormulaireIntervenant.propTypes = {
-  classes: PropTypes.shape.isRequired,
+  classes: PropTypes.shape({
+    button: PropTypes.string.isRequired,
+    input: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default withStyles(styles)(ButtonFormulaireIntervenant);

@@ -9,12 +9,11 @@ class FormulaireIntervenant extends Component {
     this.state = {
       nom: '',
       prenom: '',
+      tel: '',
       email: '',
-      telephone: '',
       parcours: '',
       metier: '',
-      photo: '',
-      flash: '',
+      citation: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,7 +26,8 @@ class FormulaireIntervenant extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    fetch('/admin/dashboard/administration', {
+    fetch('/api/intervenant', 
+    {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(this.state),
@@ -48,6 +48,7 @@ class FormulaireIntervenant extends Component {
             <Grid container spacing={24}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  required
                   name="nom"
                   label="Nom"
                   type="text"
@@ -58,6 +59,7 @@ class FormulaireIntervenant extends Component {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  required
                   name="prenom"
                   label="Prenom"
                   type="text"
@@ -70,20 +72,21 @@ class FormulaireIntervenant extends Component {
             <Grid container spacing={24}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  type="text"
-                  name="email"
-                  label="E-mail"
-                  value={this.state.email}
+                  required
+                  name="tel"
+                  label="Telephone"
+                  value={this.state.tel}
                   onChange={this.handleChange}
                 />
                 <br />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  type="text"
-                  name="telephone"
-                  label="Télephone"
-                  value={this.state.telephone}
+                  required
+                  name="email"
+                  label="Email"
+                  type="email"
+                  value={this.state.email}
                   onChange={this.handleChange}
                 />
                 <br />
@@ -91,6 +94,7 @@ class FormulaireIntervenant extends Component {
             </Grid>
             <TextField
               fullWidth
+              multiline
               name="parcours"
               type="text"
               label="Parcours"
@@ -99,6 +103,9 @@ class FormulaireIntervenant extends Component {
             />
             <br />
             <TextField
+              fullWidth
+              multiline
+              required
               name="metier"
               type="text"
               label="Métier"
@@ -106,7 +113,19 @@ class FormulaireIntervenant extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <ButtonFormulaireIntervenant />
+            <TextField
+              fullWidth
+              multiline
+              name="citation"
+              type="text"
+              label="Citation"
+              value={this.state.citation}
+              onChange={this.handleChange}
+            />
+            <br />
+            <Grid style={{ textAlign: 'center' }}>
+              <ButtonFormulaireIntervenant />
+            </Grid>
           </form>
         </div>
       </Grid>
