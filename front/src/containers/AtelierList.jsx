@@ -18,7 +18,7 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
     >
       <ul className="AteliersList">
         {ateliers.map(atelier => (
-          <Button key={ateliers.id_atelier} onClick={() => selectAteliers(atelier)}>
+          <Button key={atelier.id_atelier} onClick={() => selectAteliers(atelier)}>
             <li >
               {atelier.nom}
               <br />
