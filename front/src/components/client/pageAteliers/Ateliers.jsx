@@ -3,6 +3,7 @@ import Grid from 'material-ui/Grid';
 import AtelierList from '../../../containers/AtelierList';
 import AtelierDetail from '../../../containers/AtelierDetail';
 import FormParticipants from './FormParticipants';
+import Footer from '../footer/Footer';
 
 import './Ateliers.css';
 
@@ -29,6 +30,7 @@ const Ateliers = () => (
         </Grid>
       </Grid>
     </div>
+    <Footer />
   </div>
 );
 

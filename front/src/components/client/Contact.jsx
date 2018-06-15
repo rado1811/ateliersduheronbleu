@@ -4,6 +4,8 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import AlertDialogSlide from './pageAteliers/AlertDialogSlide';
 import { withStyles } from '@material-ui/core/styles';
+import Footer from '../client/footer/Footer';
+
 
 const styles = theme => ({
   container: {
@@ -256,6 +258,7 @@ class Contact extends Component {
           hideDialogueBox={this.hideDialogueBox}
           messageDialogue={this.state.messageDialogue}
         />
+        <Footer />
       </div>
     );
   }
