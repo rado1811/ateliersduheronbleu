@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -16,6 +15,7 @@ class FormAtelier extends Component {
     this.state = {
       nom: '',
       id_intervenant: [],
+      nom_intervenant:'',
       debut: '',
       nb_participants: '',
       prix: '',
@@ -89,7 +89,7 @@ class FormAtelier extends Component {
   };
   updateIntervenantField = event => {
     this.setState({
-      intervenant: event.target.value,
+      nom_intervenant: event.target.value,
     });
   };
   handleClick = state => () => {
@@ -104,7 +104,7 @@ class FormAtelier extends Component {
     event.preventDefault();
     let data = {
       ...this.state,
-      id_intervenant: this.state.intervenant,
+      id_intervenant: this.state.nom_intervenant,
     };
 
     fetch('/api/ateliers', {
@@ -128,7 +128,7 @@ class FormAtelier extends Component {
           <h1 className="text-center">Ajouter un Atelier</h1>
           <form onSubmit={this.handleSubmit}>
             <Grid container spacing={24}>
-              <Grid item xs={12} sm={6}>
+              <Grid item sm={12} md={6}>
                 <TextField
                   name="nom"
                   label="Titre de l'Atelier"
@@ -138,7 +138,7 @@ class FormAtelier extends Component {
                 />
                 <br />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item sm={12} md={6}>
                 <br />
                 <TextField
                   name="debut"
@@ -151,7 +151,7 @@ class FormAtelier extends Component {
               </Grid>
             </Grid>
             <Grid container spacing={24}>
-              <Grid item xs={12} sm={6}>
+              <Grid item sm={12} md={6}>
                 <TextField
                   name="nb_participants"
                   label="Nombre Participants :"
@@ -161,7 +161,7 @@ class FormAtelier extends Component {
                 />
                 <br />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item sm={12} md={6}>
                 <TextField
                   name="prix"
                   label="Prix"
@@ -216,7 +216,7 @@ class FormAtelier extends Component {
             <br />
             <InputLabel htmlFor="dropInput">Intervenant</InputLabel>
             <Select
-              value={this.state.intervenant}
+              value={this.state.nom_intervenant}
               onChange={this.updateIntervenantField.bind(this)}
             >
               <MenuItem value="">
@@ -263,8 +263,8 @@ class FormAtelier extends Component {
     );
   }
 }
-FormAtelier.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+// FormAtelier.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
 
 export default FormAtelier;
