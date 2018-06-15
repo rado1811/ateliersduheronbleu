@@ -9,6 +9,8 @@ import AddIcon from '@material-ui/icons/Add';
 import AtelierVignette from '../components/client/ateliersHome/AtelierVignette';
 import { fetchAteliers } from '../actions/ateliers';
 import BoutonContact from '../components/client/BoutonContact';
+import Footer from '../components/client/footer/Footer';
+
 
 const styles = theme => ({
   button: {
@@ -102,6 +104,7 @@ class AtelierHome extends Component {
           {upcomingAteliers}
         </Grid>
         <BoutonContact />
+        <Footer />
       </div>
     );
   }
