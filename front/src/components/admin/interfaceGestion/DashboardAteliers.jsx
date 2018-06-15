@@ -17,7 +17,7 @@ class DashboardAteliers extends Component {
     }
 
     componentDidMount(){
-        fetch("/api/atelier")
+        fetch("/api/ateliers")
         .then(res => res.json())
         .then(ateliers => this.setState({ ateliers }));
     }

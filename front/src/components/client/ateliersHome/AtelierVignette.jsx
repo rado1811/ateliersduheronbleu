@@ -52,6 +52,7 @@ const AtelierVignette = (props) => {
           </Typography>
           <Typography component="h3">{props.date}</Typography>
           <Typography component="h3">
+            Places disponibles: {props.places_disponibles} <br />
             Co-animation: {props.intervenant}, Isabelle Jono
           </Typography>
         </CardContent>
@@ -73,6 +74,7 @@ AtelierVignette.propTypes = {
   intervenant: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
+  places_disponibles: PropTypes.number.isRequired,
   classes: PropTypes.shape({
     item: PropTypes.string.isRequired,
     card: PropTypes.string.isRequired,
@@ -81,4 +83,5 @@ AtelierVignette.propTypes = {
   //  booking: PropTypes.func,isRequired
   // moreDetails: PropTypes.func,isRequired
 };
+
 export default withStyles(styles)(AtelierVignette);
