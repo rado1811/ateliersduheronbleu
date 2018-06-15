@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -16,6 +15,7 @@ class FormAtelier extends Component {
     this.state = {
       nom: '',
       id_intervenant: [],
+      nom_intervenant:'',
       debut: '',
       nb_participants: '',
       prix: '',
@@ -89,7 +89,7 @@ class FormAtelier extends Component {
   };
   updateIntervenantField = event => {
     this.setState({
-      intervenant: event.target.value,
+      nom_intervenant: event.target.value,
     });
   };
   handleClick = state => () => {
@@ -104,7 +104,7 @@ class FormAtelier extends Component {
     event.preventDefault();
     let data = {
       ...this.state,
-      id_intervenant: this.state.intervenant,
+      id_intervenant: this.state.nom_intervenant,
     };
 
     fetch('/api/ateliers', {
@@ -128,9 +128,10 @@ class FormAtelier extends Component {
           <h1 className="text-center">Ajouter un Atelier</h1>
           <form onSubmit={this.handleSubmit}>
             <Grid container spacing={24}>
-              <Grid item xs={12} sm={6}>
+              <Grid item sm={12} md={6}>
                 <TextField
                   name="nom"
+                  required
                   label="Titre de l'Atelier"
                   type="text"
                   value={this.state.nom}
@@ -138,10 +139,11 @@ class FormAtelier extends Component {
                 />
                 <br />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item sm={12} md={6}>
                 <br />
                 <TextField
                   name="debut"
+                  required
                   label=""
                   type="date"
                   value={this.state.debut}
@@ -151,9 +153,10 @@ class FormAtelier extends Component {
               </Grid>
             </Grid>
             <Grid container spacing={24}>
-              <Grid item xs={12} sm={6}>
+              <Grid item sm={12} md={6}>
                 <TextField
                   name="nb_participants"
+                  required
                   label="Nombre Participants :"
                   type="number"
                   value={this.state.nb_participants}
@@ -161,9 +164,10 @@ class FormAtelier extends Component {
                 />
                 <br />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item sm={12} md={6}>
                 <TextField
                   name="prix"
+                  required
                   label="Prix"
                   type="text"
                   value={this.state.prix}
@@ -175,7 +179,9 @@ class FormAtelier extends Component {
             <TextField
               fullWidth
               name="contenu"
+              required
               label="Contenu"
+              multiligne
               type="text"
               value={this.state.contenu}
               onChange={this.updateContenuField.bind(this)}
@@ -185,6 +191,7 @@ class FormAtelier extends Component {
             <TextField
               name="formule"
               label="Formule ?"
+              required
               type="text"
               value={this.state.formule}
               onChange={this.updateFormuleField.bind(this)}
@@ -216,7 +223,7 @@ class FormAtelier extends Component {
             <br />
             <InputLabel htmlFor="dropInput">Intervenant</InputLabel>
             <Select
-              value={this.state.intervenant}
+              value={this.state.nom_intervenant}
               onChange={this.updateIntervenantField.bind(this)}
             >
               <MenuItem value="">
@@ -263,8 +270,8 @@ class FormAtelier extends Component {
     );
   }
 }
-FormAtelier.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+// FormAtelier.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
 
 export default FormAtelier;
