@@ -84,7 +84,7 @@ class AtelierHome extends Component {
             variant="fab"
             color="secondary"
             aria-label="add"
-            onClick={this.toggleAteliers}
+            onClick={() => this.toggleAteliers()}
           >
             <AddIcon />
           </Button >
