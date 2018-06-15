@@ -25,7 +25,10 @@ class DashboardAteliers extends Component {
       <div>
         <h1 className="text-center">Tableau de bord des ateliers</h1>
         <Paper>
-          <Table style={{ marginTop: 50 }}>
+          <Table style={{
+            marginTop: 50,
+          }}
+          >
             <TableHead>
               <TableRow>
                 <TableCell>Nom de l'atelier</TableCell>
@@ -35,16 +38,19 @@ class DashboardAteliers extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.state.ateliers.map((atelier) => (
-                <TableRow key={atelier.id_atelier} >
-                  <TableCell component="th" scope="row">
-                    {atelier.nom}
-                  </TableCell>
-                  <TableCell numeric>{atelier.nb_participants}</TableCell>
-                  <TableCell numeric />
-                  <TableCell numeric>{atelier.place_disponible}</TableCell>
-                </TableRow>
-              ))}
+              {this
+                .state
+                .ateliers
+                .map(atelier => (
+                  <TableRow key={atelier.id_atelier}>
+                    <TableCell component="th" scope="row">
+                      {atelier.nom}
+                    </TableCell>
+                    <TableCell numeric>{atelier.nb_participants}</TableCell>
+                    <TableCell numeric>{atelier.nb_participants - atelier.place_disponibles}</TableCell>
+                    <TableCell numeric>{atelier.place_disponibles}</TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </Paper>
