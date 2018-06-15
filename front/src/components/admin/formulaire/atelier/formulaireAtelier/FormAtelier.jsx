@@ -131,6 +131,7 @@ class FormAtelier extends Component {
               <Grid item sm={12} md={6}>
                 <TextField
                   name="nom"
+                  required
                   label="Titre de l'Atelier"
                   type="text"
                   value={this.state.nom}
@@ -142,6 +143,7 @@ class FormAtelier extends Component {
                 <br />
                 <TextField
                   name="debut"
+                  required
                   label=""
                   type="date"
                   value={this.state.debut}
@@ -154,6 +156,7 @@ class FormAtelier extends Component {
               <Grid item sm={12} md={6}>
                 <TextField
                   name="nb_participants"
+                  required
                   label="Nombre Participants :"
                   type="number"
                   value={this.state.nb_participants}
@@ -164,6 +167,7 @@ class FormAtelier extends Component {
               <Grid item sm={12} md={6}>
                 <TextField
                   name="prix"
+                  required
                   label="Prix"
                   type="text"
                   value={this.state.prix}
@@ -175,7 +179,9 @@ class FormAtelier extends Component {
             <TextField
               fullWidth
               name="contenu"
+              required
               label="Contenu"
+              multiligne
               type="text"
               value={this.state.contenu}
               onChange={this.updateContenuField.bind(this)}
@@ -185,6 +191,7 @@ class FormAtelier extends Component {
             <TextField
               name="formule"
               label="Formule ?"
+              required
               type="text"
               value={this.state.formule}
               onChange={this.updateFormuleField.bind(this)}
