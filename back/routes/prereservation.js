@@ -3,7 +3,7 @@ import connection from '../config/db';
 
 const router = express.Router();
 
-router.post('/participants', (req, res) => {
+router.post('/participant', (req, res) => {
   const select = `INSERT INTO Participants (email, tel, prenom, nom) VALUES 
   ('${req.body.email}', '${req.body.telephone}', '${req.body.prenom}', '${req.body.nom}');`;
   connection.query(select, (err) => {

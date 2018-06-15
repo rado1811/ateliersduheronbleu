@@ -71,7 +71,7 @@ class FormParticipants extends Component {
   handleSubmit = event => {
     event.preventDefault();
     if (this.formSend()) {
-      fetch('/client/participants', {
+      fetch('/api/participant', {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json',
@@ -129,6 +129,7 @@ class FormParticipants extends Component {
                 id="email"
                 type="email"
                 className="form-control"
+                label="Email"
                 name="email"
                 placeholder="victor.leroy@gmail.com"
                 onChange={this.updateEmailField}
@@ -140,6 +141,7 @@ class FormParticipants extends Component {
               <TextField
                 type="text"
                 className="form-control"
+                label="Prénom"
                 name="prenom"
                 placeholder="Victor"
                 onChange={this.updateFirstNameField}
@@ -151,6 +153,7 @@ class FormParticipants extends Component {
               <TextField
                 type="text"
                 className="form-control"
+                label="Nom"
                 name="nom"
                 placeholder="Leroy"
                 onChange={this.updateLastNameField}
@@ -162,6 +165,7 @@ class FormParticipants extends Component {
               <TextField
                 type="text"
                 className="form-control"
+                label="Téléphone"
                 name="tel"
                 placeholder="06695026.."
                 onChange={this.updatePhoneField}

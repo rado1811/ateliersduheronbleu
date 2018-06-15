@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-
 import ButtonFormulaireIntervenant from './ButtonFormulaireIntervenant';
-
 
 class FormulaireIntervenant extends Component {
   constructor(props) {
@@ -29,23 +27,20 @@ class FormulaireIntervenant extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    fetch(
-      '/admin/dashboard/administration',
-      {
-
-        method: 'POST',
-        headers: new Headers({ 'Content-Type': 'application/json' }),
-        body: JSON.stringify(this.state),
-
-      },
-    )
+    fetch('/admin/dashboard/administration', {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify(this.state),
+    })
       .then(res => res.json())
-      .then(res => this.setState({ flash: res.flash }), err => this.setState({ flash: err.flash }));
+      .then(
+        res => this.setState({ flash: res.flash }),
+        err => this.setState({ flash: err.flash })
+      );
   }
 
   render() {
     return (
-
       <Grid>
         <div>
           <h1 className="text-center">Ajouter un intervenant</h1>
@@ -58,7 +53,8 @@ class FormulaireIntervenant extends Component {
                   type="text"
                   value={this.state.nom}
                   onChange={this.handleChange}
-                /><br />
+                />
+                <br />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -67,28 +63,31 @@ class FormulaireIntervenant extends Component {
                   type="text"
                   value={this.state.prenom}
                   onChange={this.handleChange}
-                /><br />
+                />
+                <br />
               </Grid>
             </Grid>
             <Grid container spacing={24}>
               <Grid item xs={12} sm={6}>
-            <TextField
-              type="text"
-              name="email"
-              label="E-mail"
-              value={this.state.email}
-              onChange={this.handleChange}
-            /><br />
-             </Grid>
+                <TextField
+                  type="text"
+                  name="email"
+                  label="E-mail"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+                <br />
+              </Grid>
               <Grid item xs={12} sm={6}>
-            <TextField
-              type="text"
-              name="telephone"
-              label="Télephone"
-              value={this.state.telephone}
-              onChange={this.handleChange}
-            /><br />
-             </Grid>
+                <TextField
+                  type="text"
+                  name="telephone"
+                  label="Télephone"
+                  value={this.state.telephone}
+                  onChange={this.handleChange}
+                />
+                <br />
+              </Grid>
             </Grid>
             <TextField
               fullWidth
@@ -97,14 +96,16 @@ class FormulaireIntervenant extends Component {
               label="Parcours"
               value={this.state.parcours}
               onChange={this.handleChange}
-            /><br />
+            />
+            <br />
             <TextField
               name="metier"
               type="text"
               label="Métier"
               value={this.state.metier}
               onChange={this.handleChange}
-            /><br />
+            />
+            <br />
             <ButtonFormulaireIntervenant />
           </form>
         </div>
