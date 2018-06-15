@@ -8,3 +8,19 @@ Cahier des charges:
 - Présentation du concept, des ateliers et des intervenants
 - possibilité de pré-réserver en ligne
 - administration du contenu
+
+DOCUMENTATION API
+
+Voici la description de l'API fournie :
+
+/intervenant - GET
+Affiche la liste de toutes les intervenants
+
+/intervenant - POST
+Ajoute un nouvel intervenant
+
+/intervenant/:id - PUT
+Modifie les informations d'un intervenant
+
+/intervenant - DELETE
+Supprime un intervenant

@@ -4,6 +4,8 @@ import Debug from 'debug';
 import express from 'express';
 import logger from 'morgan';
 import path from 'path';
+
+import intervenant from './routes/intervenant';
 import ateliers from './routes/ateliers';
 import prereservationRouter from './routes/prereservation';
 import nodemailer from './routes/nodemailer';
@@ -22,6 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 /** ROUTES */
 app.use('/api', ateliers);
+app.use('/api', intervenant);
 app.use('/api', prereservationRouter);
 app.use('/mail', nodemailer);
 // catch 404 and forward to error handler
