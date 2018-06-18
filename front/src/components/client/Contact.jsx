@@ -6,7 +6,6 @@ import AlertDialogSlide from './pageAteliers/AlertDialogSlide';
 import { withStyles } from '@material-ui/core/styles';
 import Footer from '../client/footer/Footer';
 
-
 const styles = theme => ({
   container: {
     display: 'flex',
@@ -145,7 +144,15 @@ class Contact extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <Paper elevation={4} style={{ padding: 40, margin:40 }}>
+        <Paper
+          elevation={4}
+          style={{
+            padding: 40,
+            marginTop: 80,
+            marginLeft: 40,
+            marginRight: 40,
+          }}
+        >
           <Grid container spacing={24} align="center">
             <Grid
               item
@@ -232,7 +239,7 @@ class Contact extends Component {
                     value="Submit"
                     color="secondary"
                     style={{ textAlign: 'center' }}
-                    variant='raised'
+                    variant="raised"
                   >
                     Envoyer
                   </Button>
@@ -240,7 +247,8 @@ class Contact extends Component {
               </form>
             </Grid>
             <Grid item xs={12} sm={6} style={{ width: '80' }}>
-              <img style={{height:'auto', maxWidth:'80' }}
+              <img
+                style={{ height: 'auto', maxWidth: '80' }}
                 src="https://images.unsplash.com/photo-1520534827997-83397f6aac19?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=48b0b26b5f8b4acfed3b9d11e3181d92&auto=format&fit=crop&w=500&q=60"
                 alt="groupe"
               />

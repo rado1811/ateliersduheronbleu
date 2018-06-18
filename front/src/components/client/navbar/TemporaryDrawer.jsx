@@ -13,6 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import { ListItem, ListItemText } from 'material-ui/List';
+import AppBar from '@material-ui/core/AppBar';
 
 const styles = {
   list: {
@@ -26,11 +27,11 @@ const styles = {
 /*
 ======= ROUTING =========
 */
-const MyAccueil = (props) => <Link to="/" {...props} />;
-const MyAteliers = (props) => <Link to="/ateliers" {...props} />;
-const MyIntervenants = (props) => <Link to="/intervenants" {...props} />;
-const MyContact = (props) => <Link to="/contact" {...props} />;
-const MyConcept = (props) => <Link to="/concept" {...props} />;
+const MyAccueil = props => <Link to="/" {...props} />;
+const MyAteliers = props => <Link to="/ateliers" {...props} />;
+const MyIntervenants = props => <Link to="/intervenants" {...props} />;
+const MyContact = props => <Link to="/contact" {...props} />;
+const MyConcept = props => <Link to="/concept" {...props} />;
 /*
 ======= ROUTING ========
 */
@@ -55,50 +56,52 @@ class TemporaryDrawer extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <Toolbar position="sticky">
-          <Hidden smUp>
-            <IconButton
+        <AppBar position="fixed" style={{marginBottom: 10}}>
+          <Toolbar>
+            <Hidden smUp>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={this.toggleDrawer('left', true)}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Hidden>
+            <Typography
+              variant="title"
+              style={{ flex: 1 }}
               color="inherit"
-              aria-label="open drawer"
-              onClick={this.toggleDrawer('left', true)}
+              noWrap
             >
-              <MenuIcon />
-            </IconButton>
-          </Hidden>
-          <Typography
-            variant="title"
-            style={{ flex: 1 }}
-            color="inherit"
-            noWrap
-          >
-            Atelier du Héron Bleu
-          </Typography>
-          <Hidden xsDown>
-            <Button color="inherit" component={MyAccueil}>
-              Accueil
-            </Button>
-          </Hidden>
-          <Hidden xsDown>
-            <Button color="inherit" component={MyAteliers}>
-              Ateliers
-            </Button>
-          </Hidden>
-          <Hidden xsDown>
-            <Button color="inherit" component={MyIntervenants}>
-              Intervenants
-            </Button>
-          </Hidden>
-          <Hidden xsDown>
-            <Button color="inherit" component={MyConcept}>
-              Concept
-            </Button>
-          </Hidden>
-          <Hidden xsDown>
-            <Button color="inherit" component={MyContact}>
-              Contact
-            </Button>
-          </Hidden>
-        </Toolbar>
+              Atelier du Héron Bleu
+            </Typography>
+            <Hidden xsDown>
+              <Button color="inherit" component={MyAccueil}>
+                Accueil
+              </Button>
+            </Hidden>
+            <Hidden xsDown>
+              <Button color="inherit" component={MyAteliers}>
+                Ateliers
+              </Button>
+            </Hidden>
+            <Hidden xsDown>
+              <Button color="inherit" component={MyIntervenants}>
+                Intervenants
+              </Button>
+            </Hidden>
+            <Hidden xsDown>
+              <Button color="inherit" component={MyConcept}>
+                Concept
+              </Button>
+            </Hidden>
+            <Hidden xsDown>
+              <Button color="inherit" component={MyContact}>
+                Contact
+              </Button>
+            </Hidden>
+          </Toolbar>
+        </AppBar>
         <Drawer
           open={this.state.left}
           onClose={this.toggleDrawer('left', false)}
