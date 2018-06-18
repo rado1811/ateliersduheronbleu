@@ -11,10 +11,10 @@ class AdminAtelier extends Component {
   render() {
     return (
       <Grid container >
-        <Grid item xs={6}>
+        <Grid item sm={6}>
           <MenuAdmin />
         </Grid>
-        <Grid item xs={18}>
+        <Grid item sm={6}>
           <FormAtelier />
         </Grid>
       </Grid>

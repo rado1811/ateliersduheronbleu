@@ -28,8 +28,8 @@ const AteliersDetail = (props) => {
             </Grid>
             <Grid className="contenu" item md={6} xs={1} key={ateliers.key}>
               <div>
-                <h3>{ateliers.nom_atelier}</h3>
-                <h4>{ateliers.date}</h4>
+                <h3>{ateliers.nom}</h3>
+                <h4>{ateliers.debut}</h4>
                 <b>
                   <img
                     src="https://cdn4.iconfinder.com/data/icons/birds-1/154/bird-stork-heron-pelican-512.png"
