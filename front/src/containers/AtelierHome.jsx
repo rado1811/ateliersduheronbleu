@@ -12,6 +12,7 @@ import { fetchAteliers } from '../actions/ateliers';
 import BoutonContact from '../components/client/BoutonContact';
 import Footer from '../components/client/footer/Footer';
 import './AtelierHome.css';
+import moment from 'moment';
 
 const styles = theme => ({
   button: {
@@ -40,6 +41,13 @@ class AtelierHome extends Component {
 
   render() {
     const firstAteliers = this.props.ateliers.slice(0, 3);
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
+
     let upcomingAteliers = (
       <Grid container justify="center">
         {firstAteliers.map(ateliers => (
