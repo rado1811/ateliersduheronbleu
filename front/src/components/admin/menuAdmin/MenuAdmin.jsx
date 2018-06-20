@@ -63,12 +63,19 @@ class MenuAdmin extends React.Component {
     const { classes, theme } = this.props;
 
     const drawer = (
-      <div>
+      <div className={classes.root}>
         <MenuList >
           <br />         
           <MenuItem key="/admin/gestion">
             <NavLink to="/admin/gestion">
           Gestion
+            </NavLink>
+          </MenuItem>
+          <Divider />
+          <br />
+          <MenuItem key="/admin/administration">
+            <NavLink to="/admin/administration">
+          Administration
             </NavLink>
           </MenuItem>
           <Divider />
