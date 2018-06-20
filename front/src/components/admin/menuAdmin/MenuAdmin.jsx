@@ -5,6 +5,10 @@ import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import Hidden from '@material-ui/core/Hidden';
+import Divider from '@material-ui/core/Divider';
+import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { NavLink } from 'react-router-dom';
@@ -14,48 +18,53 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    height: 800,
+    height: 430,
     zIndex: 1,
     overflow: 'hidden',
     position: 'relative',
     display: 'flex',
+    width: '100%',
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
+    position: 'absolute',
+    marginLeft: drawerWidth,
+    [theme.breakpoints.up('md')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
   },
+  navIconHide: {
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
+  toolbar: theme.mixins.toolbar,
   drawerPaper: {
-    position: 'relative',
     width: drawerWidth,
+    [theme.breakpoints.up('md')]: {
+      position: 'relative',
+    },
   },
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
-    minWidth: 0, 
   },
-  toolbar: theme.mixins.toolbar,
 });
 
-function MenuAdmin(props) {
-  const { classes } = props;
-  return (
+class MenuAdmin extends React.Component {
+  state = {
+    mobileOpen: false,
+  };
 
+  handleDrawerToggle = () => {
+    this.setState({ mobileOpen: !this.state.mobileOpen });
+  };
 
-    <div>
-      <AppBar position="absolute" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="title" color="inherit" noWrap>
-            Interface Administration
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.toolbar} />
+  render() {
+    const { classes, theme } = this.props;
+
+    const drawer = (
+      <div>
         <MenuList >
           <br />         
           <MenuItem key="/admin/gestion">
@@ -63,12 +72,14 @@ function MenuAdmin(props) {
           Gestion
             </NavLink>
           </MenuItem>
+          <Divider />
           <br />
           <MenuItem key="/admin/intervenant">
             <NavLink to="/admin/intervenant">
               Intervenants
             </NavLink>
           </MenuItem>
+          <Divider />
           <br />
           <MenuItem key="/admin/ateliers">
             <NavLink to="/admin/ateliers">
@@ -76,23 +87,65 @@ function MenuAdmin(props) {
             </NavLink>
           </MenuItem>
           <br />
+          <Divider />
           <MenuItem>Newletters</MenuItem>
           <br />
         </MenuList>
-      </Drawer>
-    </div>
+      </div>
+    );
 
-  );
+    return (
+      <div>
+        <AppBar>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={this.handleDrawerToggle}
+              className={classes.navIconHide}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="title" color="inherit" noWrap>
+             Interface Administration
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Hidden mdUp>
+          <Drawer
+            variant="temporary"
+            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+            open={this.state.mobileOpen}
+            onClose={this.handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+        <Hidden smDown implementation="css">
+          <Drawer
+            variant="permanent"
+            open
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+      </div>
+    );
+  }
 }
 
 MenuAdmin.propTypes = {
-  classes: PropTypes.shape({
-    root: PropTypes.string.isRequired,
-    appBar: PropTypes.string.isRequired,
-    drawerPaper: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    toolbar: PropTypes.string.isRequired,
-  }).isRequired,
+  classes: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MenuAdmin);
+export default withStyles(styles, { withTheme: true })(MenuAdmin);
