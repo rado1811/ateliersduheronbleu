@@ -15,7 +15,7 @@ class FormAtelier extends Component {
     this.state = {
       nom: '',
       id_intervenant: [],
-      nom_intervenant:'',
+      nom_intervenant: '',
       debut: '',
       nb_participants: '',
       prix: '',
@@ -270,8 +270,5 @@ class FormAtelier extends Component {
     );
   }
 }
-// FormAtelier.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
 
 export default FormAtelier;
