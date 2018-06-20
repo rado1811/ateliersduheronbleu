@@ -39,22 +39,18 @@ class AtelierHome extends Component {
     });
   }
 
-  getUpcomingAteliers() {
-    const ateliers = this.state.toggleAteliers
-      ? this.props.ateliers
-      : this.props.ateliers.slice(0, 3);
-    const iconButton = this.state.toggleAteliers ? <RemoveIcon /> : <AddIcon />;
-
-    return (
-      <Grid id="ateliers" container spacing={16} justify="center">
-        {ateliers.map((atelier) => (
+  render() {
+    const firstAteliers = this.props.ateliers.slice(0, 3);
+    let upcomingAteliers = (
+      <Grid container justify="center">
+        {firstAteliers.map(ateliers => (
           <AtelierVignette
-            key={atelier.id_atelier}
-            name={atelier.nom}
-            date={atelier.debut}
-            image={atelier.photo}
-            intervenant={atelier.id_intervenant}
-            places_disponibles={atelier.place_disponibles}
+            key={ateliers.id_atelier}
+            name={ateliers.nom}
+            date={ateliers.debut}
+            image={ateliers.photo}
+            intervenant={ateliers.id_intervenant}
+            places_disponibles={ateliers.place_disponibles}
           />
         ))}
         <Button
@@ -68,13 +64,38 @@ class AtelierHome extends Component {
     );
   }
 
-  render() {
+    if (this.state.toggleAteliers) {
+      upcomingAteliers = (
+        <Grid container justify="center">
+          {this.props.ateliers.map(ateliers => (
+            <AtelierVignette
+              key={ateliers.id_atelier}
+              name={ateliers.nom}
+              date={ateliers.debut}
+              image={ateliers.photo}
+              intervenant={ateliers.id_intervenant}
+              places_disponibles={ateliers.place_disponibles}
+            />
+          ))}
+          <Button
+            variant="fab"
+            color="secondary"
+            aria-label="add"
+            onClick={() => this.toggleAteliers()}
+          >
+            <AddIcon />
+          </Button>
+        </Grid>
+      );
+    }
+
     return (
       <div>
         <div
           className="video-container"
           style={{
             marginBottom: 100,
+            marginTop: 60,
           }}
         >
           <video
@@ -97,9 +118,9 @@ class AtelierHome extends Component {
         <Link to="#ateliers">
           <i className="fas fa-angle-double-down" />
         </Link>
-
-        {this.getUpcomingAteliers()}
-
+        <Grid id="ateliers" container spacing={16}>
+          {upcomingAteliers}
+        </Grid>
         <BoutonContact />
         <Footer />
       </div>
