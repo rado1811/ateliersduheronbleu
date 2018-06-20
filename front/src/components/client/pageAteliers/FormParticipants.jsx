@@ -112,7 +112,6 @@ class FormParticipants extends Component {
     } else {
       this.setState({ flash: 'Formulaire incomplet', open: true });
     }
-    console.log(JSON.stringify(this.state))
   };
 
   updateEmailField = event => {
