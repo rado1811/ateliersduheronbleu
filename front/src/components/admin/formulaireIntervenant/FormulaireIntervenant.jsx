@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import Snackbar from '@material-ui/core/Snackbar';
 import ButtonFormulaireIntervenant from './ButtonFormulaireIntervenant';
 
 class FormulaireIntervenant extends Component {
@@ -26,16 +27,15 @@ class FormulaireIntervenant extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    fetch('/api/intervenant', 
-    {
+    fetch('/api/intervenant', {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(this.state),
     })
       .then(res => res.json())
       .then(
-        res => this.setState({ flash: res.flash }),
-        err => this.setState({ flash: err.flash })
+        res => this.setState({ flash: 'Formulaire envoyé', open: true }),
+        err => this.setState({ flash: 'Formulaire incomplet', open: true })
       );
   }
 
@@ -128,6 +128,12 @@ class FormulaireIntervenant extends Component {
             </Grid>
           </form>
         </div>
+        <Snackbar
+          open={this.state.open}
+          message={this.state.flash}
+          autoHideDuration={4000}
+          onClose={this.handleToogle}
+        />
       </Grid>
     );
   }
