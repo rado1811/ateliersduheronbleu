@@ -49,6 +49,9 @@ class FormParticipants extends Component {
     if (this.state.tel === '') {
       whatIsMissing.push('Numéro de téléphone est requis');
     }
+    if (this.state.atelier === '') {
+      whatIsMissing.push(`Le choix d'un atelier requis`);
+    }
     if (whatIsMissing.length > 0) {
       this.showDialogueBox(whatIsMissing);
       return false;
@@ -197,20 +200,20 @@ class FormParticipants extends Component {
               />
             </div>
             <div>
-            <InputLabel htmlFor="dropInput">Ateliers</InputLabel>
-            <Select
-              value={this.state.atelier}
-              onChange={this.updateAtelierField.bind(this)}
-            >
-              <MenuItem value="">
-                <em>Ateliers</em>
-              </MenuItem>
-              {this.state.id_atelier.map(item => (
-                <MenuItem key={item.id_atelier} value={item.id_atelier}>
-                  {item.nom}
+              <InputLabel htmlFor="dropInput">Ateliers</InputLabel>
+              <Select
+                value={this.state.atelier}
+                onChange={this.updateAtelierField.bind(this)}
+              >
+                <MenuItem value="">
+                  <em>Ateliers</em>
                 </MenuItem>
-              ))}
-            </Select>
+                {this.state.id_atelier.map(item => (
+                  <MenuItem key={item.id_atelier} value={item.id_atelier}>
+                    {item.nom}
+                  </MenuItem>
+                ))}
+              </Select>
             </div>
             <br />
             <div>
