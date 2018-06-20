@@ -80,19 +80,6 @@ class MenuAdmin extends React.Component {
           </MenuItem>
           <Divider />
           <br />
-          <MenuItem key="/admin/intervenant">
-            <NavLink to="/admin/intervenant">
-              Intervenants
-            </NavLink>
-          </MenuItem>
-          <Divider />
-          <br />
-          <MenuItem key="/admin/ateliers">
-            <NavLink to="/admin/ateliers">
-              Ateliers
-            </NavLink>
-          </MenuItem>
-          <br />
           <Divider />
           <MenuItem>Newletters</MenuItem>
           <br />
