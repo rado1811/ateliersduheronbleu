@@ -8,7 +8,7 @@ import Footer from '../footer/Footer';
 import './Ateliers.css';
 
 const Ateliers = () => (
-  <div style={{ background: '#F2F2F2' }}>
+  <div style={{ background: '#F2F2F2', marginTop: 60 }}>
     <div className="shapeAteliers">
       <Grid container>
         <Grid item md={2}>

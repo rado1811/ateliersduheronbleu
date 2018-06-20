@@ -11,7 +11,6 @@ import MenuAdmin from './components/admin/menuAdmin/MenuAdmin';
 import Admin from './components/admin/formulaireIntervenant/Admin';
 import Dashboard from './components/admin/interfaceGestion/Dashboard';
 
-
 const App = () => (
   <div>
     <TemporaryDrawer />
