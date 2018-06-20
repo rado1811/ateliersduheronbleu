@@ -15,7 +15,7 @@ class FormAtelier extends Component {
     this.state = {
       nom: '',
       id_intervenant: [],
-      nom_intervenant:'',
+      nom_intervenant: '',
       debut: '',
       nb_participants: '',
       prix: '',
@@ -116,12 +116,11 @@ class FormAtelier extends Component {
     })
       .then(res => res.json())
       .then(
-        res => this.setState({ flash: res.flash }),
-        err => this.setState({ flash: err.flash })
+        res => this.setState({ flash: 'Formulaire envoyé', open: true }),
+        err => this.setState({ flash: 'Formulaire envoyé', open: true })
       );
   };
   render() {
-    const { vertical, horizontal, open } = this.state;
     return (
       <Grid>
         <div>
@@ -181,7 +180,7 @@ class FormAtelier extends Component {
               name="contenu"
               required
               label="Contenu"
-              multiligne
+              multiligne="true"
               type="text"
               value={this.state.contenu}
               onChange={this.updateContenuField.bind(this)}
@@ -257,13 +256,10 @@ class FormAtelier extends Component {
             </div>
           </form>
           <Snackbar
-            anchorOrigin={{ vertical, horizontal }}
-            open={open}
-            onClose={this.handleClose}
-            ContentProps={{
-              'aria-describedby': 'message-id',
-            }}
-            message={<span id="message-id">{this.state.flash}</span>}
+            open={this.state.open}
+            message={this.state.flash}
+            autoHideDuration={4000}
+            onClose={this.handleToogle}
           />
         </div>
       </Grid>
