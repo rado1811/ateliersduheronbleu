@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { TextField, Button, Snackbar } from 'material-ui';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import AlertDialogSlide from './AlertDialogSlide';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
 
 class FormParticipants extends Component {
   constructor(props) {
@@ -18,11 +19,21 @@ class FormParticipants extends Component {
       alert: false,
       messageDialogue: [],
       input: '',
-      atelier1: false,
-      atelier2: false,
+      id_atelier: [],
+      atelier: '',
     };
   }
 
+  componentDidMount() {
+    fetch('/api/ateliers')
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          id_atelier: data,
+        });
+      })
+      .catch(err => console.error(err));
+  }
   formSend = () => {
     let whatIsMissing = [];
     if (this.state.email === '') {
@@ -124,6 +135,11 @@ class FormParticipants extends Component {
       tel: event.target.value,
     });
   };
+  updateAtelierField = event => {
+    this.setState({
+      atelier: event.target.value,
+    });
+  };
 
   render() {
     return (
@@ -180,26 +196,23 @@ class FormParticipants extends Component {
                 margin="normal"
               />
             </div>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={this.state.atelier1}
-                  onChange={this.handleChange('atelier1')}
-                  value="Atelier 1"
-                />
-              }
-              label="Atelier 1"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={this.state.atelier2}
-                  onChange={this.handleChange('atelier2')}
-                  value="Atelier 1"
-                />
-              }
-              label="Atelier 2"
-            />
+            <div>
+            <InputLabel htmlFor="dropInput">Ateliers</InputLabel>
+            <Select
+              value={this.state.atelier}
+              onChange={this.updateAtelierField.bind(this)}
+            >
+              <MenuItem value="">
+                <em>Ateliers</em>
+              </MenuItem>
+              {this.state.id_atelier.map(item => (
+                <MenuItem key={item.id_atelier} value={item.id_atelier}>
+                  {item.nom}
+                </MenuItem>
+              ))}
+            </Select>
+            </div>
+            <br />
             <div>
               <Button
                 onClick={this.handleSubmit}
