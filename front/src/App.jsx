@@ -24,6 +24,9 @@ const App = () => (
       <Route exact path="/admin/dashboard" component={MenuAdmin} />
       <Route exact path="/admin/intervenant" component={Admin} />
       <Route exact path="/admin/gestion" component={Dashboard} />
+      
+
+
     </Switch>
   </div>
 );
