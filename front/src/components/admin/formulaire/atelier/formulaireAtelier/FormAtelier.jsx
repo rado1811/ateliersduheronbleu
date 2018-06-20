@@ -266,8 +266,5 @@ class FormAtelier extends Component {
     );
   }
 }
-// FormAtelier.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
 
 export default FormAtelier;
