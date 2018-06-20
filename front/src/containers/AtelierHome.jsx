@@ -28,9 +28,7 @@ class AtelierHome extends Component {
   }
 
   componentDidMount() {
-    this
-      .props
-      .fetchAteliers();
+    this.props.fetchAteliers();
   }
 
   toggleAteliers() {
@@ -41,20 +39,19 @@ class AtelierHome extends Component {
   }
 
   render() {
-    const firstAteliers = this
-      .props
-      .ateliers
-      .slice(0, 3);
+    const firstAteliers = this.props.ateliers.slice(0, 3);
     let upcomingAteliers = (
       <Grid container justify="center">
-        {firstAteliers.map(ateliers => (<AtelierVignette
-          key={ateliers.id_atelier}
-          name={ateliers.nom}
-          date={ateliers.debut}
-          image={ateliers.photo}
-          intervenant={ateliers.id_intervenant}
-          places_disponibles={ateliers.place_disponibles}
-        />))}
+        {firstAteliers.map(ateliers => (
+          <AtelierVignette
+            key={ateliers.id_atelier}
+            name={ateliers.nom}
+            date={ateliers.debut}
+            image={ateliers.photo}
+            intervenant={ateliers.id_intervenant}
+            places_disponibles={ateliers.place_disponibles}
+          />
+        ))}
         <Button
           variant="fab"
           color="primary"
@@ -69,17 +66,16 @@ class AtelierHome extends Component {
     if (this.state.toggleAteliers) {
       upcomingAteliers = (
         <Grid container justify="center">
-          {this
-            .props
-            .ateliers
-            .map(ateliers => (<AtelierVignette
+          {this.props.ateliers.map(ateliers => (
+            <AtelierVignette
               key={ateliers.id_atelier}
               name={ateliers.nom}
               date={ateliers.debut}
               image={ateliers.photo}
               intervenant={ateliers.id_intervenant}
               places_disponibles={ateliers.place_disponibles}
-            />))}
+            />
+          ))}
           <Button
             variant="fab"
             color="secondary"
@@ -87,7 +83,7 @@ class AtelierHome extends Component {
             onClick={() => this.toggleAteliers()}
           >
             <AddIcon />
-          </Button >
+          </Button>
         </Grid>
       );
     }
@@ -97,15 +93,16 @@ class AtelierHome extends Component {
         <div
           className="video-container"
           style={{
-          marginBottom: 100,
-        }}
+            marginBottom: 100,
+            marginTop: 60,
+          }}
         >
           <video
             id="background-video"
             style={{
-            height: 'auto',
-            width: '100%',
-          }}
+              height: 'auto',
+              width: '100%',
+            }}
             loop
             muted
             autoPlay
@@ -117,7 +114,9 @@ class AtelierHome extends Component {
         <div className="overlay">
           <p>Ateliers "Bien-être et Créativité"</p>
         </div>
-        <Link to="#ateliers"><i className="fas fa-angle-double-down" /></Link>
+        <Link to="#ateliers">
+          <i className="fas fa-angle-double-down" />
+        </Link>
         <Grid id="ateliers" container spacing={16}>
           {upcomingAteliers}
         </Grid>
@@ -129,9 +128,7 @@ class AtelierHome extends Component {
 }
 
 AtelierHome.propTypes = {
-  ateliers: PropTypes
-    .arrayOf(Array)
-    .isRequired,
+  ateliers: PropTypes.arrayOf(Array).isRequired,
   fetchAteliers: PropTypes.func.isRequired,
 };
 
@@ -139,4 +136,10 @@ function mapStateToProps(state) {
   return { ateliers: state.ateliers.ateliers };
 }
 
-export default compose(withStyles(styles), connect(mapStateToProps, { fetchAteliers }))(AtelierHome);
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    { fetchAteliers }
+  )
+)(AtelierHome);
