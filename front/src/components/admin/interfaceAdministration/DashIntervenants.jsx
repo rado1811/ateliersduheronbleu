@@ -146,7 +146,13 @@ let EnhancedTableToolbar = props => {
           </Tooltip>
         ) : (
           <Tooltip title="Ajouter">
-            <Button mini variant="fab" color="primary" aria-label="add" className={classes.button} component={Admin}>
+            <Button 
+            mini 
+            variant="fab" 
+            color="primary" 
+            aria-label="add" 
+            className={classes.button} 
+            component={Admin}>
                 <AddIcon />
             </Button>
           </Tooltip>

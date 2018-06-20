@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -20,6 +21,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 
+const AdminAtelier = props => <Link to="/admin/ateliers" {...props} />;
 
 
 function getSorting(order, orderBy) {
@@ -144,7 +146,13 @@ let EnhancedTableToolbar = props => {
           </Tooltip>
         ) : (
           <Tooltip title="Ajouter">
-           <Button mini variant="fab" color="primary" aria-label="add" className={classes.button}>
+           <Button 
+           mini 
+           variant="fab" 
+           color="primary" 
+           aria-label="add" 
+           className={classes.button} 
+           component={AdminAtelier}>
                 <AddIcon size="small" />
             </Button>
           </Tooltip>
