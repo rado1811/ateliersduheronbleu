@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,9 +11,12 @@ import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
-import { NavLink } from 'react-router-dom';
 
-const drawerWidth = 240;
+
+const Dashboard = props => <Link to="/admin/gestion" {...props} />;
+const ContainerDashboard = props => <Link to="/admin/administration" {...props} />;
+
+const drawerWidth = 150;
 
 const styles = theme => ({
   root: {
@@ -63,28 +67,18 @@ class MenuAdmin extends React.Component {
     const { classes, theme } = this.props;
 
     const drawer = (
-      <div>
+      <div className={classes.root}>
         <MenuList >
           <br />         
-          <MenuItem key="/admin/gestion">
-            <NavLink to="/admin/gestion">
+          <MenuItem button component={Dashboard}>
           Gestion
-            </NavLink>
           </MenuItem>
           <Divider />
           <br />
-          <MenuItem key="/admin/intervenant">
-            <NavLink to="/admin/intervenant">
-              Intervenants
-            </NavLink>
+          <MenuItem button component={ContainerDashboard}>            
+          Administration
           </MenuItem>
           <Divider />
-          <br />
-          <MenuItem key="/admin/ateliers">
-            <NavLink to="/admin/ateliers">
-              Ateliers
-            </NavLink>
-          </MenuItem>
           <br />
           <Divider />
           <MenuItem>Newletters</MenuItem>
