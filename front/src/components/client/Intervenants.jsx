@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchIntervenants } from '../../../actions/intervenants';
+import { fetchIntervenants } from '../../actions/intervenants';
 import BoutonContact from '../client/BoutonContact';
 
 class Intervenants extends Component {
