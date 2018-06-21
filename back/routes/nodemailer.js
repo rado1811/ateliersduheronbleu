@@ -31,12 +31,12 @@ router.post('/', (req, res) => {
 
   if (req.body.message) {
     const message = req.body.message;
-    content = `Bonjour,\n \n Vous avez reçu un nouveau message.\n nom: ${nom} \n prenom: ${prenom} \n numéro de téléphone: ${tel} \n email: ${mailAdresse} \n \n message: ${message} \n \n Ce message provient de votre site internet`;
+    content = `Bonjour,\n \nUn futur participant vous a contacté.\n \nVoici ces coordonnées ainsi que son message: \nNom: ${nom} \nPrenom: ${prenom} \nNuméro de téléphone: ${tel} \nEmail: ${mailAdresse} \nMessage: ${message} \n\nCe message provient d'un envoi automatique de votre site internet, merci de ne pas y répondre`;
     objet = "Question d'un participant";
   }
   if (req.body.atelier) {
     const atelier = req.body.id_atelier[0].nom;
-    content = `Bonjour,\n \n Un nouveau participant s'est pré-inscrit à l'atelier ${atelier}.\n nom: ${nom} \n prenom: ${prenom} \n numéro de téléphone: ${tel} \n email: ${mailAdresse} \n \n Ce message provient de votre site internet`;
+    content = `Bonjour,\n \nUn nouveau participant s'est pré-inscrit à l'atelier suivant : ${atelier}.\n \nVoici les coordonnées du participant :\nNom: ${nom} \nPrénom: ${prenom} \nNuméro de téléphone: ${tel} \nEmail: ${mailAdresse}\n \nCe message provient d'un envoi automatique de votre site internet, merci de ne pas y répondre`;
     objet = 'Demande de Pré-inscription';
   }
   const mail = {
