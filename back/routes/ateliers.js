@@ -23,11 +23,15 @@ router.post('/ateliers', (req, res) => {
   });
 });
 
-router.delete('/atelier/:id', (req, res, next) => {
-  let deleted = `DELETE FROM Ateliers WHERE id=${req.params.id}`
-  connection.query(deleted, function (err, rows) {
-    if (err)
-      throw err;
+router.delete('/atelier/:id', (req, res) => {
+  let deleted = `DELETE FROM Ateliers WHERE id_atelier=${req.params.id}`
+  connection.query(deleted, (err, rows) => {
+    if (err) {
+      console.log(err);
+      res.status(500).end();
+    } else {
+      res.status(200).end()
+    }
   });
 });
 
