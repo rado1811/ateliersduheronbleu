@@ -9,16 +9,6 @@ import Paper from '@material-ui/core/Paper';
 import BoutonContact from '../components/client/BoutonContact';
 import './AteliersDetails.css';
 
-const styles = {
-  paperContainer: {
-    backgroundImage: `url(${'../images/heron2.jpg'})`,
-    backgroundSize: '100%',
-    margin: 5,
-    height: 100,
-  },
-};
-
-
 const AteliersList = ({ ateliers, selectAteliers }) => (
   <div style={{
                 display: 'inline-flex',
