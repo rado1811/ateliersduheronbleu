@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
@@ -189,16 +191,9 @@ class DashIntervenants extends React.Component {
       order: 'asc',
       orderBy: 'calories',
       selected: [],
-      intervenants: [],
       page: 0,
       rowsPerPage: 5,
     };
-  }
-
-  componentDidMount() {
-    fetch('/api/intervenant')
-      .then(res => res.json())
-      .then(intervenants => this.setState({ intervenants }));
   }
 
   handleRequestSort = (event, property) => {
@@ -253,8 +248,8 @@ class DashIntervenants extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { intervenants, order, orderBy, selected, rowsPerPage, page } = this.state;
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, intervenants.length - page * rowsPerPage);
+    const { order, orderBy, selected, rowsPerPage, page } = this.state;
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.intervenants.length - page * rowsPerPage);
 
     return (
       <Paper className={classes.root} style={{
@@ -269,10 +264,10 @@ class DashIntervenants extends React.Component {
               orderBy={orderBy}
               onSelectAllClick={this.handleSelectAllClick}
               onRequestSort={this.handleRequestSort}
-              rowCount={intervenants.length}
+              rowCount={this.props.intervenants.length}
             />
             <TableBody>
-              {intervenants
+              {this.props.intervenants
                 .sort(getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(intervenant => {
@@ -309,7 +304,7 @@ class DashIntervenants extends React.Component {
         </div>
         <TablePagination
           component="div"
-          count={intervenants.length}
+          count={this.props.intervenants.length}
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{
@@ -330,4 +325,11 @@ DashIntervenants.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(DashIntervenants);
+function mapStateToProps(state) {
+  return { intervenants: state.intervenants.intervenants };
+}
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, null),
+)(DashIntervenants);

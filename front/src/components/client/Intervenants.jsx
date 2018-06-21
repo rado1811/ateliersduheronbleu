@@ -9,10 +9,9 @@ class Intervenants extends Component {
     this.props.fetchIntervenants();
   }
   render() {
-    console.log(this.props.intervenants)
     return (
       <div>
-      <BoutonContact />
+        <BoutonContact />
       </div>
     );
   }

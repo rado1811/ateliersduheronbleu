@@ -5,10 +5,12 @@ import DashAteliers from './DashAteliers';
 import DashIntervenants from './DashIntervenants';
 import MenuAdmin from '../menuAdmin/MenuAdmin';
 import { fetchAteliers } from '../../../actions/ateliers';
+import { fetchIntervenants } from '../../../actions/intervenants';
 
 class ContainerDashboard extends Component {
   componentDidMount() {
     this.props.fetchAteliers();
+    this.props.fetchIntervenants();
   }
   render() {
     return (
@@ -27,4 +29,4 @@ class ContainerDashboard extends Component {
   }
 }
 
-export default connect(null, { fetchAteliers })(ContainerDashboard);
+export default connect(null, { fetchAteliers, fetchIntervenants })(ContainerDashboard);
