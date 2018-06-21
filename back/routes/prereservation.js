@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/participant', (req, res) => {
   const select = `INSERT INTO Participants (email, tel, prenom, nom) VALUES 
-  ('${req.body.email}', '${req.body.telephone}', '${req.body.prenom}', '${req.body.nom}');`;
+  ('${req.body.email}', '${req.body.tel}', '${req.body.prenom}', '${req.body.nom}');`;
   connection.query(select, (err) => {
     if (err) {
       res.endStatus(500);
