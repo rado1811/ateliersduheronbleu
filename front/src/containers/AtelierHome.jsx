@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 import AtelierVignette from '../components/client/ateliersHome/AtelierVignette';
 import { fetchAteliers } from '../actions/ateliers';
 import BoutonContact from '../components/client/BoutonContact';
@@ -28,9 +29,32 @@ class AtelierHome extends Component {
   }
 
   componentDidMount() {
-    this
-      .props
-      .fetchAteliers();
+    this.props.fetchAteliers();
+  }
+
+  getUpcomingAteliers() {
+    const ateliers = (this.state.toggleAteliers)
+      ? this.props.ateliers : this.props.ateliers.slice(0, 3);
+    const iconButton = (this.state.toggleAteliers) ? <RemoveIcon /> : <AddIcon />;
+    return (
+      <Grid id="ateliers" container spacing={16} justify="center">
+        {ateliers.map(atelier => (<AtelierVignette
+          key={atelier.id_atelier}
+          name={atelier.nom}
+          date={atelier.debut}
+          image={atelier.photo}
+          intervenant={atelier.id_intervenant}
+          places_disponibles={atelier.place_disponibles}
+        />))}
+        <Button
+          variant="fab"
+          color="primary"
+          onClick={() => this.toggleAteliers()}
+        >
+          {iconButton}
+        </Button>
+      </Grid>
+    );
   }
 
   toggleAteliers() {
@@ -41,63 +65,13 @@ class AtelierHome extends Component {
   }
 
   render() {
-    const firstAteliers = this
-      .props
-      .ateliers
-      .slice(0, 3);
-    let upcomingAteliers = (
-      <Grid container justify="center">
-        {firstAteliers.map(ateliers => (<AtelierVignette
-          key={ateliers.id_atelier}
-          name={ateliers.nom}
-          date={ateliers.debut}
-          image={ateliers.photo}
-          intervenant={ateliers.id_intervenant}
-          places_disponibles={ateliers.place_disponibles}
-        />))}
-        <Button
-          variant="fab"
-          color="primary"
-          aria-label="add"
-          onClick={() => this.toggleAteliers()}
-        >
-          <AddIcon />
-        </Button>
-      </Grid>
-    );
-
-    if (this.state.toggleAteliers) {
-      upcomingAteliers = (
-        <Grid container justify="center">
-          {this
-            .props
-            .ateliers
-            .map(ateliers => (<AtelierVignette
-              key={ateliers.id_atelier}
-              name={ateliers.nom}
-              date={ateliers.debut}
-              image={ateliers.photo}
-              intervenant={ateliers.id_intervenant}
-              places_disponibles={ateliers.place_disponibles}
-            />))}
-          <Button
-            variant="fab"
-            color="secondary"
-            aria-label="add"
-            onClick={() => this.toggleAteliers()}
-          >
-            <AddIcon />
-          </Button >
-        </Grid>
-      );
-    }
-
     return (
       <div>
         <div
           className="video-container"
           style={{
           marginBottom: 100,
+          marginTop: 60,
         }}
         >
           <video
@@ -117,10 +91,10 @@ class AtelierHome extends Component {
         <div className="overlay">
           <p>Ateliers "Bien-être et Créativité"</p>
         </div>
-        <Link to="#ateliers"><i className="fas fa-angle-double-down" /></Link>
-        <Grid id="ateliers" container spacing={16}>
-          {upcomingAteliers}
-        </Grid>
+        <Link to="#ateliers">
+          <i className="fas fa-angle-double-down" />
+        </Link>
+        {this.getUpcomingAteliers()}
         <BoutonContact />
         <Footer />
       </div>
@@ -129,9 +103,7 @@ class AtelierHome extends Component {
 }
 
 AtelierHome.propTypes = {
-  ateliers: PropTypes
-    .arrayOf(Array)
-    .isRequired,
+  ateliers: PropTypes.arrayOf(Array).isRequired,
   fetchAteliers: PropTypes.func.isRequired,
 };
 
@@ -139,4 +111,7 @@ function mapStateToProps(state) {
   return { ateliers: state.ateliers.ateliers };
 }
 
-export default compose(withStyles(styles), connect(mapStateToProps, { fetchAteliers }))(AtelierHome);
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, { fetchAteliers }),
+)(AtelierHome);
