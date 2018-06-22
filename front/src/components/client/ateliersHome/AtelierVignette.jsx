@@ -26,7 +26,6 @@ const styles = {
 const AtelierVignette = (props) => {
   const { classes } = props;
 
-
   return (
     <Grid
       item

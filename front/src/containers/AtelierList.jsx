@@ -3,10 +3,10 @@ import { Button } from 'material-ui';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectAteliers } from '../actions/index';
 import Moment from 'react-moment';
 import Paper from '@material-ui/core/Paper';
 import BoutonContact from '../components/client/BoutonContact';
+import { selectAteliers } from '../actions/index';
 import './AteliersDetails.css';
 
 const AteliersList = ({ ateliers, selectAteliers }) => (
@@ -30,7 +30,7 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
               <div className="image-container">
                 <img src={atelier.photo} alt="heron" style={{ height: '10vh', width: '6vw' }} />
               </div>
-              <div style={{fontFamily: 'Montserrat'}}>
+              <div style={{ fontFamily: 'Montserrat' }}>
                 <li>
                   {atelier.nom}
                   <br />

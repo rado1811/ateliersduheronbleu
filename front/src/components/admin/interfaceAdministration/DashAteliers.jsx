@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
@@ -146,13 +148,13 @@ let EnhancedTableToolbar = props => {
           </Tooltip>
         ) : (
           <Tooltip title="Ajouter">
-           <Button 
-           mini 
-           variant="fab" 
-           color="primary" 
-           aria-label="add" 
-           className={classes.button} 
-           component={AdminAtelier}>
+          <Button 
+          mini 
+          variant="fab" 
+          color="primary" 
+          aria-label="add" 
+          className={classes.button} 
+          component={AdminAtelier}>
                 <AddIcon size="small" />
             </Button>
           </Tooltip>
@@ -189,16 +191,9 @@ class DashAteliers extends React.Component {
       order: 'asc',
       orderBy: 'calories',
       selected: [],
-      ateliers: [],
       page: 0,
       rowsPerPage: 5,
     };
-  }
-
-  componentDidMount() {
-    fetch('/api/ateliers')
-      .then(res => res.json())
-      .then(ateliers => this.setState({ ateliers }));
   }
 
   handleRequestSort = (event, property) => {
@@ -214,7 +209,7 @@ class DashAteliers extends React.Component {
 
   handleSelectAllClick = (event, checked) => {
     if (checked) {
-      this.setState({ selected: this.state.ateliers.map(atelier => atelier.id) });
+      this.setState({ selected: this.props.ateliers.map(atelier => atelier.id) });
       return;
     }
     this.setState({ selected: [] });
@@ -253,8 +248,8 @@ class DashAteliers extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { ateliers, order, orderBy, selected, rowsPerPage, page } = this.state;
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, ateliers.length - page * rowsPerPage);
+    const { order, orderBy, selected, rowsPerPage, page } = this.state;
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.ateliers.length - page * rowsPerPage);
 
     return (
       <Paper className={classes.root} style={{
@@ -269,10 +264,10 @@ class DashAteliers extends React.Component {
               orderBy={orderBy}
               onSelectAllClick={this.handleSelectAllClick}
               onRequestSort={this.handleRequestSort}
-              rowCount={ateliers.length}
+              rowCount={this.props.ateliers.length}
             />
             <TableBody>
-              {ateliers
+              {this.props.ateliers
                 .sort(getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(atelier => {
@@ -306,7 +301,7 @@ class DashAteliers extends React.Component {
         </div>
         <TablePagination
           component="div"
-          count={ateliers.length}
+          count={this.props.ateliers.length}
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{
@@ -327,4 +322,11 @@ DashAteliers.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(DashAteliers);
+function mapStateToProps(state) {
+  return { ateliers: state.ateliers.ateliers };
+}
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, null),
+)(DashAteliers);

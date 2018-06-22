@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import DashAteliers from './DashAteliers';
 import DashIntervenants from './DashIntervenants';
 import MenuAdmin from '../menuAdmin/MenuAdmin';
+import { fetchAteliers } from '../../../actions/ateliers';
+import { fetchIntervenants } from '../../../actions/intervenants';
 
 class ContainerDashboard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+  componentDidMount() {
+    this.props.fetchAteliers();
+    this.props.fetchIntervenants();
   }
   render() {
     return (
@@ -26,4 +29,4 @@ class ContainerDashboard extends Component {
   }
 }
 
-export default ContainerDashboard;
+export default connect(null, { fetchAteliers, fetchIntervenants })(ContainerDashboard);
