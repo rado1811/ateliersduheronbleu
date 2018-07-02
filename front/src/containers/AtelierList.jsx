@@ -49,7 +49,7 @@ function mapStateToProps(state) {
   return { ateliers: state.ateliers.ateliers };
 }
 
-function matchDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     selectAteliers,
   }, dispatch);
@@ -60,4 +60,4 @@ AteliersList.propTypes = {
   selectAteliers: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, matchDispatchToProps)(AteliersList);
+export default connect(mapStateToProps, mapDispatchToProps)(AteliersList);
