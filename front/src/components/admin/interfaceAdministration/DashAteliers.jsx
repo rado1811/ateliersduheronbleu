@@ -121,8 +121,20 @@ const toolbarStyles = theme => ({
 });
 
 deleteAteliers = (numSelected) => {
-    
-}
+  fetch('/api/ateliers', {
+    method: 'DELETE',
+    headers: new Headers({
+      'Content-Type': 'application/json',
+    }),
+    body: JSON.stringify(data),
+  })
+    .then(res => res.json())
+    .then(
+      res => this.setState({ flash: 'atelier supprimé', open: true }),
+      err => this.setState({ flash: 'erreur', open: true })
+    );
+};
+
 
 let EnhancedTableToolbar = props => {
   const { numSelected, classes } = props;
@@ -149,8 +161,8 @@ let EnhancedTableToolbar = props => {
         {numSelected > 0 ? (
           <Tooltip title="Supprimer">
             <IconButton aria-label="Delete">
-              <DeleteIcon 
-                onClick={() => deleteAteliers(numSelected)} />
+              <DeleteIcon />
+                onClick={() => this.deleteAteliers(numSelected)} />
             </IconButton>
           </Tooltip>
         ) : (
