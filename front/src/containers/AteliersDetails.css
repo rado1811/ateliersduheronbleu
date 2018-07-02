@@ -5,13 +5,48 @@
 }
 
 .contenu {
-    height: 100vh;
+    height: 80vh;
 }
 ;
-.details {
+
+.contenu img {
     margin-top: 5vh;
+    width: 100vw;
+    height: auto;
 }
-.details img {
-    margin-top: 5vh;
-    width: 100%;
+
+li {
+    list-style-type: none;
+    color: black;
+
+}
+.image-container { position:relative; }
+.image-container img {
+    position:relative;
+    z-index:0;
+}
+
+.images {
+    filter: brightness(40%) contrast(70%);
+}
+.images2 {
+    filter: brightness(40%) contrast(90%);
+}
+.imagesListe {
+    filter: brightness(40%) contrast(70%);
+}
+
+.overlay2 {
+    color: aliceblue;
+    font-size: 2rem;
+    margin: 0;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-left: 20vw;
+    transform: translate(-50%, -50%)
+}   
+
+div ul .AteliersList{
+    padding: 0,
 }

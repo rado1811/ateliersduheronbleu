@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -14,8 +15,6 @@ class FormAtelier extends Component {
     super(props);
     this.state = {
       nom: '',
-      id_intervenant: [],
-      nom_intervenant:'',
       debut: '',
       nb_participants: '',
       prix: '',
@@ -25,16 +24,6 @@ class FormAtelier extends Component {
       photo: '',
       programme: '',
     };
-  }
-  componentDidMount() {
-    fetch('/api/intervenant')
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          id_intervenant: data,
-        });
-      })
-      .catch(err => console.error(err));
   }
 
   updateNomField = event => {
@@ -116,19 +105,18 @@ class FormAtelier extends Component {
     })
       .then(res => res.json())
       .then(
-        res => this.setState({ flash: res.flash }),
-        err => this.setState({ flash: err.flash })
+        res => this.setState({ flash: 'Formulaire envoyé', open: true }),
+        err => this.setState({ flash: 'Formulaire envoyé', open: true })
       );
   };
   render() {
-    const { vertical, horizontal, open } = this.state;
     return (
       <Grid>
         <div>
           <h1 className="text-center">Ajouter un Atelier</h1>
           <form onSubmit={this.handleSubmit}>
             <Grid container spacing={24}>
-              <Grid item sm={12} md={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   name="nom"
                   required
@@ -139,7 +127,7 @@ class FormAtelier extends Component {
                 />
                 <br />
               </Grid>
-              <Grid item sm={12} md={6}>
+              <Grid item xs={12} sm={6}>
                 <br />
                 <TextField
                   name="debut"
@@ -153,7 +141,7 @@ class FormAtelier extends Component {
               </Grid>
             </Grid>
             <Grid container spacing={24}>
-              <Grid item sm={12} md={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   name="nb_participants"
                   required
@@ -164,7 +152,7 @@ class FormAtelier extends Component {
                 />
                 <br />
               </Grid>
-              <Grid item sm={12} md={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   name="prix"
                   required
@@ -178,10 +166,11 @@ class FormAtelier extends Component {
             </Grid>
             <TextField
               fullWidth
+              multiline
               name="contenu"
               required
               label="Contenu"
-              multiligne
+              multiligne="true"
               type="text"
               value={this.state.contenu}
               onChange={this.updateContenuField.bind(this)}
@@ -223,13 +212,13 @@ class FormAtelier extends Component {
             <br />
             <InputLabel htmlFor="dropInput">Intervenant</InputLabel>
             <Select
-              value={this.state.nom_intervenant}
+              value={this.props.nom_intervenant}
               onChange={this.updateIntervenantField.bind(this)}
             >
               <MenuItem value="">
-                <em>Intervenant</em>
+                <em>Selectionnez un intervenant</em>
               </MenuItem>
-              {this.state.id_intervenant.map(item => (
+              {this.props.intervenants.map(item => (
                 <MenuItem key={item.id_intervenant} value={item.id_intervenant}>
                   {item.nom} {item.prenom}
                 </MenuItem>
@@ -237,6 +226,8 @@ class FormAtelier extends Component {
             </Select>
             <br />
             <TextField
+              fullWidth
+              multiline
               name="programme"
               label="Programme"
               type="text"
@@ -257,21 +248,19 @@ class FormAtelier extends Component {
             </div>
           </form>
           <Snackbar
-            anchorOrigin={{ vertical, horizontal }}
-            open={open}
-            onClose={this.handleClose}
-            ContentProps={{
-              'aria-describedby': 'message-id',
-            }}
-            message={<span id="message-id">{this.state.flash}</span>}
+            open={this.state.open}
+            message={this.state.flash}
+            autoHideDuration={4000}
+            onClose={this.handleToogle}
           />
         </div>
       </Grid>
     );
   }
 }
-// FormAtelier.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
 
-export default FormAtelier;
+function mapStateToProps(state) {
+  return { intervenants: state.intervenants.intervenants };
+}
+
+export default connect(mapStateToProps, null)(FormAtelier);

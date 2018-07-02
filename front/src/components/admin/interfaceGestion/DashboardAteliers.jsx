@@ -1,29 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { fetchAteliers } from '../../../actions/ateliers';
+
 
 class DashboardAteliers extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      ateliers: [],
-    };
-  }
-
   componentDidMount() {
-    fetch('/api/ateliers')
-      .then(res => res.json())
-      .then(ateliers => this.setState({ ateliers }));
+    this.props.fetchAteliers();
   }
 
   render() {
     return (
       <div>
-        <h1 className="text-center">Tableau de bord des ateliers</h1>
+        <h1 className="text-center" style={{ marginTop: 20 }}>Tableau de bord des ateliers</h1>
         <Paper>
           <Table style={{
             marginTop: 50,
@@ -39,7 +33,7 @@ class DashboardAteliers extends Component {
             </TableHead>
             <TableBody>
               {this
-                .state
+                .props
                 .ateliers
                 .map(atelier => (
                   <TableRow key={atelier.id_atelier}>
@@ -59,4 +53,8 @@ class DashboardAteliers extends Component {
   }
 }
 
-export default DashboardAteliers;
+function mapStateToProps(state) {
+  return { ateliers: state.ateliers.ateliers };
+}
+
+export default connect(mapStateToProps, { fetchAteliers })(DashboardAteliers);

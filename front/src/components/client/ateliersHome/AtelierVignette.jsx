@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Moment from 'react-moment';
 
 const styles = {
   item: {
@@ -24,6 +25,7 @@ const styles = {
 
 const AtelierVignette = (props) => {
   const { classes } = props;
+
   return (
     <Grid
       item
@@ -50,7 +52,8 @@ const AtelierVignette = (props) => {
           <Typography gutterBottom variant="headline" component="h2">
             {props.name}
           </Typography>
-          <Typography component="h3">{props.date}</Typography>
+          <Typography component="h3"><Moment format="DD/MM/YYYY">{props.date}</Moment></Typography>
+          
           <Typography component="h3">
             Places disponibles: {props.places_disponibles} <br />
             Co-animation: {props.intervenant}, Isabelle Jono
