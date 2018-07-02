@@ -25,8 +25,8 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
       <ul className="AteliersList" style={{ padding: 2, maxHeight: '100vh', overflow: 'auto' }}>
         <p>Liste des Ateliers</p>
         {ateliers.map(atelier => (
-          <Paper elevation={8} >
-            <Button key={atelier.id_atelier} onClick={() => selectAteliers(atelier)}>
+          <Paper key={atelier.id_atelier} elevation={8} >
+            <Button onClick={() => selectAteliers(atelier)}>
               <div className="image-container">
                 <img src={atelier.photo} alt="heron" style={{ height: '10vh', width: '6vw' }} />
               </div>
