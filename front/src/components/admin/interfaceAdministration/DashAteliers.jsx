@@ -36,28 +36,9 @@ class EnhancedTableHead extends React.Component {
     this.props.onRequestSort(event, property);
   };
 
-  deleteAteliers = id_atelier => {
-    fetch('/api/ateliers/delete', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(id_atelier)
-      })
-      .then(function(response) {
-        if (response.status >= 400) {
-          throw new Error("Bad response from server");
-        }
-        return response.json();
-    }).then(function(id_atelier) {
-        if(id_atelier === "success"){
-          this.setState({ flash: 'atelier supprimé', open: true });  
-        }
-    }).catch(function(err) {
-        console.log(err)
-    });
-  };
-
   render() {
     const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
+    console.log(this.props.selected)
 
     return (
       <TableHead>
@@ -159,7 +140,7 @@ let EnhancedTableToolbar = props => {
           <Tooltip title="Supprimer">
             <IconButton aria-label="Delete">
               <DeleteIcon 
-                onClick={() => this.deleteAteliers(atelier.id_atelier)} />
+                onClick={() => this.deleteAteliers(this.state.selected)} />
             </IconButton>
           </Tooltip>
         ) : (
@@ -216,6 +197,26 @@ class DashAteliers extends React.Component {
     this.props.fetchAteliers();
   }
 
+  deleteAteliers = selected => {
+    fetch('/api/ateliers/delete', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: (selected)
+      })
+      .then(function(response) {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+        return response.json();
+    }).then(function(selected) {
+        if(selected === "success"){
+          this.setState({ flash: 'atelier supprimé', open: true });  
+        }
+    }).catch(function(err) {
+        console.log(err)
+    });
+  };
+
   handleRequestSort = (event, property) => {
     const orderBy = property;
     let order = 'desc';
@@ -270,6 +271,7 @@ class DashAteliers extends React.Component {
     const { classes } = this.props;
     const { order, orderBy, selected, rowsPerPage, page } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.ateliers.length - page * rowsPerPage);
+
 
     return (
       <Paper className={classes.root} style={{
