@@ -10,7 +10,10 @@ import RegisterServiceWorker from './registerServiceWorker';
 import allReducers from './reducers';
 
 const createStoreWithMiddleWare = applyMiddleware(reduxThunk)(createStore);
-const store = createStoreWithMiddleWare(allReducers);
+const store = createStoreWithMiddleWare(
+  allReducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 ReactDOM.render(
   <Provider store={store}>
@@ -18,6 +21,6 @@ ReactDOM.render(
       <App />
     </BrowserRouter>
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );
 RegisterServiceWorker();
