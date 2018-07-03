@@ -14,20 +14,28 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  connection.query('INSERT INTO Ateliers SET ?', req.body, (err, result) => {
-    if (err)
-      res.send(err);
+  connection.query('INSERT INTO Ateliers SET ?', req.body, (err) => {
+    if (err) res.send(err);
     else {
       res.status(200).send();
     }
   });
 });
 
-router.delete('/:id', (req, res, next) => {
-  let deleted = `DELETE FROM Ateliers WHERE id=${req.params.id}`
-  connection.query(deleted, function (err, rows) {
-    if (err)
+router.put('/', (req, res) => {
+  const sql = `UPDATE Ateliers SET ? WHERE id_atelier =${req.body.id_atelier}`;
+  connection.query(sql, req.body, (err, result) => {
+    if (err) {
       throw err;
+    }
+    res.json(result);
+  });
+});
+
+router.delete('/:id', (req) => {
+  const deleted = `DELETE FROM Ateliers WHERE id=${req.params.id}`;
+  connection.query(deleted, (err) => {
+    if (err) throw err;
   });
 });
 
