@@ -29,27 +29,21 @@ const Admin = props => <Link to="/admin/intervenant" {...props} />;
 
 
 const columnData = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Nom' },
-  { id: 'calories', numeric: true, disablePadding: false, label: 'Prénom' },
+  { id: 'name', 
+  numeric: false, 
+  disablePadding: true, 
+  label: `Nom de l'intervenant` },
 ];
 
 class EnhancedTableHead extends React.Component {
-  createSortHandler = property => event => {
-    this.props.onRequestSort(event, property);
-  };
 
   render() {
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
-
+  
     return (
       <TableHead>
         <TableRow>
           <TableCell padding="checkbox">
-            <Checkbox
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={numSelected === rowCount}
-              onChange={onSelectAllClick}
-            />
+            <Checkbox/>
           </TableCell>
           {columnData.map(column => {
             return (
@@ -57,7 +51,6 @@ class EnhancedTableHead extends React.Component {
                 key={column.id}
                 numeric={column.numeric}
                 padding={column.disablePadding ? 'none' : 'default'}
-                sortDirection={orderBy === column.id ? order : false}
               >
                 <Tooltip
                   title="Sort"
@@ -65,9 +58,6 @@ class EnhancedTableHead extends React.Component {
                   enterDelay={300}
                 >
                   <TableSortLabel
-                    active={orderBy === column.id}
-                    direction={order}
-                    onClick={this.createSortHandler(column.id)}
                   >
                     {column.label}
                   </TableSortLabel>
@@ -204,13 +194,6 @@ class DashIntervenants extends React.Component {
     this.setState({ order, orderBy });
   };
 
-  handleSelectAllClick = (event, checked) => {
-    if (checked) {
-      this.setState({ selected: this.state.intervenants.map(intervenant => intervenant.id) });
-      return;
-    }
-    this.setState({ selected: [] });
-  };
 
   handleClick = (event, id) => {
     const { selected } = this.state;
