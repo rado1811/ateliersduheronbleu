@@ -3,7 +3,7 @@ import connection from '../config/db';
 
 const router = express.Router();
 
-router.get('/', (res) => {
+router.get('/', (req, res) => {
   connection.query('SELECT * FROM Intervenants', (err, data) => {
     if (err) {
       res.send(err);
