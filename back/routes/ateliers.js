@@ -3,7 +3,7 @@ import connection from '../config/db';
 
 const router = express.Router();
 
-router.get('/ateliers', (req, res) => {
+router.get('/', (req, res) => {
   connection.query('SELECT * FROM Ateliers', (error, result) => {
     if (error) {
       res.send(error);
@@ -13,7 +13,7 @@ router.get('/ateliers', (req, res) => {
   });
 });
 
-router.post('/ateliers', (req, res) => {
+router.post('/', (req, res) => {
   connection.query('INSERT INTO Ateliers SET ?', req.body, (err, result) => {
     if (err)
       res.send(err);
@@ -23,14 +23,12 @@ router.post('/ateliers', (req, res) => {
   });
 });
 
-router.delete('/atelier/:id', (req, res) => {
-  let deleted = `DELETE FROM Ateliers WHERE id_atelier=${req.params.id}`
-  connection.query(deleted, (err, rows) => {
+router.delete('/delete', (req, res) => {
+  connection.query('DELETE from ateliers where id='+req.body.id_atelier+'', (err, results) => {
     if (err) {
-      console.log(err);
-      res.status(500).end();
+      res.send(err);
     } else {
-      res.status(200).end()
+      res.send(JSON.stringify(results));
     }
   });
 });
