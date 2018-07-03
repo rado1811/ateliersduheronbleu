@@ -25,11 +25,6 @@ import { lighten } from '@material-ui/core/styles/colorManipulator';
 
 const Admin = props => <Link to="/admin/intervenant" {...props} />;
 
-function getSorting(order, orderBy) {
-  return order === 'desc'
-    ? (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1)
-    : (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1);
-}
 
 const columnData = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Nom' },
@@ -268,7 +263,6 @@ class DashIntervenants extends React.Component {
             />
             <TableBody>
               {this.props.intervenants
-                .sort(getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(intervenant => {
                   const isSelected = this.isSelected(intervenant.id_intervenant);
