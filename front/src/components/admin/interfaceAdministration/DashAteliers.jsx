@@ -27,13 +27,6 @@ import { fetchAteliers } from '../../../actions/ateliers';
 
 const AdminAtelier = props => <Link to="/admin/ateliers" {...props} />;
 
-
-function getSorting(order, orderBy) {
-  return order === 'desc'
-    ? (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1)
-    : (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1);
-}
-
 const columnData = [
   { id: 'name', numeric: false, disablePadding: true, label: "Nom de l'atelier" },
 ];
@@ -41,6 +34,26 @@ const columnData = [
 class EnhancedTableHead extends React.Component {
   createSortHandler = property => event => {
     this.props.onRequestSort(event, property);
+  };
+
+  deleteAteliers = id_atelier => {
+    fetch('/api/ateliers/delete', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(id_atelier)
+      })
+      .then(function(response) {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+        return response.json();
+    }).then(function(id_atelier) {
+        if(id_atelier === "success"){
+          this.setState({ flash: 'atelier supprimé', open: true });  
+        }
+    }).catch(function(err) {
+        console.log(err)
+    });
   };
 
   render() {
@@ -120,22 +133,6 @@ const toolbarStyles = theme => ({
   },
 });
 
-deleteAteliers = (numSelected) => {
-  fetch('/api/ateliers', {
-    method: 'DELETE',
-    headers: new Headers({
-      'Content-Type': 'application/json',
-    }),
-    body: JSON.stringify(data),
-  })
-    .then(res => res.json())
-    .then(
-      res => this.setState({ flash: 'atelier supprimé', open: true }),
-      err => this.setState({ flash: 'erreur', open: true })
-    );
-};
-
-
 let EnhancedTableToolbar = props => {
   const { numSelected, classes } = props;
 
@@ -161,19 +158,19 @@ let EnhancedTableToolbar = props => {
         {numSelected > 0 ? (
           <Tooltip title="Supprimer">
             <IconButton aria-label="Delete">
-              <DeleteIcon />
-                onClick={() => this.deleteAteliers(numSelected)} />
+              <DeleteIcon 
+                onClick={() => this.deleteAteliers(atelier.id_atelier)} />
             </IconButton>
           </Tooltip>
         ) : (
           <Tooltip title="Ajouter">
-           <Button 
-           mini 
-           variant="fab" 
-           color="primary" 
-           aria-label="add" 
-           className={classes.button} 
-           component={AdminAtelier}>
+          <Button 
+          mini 
+          variant="fab" 
+          color="primary" 
+          aria-label="add" 
+          className={classes.button} 
+          component={AdminAtelier}>
                 <AddIcon size="small" />
             </Button>
           </Tooltip>
@@ -291,7 +288,6 @@ class DashAteliers extends React.Component {
             />
             <TableBody>
               {this.props.ateliers
-                .sort(getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(atelier => {
                   const isSelected = this.isSelected(atelier.id_atelier);
