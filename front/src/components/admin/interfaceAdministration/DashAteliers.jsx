@@ -37,18 +37,12 @@ class EnhancedTableHead extends React.Component {
   };
 
   render() {
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
-    console.log(this.props.selected)
+    const { onSelectAllClick, order, orderBy, rowCount } = this.props;
 
     return (
       <TableHead>
         <TableRow>
           <TableCell padding="checkbox">
-            <Checkbox
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={numSelected === rowCount}
-              onChange={onSelectAllClick}
-            />
           </TableCell>
           {columnData.map(column => {
             return (
@@ -81,7 +75,6 @@ class EnhancedTableHead extends React.Component {
 }
 
 EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
@@ -115,14 +108,10 @@ const toolbarStyles = theme => ({
 });
 
 let EnhancedTableToolbar = props => {
-  const { numSelected, classes } = props;
+  const { classes } = props;
 
   return (
-    <Toolbar
-      className={classNames(classes.root, {
-        [classes.highlight]: numSelected > 0,
-      })}
-    >
+    <Toolbar>
       <div className={classes.title}>
         {numSelected > 0 ? (
           <Typography color="inherit" variant="subheading">
@@ -185,11 +174,8 @@ class DashAteliers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      order: 'asc',
-      orderBy: 'calories',
-      selected: [],
       page: 0,
-      rowsPerPage: 5,
+      rowsPerPage: 10,
     };
   }
 
@@ -265,11 +251,9 @@ class DashAteliers extends React.Component {
     this.setState({ rowsPerPage: event.target.value });
   };
 
-  isSelected = id => this.state.selected.indexOf(id) !== -1;
-
   render() {
     const { classes } = this.props;
-    const { order, orderBy, selected, rowsPerPage, page } = this.state;
+    const { rowsPerPage, page } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.ateliers.length - page * rowsPerPage);
 
 
@@ -277,38 +261,33 @@ class DashAteliers extends React.Component {
       <Paper className={classes.root} style={{
         marginTop: 70,
       }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar/>
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle" >
             <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={this.handleSelectAllClick}
-              onRequestSort={this.handleRequestSort}
               rowCount={this.props.ateliers.length}
             />
             <TableBody>
               {this.props.ateliers
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(atelier => {
-                  const isSelected = this.isSelected(atelier.id_atelier);
                   return (
                     <TableRow
                       hover
                       onClick={event => this.handleClick(event, atelier.id_atelier)}
                       role="checkbox"
-                      aria-checked={isSelected}
                       tabIndex={-1}
                       key={atelier.id_atelier}
-                      selected={isSelected}
                     >
                       <TableCell padding="checkbox">
-                        <Checkbox checked={isSelected} />
                       </TableCell>
                       <TableCell component="th" scope="row" padding="none">
                         {atelier.nom}
                       </TableCell>
+                      <IconButton aria-label="Delete">
+                        <DeleteIcon 
+                          onClick={() => this.deleteAteliers(id_atelier)} />
+                      </IconButton>
                     </TableRow>
                   );
                 })}
