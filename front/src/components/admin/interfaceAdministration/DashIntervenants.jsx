@@ -22,6 +22,8 @@ import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
+import EditIcon from '@material-ui/icons/Edit';
+
 
 const Admin = props => <Link to="/admin/intervenant" {...props} />;
 
@@ -284,6 +286,13 @@ class DashIntervenants extends React.Component {
                       </TableCell>
                       <TableCell component="th" scope="row" padding="none">
                         {intervenant.prenom}
+                      </TableCell>
+                      <TableCell>
+                        <Tooltip title="Modifier">
+                          <IconButton aria-label="Edit">
+                            <EditIcon />
+                          </IconButton>
+                        </Tooltip>
                       </TableCell>
                     </TableRow>
                   );
