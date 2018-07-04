@@ -23,6 +23,8 @@ import { lighten } from '@material-ui/core/styles/colorManipulator';
 import { fetchAteliers } from '../../../actions/ateliers';
 import EditIcon from '@material-ui/icons/Edit';
 import Snackbar from '@material-ui/core/Snackbar';
+import { bindActionCreators } from 'redux';
+import { goEdit } from '../../../actions/ateliers';
 
 const AdminAtelier = (props) => <Link to="/admin/ateliers" {...props} />;
 
@@ -40,8 +42,7 @@ class EnhancedTableHead extends React.Component {
     return (
       <TableHead>
         <TableRow>
-          <TableCell padding="checkbox">
-          </TableCell>
+          <TableCell padding="checkbox" />
           {columnData.map((column) => {
             return (
               <TableCell
@@ -54,9 +55,7 @@ class EnhancedTableHead extends React.Component {
                   placement={column.numeric ? 'bottom-end' : 'bottom-start'}
                   enterDelay={300}
                 >
-                  <TableSortLabel >
-                    {column.label}
-                  </TableSortLabel>
+                  <TableSortLabel>{column.label}</TableSortLabel>
                 </Tooltip>
               </TableCell>
             );
@@ -67,7 +66,7 @@ class EnhancedTableHead extends React.Component {
   }
 }
 
-const toolbarStyles = theme => ({
+const toolbarStyles = (theme) => ({
   root: {
     paddingRight: theme.spacing.unit,
   },
@@ -92,7 +91,7 @@ const toolbarStyles = theme => ({
   },
 });
 
-let EnhancedTableToolbar = props => {
+let EnhancedTableToolbar = (props) => {
   const { classes } = props;
 
   return (
@@ -105,13 +104,14 @@ let EnhancedTableToolbar = props => {
       <div className={classes.spacer} />
       <div className={classes.actions}>
         <Tooltip title="Ajouter">
-          <Button 
-          mini 
-          variant="fab" 
-          color="primary" 
-          aria-label="add" 
-          className={classes.button} 
-          component={AdminAtelier}>
+          <Button
+            mini
+            variant="fab"
+            color="primary"
+            aria-label="add"
+            className={classes.button}
+            component={AdminAtelier}
+          >
             <AddIcon size="small" />
           </Button>
         </Tooltip>
@@ -152,20 +152,18 @@ class DashAteliers extends React.Component {
     this.props.fetchAteliers();
   }
 
-  deleteAteliers = id_atelier => {
+  deleteAteliers = (id_atelier) => {
     fetch('/api/ateliers', {
       method: 'DELETE',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({id_atelier}),
+      body: JSON.stringify({ id_atelier }),
     })
-      .then(res => res)
-      .then(
-        res => this.setState({ flash: 'atelier supprimé', open: true }),
-      )
-      .catch(err => err);
+      .then((res) => res)
+      .then((res) => this.setState({ flash: 'atelier supprimé', open: true }))
+      .catch((err) => err);
   };
 
   handleChangePage = (event, page) => {
@@ -177,40 +175,48 @@ class DashAteliers extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
     const { rowsPerPage, page } = this.state;
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.ateliers.length - page * rowsPerPage);
+    const { classes, goEdit } = this.props;
+    const emptyRows =
+      rowsPerPage -
+      Math.min(rowsPerPage, this.props.ateliers.length - page * rowsPerPage);
+
     return (
-      <Paper className={classes.root} style={{
-        marginTop: 70,
-      }}>
-        <EnhancedTableToolbar/>
+      <Paper
+        className={classes.root}
+        style={{
+          marginTop: 70,
+        }}
+      >
+        <EnhancedTableToolbar />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
-            <EnhancedTableHead
-              rowCount={this.props.ateliers.length}
-            />
+            <EnhancedTableHead rowCount={this.props.ateliers.length} />
             <TableBody>
               {this.props.ateliers
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(atelier => {
+                .map((atelier, i) => {
                   return (
-                    <TableRow
-                      hover
-                      key={atelier.id_atelier}
-                    >
-                    <TableCell />
+                    <TableRow hover key={atelier.id_atelier}>
+                      <TableCell />
                       <TableCell component="th" scope="row" padding="none">
                         {atelier.nom}
                       </TableCell>
                       <TableCell>
                         <IconButton aria-label="Delete">
-                          <DeleteIcon 
-                            onClick={() => this.deleteAteliers(atelier.id_atelier)} />
+                          <DeleteIcon
+                            onClick={() =>
+                              this.deleteAteliers(atelier.id_atelier)
+                            }
+                          />
                         </IconButton>
                       </TableCell>
                       <TableCell>
-                        <IconButton aria-label="Delete">
+                        <IconButton
+                          component={AdminAtelier}
+                          aria-label="Edit"
+                          onClick={() => goEdit(i)}
+                        >
                           <EditIcon />
                         </IconButton>
                       </TableCell>
@@ -256,11 +262,24 @@ DashAteliers.propTypes = {
   fetchAteliers: PropTypes.func.isRequired,
 };
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      goEdit,
+      fetchAteliers,
+    },
+    dispatch
+  );
+}
+
 function mapStateToProps(state) {
   return { ateliers: state.ateliers.ateliers };
 }
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { fetchAteliers }),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(DashAteliers);
