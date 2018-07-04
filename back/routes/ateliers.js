@@ -15,20 +15,21 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   connection.query('INSERT INTO Ateliers SET ?', req.body, (err, result) => {
-    if (err)
+    if (err) {
       res.send(err);
-    else {
+    } else {
       res.status(200).send();
     }
   });
 });
 
-router.delete('/delete', (req, res) => {
-  connection.query('DELETE from ateliers where id='+req.body.id_atelier+'', (err, results) => {
+router.delete('/', (req, res) => {
+  connection.query('DELETE FROM Ateliers WHERE id_atelier = ?', [req.body.id_atelier], (err, result) => {
     if (err) {
-      res.send(err);
+      res.status(500).end();
     } else {
-      res.send(JSON.stringify(results));
+      console.log('atelier n°', req.body.id_atelier, ' supprimé, ', result.affectedRows, " ligne(s) supprimée(s)  ");
+      res.end('atelier supprimé');
     }
   });
 });

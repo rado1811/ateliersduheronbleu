@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
@@ -15,7 +14,6 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -37,8 +35,6 @@ class EnhancedTableHead extends React.Component {
   };
 
   render() {
-    const { onSelectAllClick, order, orderBy, rowCount } = this.props;
-
     return (
       <TableHead>
         <TableRow>
@@ -50,18 +46,13 @@ class EnhancedTableHead extends React.Component {
                 key={column.id}
                 numeric={column.numeric}
                 padding={column.disablePadding ? 'none' : 'default'}
-                sortDirection={orderBy === column.id ? order : false}
               >
                 <Tooltip
                   title="Sort"
                   placement={column.numeric ? 'bottom-end' : 'bottom-start'}
                   enterDelay={300}
                 >
-                  <TableSortLabel
-                    active={orderBy === column.id}
-                    direction={order}
-                    onClick={this.createSortHandler(column.id)}
-                  >
+                  <TableSortLabel >
                     {column.label}
                   </TableSortLabel>
                 </Tooltip>
@@ -73,14 +64,6 @@ class EnhancedTableHead extends React.Component {
     );
   }
 }
-
-EnhancedTableHead.propTypes = {
-  onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.string.isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
-};
 
 const toolbarStyles = theme => ({
   root: {
@@ -113,27 +96,13 @@ let EnhancedTableToolbar = props => {
   return (
     <Toolbar>
       <div className={classes.title}>
-        {numSelected > 0 ? (
-          <Typography color="inherit" variant="subheading">
-            {numSelected} selected
-          </Typography>
-        ) : (
-          <Typography variant="title" id="tableTitle">
-            La liste des ateliers
-          </Typography>
-        )}
+        <Typography variant="title" id="tableTitle">
+          La liste des ateliers
+        </Typography>
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
-        {numSelected > 0 ? (
-          <Tooltip title="Supprimer">
-            <IconButton aria-label="Delete">
-              <DeleteIcon 
-                onClick={() => this.deleteAteliers(this.state.selected)} />
-            </IconButton>
-          </Tooltip>
-        ) : (
-          <Tooltip title="Ajouter">
+        <Tooltip title="Ajouter">
           <Button 
           mini 
           variant="fab" 
@@ -141,10 +110,9 @@ let EnhancedTableToolbar = props => {
           aria-label="add" 
           className={classes.button} 
           component={AdminAtelier}>
-                <AddIcon size="small" />
-            </Button>
-          </Tooltip>
-        )}
+            <AddIcon size="small" />
+          </Button>
+        </Tooltip>
       </div>
     </Toolbar>
   );
@@ -152,7 +120,6 @@ let EnhancedTableToolbar = props => {
 
 EnhancedTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired,
 };
 
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
@@ -183,64 +150,18 @@ class DashAteliers extends React.Component {
     this.props.fetchAteliers();
   }
 
-  deleteAteliers = selected => {
-    fetch('/api/ateliers/delete', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: (selected)
-      })
-      .then(function(response) {
-        if (response.status >= 400) {
-          throw new Error("Bad response from server");
-        }
-        return response.json();
-    }).then(function(selected) {
-        if(selected === "success"){
-          this.setState({ flash: 'atelier supprimé', open: true });  
-        }
-    }).catch(function(err) {
-        console.log(err)
-    });
-  };
-
-  handleRequestSort = (event, property) => {
-    const orderBy = property;
-    let order = 'desc';
-
-    if (this.state.orderBy === property && this.state.order === 'desc') {
-      order = 'asc';
-    }
-
-    this.setState({ order, orderBy });
-  };
-
-  handleSelectAllClick = (event, checked) => {
-    if (checked) {
-      this.setState({ selected: this.state.ateliers.map(atelier => atelier.id) });
-      return;
-    }
-    this.setState({ selected: [] });
-  };
-
-  handleClick = (event, id) => {
-    const { selected } = this.state;
-    const selectedIndex = selected.indexOf(id);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-
-    this.setState({ selected: newSelected });
+  deleteAteliers = id_atelier => {
+    console.log(id_atelier);
+    fetch('/api/ateliers', {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({id_atelier}),
+    })
+      .then(res => res)
+      .catch(err => err);
   };
 
   handleChangePage = (event, page) => {
@@ -255,8 +176,6 @@ class DashAteliers extends React.Component {
     const { classes } = this.props;
     const { rowsPerPage, page } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.ateliers.length - page * rowsPerPage);
-
-
     return (
       <Paper className={classes.root} style={{
         marginTop: 70,
@@ -274,9 +193,6 @@ class DashAteliers extends React.Component {
                   return (
                     <TableRow
                       hover
-                      onClick={event => this.handleClick(event, atelier.id_atelier)}
-                      role="checkbox"
-                      tabIndex={-1}
                       key={atelier.id_atelier}
                     >
                       <TableCell padding="checkbox">
@@ -284,10 +200,12 @@ class DashAteliers extends React.Component {
                       <TableCell component="th" scope="row" padding="none">
                         {atelier.nom}
                       </TableCell>
-                      <IconButton aria-label="Delete">
-                        <DeleteIcon 
-                          onClick={() => this.deleteAteliers(id_atelier)} />
-                      </IconButton>
+                      <TableCell>
+                        <IconButton aria-label="Delete">
+                          <DeleteIcon 
+                            onClick={() => this.deleteAteliers(atelier.id_atelier)} />
+                        </IconButton>
+                      </TableCell>
                     </TableRow>
                   );
                 })}
