@@ -227,7 +227,7 @@ class DashAteliers extends React.Component {
   isSelected = (id) => this.state.selected.indexOf(id) !== -1;
 
   render() {
-    const { classes, ateliers, goEdit } = this.props;
+    const { classes, goEdit } = this.props;
     const { selected, rowsPerPage, page } = this.state;
     const emptyRows =
       rowsPerPage -
@@ -276,14 +276,7 @@ class DashAteliers extends React.Component {
                           <IconButton
                             component={AdminAtelier}
                             aria-label="Edit"
-                            onClick={() => {
-                              goEdit(i);
-                              alert(
-                                `L'atelier a pour id : ${
-                                  atelier.id_atelier
-                                }\nL'atelier a pour index : ${i}`
-                              );
-                            }}
+                            onClick={() => goEdit(i)}
                           >
                             <EditIcon />
                           </IconButton>

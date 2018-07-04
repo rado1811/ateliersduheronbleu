@@ -11,13 +11,10 @@ import Place from '@material-ui/icons/Place';
 import Snackbar from '@material-ui/core/Snackbar';
 import { goEdit } from '../../../../../actions/ateliers';
 import { bindActionCreators } from 'redux';
-
-import _ from 'lodash';
 class FormAtelier extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loaded: false,
       nom: '',
       debut: '',
       nb_participants: '',
@@ -27,7 +24,32 @@ class FormAtelier extends Component {
       lieu: '',
       photo: '',
       programme: '',
+      id_atelier: '',
+      id_intervenant: '',
+      places_disponibles: '',
     };
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isFromEdit) {
+      this.setState({
+        contenu: nextProps.ateliers[nextProps.indexAtelierFromEdit].contenu,
+        debut: nextProps.ateliers[nextProps.indexAtelierFromEdit].debut,
+        formule: nextProps.ateliers[nextProps.indexAtelierFromEdit].formule,
+        id_atelier: this.props.ateliers[nextProps.indexAtelierFromEdit]
+          .id_atelier,
+        id_intervenant: this.props.ateliers[nextProps.indexAtelierFromEdit]
+          .id_intervenant,
+        lieu: nextProps.ateliers[nextProps.indexAtelierFromEdit].lieu,
+        nb_participants:
+          nextProps.ateliers[nextProps.indexAtelierFromEdit].nb_participants,
+        nom: this.props.ateliers[nextProps.indexAtelierFromEdit].nom,
+        photo: nextProps.ateliers[nextProps.indexAtelierFromEdit].photo,
+        places_disponibles:
+          nextProps.ateliers[nextProps.indexAtelierFromEdit].places_disponibles,
+        prix: nextProps.ateliers[nextProps.indexAtelierFromEdit].prix,
+        programme: nextProps.ateliers[nextProps.indexAtelierFromEdit].programme,
+      });
+    }
   }
 
   updateNomField = (event) => {
@@ -110,7 +132,28 @@ class FormAtelier extends Component {
       .then((res) => res.json())
       .then(
         (res) => this.setState({ flash: 'Formulaire envoyé', open: true }),
-        (err) => this.setState({ flash: 'Formulaire envoyé', open: true })
+        (err) => this.setState({ flash: 'Formulaire non envoyé', open: true })
+      );
+  };
+  // ========== UPDATE =========
+  handleUpdate = (event) => {
+    event.preventDefault();
+    let data = {
+      ...this.state,
+    };
+    console.log("Iciii c'est data :", data);
+    fetch('/api/ateliers', {
+      method: 'PUT',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify({ data }),
+    })
+      .then((res) => res.json())
+      .then(
+        (res) => this.setState({ flash: 'Formulaire modifié', open: true }),
+        (err) => this.setState({ flash: 'Formulaire non modifié', open: true })
       );
   };
 
@@ -120,7 +163,7 @@ class FormAtelier extends Component {
       <Grid>
         <div>
           <h1 className="text-center">Ajouter un Atelier</h1>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={isFromEdit ? this.handleUpdate : this.handleSubmit}>
             <Grid container spacing={24}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -128,12 +171,8 @@ class FormAtelier extends Component {
                   required
                   label="Titre de l'Atelier"
                   type="text"
-                  value={
-                    isFromEdit
-                      ? ateliers[indexAtelierFromEdit].nom
-                      : this.state.nom
-                  }
-                  onChange={this.updateNomField.bind(this)}
+                  value={this.state.nom}
+                  onChange={this.updateNomField}
                 />
                 <br />
               </Grid>
@@ -144,12 +183,8 @@ class FormAtelier extends Component {
                   required
                   label=""
                   type="date"
-                  value={
-                    isFromEdit
-                      ? ateliers[indexAtelierFromEdit].debut
-                      : this.state.debut
-                  }
-                  onChange={this.updateDebutField.bind(this)}
+                  value={this.state.debut}
+                  onChange={this.updateDebutField}
                 />
                 <br />
               </Grid>
@@ -161,12 +196,8 @@ class FormAtelier extends Component {
                   required
                   label="Nombre Participants :"
                   type="number"
-                  value={
-                    isFromEdit
-                      ? ateliers[indexAtelierFromEdit].nb_participants
-                      : this.state.nb_participants
-                  }
-                  onChange={this.updateNbField.bind(this)}
+                  value={this.state.nb_participants}
+                  onChange={this.updateNbField}
                 />
                 <br />
               </Grid>
@@ -176,12 +207,8 @@ class FormAtelier extends Component {
                   required
                   label="Prix"
                   type="text"
-                  value={
-                    isFromEdit
-                      ? ateliers[indexAtelierFromEdit].prix
-                      : this.state.prix
-                  }
-                  onChange={this.updatePrixField.bind(this)}
+                  value={this.state.prix}
+                  onChange={this.updatePrixField}
                 />
                 <br />
               </Grid>
@@ -194,12 +221,8 @@ class FormAtelier extends Component {
               label="Contenu"
               multiligne="true"
               type="text"
-              value={
-                isFromEdit
-                  ? ateliers[indexAtelierFromEdit].contenu
-                  : this.state.contenu
-              }
-              onChange={this.updateContenuField.bind(this)}
+              value={this.state.contenu}
+              onChange={this.updateContenuField}
             />
             <br />
             <br />
@@ -213,18 +236,14 @@ class FormAtelier extends Component {
                   ? ateliers[indexAtelierFromEdit].formule
                   : this.state.formule
               }
-              onChange={this.updateFormuleField.bind(this)}
+              onChange={this.updateFormuleField}
             />
             <br />
             <TextField
               name="photo"
               label="Photo"
-              value={
-                isFromEdit
-                  ? ateliers[indexAtelierFromEdit].photo
-                  : this.state.photo
-              }
-              onChange={this.updatePhotoField.bind(this)}
+              value={this.state.photo}
+              onChange={this.updatePhotoField}
             />
             <br />
             <br />
@@ -232,12 +251,8 @@ class FormAtelier extends Component {
               name="lieu"
               label=""
               type="text"
-              value={
-                isFromEdit
-                  ? ateliers[indexAtelierFromEdit].lieu
-                  : this.state.lieu
-              }
-              onChange={this.updateLieuField.bind(this)}
+              value={this.state.lieu}
+              onChange={this.updateLieuField}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -251,7 +266,7 @@ class FormAtelier extends Component {
             <InputLabel htmlFor="dropInput">Intervenant</InputLabel>
             <Select
               value={this.state.nom_intervenant}
-              onChange={this.updateIntervenantField.bind(this)}
+              onChange={this.updateIntervenantField}
             >
               <MenuItem value="">
                 <em>Selectionnez un intervenant</em>
@@ -269,12 +284,8 @@ class FormAtelier extends Component {
               name="programme"
               label="Programme"
               type="text"
-              value={
-                isFromEdit
-                  ? ateliers[indexAtelierFromEdit].programme
-                  : this.state.programme
-              }
-              onChange={this.updateProgrammeField.bind(this)}
+              value={this.state.programme}
+              onChange={this.updateProgrammeField}
             />
             <br />
             <br />

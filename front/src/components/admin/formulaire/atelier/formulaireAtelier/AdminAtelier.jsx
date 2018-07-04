@@ -45,7 +45,6 @@ function mapDispatchToProps(dispatch) {
 AdminAtelier.propTypes = {
   fetchAteliers: PropTypes.func.isRequired,
   fetchIntervenants: PropTypes.func.isRequired,
-  isFromEdit: PropTypes.func.isRequired,
 };
 
 export default connect(
