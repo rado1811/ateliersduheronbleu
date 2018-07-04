@@ -14,7 +14,6 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  console.log(req.body);
   connection.query('INSERT INTO Ateliers SET ?', req.body, (err) => {
     if (err) res.send(err);
     else {
