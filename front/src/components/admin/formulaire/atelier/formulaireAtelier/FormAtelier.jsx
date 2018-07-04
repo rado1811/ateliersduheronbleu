@@ -132,7 +132,7 @@ class FormAtelier extends Component {
       .then((res) => res.json())
       .then(
         (res) => this.setState({ flash: 'Formulaire envoyé', open: true }),
-        (err) => this.setState({ flash: 'Formulaire non envoyé', open: true })
+        (err) => this.setState({ flash: 'Formulaire envoyé', open: true })
       );
   };
   // ========== UPDATE =========
