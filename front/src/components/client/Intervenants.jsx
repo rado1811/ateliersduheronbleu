@@ -7,8 +7,6 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
-import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
 import BoutonContact from '../client/BoutonContact';
 import { fetchIntervenants } from '../../actions/intervenants';
 import './intervenants.css';
@@ -46,29 +44,14 @@ class Intervenants extends Component {
                   title={intervenant.prenom + ' ' + intervenant.nom}
                   subtitle={<span>{intervenant.metier}</span>}
                   actionIcon={
-                    <IconButton className="iconIntervenants">
-                      <InfoIcon
-                        onClick={this.handleOpen} 
-                        />
+                    <IconButton
+                      className="iconIntervenants"
+                      onClick={this.handleOpen} 
+                      >
+                      <InfoIcon />
                     </IconButton>
-              }
+                  } 
                 />
-                <Modal
-                  aria-labelledby="simple-modal-title"
-                  aria-describedby="simple-modal-description"
-                  open={this.state.open}
-                  // onClose={this.handleClose}
-                >
-                  <div className='ModalIntervenants'>
-                  <img src={'../images/envol.jpg'} alt="dessin_envol" width="100px" height="auto"/>
-                    <Typography variant="title" id="modal-title">
-                    {intervenant.citation}
-                    </Typography>
-                    <Typography variant="subheading" id="simple-modal-description">
-                      {intervenant.parcours}
-                    </Typography>
-                  </div>
-                </Modal>
               </GridListTile>
             ))}
           </GridList>
