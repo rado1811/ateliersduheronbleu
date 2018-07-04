@@ -66,7 +66,7 @@ class Intervenants extends Component {
                         <Avatar
                           alt="DessinEnvol"
                           src="../images/envol.jpg"
-                          // className={classes.bigAvatar}
+                          className="bigAvatar"
                           label="HELLO"
                         />
                         <h1>{intervenant.citation}</h1>
@@ -78,51 +78,49 @@ class Intervenants extends Component {
             ))}
           </Grid>
           <Grid item xs>
-          <div className="rootIntervenants">
-          <GridList cellHeight={500} className="gridListIntervenants">
-            <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-              <ListSubheader component="div" style={{ textAlign: 'center'}}>Les intervenants</ListSubheader>
-            </GridListTile>
-            {this.props.intervenants.slice(1).map(intervenant => (
-              <GridListTile key={intervenant.id_intervenant}>
-                <img src={intervenant.photo} alt={intervenant.nom} />
-                <GridListTileBar
-                  title={intervenant.prenom + ' ' + intervenant.nom}
-                  subtitle={<span>{intervenant.metier}</span>}
-                  actionIcon={
-                    <IconButton
-                    style={{color: 'white'}}
-                    onClick={this.handleOpen} 
-                      >
-                      <InfoIcon />
-                    </IconButton>
-                  } 
-                />
-                                <Modal 
-                  aria-labelledby="simple-modal-title"
-                  aria-describedby="simple-modal-description"
-                  open={this.state.open}
-                  onClose={this.handleClose}
-                >
-                  <div className="modalIntervenants">
+            <div className="rootIntervenants">
+              <GridList cellHeight={500} className="gridListIntervenants">
+                <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+                  <ListSubheader component="div" style={{ textAlign: 'center'}}>Les intervenants</ListSubheader>
+                </GridListTile>
+                {this.props.intervenants.slice(1).map(intervenant => (
+                  <GridListTile key={intervenant.id_intervenant}>
+                    <img src={intervenant.photo} alt={intervenant.nom} />
+                    <GridListTileBar
+                      title={intervenant.prenom + ' ' + intervenant.nom}
+                      subtitle={<span>{intervenant.metier}</span>}
+                      actionIcon={
+                        <IconButton
+                        style={{color: 'white'}}
+                        onClick={this.handleOpen} 
+                          >
+                          <InfoIcon />
+                        </IconButton>
+                      } 
+                    />
+                    <Modal 
+                      aria-labelledby="simple-modal-title"
+                      aria-describedby="simple-modal-description"
+                      open={this.state.open}
+                      onClose={this.handleClose}
+                    >
+                      <div className="modalIntervenants">
                         <Avatar
                           alt="DessinEnvol"
                           src="../images/envol.jpg"
-                          // className={classes.bigAvatar}
+                          className="bigAvatar"
                           label="HELLO"
                         />
                         <h1>{intervenant.citation}</h1>
                         <br />
                         {intervenant.parcours}
                       </div>
-                </ Modal>
-              </GridListTile>
-            ))}
-          </GridList>
-        </div>
+                    </ Modal>
+                  </GridListTile>
+                ))}
+              </GridList>
+            </div>
           </Grid>
-          
-
         </Grid>
       </div>
     );
