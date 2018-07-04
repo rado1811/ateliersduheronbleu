@@ -22,6 +22,7 @@ import Button from '@material-ui/core/Button';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import { fetchAteliers } from '../../../actions/ateliers';
 import EditIcon from '@material-ui/icons/Edit';
+import Snackbar from '@material-ui/core/Snackbar';
 
 const AdminAtelier = (props) => <Link to="/admin/ateliers" {...props} />;
 
@@ -161,6 +162,9 @@ class DashAteliers extends React.Component {
       body: JSON.stringify({id_atelier}),
     })
       .then(res => res)
+      .then(
+        res => this.setState({ flash: 'atelier supprimé', open: true }),
+      )
       .catch(err => err);
   };
 
@@ -235,6 +239,12 @@ class DashAteliers extends React.Component {
           }}
           onChangePage={this.handleChangePage}
           onChangeRowsPerPage={this.handleChangeRowsPerPage}
+        />
+        <Snackbar
+          open={this.state.open}
+          message={this.state.flash}
+          autoHideDuration={4000}
+          onClose={this.handleToogle}
         />
       </Paper>
     );

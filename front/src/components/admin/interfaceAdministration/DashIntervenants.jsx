@@ -22,7 +22,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import EditIcon from '@material-ui/icons/Edit';
 import { fetchIntervenants } from '../../../actions/intervenants';
-
+import Snackbar from '@material-ui/core/Snackbar';
 
 const Admin = props => <Link to="/admin/intervenant" {...props} />;
 
@@ -161,6 +161,9 @@ class DashIntervenants extends React.Component {
       body: JSON.stringify({id_intervenant}),
     })
       .then(res => res)
+      .then(
+        res => this.setState({ flash: 'intervenant supprimé', open: true }),
+      )
       .catch(err => err);
   };
 
@@ -239,6 +242,12 @@ class DashIntervenants extends React.Component {
           }}
           onChangePage={this.handleChangePage}
           onChangeRowsPerPage={this.handleChangeRowsPerPage}
+        />
+        <Snackbar
+          open={this.state.open}
+          message={this.state.flash}
+          autoHideDuration={4000}
+          onClose={this.handleToogle}
         />
       </Paper>
     );
