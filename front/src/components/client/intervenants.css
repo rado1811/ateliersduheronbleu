@@ -10,7 +10,12 @@
   height: 450;
 };
 
-.iconIntervenants {
+.rootIsabelle {
+  background-color: #F2F2F2;
+  position: sticky;
+  top: 10px;
+}
+
+.modalIntervenants {
   background-color: white;
-  width: 200;
 }
