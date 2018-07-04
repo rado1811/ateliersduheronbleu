@@ -2,6 +2,7 @@
 export const FETCH_ATELIERS_BEGIN = 'FETCH_ATELIERS_BEGIN';
 export const FETCH_ATELIERS_SUCCESS = 'FETCH_ATELIERS_SUCCESS';
 export const FETCH_ATELIERS_FAILURE = 'FETCH_ATELIERS_FAILURE';
+export const EDIT_ATELIER = 'EDIT_ATELIER';
 
 export const fetchAteliersBegin = () => ({
   type: FETCH_ATELIERS_BEGIN,
@@ -34,3 +35,7 @@ export function fetchAteliers() {
   };
 }
 
+export const goEdit = atelier => ({
+  type: EDIT_ATELIER,
+  payload: { atelier },
+});

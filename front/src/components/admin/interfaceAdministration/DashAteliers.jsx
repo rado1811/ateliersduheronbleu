@@ -170,7 +170,6 @@ const styles = (theme) => ({
   },
 });
 
-// ======= LISTE DES INTERVENANTS ==========
 class DashAteliers extends React.Component {
   constructor(props) {
     super(props);
@@ -226,7 +225,7 @@ class DashAteliers extends React.Component {
   isSelected = (id) => this.state.selected.indexOf(id) !== -1;
 
   render() {
-    const { classes } = this.props;
+    const { classes, ateliers } = this.props;
     const { selected, rowsPerPage, page } = this.state;
     const emptyRows =
       rowsPerPage -
@@ -272,7 +271,14 @@ class DashAteliers extends React.Component {
                       </TableCell>
                       <TableCell>
                         <Tooltip title="Modifier">
-                          <IconButton aria-label="Edit">
+                          <IconButton
+                            component={AdminAtelier}
+                            aria-label="Edit"
+                            onClick={() => {
+                              console.log(ateliers);
+                              alert(atelier.id_atelier);
+                            }}
+                          >
                             <EditIcon />
                           </IconButton>
                         </Tooltip>
@@ -318,8 +324,5 @@ function mapStateToProps(state) {
 
 export default compose(
   withStyles(styles),
-  connect(
-    mapStateToProps,
-    null
-  )
+  connect(mapStateToProps)
 )(DashAteliers);

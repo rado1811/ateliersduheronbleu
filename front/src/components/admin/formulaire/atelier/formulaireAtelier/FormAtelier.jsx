@@ -9,11 +9,13 @@ import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Place from '@material-ui/icons/Place';
 import Snackbar from '@material-ui/core/Snackbar';
-
+import {fetchAteliersSuccess} from '../../../../../actions/ateliers';
+import _ from 'lodash';
 class FormAtelier extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loaded: false,
       nom: '',
       debut: '',
       nb_participants: '',
@@ -26,62 +28,62 @@ class FormAtelier extends Component {
     };
   }
 
-  updateNomField = event => {
+  updateNomField = (event) => {
     this.setState({
       nom: event.target.value,
     });
   };
-  updateDebutField = event => {
+  updateDebutField = (event) => {
     this.setState({
       debut: event.target.value,
     });
   };
-  updateNbField = event => {
+  updateNbField = (event) => {
     this.setState({
       nb_participants: event.target.value,
     });
   };
-  updatePrixField = event => {
+  updatePrixField = (event) => {
     this.setState({
       prix: event.target.value,
     });
   };
-  updateContenuField = event => {
+  updateContenuField = (event) => {
     this.setState({
       contenu: event.target.value,
     });
   };
-  updateFormuleField = event => {
+  updateFormuleField = (event) => {
     this.setState({
       formule: event.target.value,
     });
   };
-  updateLieuField = event => {
+  updateLieuField = (event) => {
     this.setState({
       lieu: event.target.value,
     });
   };
-  updatePhotoField = event => {
+  updatePhotoField = (event) => {
     this.setState({
       photo: event.target.value,
     });
   };
-  updatePlacesField = event => {
+  updatePlacesField = (event) => {
     this.setState({
       places_disponibles: event.target.value,
     });
   };
-  updateProgrammeField = event => {
+  updateProgrammeField = (event) => {
     this.setState({
       programme: event.target.value,
     });
   };
-  updateIntervenantField = event => {
+  updateIntervenantField = (event) => {
     this.setState({
       nom_intervenant: event.target.value,
     });
   };
-  handleClick = state => () => {
+  handleClick = (state) => () => {
     this.setState({ open: true, ...state });
   };
 
@@ -89,7 +91,7 @@ class FormAtelier extends Component {
     this.setState({ open: false });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     let data = {
       ...this.state,
@@ -103,13 +105,18 @@ class FormAtelier extends Component {
       }),
       body: JSON.stringify(data),
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(
-        res => this.setState({ flash: 'Formulaire envoyé', open: true }),
-        err => this.setState({ flash: 'Formulaire envoyé', open: true })
+        (res) => this.setState({ flash: 'Formulaire envoyé', open: true }),
+        (err) => this.setState({ flash: 'Formulaire envoyé', open: true })
       );
   };
+
+  componentDidUpdate() {
+    console.log(this.props.ateliers);
+  }
   render() {
+    const { ateliers } = this.props;
     return (
       <Grid>
         <div>
@@ -122,7 +129,8 @@ class FormAtelier extends Component {
                   required
                   label="Titre de l'Atelier"
                   type="text"
-                  value={this.state.nom}
+                  value ={
+                    !_.isEmpty(ateliers) && ateliers[0].nom}
                   onChange={this.updateNomField.bind(this)}
                 />
                 <br />
@@ -212,13 +220,13 @@ class FormAtelier extends Component {
             <br />
             <InputLabel htmlFor="dropInput">Intervenant</InputLabel>
             <Select
-              value={this.props.nom_intervenant}
+              value={this.state.nom_intervenant}
               onChange={this.updateIntervenantField.bind(this)}
             >
               <MenuItem value="">
                 <em>Selectionnez un intervenant</em>
               </MenuItem>
-              {this.props.intervenants.map(item => (
+              {this.props.intervenants.map((item) => (
                 <MenuItem key={item.id_intervenant} value={item.id_intervenant}>
                   {item.nom} {item.prenom}
                 </MenuItem>
@@ -260,7 +268,13 @@ class FormAtelier extends Component {
 }
 
 function mapStateToProps(state) {
-  return { intervenants: state.intervenants.intervenants };
+  return {
+    intervenants: state.intervenants.intervenants,
+    ateliers: state.ateliers.ateliers,
+  };
 }
 
-export default connect(mapStateToProps, null)(FormAtelier);
+export default connect(
+  mapStateToProps,
+  null
+)(FormAtelier);
