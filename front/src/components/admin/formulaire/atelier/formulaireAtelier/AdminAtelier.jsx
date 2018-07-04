@@ -18,8 +18,6 @@ class AdminAtelier extends Component {
   componentDidMount() {
     this.props.fetchAteliers();
     this.props.fetchIntervenants();
-    /*     this.props.fetchAteliersSuccess();
- */
   }
   render() {
     return (

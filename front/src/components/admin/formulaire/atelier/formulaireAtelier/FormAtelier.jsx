@@ -27,9 +27,12 @@ class FormAtelier extends Component {
       id_atelier: '',
       id_intervenant: '',
       places_disponibles: '',
+      nom_intervenant: '',
     };
   }
   componentWillReceiveProps(nextProps) {
+    alert("Atelier", nextProps)
+
     if (nextProps.isFromEdit) {
       this.setState({
         contenu: nextProps.ateliers[nextProps.indexAtelierFromEdit].contenu,
@@ -173,7 +176,7 @@ class FormAtelier extends Component {
   };
 
   render() {
-    const { isFromEdit, indexAtelierFromEdit, ateliers } = this.props;
+    const { isFromEdit } = this.props;
     return (
       <Grid>
         <div>
@@ -246,11 +249,7 @@ class FormAtelier extends Component {
               label="Formule ?"
               required
               type="text"
-              value={
-                isFromEdit
-                  ? ateliers[indexAtelierFromEdit].formule
-                  : this.state.formule
-              }
+              value={this.state.formule}
               onChange={this.updateFormuleField}
             />
             <br />
