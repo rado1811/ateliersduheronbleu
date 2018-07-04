@@ -9,6 +9,10 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Moment from 'react-moment';
+import { Link } from 'react-router-dom';
+
+const Reserver = (props) => <Link to="/ateliers" {...props} />;
+const Atelier = (props) => <Link to="/ateliers" {...props}/>;
 
 const styles = {
   item: {
@@ -60,10 +64,10 @@ const AtelierVignette = (props) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" color="primary" onClick={props.booking}>
+          <Button size="small" color="primary" onClick={props.booking} component={Reserver}>
             Pré-réserver
           </Button>
-          <Button size="small" color="primary" onClick={props.moreDetails}>
+          <Button size="small" color="primary" onClick={props.moreDetails} component={Atelier}>
             En savoir plus
           </Button>
         </CardActions>

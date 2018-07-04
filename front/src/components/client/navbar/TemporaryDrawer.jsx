@@ -56,7 +56,7 @@ class TemporaryDrawer extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <AppBar position="fixed" style={{marginBottom: 10}}>
+        <AppBar position="fixed" style={{marginBottom: 10, backgroundColor: '#B2C4CB'}} >
           <Toolbar>
             <Hidden smUp>
               <IconButton
@@ -69,34 +69,35 @@ class TemporaryDrawer extends React.Component {
             </Hidden>
             <Typography
               variant="title"
-              style={{ flex: 1 }}
+              style={{ flex: 1, fontFamily: 'Montserrat' }}
               color="inherit"
               noWrap
+              
             >
               Atelier du Héron Bleu
             </Typography>
             <Hidden xsDown>
-              <Button color="inherit" component={MyAccueil}>
+              <Button color="inherit" component={MyAccueil} style={{fontFamily: 'Montserrat'}}>
                 Accueil
               </Button>
             </Hidden>
             <Hidden xsDown>
-              <Button color="inherit" component={MyAteliers}>
+              <Button color="inherit" component={MyAteliers} style={{fontFamily: 'Montserrat'}}>
                 Ateliers
               </Button>
             </Hidden>
             <Hidden xsDown>
-              <Button color="inherit" component={MyIntervenants}>
+              <Button color="inherit" component={MyIntervenants} style={{fontFamily: 'Montserrat'}}>
                 Intervenants
               </Button>
             </Hidden>
             <Hidden xsDown>
-              <Button color="inherit" component={MyConcept}>
+              <Button color="inherit" component={MyConcept} style={{fontFamily: 'Montserrat'}}>
                 Concept
               </Button>
             </Hidden>
             <Hidden xsDown>
-              <Button color="inherit" component={MyContact}>
+              <Button color="inherit" component={MyContact} style={{fontFamily: 'Montserrat'}}>
                 Contact
               </Button>
             </Hidden>

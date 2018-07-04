@@ -12,8 +12,8 @@ video {
     font-size: 2rem;
     margin: 0;
     position: absolute;
-    top: 25%;
-    left: 50%;
+    top: 70%;
+    left: 25%;
     margin-right: -50%;
     transform: translate(-50%, -50%)
 }   

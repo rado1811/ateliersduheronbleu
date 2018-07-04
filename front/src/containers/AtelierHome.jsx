@@ -80,16 +80,16 @@ class AtelierHome extends Component {
             height: 'auto',
             width: '100%',
           }}
-            loop
+             loop
             muted
             autoPlay
           >
-            <source src="../images/video.mp4" type="video/mp4" />
+            <source src="../images/Woman.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
         <div className="overlay">
-          <p>Ateliers "Bien-être et Créativité"</p>
+          <p style={{ fontFamily: 'Montserrat' }}> Ateliers "Bien-être et Créativité"</p>
         </div>
         <Link to="#ateliers">
           <i className="fas fa-angle-double-down" />
