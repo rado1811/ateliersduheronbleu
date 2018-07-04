@@ -98,7 +98,7 @@ let EnhancedTableToolbar = props => {
     <Toolbar>
       <div className={classes.title}>
         <Typography variant="title" id="tableTitle">
-          La liste des ateliers
+          Liste des ateliers
         </Typography>
       </div>
       <div className={classes.spacer} />
@@ -152,7 +152,6 @@ class DashAteliers extends React.Component {
   }
 
   deleteAteliers = id_atelier => {
-    console.log(id_atelier);
     fetch('/api/ateliers', {
       method: 'DELETE',
       headers: {
@@ -196,8 +195,7 @@ class DashAteliers extends React.Component {
                       hover
                       key={atelier.id_atelier}
                     >
-                      <TableCell padding="checkbox">
-                      </TableCell>
+                    <TableCell />
                       <TableCell component="th" scope="row" padding="none">
                         {atelier.nom}
                       </TableCell>
@@ -209,8 +207,7 @@ class DashAteliers extends React.Component {
                       </TableCell>
                       <TableCell>
                         <IconButton aria-label="Delete">
-                          <EditIcon 
-                            onClick />
+                          <EditIcon />
                         </IconButton>
                       </TableCell>
                     </TableRow>
