@@ -22,37 +22,28 @@ import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
+import EditIcon from '@material-ui/icons/Edit';
+
 
 const Admin = props => <Link to="/admin/intervenant" {...props} />;
 
-function getSorting(order, orderBy) {
-  return order === 'desc'
-    ? (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1)
-    : (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1);
-}
 
 const columnData = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Nom' },
-  { id: 'calories', numeric: true, disablePadding: false, label: 'Prénom' },
+  { id: 'name', 
+  numeric: false, 
+  disablePadding: true, 
+  label: `Nom de l'intervenant` },
 ];
 
 class EnhancedTableHead extends React.Component {
-  createSortHandler = property => event => {
-    this.props.onRequestSort(event, property);
-  };
 
   render() {
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
-
+  
     return (
       <TableHead>
         <TableRow>
           <TableCell padding="checkbox">
-            <Checkbox
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={numSelected === rowCount}
-              onChange={onSelectAllClick}
-            />
+            <Checkbox/>
           </TableCell>
           {columnData.map(column => {
             return (
@@ -60,7 +51,6 @@ class EnhancedTableHead extends React.Component {
                 key={column.id}
                 numeric={column.numeric}
                 padding={column.disablePadding ? 'none' : 'default'}
-                sortDirection={orderBy === column.id ? order : false}
               >
                 <Tooltip
                   title="Sort"
@@ -68,9 +58,6 @@ class EnhancedTableHead extends React.Component {
                   enterDelay={300}
                 >
                   <TableSortLabel
-                    active={orderBy === column.id}
-                    direction={order}
-                    onClick={this.createSortHandler(column.id)}
                   >
                     {column.label}
                   </TableSortLabel>
@@ -207,13 +194,6 @@ class DashIntervenants extends React.Component {
     this.setState({ order, orderBy });
   };
 
-  handleSelectAllClick = (event, checked) => {
-    if (checked) {
-      this.setState({ selected: this.state.intervenants.map(intervenant => intervenant.id) });
-      return;
-    }
-    this.setState({ selected: [] });
-  };
 
   handleClick = (event, id) => {
     const { selected } = this.state;
@@ -268,7 +248,6 @@ class DashIntervenants extends React.Component {
             />
             <TableBody>
               {this.props.intervenants
-                .sort(getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(intervenant => {
                   const isSelected = this.isSelected(intervenant.id_intervenant);
@@ -290,6 +269,13 @@ class DashIntervenants extends React.Component {
                       </TableCell>
                       <TableCell component="th" scope="row" padding="none">
                         {intervenant.prenom}
+                      </TableCell>
+                      <TableCell>
+                        <Tooltip title="Modifier">
+                          <IconButton aria-label="Edit">
+                            <EditIcon />
+                          </IconButton>
+                        </Tooltip>
                       </TableCell>
                     </TableRow>
                   );
