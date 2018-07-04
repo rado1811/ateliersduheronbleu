@@ -105,8 +105,8 @@ class FormAtelier extends Component {
     })
       .then(res => res.json())
       .then(
-        res => this.setState({ flash: 'Formulaire envoyé', open: true }),
-        err => this.setState({ flash: 'Formulaire envoyé', open: true })
+        res => this.setState({ flash: 'Nouvel atelier enregistré', open: true }),
+        err => this.setState({ flash: 'Formulaire incomplet', open: true })
       );
   };
   render() {

@@ -34,7 +34,7 @@ class FormulaireIntervenant extends Component {
     })
       .then(res => res.json())
       .then(
-        res => this.setState({ flash: 'Formulaire envoyé', open: true }),
+        res => this.setState({ flash: 'nouvel intervenant enregistré', open: true }),
         err => this.setState({ flash: 'Formulaire incomplet', open: true })
       );
   }

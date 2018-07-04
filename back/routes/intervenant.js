@@ -24,9 +24,7 @@ router.post('/', (req, res) => {
 });
 
 router.put('/', (req, res) => {
-  const sql = `UPDATE Intervenants SET ? WHERE id_intervenant =${
-    req.body.id_intervenant
-  }`;
+  const sql = `UPDATE Intervenants SET ? WHERE id_intervenant =${req.body.id_intervenant}`;
   connection.query(sql, req.body, (err, result) => {
     if (err) {
       throw err;
@@ -35,12 +33,13 @@ router.put('/', (req, res) => {
   });
 });
 
-router.delete('/:id', (req) => {
-  const deletedIntervenant = `DELETE FROM Intervenants WHERE id=${
-    req.params.id
-  }`;
-  connection.query(deletedIntervenant, (err) => {
-    if (err) throw err;
+router.delete('/', (req, res) => {
+  connection.query('DELETE FROM Intervenants WHERE id_intervenant = ?', [req.body.id_intervenant], (err, result) => {
+    if (err) {
+      res.status(500).end();
+    } else {
+      res.end('intervenant supprimé');
+    }
   });
 });
 

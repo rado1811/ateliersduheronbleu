@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
@@ -15,7 +14,6 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import AddIcon from '@material-ui/icons/Add';
@@ -23,7 +21,8 @@ import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import EditIcon from '@material-ui/icons/Edit';
-
+import { fetchIntervenants } from '../../../actions/intervenants';
+import Snackbar from '@material-ui/core/Snackbar';
 
 const Admin = props => <Link to="/admin/intervenant" {...props} />;
 
@@ -36,14 +35,11 @@ const columnData = [
 ];
 
 class EnhancedTableHead extends React.Component {
-
   render() {
-  
     return (
       <TableHead>
         <TableRow>
           <TableCell padding="checkbox">
-            <Checkbox/>
           </TableCell>
           {columnData.map(column => {
             return (
@@ -57,8 +53,7 @@ class EnhancedTableHead extends React.Component {
                   placement={column.numeric ? 'bottom-end' : 'bottom-start'}
                   enterDelay={300}
                 >
-                  <TableSortLabel
-                  >
+                  <TableSortLabel>
                     {column.label}
                   </TableSortLabel>
                 </Tooltip>
@@ -70,15 +65,6 @@ class EnhancedTableHead extends React.Component {
     );
   }
 }
-
-EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.string.isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
-};
 
 const toolbarStyles = theme => ({
   root: {
@@ -106,46 +92,28 @@ const toolbarStyles = theme => ({
 });
 
 let EnhancedTableToolbar = props => {
-  const { numSelected, classes } = props;
+  const { classes } = props;
 
   return (
-    <Toolbar
-      className={classNames(classes.root, {
-        [classes.highlight]: numSelected > 0,
-      })}
-    >
+    <Toolbar>
       <div className={classes.title}>
-        {numSelected > 0 ? (
-          <Typography color="inherit" variant="subheading">
-            {numSelected} selected
-          </Typography>
-        ) : (
-          <Typography variant="title" id="tableTitle">
-            La liste des intervenants
-          </Typography>
-        )}
+        <Typography variant="title" id="tableTitle">
+          Liste des intervenants
+        </Typography>
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
-        {numSelected > 0 ? (
-          <Tooltip title="Supprimer">
-            <IconButton aria-label="Delete">
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        ) : (
-          <Tooltip title="Ajouter">
-            <Button 
-            mini 
-            variant="fab" 
-            color="primary" 
-            aria-label="add" 
-            className={classes.button} 
-            component={Admin}>
-                <AddIcon />
-            </Button>
-          </Tooltip>
-        )}
+        <Tooltip title="Ajouter">
+          <Button 
+          mini 
+          variant="fab" 
+          color="primary" 
+          aria-label="add" 
+          className={classes.button} 
+          component={Admin}>
+              <AddIcon size="small" />
+          </Button>
+        </Tooltip>
       </div>
     </Toolbar>
   );
@@ -153,7 +121,6 @@ let EnhancedTableToolbar = props => {
 
 EnhancedTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired,
 };
 
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
@@ -175,45 +142,29 @@ class DashIntervenants extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      order: 'asc',
-      orderBy: 'calories',
-      selected: [],
       page: 0,
-      rowsPerPage: 5,
+      rowsPerPage: 10,
     };
   }
 
-  handleRequestSort = (event, property) => {
-    const orderBy = property;
-    let order = 'desc';
+  componentDidMount() {
+    this.props.fetchIntervenants();
+  }
 
-    if (this.state.orderBy === property && this.state.order === 'desc') {
-      order = 'asc';
-    }
-
-    this.setState({ order, orderBy });
-  };
-
-
-  handleClick = (event, id) => {
-    const { selected } = this.state;
-    const selectedIndex = selected.indexOf(id);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-
-    this.setState({ selected: newSelected });
+  deleteIntervenants = id_intervenant => {
+    fetch('/api/intervenants', {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({id_intervenant}),
+    })
+      .then(res => res)
+      .then(
+        res => this.setState({ flash: 'intervenant supprimé', open: true }),
+      )
+      .catch(err => err);
   };
 
   handleChangePage = (event, page) => {
@@ -224,51 +175,41 @@ class DashIntervenants extends React.Component {
     this.setState({ rowsPerPage: event.target.value });
   };
 
-  isSelected = id => this.state.selected.indexOf(id) !== -1;
-
   render() {
     const { classes } = this.props;
-    const { order, orderBy, selected, rowsPerPage, page } = this.state;
+    const { rowsPerPage, page } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.intervenants.length - page * rowsPerPage);
-
     return (
       <Paper className={classes.root} style={{
         marginTop: 70,
       }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle" >
             <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={this.handleSelectAllClick}
-              onRequestSort={this.handleRequestSort}
               rowCount={this.props.intervenants.length}
             />
             <TableBody>
               {this.props.intervenants
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(intervenant => {
-                  const isSelected = this.isSelected(intervenant.id_intervenant);
                   return (
                     <TableRow
                       hover
-                      onClick={event => this.handleClick(event, intervenant.id_intervenant)}
-                      role="checkbox"
-                      aria-checked={isSelected}
-                      tabIndex={-1}
                       key={intervenant.id_intervenant}
-                      selected={isSelected}
                     >
-                      <TableCell padding="checkbox">
-                        <Checkbox checked={isSelected} />
-                      </TableCell>
+                      <TableCell />
                       <TableCell component="th" scope="row" padding="none">
                         {intervenant.nom}
                       </TableCell>
                       <TableCell component="th" scope="row" padding="none">
                         {intervenant.prenom}
+                      </TableCell>
+                      <TableCell>
+                        <IconButton aria-label="Delete">
+                          <DeleteIcon 
+                            onClick={() => this.deleteIntervenants(intervenant.id_intervenant)} />
+                        </IconButton>
                       </TableCell>
                       <TableCell>
                         <Tooltip title="Modifier">
@@ -302,6 +243,12 @@ class DashIntervenants extends React.Component {
           onChangePage={this.handleChangePage}
           onChangeRowsPerPage={this.handleChangeRowsPerPage}
         />
+        <Snackbar
+          open={this.state.open}
+          message={this.state.flash}
+          autoHideDuration={4000}
+          onClose={this.handleToogle}
+        />
       </Paper>
     );
   }
@@ -309,6 +256,8 @@ class DashIntervenants extends React.Component {
 
 DashIntervenants.propTypes = {
   classes: PropTypes.object.isRequired,
+  fetchIntervenants: PropTypes.func.isRequired,
+
 };
 
 function mapStateToProps(state) {
@@ -317,5 +266,5 @@ function mapStateToProps(state) {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, null),
+  connect(mapStateToProps, { fetchIntervenants }),
 )(DashIntervenants);
