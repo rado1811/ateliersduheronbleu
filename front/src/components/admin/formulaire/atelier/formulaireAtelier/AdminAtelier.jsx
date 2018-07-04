@@ -35,13 +35,6 @@ class AdminAtelier extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  console.log('youhou2', state);
-  /*   return {
-    ateliers: state.ateliersReducer.ateliers,
-  }; */
-}
-
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     { fetchAteliers, fetchIntervenants, fetchAteliersSuccess },
@@ -52,10 +45,10 @@ function mapDispatchToProps(dispatch) {
 AdminAtelier.propTypes = {
   fetchAteliers: PropTypes.func.isRequired,
   fetchIntervenants: PropTypes.func.isRequired,
-  isFromEdit:PropTypes.func.isRequired,
+  isFromEdit: PropTypes.func.isRequired,
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(AdminAtelier);

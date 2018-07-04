@@ -1,7 +1,7 @@
 const EDIT_ATELIER = 'EDIT_ATELIER';
 
 const initialState = {
-  ateliers: [],
+  indexAtelierFromEdit: {},
   isFromEdit: false,
 };
 
@@ -10,7 +10,7 @@ export default function isFromEdit(state = initialState, action) {
     case EDIT_ATELIER:
       return {
         ...state,
-        ateliers: [],
+        indexAtelierFromEdit: action.payload.indexAtelierFromEdit,
         isFromEdit: true,
       };
     default:

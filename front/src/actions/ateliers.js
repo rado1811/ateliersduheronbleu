@@ -35,7 +35,7 @@ export function fetchAteliers() {
   };
 }
 
-export const goEdit = atelier => ({
+export const goEdit = indexAtelierFromEdit => ({
   type: EDIT_ATELIER,
-  payload: { atelier },
+  payload: { indexAtelierFromEdit },
 });

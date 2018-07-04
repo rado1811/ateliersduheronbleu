@@ -9,7 +9,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Place from '@material-ui/icons/Place';
 import Snackbar from '@material-ui/core/Snackbar';
-import {fetchAteliersSuccess} from '../../../../../actions/ateliers';
+import { goEdit } from '../../../../../actions/ateliers';
+import { bindActionCreators } from 'redux';
+
 import _ from 'lodash';
 class FormAtelier extends Component {
   constructor(props) {
@@ -112,11 +114,8 @@ class FormAtelier extends Component {
       );
   };
 
-  componentDidUpdate() {
-    console.log(this.props.ateliers);
-  }
   render() {
-    const { ateliers } = this.props;
+    const { isFromEdit, indexAtelierFromEdit, ateliers } = this.props;
     return (
       <Grid>
         <div>
@@ -129,8 +128,11 @@ class FormAtelier extends Component {
                   required
                   label="Titre de l'Atelier"
                   type="text"
-                  value ={
-                    !_.isEmpty(ateliers) && ateliers[0].nom}
+                  value={
+                    isFromEdit
+                      ? ateliers[indexAtelierFromEdit].nom
+                      : this.state.nom
+                  }
                   onChange={this.updateNomField.bind(this)}
                 />
                 <br />
@@ -142,7 +144,11 @@ class FormAtelier extends Component {
                   required
                   label=""
                   type="date"
-                  value={this.state.debut}
+                  value={
+                    isFromEdit
+                      ? ateliers[indexAtelierFromEdit].debut
+                      : this.state.debut
+                  }
                   onChange={this.updateDebutField.bind(this)}
                 />
                 <br />
@@ -155,7 +161,11 @@ class FormAtelier extends Component {
                   required
                   label="Nombre Participants :"
                   type="number"
-                  value={this.state.nb_participants}
+                  value={
+                    isFromEdit
+                      ? ateliers[indexAtelierFromEdit].nb_participants
+                      : this.state.nb_participants
+                  }
                   onChange={this.updateNbField.bind(this)}
                 />
                 <br />
@@ -166,7 +176,11 @@ class FormAtelier extends Component {
                   required
                   label="Prix"
                   type="text"
-                  value={this.state.prix}
+                  value={
+                    isFromEdit
+                      ? ateliers[indexAtelierFromEdit].prix
+                      : this.state.prix
+                  }
                   onChange={this.updatePrixField.bind(this)}
                 />
                 <br />
@@ -180,7 +194,11 @@ class FormAtelier extends Component {
               label="Contenu"
               multiligne="true"
               type="text"
-              value={this.state.contenu}
+              value={
+                isFromEdit
+                  ? ateliers[indexAtelierFromEdit].contenu
+                  : this.state.contenu
+              }
               onChange={this.updateContenuField.bind(this)}
             />
             <br />
@@ -190,14 +208,22 @@ class FormAtelier extends Component {
               label="Formule ?"
               required
               type="text"
-              value={this.state.formule}
+              value={
+                isFromEdit
+                  ? ateliers[indexAtelierFromEdit].formule
+                  : this.state.formule
+              }
               onChange={this.updateFormuleField.bind(this)}
             />
             <br />
             <TextField
               name="photo"
               label="Photo"
-              value={this.state.photo}
+              value={
+                isFromEdit
+                  ? ateliers[indexAtelierFromEdit].photo
+                  : this.state.photo
+              }
               onChange={this.updatePhotoField.bind(this)}
             />
             <br />
@@ -206,7 +232,11 @@ class FormAtelier extends Component {
               name="lieu"
               label=""
               type="text"
-              value={this.state.lieu}
+              value={
+                isFromEdit
+                  ? ateliers[indexAtelierFromEdit].lieu
+                  : this.state.lieu
+              }
               onChange={this.updateLieuField.bind(this)}
               InputProps={{
                 startAdornment: (
@@ -239,20 +269,35 @@ class FormAtelier extends Component {
               name="programme"
               label="Programme"
               type="text"
-              value={this.state.programme}
+              value={
+                isFromEdit
+                  ? ateliers[indexAtelierFromEdit].programme
+                  : this.state.programme
+              }
               onChange={this.updateProgrammeField.bind(this)}
             />
             <br />
             <br />
             <div>
-              <Button
-                type="submit"
-                value="Submit"
-                variant="raised"
-                color="primary"
-              >
-                Enregistrer
-              </Button>
+              {isFromEdit ? (
+                <Button
+                  type="submit"
+                  value="Submit"
+                  variant="raised"
+                  color="primary"
+                >
+                  Modifier
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  value="Submit"
+                  variant="raised"
+                  color="primary"
+                >
+                  Enregistrer
+                </Button>
+              )}
             </div>
           </form>
           <Snackbar
@@ -267,14 +312,25 @@ class FormAtelier extends Component {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      goEdit,
+    },
+    dispatch
+  );
+}
+
 function mapStateToProps(state) {
   return {
     intervenants: state.intervenants.intervenants,
     ateliers: state.ateliers.ateliers,
+    indexAtelierFromEdit: state.edit.indexAtelierFromEdit,
+    isFromEdit: state.edit.isFromEdit,
   };
 }
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(FormAtelier);

@@ -8,7 +8,7 @@ const allReducers = combineReducers({
   ateliers: AteliersReducer,
   activeAteliers: ActiveAteliersReducer,
   intervenants: IntervenantsReducer,
-  Edit: isFromEdit,
+  edit: isFromEdit,
 });
 
 export default allReducers;

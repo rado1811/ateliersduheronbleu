@@ -23,6 +23,8 @@ import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import EditIcon from '@material-ui/icons/Edit';
+import { bindActionCreators } from 'redux';
+import { goEdit } from '../../../actions/ateliers';
 
 const AdminAtelier = (props) => <Link to="/admin/ateliers" {...props} />;
 
@@ -225,7 +227,7 @@ class DashAteliers extends React.Component {
   isSelected = (id) => this.state.selected.indexOf(id) !== -1;
 
   render() {
-    const { classes, ateliers } = this.props;
+    const { classes, ateliers, goEdit } = this.props;
     const { selected, rowsPerPage, page } = this.state;
     const emptyRows =
       rowsPerPage -
@@ -249,7 +251,7 @@ class DashAteliers extends React.Component {
             <TableBody>
               {this.props.ateliers
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((atelier) => {
+                .map((atelier, i) => {
                   const isSelected = this.isSelected(atelier.id_atelier);
                   return (
                     <TableRow
@@ -275,8 +277,12 @@ class DashAteliers extends React.Component {
                             component={AdminAtelier}
                             aria-label="Edit"
                             onClick={() => {
-                              console.log(ateliers);
-                              alert(atelier.id_atelier);
+                              goEdit(i);
+                              alert(
+                                `L'atelier a pour id : ${
+                                  atelier.id_atelier
+                                }\nL'atelier a pour index : ${i}`
+                              );
                             }}
                           >
                             <EditIcon />
@@ -318,11 +324,23 @@ DashAteliers.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      goEdit,
+    },
+    dispatch
+  );
+}
+
 function mapStateToProps(state) {
   return { ateliers: state.ateliers.ateliers };
 }
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(DashAteliers);
