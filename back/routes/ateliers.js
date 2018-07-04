@@ -23,12 +23,21 @@ router.post('/', (req, res) => {
   });
 });
 
+router.put('/', (req, res) => {
+  const sql = `UPDATE Ateliers SET ? WHERE id_atelier =${req.body.id_atelier}`;
+  connection.query(sql, req.body, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.json(result);
+  });
+});
+
 router.delete('/', (req, res) => {
   connection.query('DELETE FROM Ateliers WHERE id_atelier = ?', [req.body.id_atelier], (err, result) => {
     if (err) {
       res.status(500).end();
     } else {
-      console.log('atelier n°', req.body.id_atelier, ' supprimé, ', result.affectedRows, " ligne(s) supprimée(s)  ");
       res.end('atelier supprimé');
     }
   });

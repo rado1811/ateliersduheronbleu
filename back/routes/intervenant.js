@@ -3,7 +3,7 @@ import connection from '../config/db';
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
   connection.query('SELECT * FROM Intervenants', (err, data) => {
     if (err) {
       res.send(err);
@@ -23,12 +23,23 @@ router.post('/', (req, res) => {
   });
 });
 
+router.put('/', (req, res) => {
+  const sql = `UPDATE Intervenants SET ? WHERE id_intervenant =${req.body.id_intervenant}`;
+  connection.query(sql, req.body, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.json(result);
+  });
+});
+
 router.delete('/', (req, res) => {
-  const deletedIntervenant = `DELETE FROM Intervenants WHERE id=${
-    req.params.id
-  }`;
-  connection.query(deletedIntervenant, function(err, rows) {
-    if (err) throw err;
+  connection.query('DELETE FROM Intervenants WHERE id_intervenant = ?', [req.body.id_intervenant], (err, result) => {
+    if (err) {
+      res.status(500).end();
+    } else {
+      res.end('intervenant supprimé');
+    }
   });
 });
 

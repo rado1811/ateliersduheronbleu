@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 /** ROUTES */
 app.use('/api/ateliers', ateliers);
-app.use('/api/intervenant', intervenant);
+app.use('/api/intervenants', intervenant);
 app.use('/api', prereservationRouter);
 app.use('/mail', nodemailer);
 // catch 404 and forward to error handler

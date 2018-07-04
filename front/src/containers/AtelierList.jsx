@@ -3,10 +3,10 @@ import { Button } from 'material-ui';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectAteliers } from '../actions/index';
 import Moment from 'react-moment';
 import Paper from '@material-ui/core/Paper';
 import BoutonContact from '../components/client/BoutonContact';
+import { selectAteliers } from '../actions/index';
 import './AteliersDetails.css';
 
 const AteliersList = ({ ateliers, selectAteliers }) => (
@@ -25,12 +25,12 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
       <ul className="AteliersList" style={{ padding: 2, maxHeight: '100vh', overflow: 'auto' }}>
         <p>Liste des Ateliers</p>
         {ateliers.map(atelier => (
-          <Paper elevation={8} >
-            <Button key={atelier.id_atelier} onClick={() => selectAteliers(atelier)}>
+          <Paper key={atelier.id_atelier} elevation={8} >
+            <Button onClick={() => selectAteliers(atelier)}>
               <div className="image-container">
                 <img src={atelier.photo} alt="heron" style={{ height: '10vh', width: '6vw' }} />
               </div>
-              <div style={{fontFamily: 'Montserrat'}}>
+              <div style={{ fontFamily: 'Montserrat' }}>
                 <li>
                   {atelier.nom}
                   <br />
@@ -49,7 +49,7 @@ function mapStateToProps(state) {
   return { ateliers: state.ateliers.ateliers };
 }
 
-function matchDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     selectAteliers,
   }, dispatch);
@@ -60,4 +60,4 @@ AteliersList.propTypes = {
   selectAteliers: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, matchDispatchToProps)(AteliersList);
+export default connect(mapStateToProps, mapDispatchToProps)(AteliersList);

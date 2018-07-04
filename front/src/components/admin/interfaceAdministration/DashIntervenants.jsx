@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
@@ -20,37 +22,28 @@ import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
+import EditIcon from '@material-ui/icons/Edit';
+
 
 const Admin = props => <Link to="/admin/intervenant" {...props} />;
 
-function getSorting(order, orderBy) {
-  return order === 'desc'
-    ? (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1)
-    : (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1);
-}
 
 const columnData = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Nom' },
-  { id: 'calories', numeric: true, disablePadding: false, label: 'Prénom' },
+  { id: 'name', 
+  numeric: false, 
+  disablePadding: true, 
+  label: `Nom de l'intervenant` },
 ];
 
 class EnhancedTableHead extends React.Component {
-  createSortHandler = property => event => {
-    this.props.onRequestSort(event, property);
-  };
 
   render() {
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
-
+  
     return (
       <TableHead>
         <TableRow>
           <TableCell padding="checkbox">
-            <Checkbox
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={numSelected === rowCount}
-              onChange={onSelectAllClick}
-            />
+            <Checkbox/>
           </TableCell>
           {columnData.map(column => {
             return (
@@ -58,7 +51,6 @@ class EnhancedTableHead extends React.Component {
                 key={column.id}
                 numeric={column.numeric}
                 padding={column.disablePadding ? 'none' : 'default'}
-                sortDirection={orderBy === column.id ? order : false}
               >
                 <Tooltip
                   title="Sort"
@@ -66,9 +58,6 @@ class EnhancedTableHead extends React.Component {
                   enterDelay={300}
                 >
                   <TableSortLabel
-                    active={orderBy === column.id}
-                    direction={order}
-                    onClick={this.createSortHandler(column.id)}
                   >
                     {column.label}
                   </TableSortLabel>
@@ -189,16 +178,9 @@ class DashIntervenants extends React.Component {
       order: 'asc',
       orderBy: 'calories',
       selected: [],
-      intervenants: [],
       page: 0,
       rowsPerPage: 5,
     };
-  }
-
-  componentDidMount() {
-    fetch('/api/intervenant')
-      .then(res => res.json())
-      .then(intervenants => this.setState({ intervenants }));
   }
 
   handleRequestSort = (event, property) => {
@@ -212,13 +194,6 @@ class DashIntervenants extends React.Component {
     this.setState({ order, orderBy });
   };
 
-  handleSelectAllClick = (event, checked) => {
-    if (checked) {
-      this.setState({ selected: this.state.intervenants.map(intervenant => intervenant.id) });
-      return;
-    }
-    this.setState({ selected: [] });
-  };
 
   handleClick = (event, id) => {
     const { selected } = this.state;
@@ -253,8 +228,8 @@ class DashIntervenants extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { intervenants, order, orderBy, selected, rowsPerPage, page } = this.state;
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, intervenants.length - page * rowsPerPage);
+    const { order, orderBy, selected, rowsPerPage, page } = this.state;
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.intervenants.length - page * rowsPerPage);
 
     return (
       <Paper className={classes.root} style={{
@@ -269,11 +244,10 @@ class DashIntervenants extends React.Component {
               orderBy={orderBy}
               onSelectAllClick={this.handleSelectAllClick}
               onRequestSort={this.handleRequestSort}
-              rowCount={intervenants.length}
+              rowCount={this.props.intervenants.length}
             />
             <TableBody>
-              {intervenants
-                .sort(getSorting(order, orderBy))
+              {this.props.intervenants
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(intervenant => {
                   const isSelected = this.isSelected(intervenant.id_intervenant);
@@ -296,6 +270,13 @@ class DashIntervenants extends React.Component {
                       <TableCell component="th" scope="row" padding="none">
                         {intervenant.prenom}
                       </TableCell>
+                      <TableCell>
+                        <Tooltip title="Modifier">
+                          <IconButton aria-label="Edit">
+                            <EditIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </TableCell>
                     </TableRow>
                   );
                 })}
@@ -309,7 +290,7 @@ class DashIntervenants extends React.Component {
         </div>
         <TablePagination
           component="div"
-          count={intervenants.length}
+          count={this.props.intervenants.length}
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{
@@ -330,4 +311,11 @@ DashIntervenants.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(DashIntervenants);
+function mapStateToProps(state) {
+  return { intervenants: state.intervenants.intervenants };
+}
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, null),
+)(DashIntervenants);

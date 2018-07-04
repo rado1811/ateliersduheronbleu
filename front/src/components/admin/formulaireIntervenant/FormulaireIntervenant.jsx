@@ -27,7 +27,7 @@ class FormulaireIntervenant extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    fetch('/api/intervenant', {
+    fetch('/api/intervenants', {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(this.state),

@@ -4,7 +4,7 @@ import TemporaryDrawer from './components/client/navbar/TemporaryDrawer';
 import Ateliers from './components/client/pageAteliers/Ateliers';
 import AtelierHome from './containers/AtelierHome';
 import Concept from './components/client/navbar/fakeComponents/Concept';
-import Intervenants from './components/client/navbar/fakeComponents/Intervenants';
+import Intervenants from './components/client/Intervenants';
 import Contact from './components/client/Contact';
 import AdminAtelier from './components/admin/formulaire/atelier/formulaireAtelier/AdminAtelier';
 import MenuAdmin from './components/admin/menuAdmin/MenuAdmin';
@@ -26,7 +26,6 @@ const App = () => (
       <Route exact path="/admin/intervenant" component={Admin} />
       <Route exact path="/admin/gestion" component={Dashboard} />
       <Route exact path="/admin/administration" component={ContainerDashboard} />
-      
     </Switch>
   </div>
 );

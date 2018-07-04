@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import compose from 'recompose/compose';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import compose from 'recompose/compose';
-import { connect } from 'react-redux';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -21,26 +21,27 @@ import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import { fetchAteliers } from '../../../actions/ateliers';
+import EditIcon from '@material-ui/icons/Edit';
 
-
-const AdminAtelier = props => <Link to="/admin/ateliers" {...props} />;
+const AdminAtelier = (props) => <Link to="/admin/ateliers" {...props} />;
 
 const columnData = [
-  { id: 'name', numeric: false, disablePadding: true, label: "Nom de l'atelier" },
+  {
+    id: 'name',
+    numeric: false,
+    disablePadding: true,
+    label: "Nom de l'atelier",
+  },
 ];
 
 class EnhancedTableHead extends React.Component {
-  createSortHandler = property => event => {
-    this.props.onRequestSort(event, property);
-  };
-
   render() {
     return (
       <TableHead>
         <TableRow>
           <TableCell padding="checkbox">
           </TableCell>
-          {columnData.map(column => {
+          {columnData.map((column) => {
             return (
               <TableCell
                 key={column.id}
@@ -124,7 +125,7 @@ EnhancedTableToolbar.propTypes = {
 
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     width: '100%',
     marginTop: theme.spacing.unit * 3,
@@ -168,7 +169,7 @@ class DashAteliers extends React.Component {
     this.setState({ page });
   };
 
-  handleChangeRowsPerPage = event => {
+  handleChangeRowsPerPage = (event) => {
     this.setState({ rowsPerPage: event.target.value });
   };
 
@@ -182,7 +183,7 @@ class DashAteliers extends React.Component {
       }}>
         <EnhancedTableToolbar/>
         <div className={classes.tableWrapper}>
-          <Table className={classes.table} aria-labelledby="tableTitle" >
+          <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
               rowCount={this.props.ateliers.length}
             />
@@ -206,9 +207,16 @@ class DashAteliers extends React.Component {
                             onClick={() => this.deleteAteliers(atelier.id_atelier)} />
                         </IconButton>
                       </TableCell>
+                      <TableCell>
+                        <IconButton aria-label="Delete">
+                          <EditIcon 
+                            onClick />
+                        </IconButton>
+                      </TableCell>
                     </TableRow>
                   );
                 })}
+
               {emptyRows > 0 && (
                 <TableRow style={{ height: 49 * emptyRows }}>
                   <TableCell colSpan={6} />
