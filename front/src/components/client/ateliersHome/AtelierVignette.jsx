@@ -10,9 +10,13 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import compose from 'recompose/compose';
+import { selectAteliers } from '../../../actions/index';
 
 const Reserver = (props) => <Link to="/ateliers" {...props} />;
-const Atelier = (props) => <Link to="/ateliers" {...props}/>;
+const Atelier = (props) => <Link to="/ateliers" {...props} />;
 
 const styles = {
   item: {
@@ -56,18 +60,35 @@ const AtelierVignette = (props) => {
           <Typography gutterBottom variant="headline" component="h2">
             {props.name}
           </Typography>
-          <Typography component="h3"><Moment format="DD/MM/YYYY">{props.date}</Moment></Typography>
-          
+          <Typography component="h3">
+            <Moment format="DD/MM/YYYY">{props.date}</Moment>
+          </Typography>
+
           <Typography component="h3">
             Places disponibles: {props.places_disponibles} <br />
             Co-animation: {props.intervenant}, Isabelle Jono
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" style={{ backgroundColor: '#B2C4CB', color: 'white' }} onClick={props.booking} component={Reserver}>
+          <Button
+            size="small"
+            style={{ backgroundColor: '#B2C4CB', color: 'white' }}
+            onClick={() => alert(this.props.ateliers[props.indexAtelier])}
+            component={Reserver}
+          >
             Pré-réserver
           </Button>
-          <Button size="small" style={{ backgroundColor: '#B2C4CB', color: 'white' }} onClick={props.moreDetails} component={Atelier}>
+          <Button
+            // IIIIIIIIIIIICIIIIIIIIIIIIIIIIIII
+            size="small"
+            style={{ backgroundColor: '#B2C4CB', color: 'white' }}
+            onClick={() => {
+            console.log(props.ateliers[props.indexAtelier]);
+              selectAteliers(props.ateliers[props.indexAtelier]);
+            }}
+            component={Atelier}
+            // IIIIIIIIIIIICIIIIIIIIIIIIIIIIIII
+          >
             En savoir plus
           </Button>
         </CardActions>
@@ -80,6 +101,7 @@ AtelierVignette.propTypes = {
   image: PropTypes.string.isRequired,
   intervenant: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  indexAtelier: PropTypes.number.isRequired,
   date: PropTypes.string.isRequired,
   places_disponibles: PropTypes.number.isRequired,
   classes: PropTypes.shape({
@@ -91,4 +113,22 @@ AtelierVignette.propTypes = {
   // moreDetails: PropTypes.func,isRequired
 };
 
-export default withStyles(styles)(AtelierVignette);
+function mapStateToProps(state) {
+  return { ateliers: state.ateliers.ateliers };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      selectAteliers,
+    },
+    dispatch,
+  );
+}
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )
+)(AtelierVignette);
