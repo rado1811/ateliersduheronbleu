@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 import TemporaryDrawer from './components/client/navbar/TemporaryDrawer';
 import Ateliers from './components/client/pageAteliers/Ateliers';
 import AtelierHome from './containers/AtelierHome';
-import Concept from './components/client/navbar/fakeComponents/Concept';
 import Intervenants from './components/client/Intervenants';
 import Contact from './components/client/Contact';
 import AdminAtelier from './components/admin/formulaire/atelier/formulaireAtelier/AdminAtelier';
@@ -18,7 +17,6 @@ const App = () => (
     <Switch>
       <Route exact path="/" component={AtelierHome} />
       <Route path="/ateliers" component={Ateliers} />
-      <Route path="/concept" component={Concept} />
       <Route path="/intervenants" component={Intervenants} />
       <Route path="/contact" component={Contact} />
       <Route path="/admin/ateliers" component={AdminAtelier} />
