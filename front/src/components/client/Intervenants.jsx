@@ -10,17 +10,17 @@ import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import BoutonContact from '../client/BoutonContact';
 import { fetchIntervenants } from '../../actions/intervenants';
-import './intervenants.css';
 import IntervenantsModal from './IntervenantsModal';
+import './intervenants.css';
 
 class Intervenants extends Component {
 
-  componentDidMount() {
+  constructor(props) {
+    super(props)
     this.props.fetchIntervenants();
   }
 
   render() {
-    console.log(this.props.intervenants)
     return (
       <div style={{ marginTop: 50 }}>
         <BoutonContact />
@@ -76,7 +76,7 @@ class Intervenants extends Component {
                         </IconButton>
                       } 
                     />
-                    <intervenantsModal
+                    <IntervenantsModal
                       id={intervenant.id_intervenant}
                       prenom={intervenant.prenom}
                       nom={intervenant.nom}
@@ -99,6 +99,7 @@ class Intervenants extends Component {
 Intervenants.propTypes = {
   fetchIntervenants: PropTypes.func.isRequired,
   intervenants: PropTypes.arrayOf(Array).isRequired,
+  handleOpen: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
