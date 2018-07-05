@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
+import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
@@ -30,6 +31,7 @@ class FormulaireIntervenant extends Component {
         parcours: '',
         metier: '',
         citation: '',
+        photo: {},
       };
     }
   }
@@ -42,19 +44,43 @@ class FormulaireIntervenant extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    fetch('/api/intervenants', {
-      method: 'POST',
-      headers: new Headers({ 'Content-Type': 'application/json' }),
-      body: JSON.stringify(this.state),
-    })
-      .then((res) => res.json())
-      .then(
-        (res) =>
-          this.setState({ flash: 'nouvel intervenant enregistré', open: true }),
-        (err) => this.setState({ flash: 'Formulaire incomplet', open: true })
-      );
-  };
 
+    let form = {
+      ...this.state,
+    };
+
+    let data = new FormData();
+    data.append('file', this.state.photo);
+    data.append('form', JSON.stringify(form));
+
+    axios.post('/api/intervenants', data)
+    .then(res => this.setState({ flash: 'Formulaire envoyé', open: true }));
+  };
+  updatePhotoField = () => {
+    const inputFile = this.refs.photo;
+    const files = inputFile.files;
+    console.log(files);
+    if (files.length > 0) {
+      this.setState({
+        photo: files[0],
+      });
+    }
+  };
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    let form = {
+      ...this.state,
+      id_intervenant: this.state.nom_intervenant,
+    };
+
+    let data = new FormData();
+    data.append('file', this.state.photo);
+    data.append('form', JSON.stringify(form));
+
+    axios.post('/api/intervenants', data)
+    .then(res => this.setState({ flash: 'Formulaire envoyé', open: true }));
+  };
   // ========== UPDATE =========
   handleUpdate = (event) => {
     event.preventDefault();
@@ -175,6 +201,11 @@ class FormulaireIntervenant extends Component {
               value={this.state.citation}
               onChange={this.handleChange}
             />
+            <br />
+            <input type="file"
+            ref="photo"
+            name="photo"
+            onChange={this.updatePhotoField.bind(this)} />
             <br />
             <Grid style={{ textAlign: 'center' }}>
               {isFromEditIntervenant ? (

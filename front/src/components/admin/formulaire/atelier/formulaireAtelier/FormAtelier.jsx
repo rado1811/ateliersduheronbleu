@@ -27,7 +27,7 @@ class FormAtelier extends Component {
       programme: '',
       id_atelier: '',
       id_intervenant: '',
-      places_disponibles: '',
+      place_disponibles: '',
       nom_intervenant: '',
     };
   }
@@ -46,8 +46,8 @@ class FormAtelier extends Component {
           nextProps.ateliers[nextProps.indexAtelierFromEdit].nb_participants,
         nom: this.props.ateliers[nextProps.indexAtelierFromEdit].nom,
         photo: nextProps.ateliers[nextProps.indexAtelierFromEdit].photo,
-        places_disponibles:
-          nextProps.ateliers[nextProps.indexAtelierFromEdit].places_disponibles,
+        place_disponibles:
+          nextProps.ateliers[nextProps.indexAtelierFromEdit].place_disponibles,
         prix: nextProps.ateliers[nextProps.indexAtelierFromEdit].prix,
         programme: nextProps.ateliers[nextProps.indexAtelierFromEdit].programme,
       });
@@ -101,7 +101,7 @@ class FormAtelier extends Component {
   };
   updatePlacesField = (event) => {
     this.setState({
-      places_disponibles: event.target.value,
+      place_disponibles: event.target.value,
     });
   };
   updateProgrammeField = (event) => {
