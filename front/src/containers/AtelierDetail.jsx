@@ -56,7 +56,7 @@ class AtelierDetail extends Component {
               >
                 <Grid media="screen and (max-width: 440px)" className="image-container" item md={6} sm={1} key={this.props.ateliers.key}>
                   <div>
-                    <img src={this.props.ateliers.photo} alt="heron" style={{ height: '80vh', width: '80vw' }} className="images" />
+                    <img src={`/images/${this.props.ateliers.photo}`} alt="heron" style={{ height: '80vh', width: '80vw' }} className="images" />
                   </div>
                 </Grid>
                 <Grid >
