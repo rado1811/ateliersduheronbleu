@@ -64,10 +64,10 @@ const AtelierVignette = (props) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" color="primary" onClick={props.booking} component={Reserver}>
+          <Button size="small" style={{ backgroundColor: '#B2C4CB', color: 'white' }} onClick={props.booking} component={Reserver}>
             Pré-réserver
           </Button>
-          <Button size="small" color="primary" onClick={props.moreDetails} component={Atelier}>
+          <Button size="small" style={{ backgroundColor: '#B2C4CB', color: 'white' }} onClick={props.moreDetails} component={Atelier}>
             En savoir plus
           </Button>
         </CardActions>

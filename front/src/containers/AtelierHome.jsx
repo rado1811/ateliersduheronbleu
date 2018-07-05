@@ -49,6 +49,7 @@ class AtelierHome extends Component {
         <Button
           variant="fab"
           color="primary"
+          style={{ backgroundColor: '#B2C4CB' }}
           onClick={() => this.toggleAteliers()}
         >
           {iconButton}
@@ -84,12 +85,13 @@ class AtelierHome extends Component {
             muted
             autoPlay
           >
-            <source src="../images/Woman.mp4" type="video/mp4" />
+            <source src="../images/Bassin.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
         <div className="overlay">
           <p style={{ fontFamily: 'Montserrat' }}> Ateliers "Bien-être et Créativité"</p>
+          <p className="sousTitre" style={{ fontFamily: 'Montserrat' }}> La Teste De Buch</p>
         </div>
         <Link to="#ateliers">
           <i className="fas fa-angle-double-down" />

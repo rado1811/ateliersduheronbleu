@@ -27,6 +27,7 @@ const styles = {
 /*
 ======= ROUTING =========
 */
+
 const MyAccueil = props => <Link to="/" {...props} />;
 const MyAteliers = props => <Link to="/ateliers" {...props} />;
 const MyIntervenants = props => <Link to="/intervenants" {...props} />;
@@ -72,6 +73,8 @@ class TemporaryDrawer extends React.Component {
               style={{ flex: 1, fontFamily: 'Montserrat' }}
               color="inherit"
               noWrap
+              component={MyAccueil}
+              
               
             >
               Atelier du Héron Bleu
