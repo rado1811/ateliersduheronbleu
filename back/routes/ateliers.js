@@ -15,6 +15,19 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   connection.query('INSERT INTO Ateliers SET ?', req.body, (err) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.status(200).send();
+    }
+  });
+});
+
+router.put('/', (req, res) => {
+  const sql = `UPDATE Ateliers SET ? WHERE id_atelier =${
+    req.body.data.id_atelier
+  }`;
+  connection.query(sql, req.body.data, (err) => {
     if (err) res.send(err);
     else {
       res.status(200).send();
@@ -22,20 +35,13 @@ router.post('/', (req, res) => {
   });
 });
 
-router.put('/', (req, res) => {
-  const sql = `UPDATE Ateliers SET ? WHERE id_atelier =${req.body.id_atelier}`;
-  connection.query(sql, req.body, (err, result) => {
+router.delete('/', (req, res) => {
+  connection.query('DELETE FROM Ateliers WHERE id_atelier = ?', [req.body.id_atelier], (err, result) => {
     if (err) {
-      throw err;
+      res.status(500).end();
+    } else {
+      res.end('atelier supprimé');
     }
-    res.json(result);
-  });
-});
-
-router.delete('/:id', (req) => {
-  const deleted = `DELETE FROM Ateliers WHERE id=${req.params.id}`;
-  connection.query(deleted, (err) => {
-    if (err) throw err;
   });
 });
 
