@@ -21,17 +21,22 @@ import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import EditIcon from '@material-ui/icons/Edit';
-import { fetchIntervenants } from '../../../actions/intervenants';
+import {
+  fetchIntervenants,
+  goEditIntervenant,
+} from '../../../actions/intervenants';
 import Snackbar from '@material-ui/core/Snackbar';
+import { bindActionCreators } from 'redux';
 
-const Admin = props => <Link to="/admin/intervenant" {...props} />;
-
+const Admin = (props) => <Link to="/admin/intervenant" {...props} />;
 
 const columnData = [
-  { id: 'name', 
-  numeric: false, 
-  disablePadding: true, 
-  label: `Nom de l'intervenant` },
+  {
+    id: 'name',
+    numeric: false,
+    disablePadding: true,
+    label: `Nom de l'intervenant`,
+  },
 ];
 
 class EnhancedTableHead extends React.Component {
@@ -39,9 +44,8 @@ class EnhancedTableHead extends React.Component {
     return (
       <TableHead>
         <TableRow>
-          <TableCell padding="checkbox">
-          </TableCell>
-          {columnData.map(column => {
+          <TableCell padding="checkbox" />
+          {columnData.map((column) => {
             return (
               <TableCell
                 key={column.id}
@@ -53,9 +57,7 @@ class EnhancedTableHead extends React.Component {
                   placement={column.numeric ? 'bottom-end' : 'bottom-start'}
                   enterDelay={300}
                 >
-                  <TableSortLabel>
-                    {column.label}
-                  </TableSortLabel>
+                  <TableSortLabel>{column.label}</TableSortLabel>
                 </Tooltip>
               </TableCell>
             );
@@ -66,7 +68,7 @@ class EnhancedTableHead extends React.Component {
   }
 }
 
-const toolbarStyles = theme => ({
+const toolbarStyles = (theme) => ({
   root: {
     paddingRight: theme.spacing.unit,
   },
@@ -91,7 +93,7 @@ const toolbarStyles = theme => ({
   },
 });
 
-let EnhancedTableToolbar = props => {
+let EnhancedTableToolbar = (props) => {
   const { classes } = props;
 
   return (
@@ -104,14 +106,15 @@ let EnhancedTableToolbar = props => {
       <div className={classes.spacer} />
       <div className={classes.actions}>
         <Tooltip title="Ajouter">
-          <Button 
-          mini 
-          variant="fab" 
-          color="primary" 
-          aria-label="add" 
-          className={classes.button} 
-          component={Admin}>
-              <AddIcon size="small" />
+          <Button
+            mini
+            variant="fab"
+            color="primary"
+            aria-label="add"
+            className={classes.button}
+            component={Admin}
+          >
+            <AddIcon size="small" />
           </Button>
         </Tooltip>
       </div>
@@ -125,7 +128,7 @@ EnhancedTableToolbar.propTypes = {
 
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     width: '100%',
     marginTop: theme.spacing.unit * 3,
@@ -151,53 +154,56 @@ class DashIntervenants extends React.Component {
     this.props.fetchIntervenants();
   }
 
-  deleteIntervenants = id_intervenant => {
+  deleteIntervenants = (id_intervenant) => {
     fetch('/api/intervenants', {
       method: 'DELETE',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({id_intervenant}),
+      body: JSON.stringify({ id_intervenant }),
     })
-      .then(res => res)
-      .then(
-        res => this.setState({ flash: 'intervenant supprimé', open: true }),
+      .then((res) => res)
+      .then((res) =>
+        this.setState({ flash: 'intervenant supprimé', open: true })
       )
-      .catch(err => err);
+      .catch((err) => err);
   };
 
   handleChangePage = (event, page) => {
     this.setState({ page });
   };
 
-  handleChangeRowsPerPage = event => {
+  handleChangeRowsPerPage = (event) => {
     this.setState({ rowsPerPage: event.target.value });
   };
 
   render() {
-    const { classes } = this.props;
     const { rowsPerPage, page } = this.state;
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.props.intervenants.length - page * rowsPerPage);
+    const { classes, goEditIntervenant } = this.props;
+    const emptyRows =
+      rowsPerPage -
+      Math.min(
+        rowsPerPage,
+        this.props.intervenants.length - page * rowsPerPage
+      );
     return (
-      <Paper className={classes.root} style={{
-        marginTop: 70,
-      }}>
+      <Paper
+        className={classes.root}
+        style={{
+          marginTop: 70,
+        }}
+      >
         <EnhancedTableToolbar />
         <div className={classes.tableWrapper}>
-          <Table className={classes.table} aria-labelledby="tableTitle" >
-            <EnhancedTableHead
-              rowCount={this.props.intervenants.length}
-            />
+          <Table className={classes.table} aria-labelledby="tableTitle">
+            <EnhancedTableHead rowCount={this.props.intervenants.length} />
             <TableBody>
               {this.props.intervenants
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(intervenant => {
+                .map((intervenant, i) => {
                   return (
-                    <TableRow
-                      hover
-                      key={intervenant.id_intervenant}
-                    >
+                    <TableRow hover key={intervenant.id_intervenant}>
                       <TableCell />
                       <TableCell component="th" scope="row" padding="none">
                         {intervenant.nom}
@@ -207,13 +213,22 @@ class DashIntervenants extends React.Component {
                       </TableCell>
                       <TableCell>
                         <IconButton aria-label="Delete">
-                          <DeleteIcon 
-                            onClick={() => this.deleteIntervenants(intervenant.id_intervenant)} />
+                          <DeleteIcon
+                            onClick={() =>
+                              this.deleteIntervenants(
+                                intervenant.id_intervenant
+                              )
+                            }
+                          />
                         </IconButton>
                       </TableCell>
                       <TableCell>
                         <Tooltip title="Modifier">
-                          <IconButton aria-label="Edit">
+                          <IconButton
+                            aria-label="Edit"
+                            component={Admin}
+                            onClick={() => goEditIntervenant(i)}
+                          >
                             <EditIcon />
                           </IconButton>
                         </Tooltip>
@@ -257,8 +272,17 @@ class DashIntervenants extends React.Component {
 DashIntervenants.propTypes = {
   classes: PropTypes.object.isRequired,
   fetchIntervenants: PropTypes.func.isRequired,
-
 };
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      goEditIntervenant,
+      fetchIntervenants,
+    },
+    dispatch
+  );
+}
 
 function mapStateToProps(state) {
   return { intervenants: state.intervenants.intervenants };
@@ -266,5 +290,8 @@ function mapStateToProps(state) {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { fetchIntervenants }),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(DashIntervenants);

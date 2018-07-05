@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  connection.query('INSERT INTO Ateliers SET ?', req.body, (err, result) => {
+  connection.query('INSERT INTO Ateliers SET ?', req.body, (err) => {
     if (err) {
       res.send(err);
     } else {
@@ -24,12 +24,14 @@ router.post('/', (req, res) => {
 });
 
 router.put('/', (req, res) => {
-  const sql = `UPDATE Ateliers SET ? WHERE id_atelier =${req.body.id_atelier}`;
-  connection.query(sql, req.body, (err, result) => {
-    if (err) {
-      throw err;
+  const sql = `UPDATE Ateliers SET ? WHERE id_atelier =${
+    req.body.data.id_atelier
+  }`;
+  connection.query(sql, req.body.data, (err) => {
+    if (err) res.send(err);
+    else {
+      res.status(200).send();
     }
-    res.json(result);
   });
 });
 
