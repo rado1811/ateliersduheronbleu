@@ -8,28 +8,16 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
-import Modal from '@material-ui/core/Modal';
-import Avatar from '@material-ui/core/Avatar';
 import BoutonContact from '../client/BoutonContact';
 import { fetchIntervenants } from '../../actions/intervenants';
 import './intervenants.css';
+import IntervenantsModal from './IntervenantsModal';
 
 class Intervenants extends Component {
-  state = {
-    open: false,
-  };
-  
+
   componentDidMount() {
     this.props.fetchIntervenants();
   }
-
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
 
   render() {
     console.log(this.props.intervenants)
@@ -38,44 +26,34 @@ class Intervenants extends Component {
         <BoutonContact />
         <Grid container spacing={24}>
           <Grid item xs={12} md={4} className="rootIsabelle">
-          <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+            <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
               <ListSubheader component="div" style={{ textAlign: 'center'}}>La fondatrice</ListSubheader>
             </GridListTile>
-            {this.props.intervenants.slice(0,1).map(intervenant => (
-              <GridListTile key={intervenant.id_intervenant}>
-                <img src={intervenant.photo} alt={intervenant.nom} />
-                <GridListTileBar
-                  title={intervenant.prenom + ' ' + intervenant.nom}
-                  subtitle={<span>{intervenant.metier}</span>}
-                  actionIcon={
-                    <IconButton
-                      style={{color: 'white'}}
-                      onClick={this.handleOpen} 
-                      >
-                      <InfoIcon />
-                    </IconButton>
-                  } 
-                />
-                <Modal 
-                  aria-labelledby="simple-modal-title"
-                  aria-describedby="simple-modal-description"
-                  open={this.state.open}
-                  onClose={this.handleClose}
-                >
-                  <div className="modalIntervenants">
-                        <Avatar
-                          alt="DessinEnvol"
-                          src="../images/envol.jpg"
-                          className="bigAvatar"
-                          label="HELLO"
-                        />
-                        <h1>{intervenant.citation}</h1>
-                        <br />
-                        {intervenant.parcours}
-                      </div>
-                </ Modal>
-              </GridListTile>
-            ))}
+            <GridListTile>
+              <img src={this.props.intervenants[0].photo} alt={this.props.intervenants[0].nom} />
+              <GridListTileBar
+                title={this.props.intervenants[0].prenom + ' ' + this.props.intervenants[0].nom}
+                subtitle={<span>{this.props.intervenants[0].metier}</span>}
+                actionIcon={
+                  <IconButton
+                    style={{ color: 'white' }}
+                    onClick={this.props.handleOpen} 
+                  >
+                    <InfoIcon />
+                  </IconButton>
+                } 
+              />
+              <IntervenantsModal
+                id={this.props.intervenants[0].id_intervenant}
+                prenom={this.props.intervenants[0].prenom}
+                nom={this.props.intervenants[0].nom}
+                photo={this.props.intervenants[0].photo}
+                metier={this.props.intervenants[0].metier}
+                citation={this.props.intervenants[0].metier}
+                parcours={this.props.intervenants[0].parcours}
+              />
+            </GridListTile>
+            
           </Grid>
           <Grid item xs>
             <div className="rootIntervenants">
@@ -91,31 +69,22 @@ class Intervenants extends Component {
                       subtitle={<span>{intervenant.metier}</span>}
                       actionIcon={
                         <IconButton
-                        style={{color: 'white'}}
-                        onClick={this.handleOpen} 
-                          >
+                          style={{color: 'white'}}
+                          onClick={this.props.handleOpen}
+                        >
                           <InfoIcon />
                         </IconButton>
                       } 
                     />
-                    <Modal 
-                      aria-labelledby="simple-modal-title"
-                      aria-describedby="simple-modal-description"
-                      open={this.state.open}
-                      onClose={this.handleClose}
-                    >
-                      <div className="modalIntervenants">
-                        <Avatar
-                          alt="DessinEnvol"
-                          src="../images/envol.jpg"
-                          className="bigAvatar"
-                          label="HELLO"
-                        />
-                        <h1>{intervenant.citation}</h1>
-                        <br />
-                        {intervenant.parcours}
-                      </div>
-                    </ Modal>
+                    <intervenantsModal
+                      id={intervenant.id_intervenant}
+                      prenom={intervenant.prenom}
+                      nom={intervenant.nom}
+                      photo={intervenant.photo}
+                      metier={intervenant.metier}
+                      citation={intervenant.metier}
+                      parcours={intervenant.parcours}
+                    />
                   </GridListTile>
                 ))}
               </GridList>

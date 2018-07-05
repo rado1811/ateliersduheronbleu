@@ -28,7 +28,7 @@ class AtelierHome extends Component {
     };
   }
 
-  componentDidMount() { 
+  componentDidMount() {
     this.props.fetchAteliers();
   }
 
