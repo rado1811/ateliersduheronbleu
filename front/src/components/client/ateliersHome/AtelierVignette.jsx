@@ -73,21 +73,17 @@ const AtelierVignette = (props) => {
           <Button
             size="small"
             style={{ backgroundColor: '#B2C4CB', color: 'white' }}
-            onClick={() => alert(this.props.ateliers[props.indexAtelier])}
             component={Reserver}
           >
             Pré-réserver
           </Button>
           <Button
-            // IIIIIIIIIIIICIIIIIIIIIIIIIIIIIII
             size="small"
             style={{ backgroundColor: '#B2C4CB', color: 'white' }}
             onClick={() => {
-            console.log(props.ateliers[props.indexAtelier]);
               props.selectAteliers(props.ateliers[props.indexAtelier]);
             }}
             component={Atelier}
-            // IIIIIIIIIIIICIIIIIIIIIIIIIIIIIII
           >
             En savoir plus
           </Button>
