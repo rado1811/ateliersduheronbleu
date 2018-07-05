@@ -20,6 +20,10 @@ class Intervenants extends Component {
     this.props.fetchIntervenants();
   }
 
+  openToggle() {
+    this.refs.child.handleOpen();
+  }
+
   render() {
     return (
       <div style={{ marginTop: 50 }}>
@@ -37,7 +41,7 @@ class Intervenants extends Component {
                 actionIcon={
                   <IconButton
                     style={{ color: 'white' }}
-                    onClick={this.props.handleOpen} 
+                    onClick={this.openToggle} 
                   >
                     <InfoIcon />
                   </IconButton>
@@ -51,6 +55,7 @@ class Intervenants extends Component {
                 metier={this.props.intervenants[0].metier}
                 citation={this.props.intervenants[0].metier}
                 parcours={this.props.intervenants[0].parcours}
+                handleOpen={this.handleOpen}
               />
             </GridListTile>
             
@@ -70,7 +75,7 @@ class Intervenants extends Component {
                       actionIcon={
                         <IconButton
                           style={{color: 'white'}}
-                          onClick={this.props.handleOpen}
+                          onClick={this.openToggle}
                         >
                           <InfoIcon />
                         </IconButton>
