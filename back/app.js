@@ -17,7 +17,7 @@ const debug = Debug('back:app');
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(cookieParser());
 
@@ -27,28 +27,30 @@ app.use('/api/ateliers', ateliers);
 app.use('/api/intervenants', intervenant);
 app.use('/api', prereservationRouter);
 app.use('/mail', nodemailer);
-// catch 404 and forward to error handler
-app.use(next => {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
 
-// error handler
+
 /* eslint no-unused-vars: 0 */
 app.use((err, req, res) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-  // render the error page
-  res.status(err.status || 500);
-  res.json(err);
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req
+        .app
+        .get('env') === 'development'
+        ? err
+        : {};
+    // render the error page
+    res.status(err.status || 500);
+    res.json(err);
 });
-
+app.use((next) => {
+  const err = new Error('Not Found');
+  err.sendStatus(400);
+  next(err);
+});
 // Handle uncaughtException
-process.on('uncaughtException', err => {
-  debug('Caught exception: %j', err);
-  process.exit(1);
+process.on('uncaughtException', (err) => {
+    debug('Caught exception: %j', err);
+    process.exit(1);
 });
 
 export default app;
