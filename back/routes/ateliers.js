@@ -26,6 +26,7 @@ router.get('/', (req, res) => {
   });
 });
 
+<<<<<<< HEAD
 router.post('/', upload.single('file'), (req, res) => {
   const form = JSON.parse(req.body.form);
   const body = {
@@ -39,15 +40,44 @@ router.post('/', upload.single('file'), (req, res) => {
       res.send(errSql);
     } else {
       res.sendStatus(200);
+=======
+router.post('/', (req, res) => {
+  connection.query('INSERT INTO Ateliers SET ?', req.body, (err) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.status(200).send();
     }
   });
 });
 
+router.put('/', (req, res) => {
+  const sql = `UPDATE Ateliers SET ? WHERE id_atelier =${
+    req.body.data.id_atelier
+  }`;
+  connection.query(sql, req.body.data, (err) => {
+    if (err) res.send(err);
+    else {
+      res.status(200).send();
+>>>>>>> dev
+    }
+  });
+});
+
+<<<<<<< HEAD
 router.delete('/:id', (req, res) => {
   const deleted = `DELETE FROM Ateliers WHERE id=${req.params.id}`;
   connection.query(deleted, (err, rows) => {
     if (err) {
       throw err;
+=======
+router.delete('/', (req, res) => {
+  connection.query('DELETE FROM Ateliers WHERE id_atelier = ?', [req.body.id_atelier], (err, result) => {
+    if (err) {
+      res.status(500).end();
+    } else {
+      res.end('atelier supprimé');
+>>>>>>> dev
     }
   });
 });

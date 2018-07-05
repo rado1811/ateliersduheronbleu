@@ -5,6 +5,7 @@ import connection from '../config/db';
 
 const router = express.Router();
 
+<<<<<<< HEAD
 const storage = multer.diskStorage({
   destination(req, file, cb) {
     cb(null, '../front/public/images/');
@@ -17,6 +18,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.get('/', (req, res, next) => {
+=======
+router.get('/', (req, res) => {
+>>>>>>> dev
   connection.query('SELECT * FROM Intervenants', (err, data) => {
     if (err) {
       res.send(err);
@@ -43,13 +47,33 @@ router.post('/', upload.single('file'), (req, res) => {
   });
 });
 
-router.delete('/:id', (req, res) => {
-  const deletedIntervenant = `DELETE FROM Intervenants WHERE id=${
-    req.params.id
+router.put('/', (req, res) => {
+  const sql = `UPDATE Intervenants SET ? WHERE id_intervenant =${
+    req.body.data.id_intervenant
   }`;
-  connection.query(deletedIntervenant, function(err, rows) {
-    if (err) throw err;
+  console.log('Iciii d_intervenant', req.body.data.id_intervenant);
+  console.log('Iciii req.body.data', req.body.data);
+
+  connection.query(sql, req.body.data, (err) => {
+    if (err) res.send(err);
+    else {
+      res.status(200).send();
+    }
   });
+});
+
+router.delete('/', (req, res) => {
+  connection.query(
+    'DELETE FROM Intervenants WHERE id_intervenant = ?',
+    [req.body.id_intervenant],
+    (err, result) => {
+      if (err) {
+        res.status(500).end();
+      } else {
+        res.end('intervenant supprimé');
+      }
+    }
+  );
 });
 
 export default router;

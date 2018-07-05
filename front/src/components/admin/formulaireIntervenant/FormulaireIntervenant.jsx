@@ -1,50 +1,103 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { connect } from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
+import { bindActionCreators } from 'redux';
 import ButtonFormulaireIntervenant from './ButtonFormulaireIntervenant';
-
+import { goEditIntervenant } from '../../../actions/intervenants';
 class FormulaireIntervenant extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      nom: '',
-      prenom: '',
-      tel: '',
-      email: '',
-      parcours: '',
-      metier: '',
-      citation: '',
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    if (this.props.isFromEditIntervenant) {
+   this.state = {
+        nom: this.props.intervenants[this.props.indexIntervenantFromEdit].nom,
+        prenom:this.props.intervenants[this.props.indexIntervenantFromEdit].prenom,
+        tel: this.props.intervenants[this.props.indexIntervenantFromEdit].tel,
+        email: this.props.intervenants[this.props.indexIntervenantFromEdit].email,
+        parcours: this.props.intervenants[this.props.indexIntervenantFromEdit].parcours,
+        metier: this.props.intervenants[this.props.indexIntervenantFromEdit].metier,
+        citation: this.props.intervenants[this.props.indexIntervenantFromEdit].citation,
+        id_intervenant: this.props.intervenants[this.props.indexIntervenantFromEdit].id_intervenant,
+      };  
+    } else {
+      this.state = {
+        nom: '',
+        prenom: '',
+        tel: '',
+        email: '',
+        parcours: '',
+        metier: '',
+        citation: '',
+      };
+    }
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     const change = {};
     change[e.target.name] = e.target.value;
     this.setState(change);
-  }
-  handleSubmit(e) {
+  };
+
+  handleSubmit = (e) => {
     e.preventDefault();
     fetch('/api/intervenants', {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(this.state),
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(
-        res => this.setState({ flash: 'Formulaire envoyé', open: true }),
-        err => this.setState({ flash: 'Formulaire incomplet', open: true })
+        (res) =>
+          this.setState({ flash: 'nouvel intervenant enregistré', open: true }),
+        (err) => this.setState({ flash: 'Formulaire incomplet', open: true })
       );
-  }
+  };
+
+  // ========== UPDATE =========
+  handleUpdate = (event) => {
+    event.preventDefault();
+    let data = {
+      ...this.state,
+    };
+    fetch('/api/intervenants', {
+      method: 'PUT',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify({ data }),
+    })
+      .then((res) => res.json())
+      .then(
+        (res) => this.setState({ flash: 'Formulaire modifié', open: true }),
+        (err) => this.setState({ flash: 'Formulaire modifié', open: true })
+      )
+      .then(
+        this.setState({
+          nom: '',
+          prenom: '',
+          tel: '',
+          email: '',
+          parcours: '',
+          metier: '',
+          citation: '',
+        })
+      );
+  };
 
   render() {
+    const { isFromEditIntervenant } = this.props;
     return (
       <Grid>
         <div>
           <h1 className="text-center">Ajouter un intervenant</h1>
-          <form onSubmit={this.handleSubmit}>
+          <form
+            onSubmit={
+              isFromEditIntervenant ? this.handleUpdate : this.handleSubmit
+            }
+          >
             <Grid container spacing={24}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -124,7 +177,18 @@ class FormulaireIntervenant extends Component {
             />
             <br />
             <Grid style={{ textAlign: 'center' }}>
-              <ButtonFormulaireIntervenant />
+              {isFromEditIntervenant ? (
+                <Button
+                  type="submit"
+                  value="Submit"
+                  variant="raised"
+                  color="primary"
+                >
+                  Modifier
+                </Button>
+              ) : (
+                <ButtonFormulaireIntervenant />
+              )}
             </Grid>
           </form>
         </div>
@@ -139,4 +203,24 @@ class FormulaireIntervenant extends Component {
   }
 }
 
-export default FormulaireIntervenant;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      goEditIntervenant,
+    },
+    dispatch
+  );
+}
+
+function mapStateToProps(state) {
+  return {
+    intervenants: state.intervenants.intervenants,
+    indexIntervenantFromEdit: state.editIntervenant.indexIntervenantFromEdit,
+    isFromEditIntervenant: state.editIntervenant.isFromEditIntervenant,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FormulaireIntervenant);
