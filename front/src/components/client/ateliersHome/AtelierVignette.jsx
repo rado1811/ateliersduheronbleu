@@ -84,7 +84,7 @@ const AtelierVignette = (props) => {
             style={{ backgroundColor: '#B2C4CB', color: 'white' }}
             onClick={() => {
             console.log(props.ateliers[props.indexAtelier]);
-              selectAteliers(props.ateliers[props.indexAtelier]);
+              props.selectAteliers(props.ateliers[props.indexAtelier]);
             }}
             component={Atelier}
             // IIIIIIIIIIIICIIIIIIIIIIIIIIIIIII
