@@ -25,9 +25,12 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
   const sql = `UPDATE Intervenants SET ? WHERE id_intervenant =${
-    req.body.id_intervenant
+    req.body.data.id_intervenant
   }`;
-  connection.query(sql, req.body, (err) => {
+  console.log('Iciii d_intervenant', req.body.data.id_intervenant);
+  console.log('Iciii req.body.data', req.body.data);
+
+  connection.query(sql, req.body.data, (err) => {
     if (err) res.send(err);
     else {
       res.status(200).send();

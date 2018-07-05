@@ -10,44 +10,29 @@ import { goEditIntervenant } from '../../../actions/intervenants';
 class FormulaireIntervenant extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      nom: '',
-      prenom: '',
-      tel: '',
-      email: '',
-      parcours: '',
-      metier: '',
-      citation: '',
-    };
-  }
-  componentWillReceiveProps(nextProps) {
-    alert('intervenant', nextProps);
-    if (nextProps.isFromEditIntervenant) {
-      this.setState({
-        prenom:
-          nextProps.intervenants[nextProps.indexIntervenantsFromEdit].prenom,
-        tel: nextProps.intervenants[nextProps.indexIntervenantsFromEdit].tel,
-        parcours:
-          nextProps.intervenants[nextProps.indexIntervenantsFromEdit].parcours,
-        email:
-          nextProps.intervenants[nextProps.indexIntervenantsFromEdit].email,
-        lieu: nextProps.intervenants[nextProps.indexIntervenantsFromEdit].lieu,
-        nb_participants:
-          nextProps.intervenants[nextProps.indexIntervenantsFromEdit]
-            .nb_participants,
-        metier:
-          nextProps.intervenants[nextProps.indexIntervenantsFromEdit].metier,
-        citation:
-          nextProps.intervenants[nextProps.indexIntervenantsFromEdit].citation,
-      });
+    if (this.props.isFromEditIntervenant) {
+   this.state = {
+        nom: this.props.intervenants[this.props.indexIntervenantFromEdit].nom,
+        prenom:this.props.intervenants[this.props.indexIntervenantFromEdit].prenom,
+        tel: this.props.intervenants[this.props.indexIntervenantFromEdit].tel,
+        email: this.props.intervenants[this.props.indexIntervenantFromEdit].email,
+        parcours: this.props.intervenants[this.props.indexIntervenantFromEdit].parcours,
+        metier: this.props.intervenants[this.props.indexIntervenantFromEdit].metier,
+        citation: this.props.intervenants[this.props.indexIntervenantFromEdit].citation,
+        id_intervenant: this.props.intervenants[this.props.indexIntervenantFromEdit].id_intervenant,
+      };  
+    } else {
+      this.state = {
+        nom: '',
+        prenom: '',
+        tel: '',
+        email: '',
+        parcours: '',
+        metier: '',
+        citation: '',
+      };
     }
   }
-
-  /*   updateNomField = (event) => {
-    this.setState({
-      prenom: event.target.value,
-    });
-  }; */
 
   handleChange = (e) => {
     const change = {};
@@ -104,7 +89,6 @@ class FormulaireIntervenant extends Component {
 
   render() {
     const { isFromEditIntervenant } = this.props;
-    console.log(isFromEditIntervenant);
     return (
       <Grid>
         <div>

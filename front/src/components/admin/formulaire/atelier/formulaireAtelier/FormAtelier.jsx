@@ -31,8 +31,6 @@ class FormAtelier extends Component {
     };
   }
   componentWillReceiveProps(nextProps) {
-    alert("Atelier", nextProps)
-
     if (nextProps.isFromEdit) {
       this.setState({
         contenu: nextProps.ateliers[nextProps.indexAtelierFromEdit].contenu,
