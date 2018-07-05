@@ -31,11 +31,7 @@ app.use('/api/participant', participants);
 app.use('/api', prereservationRouter);
 app.use('/mail', nodemailer);
 // catch 404 and forward to error handler
-app.use(next => {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+
 
 // error handler
 /* eslint no-unused-vars: 0 */
@@ -47,7 +43,11 @@ app.use((err, req, res) => {
   res.status(err.status || 500);
   res.json(err);
 });
-
+app.use(next => {
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
 // Handle uncaughtException
 process.on('uncaughtException', err => {
   debug('Caught exception: %j', err);

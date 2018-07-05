@@ -39,6 +39,7 @@ class DashboardParticipants extends Component {
                     {participants.nom}
                   </TableCell>
                   <TableCell numeric>{participants.prenom}</TableCell>
+                  <TableCell numeric>{participants.id_atelier}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

@@ -14,16 +14,16 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const select = `INSERT INTO Participants (email, tel, prenom, nom) VALUES 
-    ('${req.body.email}', '${req.body.tel}', '${req.body.prenom}', '${req.body.nom}');`;
-    connection.query(select, (err) => {
-      if (err) {
-        res.endStatus(500);
-      } else {
-        res.status(200);
-        res.end();
-      }
-    });
+  const select = `INSERT INTO Participants (email, tel, prenom, nom, id_atelier) VALUES 
+    ('${req.body.email}', '${req.body.tel}', '${req.body.prenom}', '${req.body.nom}', '${req.body.id_atelier}');`;
+  connection.query(select, err => {
+    if (err) {
+      res.endStatus(500);
+    } else {
+      res.status(200);
+      res.end();
+    }
   });
+});
 
 export default router;
