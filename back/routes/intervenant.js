@@ -5,7 +5,6 @@ import connection from '../config/db';
 
 const router = express.Router();
 
-<<<<<<< HEAD
 const storage = multer.diskStorage({
   destination(req, file, cb) {
     cb(null, '../front/public/images/');
@@ -18,9 +17,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.get('/', (req, res, next) => {
-=======
-router.get('/', (req, res) => {
->>>>>>> dev
   connection.query('SELECT * FROM Intervenants', (err, data) => {
     if (err) {
       res.send(err);

@@ -89,7 +89,6 @@ class FormAtelier extends Component {
       lieu: event.target.value,
     });
   };
-<<<<<<< HEAD
   updatePhotoField = () => {
     const inputFile = this.refs.photo;
     const files = inputFile.files;
@@ -99,12 +98,6 @@ class FormAtelier extends Component {
         photo: files[0],
       });
     }
-=======
-  updatePhotoField = (event) => {
-    this.setState({
-      photo: event.target.value,
-    });
->>>>>>> dev
   };
   updatePlacesField = (event) => {
     this.setState({
@@ -137,27 +130,12 @@ class FormAtelier extends Component {
       id_intervenant: this.state.nom_intervenant,
     };
 
-<<<<<<< HEAD
     let data = new FormData();
     data.append('file', this.state.photo);
     data.append('form', JSON.stringify(form));
 
     axios.post('/api/ateliers', data)
     .then(res => this.setState({ flash: 'Formulaire envoyé', open: true }));
-=======
-    fetch('/api/ateliers', {
-      method: 'POST',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then(
-        (res) => this.setState({ flash: 'Formulaire envoyé', open: true }),
-        (err) => this.setState({ flash: 'Formulaire envoyé', open: true })
-      );
->>>>>>> dev
   };
   // ========== UPDATE =========
   handleUpdate = (event) => {
@@ -274,19 +252,10 @@ class FormAtelier extends Component {
               onChange={this.updateFormuleField}
             />
             <br />
-<<<<<<< HEAD
             <input type="file"
             ref="photo"
             name="photo"
             onChange={this.updatePhotoField.bind(this)} />
-=======
-            <TextField
-              name="photo"
-              label="Photo"
-              value={this.state.photo}
-              onChange={this.updatePhotoField}
-            />
->>>>>>> dev
             <br />
             <br />
             <TextField
