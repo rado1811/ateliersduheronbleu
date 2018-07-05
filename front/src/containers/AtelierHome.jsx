@@ -37,7 +37,7 @@ class AtelierHome extends Component {
       ? this.props.ateliers
       : this.props.ateliers.slice(0, 3);
     const iconButton = this.state.toggleAteliers ? <RemoveIcon /> : <AddIcon />;
-    return (
+    return (    
       <Grid id="ateliers" container spacing={16} justify="center">
         {ateliers.map((atelier, i) => (
           <AtelierVignette

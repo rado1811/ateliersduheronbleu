@@ -32,7 +32,6 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
           <Paper key={atelier.id_atelier} elevation={8}>
             <Button
               onClick={() => {
-                console.log(atelier);
                 selectAteliers(atelier);
               }}
             >
@@ -67,7 +66,7 @@ function mapDispatchToProps(dispatch) {
     {
       selectAteliers,
     },
-    dispatch
+    dispatch,
   );
 }
 
@@ -78,5 +77,5 @@ AteliersList.propTypes = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(AteliersList);
