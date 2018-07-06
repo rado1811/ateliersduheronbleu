@@ -78,7 +78,7 @@ class AtelierDetail extends Component {
                   >
                     <div>
                       <img
-                        src={this.props.ateliers.photo}
+                        src={`/images/${this.props.ateliers.photo}`}
                         alt="heron"
                         style={{ height: '80vh', width: '80vw' }}
                         className="images"

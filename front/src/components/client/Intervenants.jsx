@@ -68,7 +68,7 @@ class Intervenants extends Component {
                 </GridListTile>
                 {this.props.intervenants.slice(1).map(intervenant => (
                   <GridListTile key={intervenant.id_intervenant}>
-                    <img src={intervenant.photo} alt={intervenant.nom} />
+                    <img src={`/images/${intervenant.photo}`} alt={intervenant.nom} />
                     <GridListTileBar
                       title={intervenant.prenom + ' ' + intervenant.nom}
                       subtitle={<span>{intervenant.metier}</span>}
