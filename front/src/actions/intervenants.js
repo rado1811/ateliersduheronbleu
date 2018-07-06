@@ -2,6 +2,7 @@
 export const FETCH_INTERVENANTS_BEGIN = 'FETCH_INTERVENANTS_BEGIN';
 export const FETCH_INTERVENANTS_SUCCESS = 'FETCH_INTERVENANTS_SUCCESS';
 export const FETCH_INTERVENANTS_FAILURE = 'FETCH_INTERVENANTS_FAILURE';
+export const EDIT_INTERVENANT = 'EDIT_INTERVENANT';
 
 export const fetchIntervenantsBegin = () => ({
   type: FETCH_INTERVENANTS_BEGIN,
@@ -33,3 +34,7 @@ export function fetchIntervenants() {
   };
 }
 
+export const goEditIntervenant = indexIntervenantFromEdit => ({
+  type: EDIT_INTERVENANT,
+  payload: { indexIntervenantFromEdit },
+});

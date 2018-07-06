@@ -1,4 +1,8 @@
-import { FETCH_ATELIERS_BEGIN, FETCH_ATELIERS_SUCCESS, FETCH_ATELIERS_FAILURE } from '../actions/ateliers';
+import {
+  FETCH_ATELIERS_BEGIN,
+  FETCH_ATELIERS_SUCCESS,
+  FETCH_ATELIERS_FAILURE,
+} from '../actions/ateliers';
 
 const initialState = {
   ateliers: [],

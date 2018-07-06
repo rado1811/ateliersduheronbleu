@@ -65,3 +65,4 @@ export default connect(
   mapStateToProps,
   { fetchParticipants }
 )(DashboardParticipants);
+
