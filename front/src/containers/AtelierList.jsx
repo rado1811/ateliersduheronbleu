@@ -37,7 +37,7 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
             >
               <div className="image-container">
                 <img
-                  src={atelier.photo}
+                  src={`/images/${atelier.photo}`}
                   alt="heron"
                   style={{ height: '10vh', width: '6vw' }}
                 />

@@ -44,7 +44,7 @@ class AtelierHome extends Component {
             key={atelier.id_atelier}
             name={atelier.nom}
             date={atelier.debut}
-            image={atelier.photo}
+            image={`/images/${atelier.photo}`}
             intervenant={atelier.id_intervenant}
             places_disponibles={atelier.place_disponibles}
             indexAtelier={i}
