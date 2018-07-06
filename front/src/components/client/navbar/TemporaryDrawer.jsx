@@ -32,7 +32,6 @@ const MyAccueil = props => <Link to="/" {...props} />;
 const MyAteliers = props => <Link to="/ateliers" {...props} />;
 const MyIntervenants = props => <Link to="/intervenants" {...props} />;
 const MyContact = props => <Link to="/contact" {...props} />;
-const MyConcept = props => <Link to="/concept" {...props} />;
 /*
 ======= ROUTING ========
 */
@@ -125,19 +124,11 @@ class TemporaryDrawer extends React.Component {
               Intervenants
               <ListItemText />
             </ListItem>
-            <ListItem button component={MyConcept}>
-              Concept
-              <ListItemText />
-            </ListItem>
             <ListItem button component={MyContact}>
               Contact
               <ListItemText />
             </ListItem>
           </List>
-          <Divider />
-          <Button color="inherit" component={MyAccueil}>
-            Connexion
-          </Button>
         </Drawer>
       </div>
     );

@@ -1,0 +1,17 @@
+.rootIntervenants {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  overflow: hidden;
+  background-color: #F2F2F2;
+};
+.gridListIntervenants {
+  width: 500;
+  height: 450;
+};
+
+.rootIsabelle {
+  background-color: #F2F2F2;
+  position: sticky;
+  top: 10px;
+}
