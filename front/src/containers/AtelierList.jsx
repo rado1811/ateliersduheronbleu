@@ -10,25 +10,41 @@ import { selectAteliers } from '../actions/index';
 import './AteliersDetails.css';
 
 const AteliersList = ({ ateliers, selectAteliers }) => (
-  <div style={{
-                display: 'inline-flex',
-                paddingTop: 0,
-              }}
+  <div
+    style={{
+      display: 'inline-flex',
+      paddingTop: 0,
+    }}
   >
     <BoutonContact />
     <div
       style={{
-          width: '100%',
-          height: '100vh',
-        }}
+        width: '100%',
+        height: '100vh',
+      }}
     >
-      <ul className="AteliersList" style={{ padding: 2, maxHeight: '100vh', overflow: 'auto' }}>
+      <ul
+        className="AteliersList"
+        style={{ padding: 2, maxHeight: '100vh', overflow: 'auto' }}
+      >
         <p>Liste des Ateliers</p>
         {ateliers.map(atelier => (
-          <Paper key={atelier.id_atelier} elevation={8} >
-            <Button onClick={() => selectAteliers(atelier)}>
+          <Paper key={atelier.id_atelier} elevation={8}>
+            <Button
+              onClick={() => {
+                selectAteliers(atelier);
+              }}
+            >
               <div className="image-container">
+<<<<<<< HEAD
                 <img src={`/images/${atelier.photo}`} alt="heron" style={{ height: '10vh', width: '6vw' }} />
+=======
+                <img
+                  src={atelier.photo}
+                  alt="heron"
+                  style={{ height: '10vh', width: '6vw' }}
+                />
+>>>>>>> dev
               </div>
               <div style={{ fontFamily: 'Montserrat' }}>
                 <li>
@@ -50,9 +66,12 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    selectAteliers,
-  }, dispatch);
+  return bindActionCreators(
+    {
+      selectAteliers,
+    },
+    dispatch,
+  );
 }
 
 AteliersList.propTypes = {
@@ -60,4 +79,7 @@ AteliersList.propTypes = {
   selectAteliers: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AteliersList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AteliersList);

@@ -44,7 +44,7 @@ app.use((err, req, res) => {
 });
 app.use((next) => {
   const err = new Error('Not Found');
-  err.sendStatus(400);
+  err.sendStatus(404);
   next(err);
 });
 // Handle uncaughtException
