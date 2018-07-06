@@ -14,7 +14,7 @@ import BoutonContact from '../components/client/BoutonContact';
 import Footer from '../components/client/footer/Footer';
 import './AtelierHome.css';
 
-const styles = theme => ({
+const styles = (theme) => ({
   button: {
     margin: theme.spacing.unit,
   },
@@ -28,24 +28,26 @@ class AtelierHome extends Component {
     };
   }
 
-  componentDidMount() { 
+  componentDidMount() {
     this.props.fetchAteliers();
   }
 
   getUpcomingAteliers() {
-    const ateliers = (this.state.toggleAteliers)
-      ? this.props.ateliers : this.props.ateliers.slice(0, 3);
-    const iconButton = (this.state.toggleAteliers) ? <RemoveIcon /> : <AddIcon />;
+    const ateliers = this.state.toggleAteliers
+      ? this.props.ateliers
+      : this.props.ateliers.slice(0, 3);
+    const iconButton = this.state.toggleAteliers ? <RemoveIcon /> : <AddIcon />;
     return (
       <Grid id="ateliers" container spacing={16} justify="center">
-        {ateliers.map(atelier => (<AtelierVignette
-          key={atelier.id_atelier}
-          name={atelier.nom}
-          date={atelier.debut}
-          image={atelier.photo}
-          intervenant={atelier.id_intervenant}
-          places_disponibles={atelier.place_disponibles}
-        />))}
+        {ateliers.map((atelier) => (
+          <AtelierVignette
+            key={atelier.id_atelier}
+            name={atelier.nom}
+            date={atelier.debut}
+            image={`/images/${atelier.photo}`}
+            places_disponibles={atelier.place_disponibles}
+          />
+        ))}
         <Button
           variant="fab"
           color="primary"
@@ -70,16 +72,16 @@ class AtelierHome extends Component {
         <div
           className="video-container"
           style={{
-          marginBottom: 100,
-          marginTop: 60,
-        }}
+            marginBottom: 100,
+            marginTop: 60,
+          }}
         >
           <video
             id="background-video"
             style={{
-            height: 'auto',
-            width: '100%',
-          }}
+              height: 'auto',
+              width: '100%',
+            }}
             loop
             muted
             autoPlay
@@ -113,5 +115,8 @@ function mapStateToProps(state) {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { fetchAteliers }),
+  connect(
+    mapStateToProps,
+    { fetchAteliers }
+  )
 )(AtelierHome);
