@@ -20,7 +20,7 @@ function ButtonFormulaireIntervenant(props) {
       color="primary"
       className={classes.button}
     >
-      Submit
+      Valider
     </Button>
   );
 }
