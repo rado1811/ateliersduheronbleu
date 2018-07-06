@@ -12,6 +12,7 @@ class AtelierDetail extends Component {
     this.props.fetchAteliers();
   }
 
+
   render() {
     return (
       <div className="AteliersDetail">
@@ -25,83 +26,131 @@ class AtelierDetail extends Component {
                   width: 'auto',
                 }}
               >
-                <Grid media="screen and (max-width: 440px)" className="image-container" item md={6} sm={1}>
+                <Grid
+                  media="screen and (max-width: 440px)"
+                  className="image-container"
+                  item
+                  md={6}
+                  sm={1}
+                >
                   <div>
-                    <img src="../images/landing.jpg" alt="heron" style={{ height: '80vh', width: '80vw' }} className="images2" />
+                    <img
+                      src="../images/landing.jpg"
+                      alt="heron"
+                      style={{ height: '80vh', width: '80vw' }}
+                      className="images2"
+                    />
                   </div>
                   <div
                     className="overlay2"
                     style={{
-                            height: '20vh', width: '60vw', fontSize: 40, marginLeft: '20vw', fontFamily: 'Montserrat'
-                            ,
-                          }}
+                      height: '20vh',
+                      width: '60vw',
+                      fontSize: 40,
+                      marginLeft: '20vw',
+                      fontFamily: 'Montserrat',
+                    }}
                   >
                     <h3>Les Ateliers du Héron Bleu</h3>
-                  Choisissez un atelier
-                  </div>
-                </Grid>
-              </Grid >
-            </Paper>
-          </div>
-        ) : (
-          <div>
-            <Paper elevation={4} style={{ padding: 20 }}>
-
-              <Grid
-                container
-                style={{
-                height: '80vh',
-                width: 'auto',
-              }}
-              >
-                <Grid media="screen and (max-width: 440px)" className="image-container" item md={6} sm={1} key={this.props.ateliers.key}>
-                  <div>
-                    <img src={this.props.ateliers.photo} alt="heron" style={{ height: '80vh', width: '80vw' }} className="images" />
-                  </div>
-                </Grid>
-                <Grid >
-                  <div
-                    className="overlay"
-                    style={{
-                            height: '20vh', width: '60vw', fontSize: 14, marginLeft: '10vw', fontFamily: 'Montserrat'
-                            ,
-                          }}
-                  >
-                    <h1>{this.props.ateliers.nom}</h1>
-                    <h3><Moment format="DD/MM/YYYY">{this.props.ateliers.debut}</Moment></h3>
-                    <b>
-                      <img
-                        src="../images/logoHeron.png"
-                        width="4%"
-                        alt="heron"
-                      />
-                      <h3>En chemin, vous trouverez :</h3>
-                    </b>
-                    <p>{this.props.ateliers.contenu}</p>
-                    <b>
-                      <h3>Programme :</h3>
-                    </b>
-                    <p>{this.props.ateliers.programme}</p>
-                    <b>
-                      <h3>Intervenants :</h3>
-                    </b>
-                    <p>{this.props.ateliers.intervenant}</p>
+                    Choisissez un atelier
                   </div>
                 </Grid>
               </Grid>
             </Paper>
           </div>
-        )}
+        ) : (
+            <div>
+              <Paper elevation={4} style={{ padding: 20 }}>
+                <Grid
+                  container
+                  style={{
+                    height: '80vh',
+                    width: 'auto',
+                  }}
+                >
+                  <Grid
+                    media="screen and (max-width: 440px)"
+                    className="image-container"
+                    item
+                    md={6}
+                    sm={1}
+                    key={this.props.ateliers.key}
+                  >
+                    <div>
+                      <img
+                        src={this.props.ateliers.photo}
+                        alt="heron"
+                        style={{ height: '80vh', width: '80vw' }}
+                        className="images"
+                      />
+                    </div>
+                  </Grid>
+                  <Grid>
+                    <div
+                      className="overlay"
+                      style={{
+                        height: '20vh',
+                        width: '60vw',
+                        fontSize: 14,
+                        marginLeft: '10vw',
+                        fontFamily: 'Montserrat',
+                      }}
+                    >
+                      <h1>{this.props.ateliers.nom}</h1>
+                      <h3>
+                        <Moment format="DD/MM/YYYY">
+                          {this.props.ateliers.debut}
+                        </Moment>
+                      </h3>
+                      <b>
+                        <img
+                          src="../images/logoHeron.png"
+                          width="4%"
+                          alt="heron"
+                        />
+                        <h3>En chemin, vous trouverez :</h3>
+                      </b>
+                      <p>{this.props.ateliers.contenu}</p>
+                      <b>
+                        <h3>Programme :</h3>
+                      </b>
+                      <p>{this.props.ateliers.programme}</p>
+                      <b>
+                        <h3>Intervenants :</h3>
+                      </b>
+                      <p>{this.props.ateliers.intervenant}</p>
+                    </div>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </div>
+          )}
       </div>
     );
-  };
+  }
 }
 AtelierDetail.propTypes = {
   fetchAteliers: PropTypes.func.isRequired,
-}
+  ateliers: PropTypes.shape({
+    id_atelier: PropTypes.number.isRequired,
+    id_intervenant: PropTypes.number.isRequired,
+    nom_intervenant: PropTypes.string.isRequired,
+    intervenant: PropTypes.string.isRequired,
+    debut: PropTypes.string.isRequired,
+    prix: PropTypes.number.isRequired,
+    programme: PropTypes.string.isRequired,
+    key: PropTypes.number.isRequired,
+    photo: PropTypes.string.isRequired,
+    nom: PropTypes.string.isRequired,
+    contenu: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 function mapStateToProps(state) {
   return { ateliers: state.activeAteliers };
 }
 
-export default connect(mapStateToProps, { fetchAteliers })(AtelierDetail);
+export default connect(
+  mapStateToProps,
+  { fetchAteliers }
+)(AtelierDetail);
