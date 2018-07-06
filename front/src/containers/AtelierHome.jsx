@@ -42,7 +42,7 @@ class AtelierHome extends Component {
           key={atelier.id_atelier}
           name={atelier.nom}
           date={atelier.debut}
-          image={atelier.photo}
+          image={`/images/${atelier.photo}`}
           intervenant={atelier.id_intervenant}
           places_disponibles={atelier.place_disponibles}
         />))}
@@ -88,7 +88,7 @@ class AtelierHome extends Component {
             Your browser does not support the video tag.
           </video>
         </div>
-        <div className="overlay">
+        <div className="overlay" style={{fontWeight: 'bold' }}>
           <p>Ateliers "Bien-être et Créativité"</p>
         </div>
         <Link to="#ateliers">
