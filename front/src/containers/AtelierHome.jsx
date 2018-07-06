@@ -100,7 +100,7 @@ class AtelierHome extends Component {
           </p>
           <p className="sousTitre" style={{ fontFamily: 'Montserrat' }}>
             {' '}
-            La Teste De Buch
+            Le Teich
           </p>
         </div>
         <Link to="#ateliers">
