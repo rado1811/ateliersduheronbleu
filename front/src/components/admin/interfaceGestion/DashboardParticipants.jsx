@@ -12,7 +12,6 @@ class DashboardParticipants extends Component {
   componentDidMount() {
     this.props.fetchParticipants();
   }
-
   render() {
     return (
       <div>
@@ -29,6 +28,8 @@ class DashboardParticipants extends Component {
               <TableRow>
                 <TableCell>Nom</TableCell>
                 <TableCell numeric>Prénom</TableCell>
+                <TableCell numeric>Email</TableCell>
+                <TableCell numeric>Téléphone</TableCell>
                 <TableCell numeric>Atelier</TableCell>
               </TableRow>
             </TableHead>
@@ -39,6 +40,8 @@ class DashboardParticipants extends Component {
                     {participants.nom}
                   </TableCell>
                   <TableCell numeric>{participants.prenom}</TableCell>
+                  <TableCell numeric>{participants.email}</TableCell>
+                  <TableCell numeric>{participants.tel}</TableCell>
                   <TableCell numeric>{participants.id_atelier}</TableCell>
                 </TableRow>
               ))}
@@ -53,7 +56,9 @@ class DashboardParticipants extends Component {
 //
 
 function mapStateToProps(state) {
-  return { participants: state.participants.participants };
+  return {
+    participants: state.participants.participants,
+  };
 }
 
 export default connect(
