@@ -57,7 +57,7 @@ class TemporaryDrawer extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <AppBar position="fixed" style={{marginBottom: 10, backgroundColor: '#B2C4CB'}} >
+        <AppBar position="fixed" style={{marginBottom: 10, backgroundColor: '#B2C4CB', color : '#000000'}} >
           <Toolbar>
             <Hidden smUp>
               <IconButton
@@ -80,27 +80,27 @@ class TemporaryDrawer extends React.Component {
               Atelier du Héron Bleu
             </Typography>
             <Hidden xsDown>
-              <Button color="inherit" component={MyAccueil} style={{fontFamily: 'Montserrat'}}>
+              <Button color="inherit" component={MyAccueil} style={{fontFamily: 'Montserrat', color : '#000000'	}}>
                 Accueil
               </Button>
             </Hidden>
             <Hidden xsDown>
-              <Button color="inherit" component={MyAteliers} style={{fontFamily: 'Montserrat'}}>
+              <Button color="inherit" component={MyAteliers} style={{fontFamily: 'Montserrat', color : '#000000'}}>
                 Ateliers
               </Button>
             </Hidden>
             <Hidden xsDown>
-              <Button color="inherit" component={MyIntervenants} style={{fontFamily: 'Montserrat'}}>
+              <Button color="inherit" component={MyIntervenants} style={{fontFamily: 'Montserrat', color : '#000000'}}>
                 Intervenants
               </Button>
             </Hidden>
             <Hidden xsDown>
-              <Button color="inherit" component={MyConcept} style={{fontFamily: 'Montserrat'}}>
+              <Button color="inherit" component={MyConcept} style={{fontFamily: 'Montserrat', color : '#000000'}}>
                 Concept
               </Button>
             </Hidden>
             <Hidden xsDown>
-              <Button color="inherit" component={MyContact} style={{fontFamily: 'Montserrat'}}>
+              <Button color="inherit" component={MyContact} style={{fontFamily: 'Montserrat', color : '#000000'}}>
                 Contact
               </Button>
             </Hidden>
