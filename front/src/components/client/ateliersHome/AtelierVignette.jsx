@@ -73,21 +73,17 @@ const AtelierVignette = (props) => {
           <Button
             size="small"
             style={{ backgroundColor: '#B2C4CB', color: 'white' }}
-            onClick={() => alert(this.props.ateliers[props.indexAtelier])}
             component={Reserver}
           >
             Pré-réserver
           </Button>
           <Button
-            // IIIIIIIIIIIICIIIIIIIIIIIIIIIIIII
             size="small"
             style={{ backgroundColor: '#B2C4CB', color: 'white' }}
             onClick={() => {
-            console.log(props.ateliers[props.indexAtelier]);
-              selectAteliers(props.ateliers[props.indexAtelier]);
+              props.selectAteliers(props.ateliers[props.indexAtelier]);
             }}
             component={Atelier}
-            // IIIIIIIIIIIICIIIIIIIIIIIIIIIIIII
           >
             En savoir plus
           </Button>
@@ -99,18 +95,25 @@ const AtelierVignette = (props) => {
 
 AtelierVignette.propTypes = {
   image: PropTypes.string.isRequired,
-  intervenant: PropTypes.string.isRequired,
+  intervenant: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   indexAtelier: PropTypes.number.isRequired,
   date: PropTypes.string.isRequired,
   places_disponibles: PropTypes.number.isRequired,
+  selectAteliers: PropTypes.func.isRequired,
   classes: PropTypes.shape({
     item: PropTypes.string.isRequired,
     card: PropTypes.string.isRequired,
     media: PropTypes.string.isRequired,
   }).isRequired,
-  //  booking: PropTypes.func,isRequired
-  // moreDetails: PropTypes.func,isRequired
+  ateliers: PropTypes.shape({
+    id_atelier: PropTypes.number.isRequired,
+    id_intervenant: PropTypes.number.isRequired,
+    nom_intervenant: PropTypes.string.isRequired,
+    debut: PropTypes.string.isRequired,
+    prix: PropTypes.number.isRequired,
+    programme: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 function mapStateToProps(state) {
@@ -130,5 +133,5 @@ export default compose(
   connect(
     mapStateToProps,
     mapDispatchToProps,
-  )
+  ),
 )(AtelierVignette);
