@@ -76,7 +76,7 @@ class AtelierHome extends Component {
           className="video-container"
           style={{
             marginBottom: 100,
-            marginTop: 60,
+            marginTop: -70,
           }}
         >
           <video
@@ -89,7 +89,7 @@ class AtelierHome extends Component {
             muted
             autoPlay
           >
-            <source src="../images/Bassin.mp4" type="video/mp4" />
+            <source src="../images/sunwaves.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>

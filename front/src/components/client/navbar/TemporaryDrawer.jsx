@@ -70,7 +70,7 @@ class TemporaryDrawer extends React.Component {
             </Hidden>
             <Typography
               variant="title"
-              style={{ flex: 1, fontFamily: 'Montserrat' }}
+              style={{ flex: 1, fontFamily: 'Montserrat', color : '#FFFFFF	', fontWeight: 'bold' }}
               color="inherit"
               noWrap
               component={MyAccueil}
@@ -80,27 +80,27 @@ class TemporaryDrawer extends React.Component {
               Atelier du Héron Bleu
             </Typography>
             <Hidden xsDown>
-              <Button color="inherit" component={MyAccueil} style={{fontFamily: 'Montserrat', color : '#000000'	}}>
+              <Button color="inherit" component={MyAccueil} style={{fontFamily: 'Montserrat', color : '#FFFFFF	', fontWeight: 'bold'}}>
                 Accueil
               </Button>
             </Hidden>
             <Hidden xsDown>
-              <Button color="inherit" component={MyAteliers} style={{fontFamily: 'Montserrat', color : '#000000'}}>
+              <Button color="inherit" component={MyAteliers} style={{fontFamily: 'Montserrat', color : '#FFFFFF	', fontWeight: 'bold'}}>
                 Ateliers
               </Button>
             </Hidden>
             <Hidden xsDown>
-              <Button color="inherit" component={MyIntervenants} style={{fontFamily: 'Montserrat', color : '#000000'}}>
+              <Button color="inherit" component={MyIntervenants} style={{fontFamily: 'Montserrat', color : '#FFFFFF	', fontWeight: 'bold'}}>
                 Intervenants
               </Button>
             </Hidden>
             <Hidden xsDown>
-              <Button color="inherit" component={MyConcept} style={{fontFamily: 'Montserrat', color : '#000000'}}>
+              <Button color="inherit" component={MyConcept} style={{fontFamily: 'Montserrat', color : '#FFFFFF	', fontWeight: 'bold'}}>
                 Concept
               </Button>
             </Hidden>
             <Hidden xsDown>
-              <Button color="inherit" component={MyContact} style={{fontFamily: 'Montserrat', color : '#000000'}}>
+              <Button color="inherit" component={MyContact} style={{fontFamily: 'Montserrat', color : '#FFFFFF	', fontWeight: 'bold'}}>
                 Contact
               </Button>
             </Hidden>
