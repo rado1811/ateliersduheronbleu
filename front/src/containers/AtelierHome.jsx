@@ -93,10 +93,6 @@ class AtelierHome extends Component {
             Your browser does not support the video tag.
           </video>
         </div>
-<<<<<<< HEAD
-        <div className="overlay" style={{fontWeight: 'bold' }}>
-          <p>Ateliers "Bien-être et Créativité"</p>
-=======
         <div className="overlay">
           <p style={{ fontFamily: 'Montserrat' }}>
             {' '}
@@ -106,7 +102,6 @@ class AtelierHome extends Component {
             {' '}
             Le Teich
           </p>
->>>>>>> dev
         </div>
         <Link to="#ateliers">
           <i className="fas fa-angle-double-down" />

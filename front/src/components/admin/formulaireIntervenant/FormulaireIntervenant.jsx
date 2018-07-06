@@ -242,7 +242,6 @@ class FormulaireIntervenant extends Component {
                   <ButtonFormulaireIntervenant />
                 )}
               </Grid>
-<<<<<<< HEAD
             </Grid>
             <TextField
               fullWidth
@@ -302,17 +301,6 @@ class FormulaireIntervenant extends Component {
           autoHideDuration={4000}
           onClose={this.handleToogle}
         />
-=======
-            </form>
-          </div>
-          <Snackbar
-            open={this.state.open}
-            message={this.state.flash}
-            autoHideDuration={4000}
-            onClose={this.handleToogle}
-          />
-        </Paper>
->>>>>>> dev
       </Grid>
     );
   }

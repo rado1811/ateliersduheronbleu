@@ -248,7 +248,6 @@ class FormAtelier extends Component {
                   <br />
                 </Grid>
               </Grid>
-<<<<<<< HEAD
             </Grid>
             <TextField
               fullWidth
@@ -305,65 +304,6 @@ class FormAtelier extends Component {
               {this.props.intervenants.map((item) => (
                 <MenuItem key={item.id_intervenant} value={item.id_intervenant}>
                   {item.nom} {item.prenom}
-=======
-              <TextField
-                style={{ margin: 15 }}
-                fullWidth
-                multiline
-                name="contenu"
-                required
-                label="Contenu"
-                multiligne="true"
-                type="text"
-                value={this.state.contenu}
-                onChange={this.updateContenuField}
-              />
-              <br />
-              <br />
-              <TextField
-                style={{ margin: 15 }}
-                name="formule"
-                label="Formule ?"
-                required
-                type="text"
-                value={this.state.formule}
-                onChange={this.updateFormuleField}
-              />
-              <br />
-              <TextField
-                style={{ margin: 15 }}
-                name="photo"
-                label="Photo"
-                value={this.state.photo}
-                onChange={this.updatePhotoField}
-              />
-              <br />
-              <br />
-              <TextField
-                style={{ margin: 15 }}
-                name="lieu"
-                label=""
-                type="text"
-                value={this.state.lieu}
-                onChange={this.updateLieuField}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Place />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <br />
-              <br />
-              <InputLabel htmlFor="dropInput">Intervenant</InputLabel>
-              <Select
-                value={this.state.nom_intervenant}
-                onChange={this.updateIntervenantField}
-              >
-                <MenuItem value="">
-                  <em>Selectionnez un intervenant</em>
->>>>>>> dev
                 </MenuItem>
                 {this.props.intervenants.map((item) => (
                   <MenuItem
