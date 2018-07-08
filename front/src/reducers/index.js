@@ -4,6 +4,8 @@ import ActiveAteliersReducer from './activeAteliers';
 import IntervenantsReducer from './intervenants';
 import isFromEdit from './editAtelier';
 import isFromEditIntervenant from './editIntervenant';
+import authReducer from './authReducer';
+
 
 const allReducers = combineReducers({
   ateliers: AteliersReducer,
@@ -11,6 +13,7 @@ const allReducers = combineReducers({
   intervenants: IntervenantsReducer,
   edit: isFromEdit,
   editIntervenant: isFromEditIntervenant,
+  auth: authReducer,
 });
 
 export default allReducers;
