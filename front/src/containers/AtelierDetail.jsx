@@ -77,7 +77,7 @@ class AtelierDetail extends Component {
                 >
                   <div>
                     <img
-                      src={`/images/${this.props.ateliers.photo}`}
+                      src={this.props.ateliers.photo}
                       alt="heron"
                       style={{ height: '80vh', width: '80vw' }}
                       className="images"
@@ -130,6 +130,20 @@ class AtelierDetail extends Component {
 }
 AtelierDetail.propTypes = {
   fetchAteliers: PropTypes.func.isRequired,
+
+  ateliers: PropTypes.shape({
+    id_atelier: PropTypes.number.isRequired,
+    id_intervenant: PropTypes.number.isRequired,
+    nom_intervenant: PropTypes.string.isRequired,
+    intervenant: PropTypes.string.isRequired,
+    debut: PropTypes.string.isRequired,
+    prix: PropTypes.number.isRequired,
+    programme: PropTypes.string.isRequired,
+    key: PropTypes.number.isRequired,
+    photo: PropTypes.string.isRequired,
+    nom: PropTypes.string.isRequired,
+    contenu: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 function mapStateToProps(state) {

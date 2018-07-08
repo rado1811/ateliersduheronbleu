@@ -63,7 +63,7 @@ function mapDispatchToProps(dispatch) {
     {
       selectAteliers,
     },
-    dispatch
+    dispatch,
   );
 }
 
@@ -74,5 +74,5 @@ AteliersList.propTypes = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(AteliersList);

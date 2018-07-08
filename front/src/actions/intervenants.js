@@ -22,7 +22,7 @@ export function fetchIntervenants() {
   return (dispatch) => {
     dispatch(fetchIntervenantsBegin());
     return fetch('/api/intervenants')
-      .then((res) => {
+    .then((res) => {
         if (!res.ok) {
           throw Error(res.statusText);
         }
