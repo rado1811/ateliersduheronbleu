@@ -15,7 +15,6 @@ import BoutonContact from '../client/BoutonContact';
 import { fetchIntervenants } from '../../actions/intervenants';
 import IntervenantsTile from './IntervenantsTile';
 import './intervenants.css';
-// import './intervenantsModal.css';
 
 class Intervenants extends Component {
 
@@ -37,7 +36,7 @@ class Intervenants extends Component {
 
   render() {
     return (
-      <div style={{ marginTop: 50 }}>
+      <div style={{ marginTop: 60 }}>
         <BoutonContact />
         <Grid container spacing={24}>
           <Grid item xs={12} md={4}>
@@ -84,9 +83,9 @@ class Intervenants extends Component {
           </Grid>
           <Grid item xs={12} md={8}>
             <div className="rootIntervenants">
-              <GridList cellHeight={500} className="gridList">
+              <GridList cellHeight={500}>
                 <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                  <ListSubheader component="div" style={{ textAlign: 'center'}}>Les intervenants</ListSubheader>
+                  <ListSubheader component="div" style={{ textAlign: 'center', backgroundColor: 'E9E7DF'}}>Les intervenants</ListSubheader>
                 </GridListTile>
                 {this.props.intervenants.slice(1).map(intervenant => (
                   <IntervenantsTile

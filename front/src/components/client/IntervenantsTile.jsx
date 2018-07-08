@@ -46,14 +46,23 @@ class IntervenantsTile extends Component {
           aria-describedby="simple-modal-description"
           open={this.state.open}
           onClose={() => this.handleClose()}
-          >
-          <div className="modalIntervenants">
+        >
+          <div className="modalIntervenants" style={{ textAlign: 'center' }}>
             <Avatar
               alt="avatar intervenant"
-              src={this.props.photo}
-              className="bigAvatar"
-              label="HELLO"
+              src={`/images/${this.props.photo}`}
+              label="intervenant"
+              style={{
+                width: 100,
+                height: 100,
+                marginLeft: 'auto',
+                marginRight: 'auto',
+              }}
             />
+            <Typography variant="body1" id="modal-title">
+              <strong>{this.props.prenom} {this.props.nom}</strong>
+              <br />{this.props.metier}
+            </Typography> <br />
             <Typography variant="title" id="modal-title">
               {this.props.citation}
             </Typography>
