@@ -70,6 +70,7 @@ class AtelierHome extends Component {
   }
 
   render() {
+    console.log('ici ', this.props);
     return (
       <div>
         <div
