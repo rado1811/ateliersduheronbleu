@@ -19,7 +19,7 @@
     padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
-    
+    z-index: 1;
 }
 @media (max-width: 750px) {
     .BoutonContact {

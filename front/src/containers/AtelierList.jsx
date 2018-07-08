@@ -69,10 +69,9 @@ function mapDispatchToProps(dispatch) {
 
 AteliersList.propTypes = {
   ateliers: PropTypes.arrayOf(Array).isRequired,
-  selectAteliers: PropTypes.func.isRequired,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(AteliersList);

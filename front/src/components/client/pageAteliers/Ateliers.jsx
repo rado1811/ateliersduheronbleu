@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
-import AtelierList from '../../../containers/AtelierList';
+import AteliersList from '../../../containers/AtelierList';
 import AtelierDetail from '../../../containers/AtelierDetail';
 import FormParticipants from './FormParticipants';
 import Footer from '../footer/Footer';
@@ -12,7 +12,7 @@ const Ateliers = () => (
     <div className="shapeAteliers">
       <Grid container>
         <Grid item md={2}>
-          <AtelierList />
+          <AteliersList />
         </Grid>
         <Grid item md={10}>
           <AtelierDetail />

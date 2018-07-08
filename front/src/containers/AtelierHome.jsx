@@ -39,18 +39,21 @@ class AtelierHome extends Component {
     const iconButton = this.state.toggleAteliers ? <RemoveIcon /> : <AddIcon />;
     return (
       <Grid id="ateliers" container spacing={16} justify="center">
-        {ateliers.map((atelier) => (
+        {ateliers.map((atelier, i) => (
           <AtelierVignette
             key={atelier.id_atelier}
             name={atelier.nom}
             date={atelier.debut}
             image={`/images/${atelier.photo}`}
+            intervenant={atelier.id_intervenant}
             places_disponibles={atelier.place_disponibles}
+            indexAtelier={i}
           />
         ))}
         <Button
           variant="fab"
           color="primary"
+          style={{ backgroundColor: '#B2C4CB' }}
           onClick={() => this.toggleAteliers()}
         >
           {iconButton}
@@ -73,7 +76,7 @@ class AtelierHome extends Component {
           className="video-container"
           style={{
             marginBottom: 100,
-            marginTop: 60,
+            marginTop: -70,
           }}
         >
           <video
@@ -86,12 +89,19 @@ class AtelierHome extends Component {
             muted
             autoPlay
           >
-            <source src="../images/video.mp4" type="video/mp4" />
+            <source src="../images/sunwaves.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
         <div className="overlay">
-          <p>Ateliers "Bien-être et Créativité"</p>
+          <p style={{ fontFamily: 'Montserrat' }}>
+            {' '}
+            Ateliers "Bien-être et Créativité"
+          </p>
+          <p className="sousTitre" style={{ fontFamily: 'Montserrat' }}>
+            {' '}
+            Le Teich
+          </p>
         </div>
         <Link to="#ateliers">
           <i className="fas fa-angle-double-down" />
