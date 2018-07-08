@@ -79,12 +79,10 @@ class SignIn extends Component {
         .then((res) => res.json())
         .then(
           ((res) => (
-            alert('ok'),
             this.setState({
               flash: res.flash,
               open: true,
-              infosUser: true,
-              //    infosUser: res.user,
+              infosUser: res.user,
             }),
             this.props.dispatch({
               type: 'CREATE_SESSION',
@@ -184,6 +182,7 @@ class SignIn extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('Ici State de mapStateToProps : ', state);
   return {
     flash: state.auth.token,
   };

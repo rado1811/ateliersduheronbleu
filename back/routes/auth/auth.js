@@ -10,8 +10,8 @@ const jwt = require('jsonwebtoken');
 
 router.post('/signup', (req, res) => {
   const hash = bcrypt.hashSync(req.body.password, 10);
-  const select = `INSERT INTO Utilisateurs2 (email, password) VALUES 
-   ('${req.body.email}', '${hash}');`;
+  const select = `INSERT INTO Utilisateurs2 (email, password, prenom, nom) VALUES 
+   ('${req.body.email}', '${hash}', '${req.body.prenom}','${req.body.nom}');`;
   connection.query(select, (err) => {
     if (err) {
       res.status(500).json({
@@ -19,7 +19,7 @@ router.post('/signup', (req, res) => {
       });
     } else {
       res.status(200).json({
-        flash: 'Utilisateur enregistré!',
+        flash: 'Nouvel utilisateur enregistré !',
       });
       res.end();
     }

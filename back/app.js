@@ -87,6 +87,8 @@ passport.use(
             } else if (bcrypt.compareSync(password, rows[0].password)) {
               const user = {
                 email: rows[0].email,
+                nom: rows[0].nom,
+                prenom: rows[0].prenom,
               };
               return done(null, user);
             } else {

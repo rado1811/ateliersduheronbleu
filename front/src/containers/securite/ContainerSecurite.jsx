@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
-import Securite from './Securite';
+import SignUp from './SignUp';
 import MenuAdmin from '../../components/admin/menuAdmin/MenuAdmin';
 
 class ContainerSecurite extends Component {
@@ -15,7 +15,7 @@ class ContainerSecurite extends Component {
           <MenuAdmin />
         </Grid>
         <Grid item style={{ marginTop: 10 }}>
-          <Securite />
+          <SignUp />
         </Grid>
       </Grid>
     );
