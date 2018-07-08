@@ -8,20 +8,31 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
+import Avatar from '@material-ui/core/Avatar';
+import Modal from '@material-ui/core/Modal';
+import Typography from '@material-ui/core/Typography';
 import BoutonContact from '../client/BoutonContact';
 import { fetchIntervenants } from '../../actions/intervenants';
-import IntervenantsModal from './IntervenantsModal';
+import IntervenantsTile from './IntervenantsTile';
 import './intervenants.css';
+// import './intervenantsModal.css';
 
 class Intervenants extends Component {
 
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      open: false,
+    };
     this.props.fetchIntervenants();
   }
 
-  openToggle() {
-    this.refs.child.handleOpen();
+  handleOpen() {
+    this.setState({ open: true });
+  }
+
+  handleClose() {
+    this.setState({ open: false });
   }
 
   render() {
@@ -29,7 +40,7 @@ class Intervenants extends Component {
       <div style={{ marginTop: 50 }}>
         <BoutonContact />
         <Grid container spacing={24}>
-          <Grid item xs={12} md={4} className="rootIsabelle">
+          <Grid item xs={12} md={4}>
             <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
               <ListSubheader component="div" style={{ textAlign: 'center'}}>La fondatrice</ListSubheader>
             </GridListTile>
@@ -41,56 +52,52 @@ class Intervenants extends Component {
                 actionIcon={
                   <IconButton
                     style={{ color: 'white' }}
-                    onClick={this.openToggle} 
+                    onClick={() => this.handleOpen()} 
                   >
                     <InfoIcon />
                   </IconButton>
                 } 
               />
-              <IntervenantsModal
-                id={this.props.intervenants[0].id_intervenant}
-                prenom={this.props.intervenants[0].prenom}
-                nom={this.props.intervenants[0].nom}
-                photo={this.props.intervenants[0].photo}
-                metier={this.props.intervenants[0].metier}
-                citation={this.props.intervenants[0].metier}
-                parcours={this.props.intervenants[0].parcours}
-                handleOpen={this.handleOpen}
-              />
+              <Modal
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+                open={this.state.open}
+                onClose={() => this.handleClose()}
+              >
+                <div className="modalIntervenants" >
+                  <Avatar
+                    alt="avatar intervenant"
+                    src={this.props.intervenants[0].photo}
+                    className="modalAvatar"
+                    label="HELLO"
+                  />
+                  <Typography variant="title" id="modal-title">
+                    {this.props.intervenants[0].citation}
+                  </Typography>
+                  <Typography variant="subheading" id="simple-modal-description">
+                    <br />
+                    {this.props.intervenants[0].parcours}
+                  </Typography>
+                </div>
+              </Modal>
             </GridListTile>
-            
           </Grid>
-          <Grid item xs>
+          <Grid item xs={12} md={8}>
             <div className="rootIntervenants">
-              <GridList cellHeight={500} className="gridListIntervenants">
+              <GridList cellHeight={500} className="gridList">
                 <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
                   <ListSubheader component="div" style={{ textAlign: 'center'}}>Les intervenants</ListSubheader>
                 </GridListTile>
                 {this.props.intervenants.slice(1).map(intervenant => (
-                  <GridListTile key={intervenant.id_intervenant}>
-                    <img src={`/images/${intervenant.photo}`} alt={intervenant.nom} />
-                    <GridListTileBar
-                      title={intervenant.prenom + ' ' + intervenant.nom}
-                      subtitle={<span>{intervenant.metier}</span>}
-                      actionIcon={
-                        <IconButton
-                          style={{color: 'white'}}
-                          onClick={this.openToggle}
-                        >
-                          <InfoIcon />
-                        </IconButton>
-                      } 
-                    />
-                    <IntervenantsModal
-                      id={intervenant.id_intervenant}
-                      prenom={intervenant.prenom}
-                      nom={intervenant.nom}
-                      photo={intervenant.photo}
-                      metier={intervenant.metier}
-                      citation={intervenant.metier}
-                      parcours={intervenant.parcours}
-                    />
-                  </GridListTile>
+                  <IntervenantsTile
+                    key={intervenant.id_intervenant}
+                    photo={intervenant.photo}
+                    nom={intervenant.nom}
+                    prenom={intervenant.prenom}
+                    metier={intervenant.metier}
+                    citation={intervenant.citation}
+                    parcours={intervenant.parcours}
+                  />
                 ))}
               </GridList>
             </div>
@@ -104,7 +111,6 @@ class Intervenants extends Component {
 Intervenants.propTypes = {
   fetchIntervenants: PropTypes.func.isRequired,
   intervenants: PropTypes.arrayOf(Array).isRequired,
-  handleOpen: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {

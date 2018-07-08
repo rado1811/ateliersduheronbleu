@@ -4,7 +4,7 @@
 };
 
 .modalIntervenants {
-  position: fixed;
+  /* position: fixed;
   z-index: 500;
   background-color: #B2C4CB;
   width: 50%;
@@ -16,7 +16,7 @@
   top: 3%;
   box-sizing: border-box;
   transition: all 0.3s ease-out;
-  text-align: justify;
+  text-align: justify; */
 };
 
 .bigAvatar {
