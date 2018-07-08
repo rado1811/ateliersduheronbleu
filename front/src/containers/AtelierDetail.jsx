@@ -132,17 +132,19 @@ class AtelierDetail extends Component {
 AtelierDetail.propTypes = {
   fetchAteliers: PropTypes.func.isRequired,
   ateliers: PropTypes.shape({
+    contenu: PropTypes.string.isRequired,
+    debut: PropTypes.string.isRequired,
+    formule: PropTypes.string.isRequired,
     id_atelier: PropTypes.number.isRequired,
     id_intervenant: PropTypes.number.isRequired,
+    lieu: PropTypes.string.isRequired,
+    nb_participants: PropTypes.number.isRequired,
+    nom: PropTypes.string.isRequired,
     nom_intervenant: PropTypes.string.isRequired,
-    intervenant: PropTypes.string.isRequired,
-    debut: PropTypes.string.isRequired,
+    photo: PropTypes.string.isRequired,
+    place_disponibles: PropTypes.number.isRequired,
     prix: PropTypes.number.isRequired,
     programme: PropTypes.string.isRequired,
-    key: PropTypes.number.isRequired,
-    photo: PropTypes.string.isRequired,
-    nom: PropTypes.string.isRequired,
-    contenu: PropTypes.string.isRequired,
   }).isRequired,
 };
 
