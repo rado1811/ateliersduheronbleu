@@ -131,13 +131,13 @@ function mapDispatchToProps(dispatch) {
     {
       selectAteliers,
     },
-    dispatch
+    dispatch,
   );
 }
 export default compose(
   withStyles(styles),
   connect(
     mapStateToProps,
-    mapDispatchToProps
-  )
+    mapDispatchToProps,
+  ),
 )(AtelierVignette);
