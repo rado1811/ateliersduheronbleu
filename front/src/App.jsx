@@ -27,7 +27,6 @@ const App = () => (
       <Route exact path="/admin/intervenant" component={Admin} />
       <Route exact path="/admin/gestion" component={Dashboard} />
       <Route exact path="/zfesg4685f4dqsfv46es8qz4df" component={SignIn} />
-
       <Route
         exact
         path="/admin/administration"

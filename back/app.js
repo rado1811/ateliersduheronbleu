@@ -5,7 +5,6 @@ import express from 'express';
 import logger from 'morgan';
 import path from 'path';
 import connection from './config/db';
-
 import intervenant from './routes/intervenant';
 import ateliers from './routes/ateliers';
 import prereservationRouter from './routes/prereservation';
@@ -76,10 +75,9 @@ passport.use(
     (email, password, done) => {
       try {
         connection.query(
-          `select * from Utilisateurs where email=?`,
+          `select * from Utilisateurs2 where email=?`,
           [email],
           (err, rows) => {
-            console.log(rows);
             if (err) {
               return done(err, 'Not good enouth');
             } else if (!rows[0]) {

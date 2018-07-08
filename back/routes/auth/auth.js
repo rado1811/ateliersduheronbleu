@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 
 router.post('/signup', (req, res) => {
   const hash = bcrypt.hashSync(req.body.password, 10);
-  const select = `INSERT INTO Utilisateurs (email, password) VALUES 
+  const select = `INSERT INTO Utilisateurs2 (email, password) VALUES 
    ('${req.body.email}', '${hash}');`;
   connection.query(select, (err) => {
     if (err) {
@@ -19,7 +19,7 @@ router.post('/signup', (req, res) => {
       });
     } else {
       res.status(200).json({
-        flash: 'User has been signed up !',
+        flash: 'Utilisateur enregistré!',
       });
       res.end();
     }
@@ -27,36 +27,15 @@ router.post('/signup', (req, res) => {
 });
 
 router.post('/signin', (req, res) => {
-  console.log(req.body)
   passport.authenticate('local', (err, user) => {
-    console.log(user)
     if (err) return res.status(500).send(`${err} dans auth/signin`);
-    if (!user) return res.status(401).json({ flash: 'Not a yet a Success' });
+    if (!user)
+      return res
+        .status(401)
+        .json({ flash: "Erreur de Mot de Passe ou d'adresse mail" });
     const token = jwt.sign(user, 'N4bit3');
-    return res.json({ user, token, flash: 'Successs' });
+    return res.json({ user, token, flash: 'Connexion validée' });
   })(req, res);
 });
 
 module.exports = router;
-
-/* alert:
-false
-checkPassWord:
-"Tiboo1995.."
-email:
-"test15.47@test.com"
-flash:
-"User has been signed up !"
-input:
-"Tiboo1995.."
-lastname:
-"r"
-messageDialogue:
-Array[0]
-name:
-"r"
-open:
-false
-password:
-"Tiboo1995.."
- */

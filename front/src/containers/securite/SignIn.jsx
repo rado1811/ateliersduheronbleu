@@ -36,7 +36,7 @@ class SignIn extends Component {
     }
   };
 
-  showDialogueBox = whatIsMissing => {
+  showDialogueBox = (whatIsMissing) => {
     this.setState({
       messageDialogue: whatIsMissing,
       alert: true,
@@ -54,19 +54,19 @@ class SignIn extends Component {
     this.setState({ open: !this.state.open });
   };
 
-  updateEmailField = event => {
+  updateEmailField = (event) => {
     this.setState({
       email: event.target.value,
     });
   };
 
-  updatePassWordField = event => {
+  updatePassWordField = (event) => {
     this.setState({
       password: event.target.value,
     });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     if (this.formSend()) {
       fetch('/auth/signin', {
@@ -76,13 +76,15 @@ class SignIn extends Component {
         }),
         body: JSON.stringify(this.state),
       })
-        .then(res => res.json())
+        .then((res) => res.json())
         .then(
-          (res => (
+          ((res) => (
+            alert('ok'),
             this.setState({
               flash: res.flash,
               open: true,
-              infosUser: res.user,
+              infosUser: true,
+              //    infosUser: res.user,
             }),
             this.props.dispatch({
               type: 'CREATE_SESSION',
@@ -91,7 +93,7 @@ class SignIn extends Component {
               message: res.message,
             })
           ),
-          err =>
+          (err) =>
             this.setState({
               flash: err.flash,
             }))
@@ -107,7 +109,7 @@ class SignIn extends Component {
     }
   }
 
-  updateEmailField = event => {
+  updateEmailField = (event) => {
     this.setState({
       email: event.target.value,
     });
