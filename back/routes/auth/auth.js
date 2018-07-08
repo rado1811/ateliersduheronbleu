@@ -10,10 +10,8 @@ const jwt = require('jsonwebtoken');
 
 router.post('/signup', (req, res) => {
   const hash = bcrypt.hashSync(req.body.password, 10);
-  const select = `INSERT INTO users (email, password, name, lastname) VALUES 
-   ('${req.body.email}', '${hash}', '${req.body.name}', '${
-    req.body.lastname
-  }');`;
+  const select = `INSERT INTO Utilisateurs (email, password) VALUES 
+   ('${req.body.email}', '${hash}');`;
   connection.query(select, (err) => {
     if (err) {
       res.status(500).json({
@@ -29,7 +27,9 @@ router.post('/signup', (req, res) => {
 });
 
 router.post('/signin', (req, res) => {
+  console.log(req.body)
   passport.authenticate('local', (err, user) => {
+    console.log(user)
     if (err) return res.status(500).send(`${err} dans auth/signin`);
     if (!user) return res.status(401).json({ flash: 'Not a yet a Success' });
     const token = jwt.sign(user, 'N4bit3');
@@ -38,3 +38,25 @@ router.post('/signin', (req, res) => {
 });
 
 module.exports = router;
+
+/* alert:
+false
+checkPassWord:
+"Tiboo1995.."
+email:
+"test15.47@test.com"
+flash:
+"User has been signed up !"
+input:
+"Tiboo1995.."
+lastname:
+"r"
+messageDialogue:
+Array[0]
+name:
+"r"
+open:
+false
+password:
+"Tiboo1995.."
+ */

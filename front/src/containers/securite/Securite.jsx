@@ -89,7 +89,7 @@ class Securite extends Component {
               flash: err.flash,
             })
         );
-      this.props.history.push(`/signin`);
+    // this.props.history.push(`/zfesg4685f4dqsfv46es8qz4df`);
     } else {
       this.setState({ flash: 'Form not conform', open: true });
     }
@@ -140,13 +140,11 @@ class Securite extends Component {
 */
   render() {
     return (
-      <div>
         <Paper
           style={{
             marginTop: 70,
           }}
         >
-          <Grid item xs={12} sm={6} style={{ width: '80' }}>
             <h2>Sign Up !</h2>
             <form onSubmit={this.handleSubmit} style={{ margin: 40 }}>
               <div>
@@ -239,9 +237,7 @@ class Securite extends Component {
               hideDialogueBox={this.hideDialogueBox}
               messageDialogue={this.state.messageDialogue}
             />
-          </Grid>
         </Paper>
-      </div>
     );
   }
 }

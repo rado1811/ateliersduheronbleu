@@ -29,12 +29,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const auth = require('./routes/auth/auth');
 
 // JWT
-app.get('/profile', passport.authenticate('jwt', { session: false }), function(
-  req,
-  res
-) {
-  res.send(req.user);
-});
+app.get(
+  '/admin/dashboard',
+  passport.authenticate('jwt', { session: false }),
+  function(req, res) {
+    res.send(req.user);
+  }
+);
 
 app.use(cookieParser());
 
@@ -75,9 +76,10 @@ passport.use(
     (email, password, done) => {
       try {
         connection.query(
-          `select * from users where email=?`,
+          `select * from Utilisateurs where email=?`,
           [email],
           (err, rows) => {
+            console.log(rows);
             if (err) {
               return done(err, 'Not good enouth');
             } else if (!rows[0]) {
@@ -87,8 +89,6 @@ passport.use(
             } else if (bcrypt.compareSync(password, rows[0].password)) {
               const user = {
                 email: rows[0].email,
-                prenom: rows[0].name,
-                nom: rows[0].lastname,
               };
               return done(null, user);
             } else {
