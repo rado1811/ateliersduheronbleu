@@ -4,11 +4,13 @@ import AteliersList from '../../../containers/AtelierList';
 import AtelierDetail from '../../../containers/AtelierDetail';
 import FormParticipants from './FormParticipants';
 import Footer from '../footer/Footer';
+import TemporaryDrawer from '../navbar/TemporaryDrawer';
 
 import './Ateliers.css';
 
 const Ateliers = () => (
   <div style={{ background: '#F2F2F2', marginTop: 60 }}>
+    <TemporaryDrawer />
     <div className="shapeAteliers">
       <Grid container>
         <Grid item md={2}>

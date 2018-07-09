@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
-import TemporaryDrawer from './components/client/navbar/TemporaryDrawer';
 import Ateliers from './components/client/pageAteliers/Ateliers';
 import AtelierHome from './containers/AtelierHome';
 import Intervenants from './components/client/Intervenants';
@@ -16,7 +15,6 @@ import SignIn from './containers/securite/SignIn';
 
 const App = () => (
   <div>
-    <TemporaryDrawer />
     <Switch>
       <Route exact path="/" component={AtelierHome} />
       <Route path="/ateliers" component={Ateliers} />

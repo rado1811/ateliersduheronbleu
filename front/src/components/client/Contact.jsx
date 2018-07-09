@@ -5,8 +5,9 @@ import Grid from '@material-ui/core/Grid';
 import AlertDialogSlide from './pageAteliers/AlertDialogSlide';
 import { withStyles } from '@material-ui/core/styles';
 import Footer from '../client/footer/Footer';
+import TemporaryDrawer from '../client/navbar/TemporaryDrawer';
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -63,7 +64,7 @@ class Contact extends Component {
     }
   };
 
-  showDialogueBox = whatIsMissing => {
+  showDialogueBox = (whatIsMissing) => {
     this.setState({
       messageDialogue: whatIsMissing,
       alert: true,
@@ -81,11 +82,11 @@ class Contact extends Component {
     this.setState({ open: !this.state.open });
   };
 
-  handleChange = name => event => {
+  handleChange = (name) => (event) => {
     this.setState({ [name]: event.target.checked });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     if (this.formSend()) {
       fetch('/mail', {
@@ -95,14 +96,14 @@ class Contact extends Component {
         }),
         body: JSON.stringify(this.state),
       })
-        .then(res => res.json())
+        .then((res) => res.json())
         .then(
-          res =>
+          (res) =>
             this.setState({
               flash: res.flash,
               open: true,
             }),
-          err =>
+          (err) =>
             this.setState({
               flash: err.flash,
             })
@@ -113,28 +114,28 @@ class Contact extends Component {
     }
   };
 
-  updateEmailField = event => {
+  updateEmailField = (event) => {
     this.setState({
       email: event.target.value,
     });
   };
 
-  updateFirstNameField = event => {
+  updateFirstNameField = (event) => {
     this.setState({
       prenom: event.target.value,
     });
   };
-  updateLastNameField = event => {
+  updateLastNameField = (event) => {
     this.setState({
       nom: event.target.value,
     });
   };
-  updatePhoneField = event => {
+  updatePhoneField = (event) => {
     this.setState({
       tel: event.target.value,
     });
   };
-  updateMessageField = event => {
+  updateMessageField = (event) => {
     this.setState({
       message: event.target.value,
     });
@@ -144,6 +145,7 @@ class Contact extends Component {
     const { classes } = this.props;
     return (
       <div>
+        <TemporaryDrawer />
         <Paper
           elevation={4}
           style={{

@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
 import { TextField, Button, Snackbar } from 'material-ui';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
 import AlertDialogSlide from '../../components/client/pageAteliers/AlertDialogSlide';
 
 let hint = '';
 const faible = /[a-z]{1,5}/g;
 const medium = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{5,}$/g;
 const lastLevel = /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-.]).{6,}/g;
+
+const styles = (theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+});
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +34,8 @@ class SignUp extends Component {
       alert: false,
       messageDialogue: [],
       input: '',
+      infosUser: false,
+      redirect: false,
     };
   }
   formSend = () => {
@@ -78,21 +93,36 @@ class SignUp extends Component {
       })
         .then((res) => res.json())
         .then(
-          (res) =>
+          (res) => {
             this.setState({
               flash: res.flash,
               open: true,
-            }),
-          (err) =>
+              infosUser: res.user,
+              redirect: true,
+            });
+            this.props.dispatch({
+              type: 'CREATE_SESSION',
+              user: res.user,
+              token: res.token,
+              message: res.message,
+            });
+          },
+          (err) => {
             this.setState({
               flash: err.flash,
-            })
+            });
+          }
         );
-      // this.props.history.push(`/zfesg4685f4dqsfv46es8qz4df`);
     } else {
       this.setState({ flash: 'Form not conform', open: true });
     }
   };
+
+  componentDidUpdate() {
+    if (this.state.redirect) {
+      this.props.history.push('/zfesg4685f4dqsfv46es8qz4df');
+    }
+  }
 
   updateEmailField = (event) => {
     this.setState({
@@ -138,107 +168,114 @@ class SignUp extends Component {
 ======== RENDER ==========
 */
   render() {
+    const { classes } = this.props;
     return (
-      <Paper
-        style={{
-          marginTop: 70,
-        }}
-      >
-        <h2>Sign Up !</h2>
-        <form onSubmit={this.handleSubmit} style={{ margin: 40 }}>
-          <div>
-            <TextField
-              id="name"
-              type="email"
-              className="form-control"
-              name="email"
-              placeholder="Email"
-              onChange={this.updateEmailField}
-              fullWidth
-              margin="normal"
-            />
-          </div>
-          <div>
-            {/* Mot de passe */}
-            <TextField
-              type="password"
-              className="form-control"
-              aria-describedby="emailHelp"
-              placeholder="New password"
-              onChange={this.updatePassWordField}
-              fullWidth
-              helperText={hint}
-              margin="normal"
-            />
-          </div>
-          <div>
-            {/* Vérification du mot de passe */}
-            <TextField
-              type="password"
-              className="form-control"
-              aria-describedby="emailHelp"
-              placeholder="Enter the same password"
-              onChange={this.updateCheckPassWordField}
-              fullWidth
-              helperText={
-                this.state.password === this.state.checkPassWord &&
-                this.state.checkPassWord.length > 0
-                  ? 'Mots de passes concordants'
-                  : 'Veuillez rentrer le même mot de passe'
-              }
-              margin="normal"
-            />
-          </div>
-          <div>
-            {/* Prénom */}
-            <TextField
-              type="text"
-              className="form-control"
-              name="prenom"
-              placeholder="Jean"
-              onChange={this.updateFirstNameField}
-              fullWidth
-              margin="normal"
-            />
-          </div>
-          <div>
-            {/* Nom */}
-            <TextField
-              type="text"
-              className="form-control"
-              name="nom"
-              placeholder="Dujardin"
-              onChange={this.updateLastNameField}
-              fullWidth
-              margin="normal"
-            />
-          </div>
-          <div>
-            <Button
-              onClick={this.handleSubmit}
-              type="submit"
-              value="Submit"
-              variant="raised"
-              color="secondary"
+      <div className={classes.root}>
+        <Grid container spacing={24}>
+          <Grid item xs={12}>
+            <Paper
+              style={{
+                marginTop: 70,
+              }}
             >
-              Hit me
-            </Button>
-          </div>
-        </form>
-        <Snackbar
-          open={this.state.open}
-          message={this.state.flash}
-          autoHideDuration={5000}
-          onClose={this.handleToogle}
-        />
-        <AlertDialogSlide
-          showDialogueBox={this.state.alert}
-          hideDialogueBox={this.hideDialogueBox}
-          messageDialogue={this.state.messageDialogue}
-        />
-      </Paper>
+              <h2>Sign Up !</h2>
+              <form onSubmit={this.handleSubmit} style={{ margin: 40 }}>
+                <div>
+                  <TextField
+                    id="name"
+                    type="email"
+                    className="form-control"
+                    name="email"
+                    placeholder="Email"
+                    onChange={this.updateEmailField}
+                    fullWidth
+                    margin="normal"
+                  />
+                </div>
+                <div>
+                  {/* Mot de passe */}
+                  <TextField
+                    type="password"
+                    className="form-control"
+                    aria-describedby="emailHelp"
+                    placeholder="New password"
+                    onChange={this.updatePassWordField}
+                    fullWidth
+                    helperText={hint}
+                    margin="normal"
+                  />
+                </div>
+                <div>
+                  {/* Vérification du mot de passe */}
+                  <TextField
+                    type="password"
+                    className="form-control"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter the same password"
+                    onChange={this.updateCheckPassWordField}
+                    fullWidth
+                    helperText={
+                      this.state.password === this.state.checkPassWord &&
+                      this.state.checkPassWord.length > 0
+                        ? 'Mots de passes concordants'
+                        : 'Veuillez rentrer le même mot de passe'
+                    }
+                    margin="normal"
+                  />
+                </div>
+                <div>
+                  {/* Prénom */}
+                  <TextField
+                    type="text"
+                    className="form-control"
+                    name="prenom"
+                    placeholder="Jean"
+                    onChange={this.updateFirstNameField}
+                    fullWidth
+                    margin="normal"
+                  />
+                </div>
+                <div>
+                  {/* Nom */}
+                  <TextField
+                    type="text"
+                    className="form-control"
+                    name="nom"
+                    placeholder="Dujardin"
+                    onChange={this.updateLastNameField}
+                    fullWidth
+                    margin="normal"
+                  />
+                </div>
+                <div>
+                  <Button
+                    onClick={this.handleSubmit}
+                    type="submit"
+                    value="Submit"
+                    variant="raised"
+                    color="secondary"
+                  >
+                    Hit me
+                  </Button>
+                </div>
+              </form>
+              <Snackbar
+                open={this.state.open}
+                message={this.state.flash}
+                autoHideDuration={5000}
+                onClose={this.handleToogle}
+              />
+              <AlertDialogSlide
+                showDialogueBox={this.state.alert}
+                hideDialogueBox={this.hideDialogueBox}
+                messageDialogue={this.state.messageDialogue}
+              />
+            </Paper>
+          </Grid>
+        </Grid>
+      </div>
     );
   }
 }
 
-export default SignUp;
+export default withStyles(styles)(SignUp);

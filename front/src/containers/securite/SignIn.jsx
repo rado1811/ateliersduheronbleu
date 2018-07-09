@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { TextField, Button, Snackbar } from 'material-ui';
+import Grid from '@material-ui/core/Grid';
 import AlertDialogSlide from '../../components/client/pageAteliers/AlertDialogSlide';
 
 class SignIn extends Component {
@@ -14,6 +15,7 @@ class SignIn extends Component {
       alert: false,
       messageDialogue: [],
       infosUser: false,
+      redirect: false,
     };
   }
   /*
@@ -78,23 +80,24 @@ class SignIn extends Component {
       })
         .then((res) => res.json())
         .then(
-          ((res) => (
+          (res) => {
             this.setState({
               flash: res.flash,
               open: true,
               infosUser: res.user,
-            }),
+            });
             this.props.dispatch({
               type: 'CREATE_SESSION',
               user: res.user,
               token: res.token,
               message: res.message,
-            })
-          ),
-          (err) =>
+            });
+          },
+          (err) => {
             this.setState({
               flash: err.flash,
-            }))
+            });
+          }
         );
     } else {
       this.setState({ flash: 'Formulaire non conforme', open: true });
@@ -116,75 +119,81 @@ class SignIn extends Component {
 ======== RENDER ==========
 */
   render() {
-    const { flash } = this.props;
-    console.log(flash);
     return (
       <div>
-        <h2>Sign In !</h2>
-        <form
-          action="/login"
-          method="post"
-          onSubmit={this.handleSubmit}
-          style={{ margin: 40 }}
-        >
-          <div>
-            <TextField
-              id="name"
-              type="email"
-              className="form-control"
-              name="email"
-              placeholder="Email"
-              onChange={this.updateEmailField}
-              fullWidth
-              margin="normal"
-            />
-          </div>
-          <div>
-            {/* Mot de passe */}
-            <TextField
-              type="password"
-              name="password"
-              className="form-control"
-              aria-describedby="emailHelp"
-              placeholder="New password"
-              onChange={this.updatePassWordField}
-              fullWidth
-              margin="normal"
-            />
-          </div>
-          <div>
-            <Button
-              onClick={this.handleSubmit}
-              type="submit"
-              value="Submit"
-              variant="raised"
-              color="secondary"
-              style={{ marginTop: 30 }}
+        <Grid container spacing={24}>
+          <Grid item xs={12}>
+            <form
+              action="/login"
+              method="post"
+              onSubmit={this.handleSubmit}
+              style={{ margin: 40 }}
             >
-              Hit me
-            </Button>
-          </div>
-        </form>
-        <Snackbar
-          open={this.state.open}
-          message={this.state.flash}
-          autoHideDuration={4000}
-          onClose={this.handleToogle}
-        />
-        <AlertDialogSlide
-          showDialogueBox={this.state.alert}
-          hideDialogueBox={this.hideDialogueBox}
-          messageDialogue={this.state.messageDialogue}
-        />
+              <h2 style={{ marginTop: 60 }}>
+                Connectez vous à votre espace d'administration
+              </h2>
+              <div>
+                <TextField
+                  id="name"
+                  type="email"
+                  className="form-control"
+                  name="email"
+                  placeholder="Email"
+                  onChange={this.updateEmailField}
+                  fullWidth
+                  margin="normal"
+                />
+              </div>
+              <div>
+                {/* Mot de passe */}
+                <TextField
+                  type="password"
+                  name="password"
+                  className="form-control"
+                  aria-describedby="emailHelp"
+                  placeholder="New password"
+                  onChange={this.updatePassWordField}
+                  fullWidth
+                  margin="normal"
+                />
+              </div>
+              <div>
+                <Button
+                  onClick={this.handleSubmit}
+                  type="submit"
+                  value="Submit"
+                  variant="raised"
+                  color="secondary"
+                  style={{ margin: 30 }}
+                >
+                  Valider
+                </Button>
+              </div>
+            </form>
+            <Snackbar
+              open={this.state.open}
+              message={this.state.flash}
+              autoHideDuration={4000}
+              onClose={this.handleToogle}
+            />
+            <AlertDialogSlide
+              showDialogueBox={this.state.alert}
+              hideDialogueBox={this.hideDialogueBox}
+              messageDialogue={this.state.messageDialogue}
+            />
+          </Grid>
+        </Grid>
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  console.log('Ici State de mapStateToProps : ', state);
   return {
     flash: state.auth.token,
   };
 }
-export default connect(mapStateToProps)(SignIn);
+export default connect(
+  mapStateToProps,
+  null
+)(SignIn);
