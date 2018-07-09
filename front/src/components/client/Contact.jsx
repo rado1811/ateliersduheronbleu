@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import compose from 'recompose/compose';
+import { fetchIntervenants } from '../../actions/intervenants';
 import { TextField, Button, Snackbar } from 'material-ui';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import AlertDialogSlide from './pageAteliers/AlertDialogSlide';
+import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Footer from '../client/footer/Footer';
+import AlertDialogSlide from './pageAteliers/AlertDialogSlide';
 
 const styles = theme => ({
   container: {
@@ -36,6 +40,10 @@ class Contact extends Component {
       messageDialogue: [],
       input: '',
     };
+  }
+
+  componentDidMount() {
+    this.props.fetchIntervenants();
   }
 
   formSend = () => {
@@ -165,7 +173,7 @@ class Contact extends Component {
               <form
                 className={classes.container}
                 onSubmit={this.handleSubmit}
-                style={{ margin: 40 }}
+                style={{ margin: 30, marginTop: 10 }}
               >
                 <h2 style={{ textAlign: 'center' }}>Une question ?</h2>
                 <TextField
@@ -244,13 +252,18 @@ class Contact extends Component {
                     Envoyer
                   </Button>
                 </div>
+                <div style={{ marginTop: '20px' }}>
+                  <Typography variant="title">
+                    Vous pouvez également nous contacter par téléphone au <br/>{this.props.intervenants[0].tel}
+                  </Typography>
+                </div>
               </form>
             </Grid>
             <Grid item xs={12} sm={6} style={{ width: '80' }}>
               <img
-                style={{ height: '1000', width: 'auto' }}
+                style={{ height: 'auto', width: '100%', backgroundSize: 'contain'
+              }}
                 src={`/images/envol.jpg`}
-
                 alt="heron"
               />
             </Grid>
@@ -273,4 +286,14 @@ class Contact extends Component {
   }
 }
 
-export default withStyles(styles)(Contact);
+function mapStateToProps(state) {
+  return { intervenants: state.intervenants.intervenants };
+}
+
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    { fetchIntervenants }
+  )
+)(Contact);
