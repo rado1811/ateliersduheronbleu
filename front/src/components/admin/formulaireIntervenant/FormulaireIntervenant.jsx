@@ -80,8 +80,8 @@ class FormulaireIntervenant extends Component {
     })
       .then((res) => res.json())
       .then(
-        (res) => this.setState({ flash: 'Formulaire modifié', open: true }),
-        (err) => this.setState({ flash: 'Formulaire modifié', open: true })
+        (res) => this.setState({ flash: 'Intervenant modifié', open: true }),
+        (err) => this.setState({ flash: 'Intervenant modifié', open: true })
       )
       .then(
         this.setState({

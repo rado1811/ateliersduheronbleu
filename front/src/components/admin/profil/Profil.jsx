@@ -1,12 +1,103 @@
-
 import React, { Component } from 'react';
-import { fetchIntervenants, goEditIntervenant } from '../../../actions/intervenants';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
-
+import Snackbar from '@material-ui/core/Snackbar';
+import { bindActionCreators } from 'redux';
+import ButtonFormulaireIntervenant from '../../admin/formulaireIntervenant/ButtonFormulaireIntervenant';
+import { goEditIntervenant } from '../../../actions/intervenants';
+import Paper from '@material-ui/core/Paper';
 
 class ProfilAdmin extends Component {
-  state = {}
-  render() { 
+  constructor(props) {
+    super(props);
+    if (this.props.isFromEditIntervenant) {
+      this.state = {
+        nom: this.props.intervenants[this.props.indexIntervenantFromEdit].nom,
+        prenom: this.props.intervenants[this.props.indexIntervenantFromEdit]
+          .prenom,
+        tel: this.props.intervenants[this.props.indexIntervenantFromEdit].tel,
+        email: this.props.intervenants[this.props.indexIntervenantFromEdit]
+          .email,
+        parcours: this.props.intervenants[this.props.indexIntervenantFromEdit]
+          .parcours,
+        metier: this.props.intervenants[this.props.indexIntervenantFromEdit]
+          .metier,
+        citation: this.props.intervenants[this.props.indexIntervenantFromEdit]
+          .citation,
+        id_intervenant: this.props.intervenants[
+          this.props.indexIntervenantFromEdit
+        ].id_intervenant,
+      };
+    } else {
+      this.state = {
+        nom: '',
+        prenom: '',
+        tel: '',
+        email: '',
+        parcours: '',
+        metier: '',
+        citation: '',
+      };
+    }
+  }
+
+  handleChange = (e) => {
+    const change = {};
+    change[e.target.name] = e.target.value;
+    this.setState(change);
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    fetch('/api/intervenants', {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify(this.state),
+    })
+      .then((res) => res.json())
+      .then(
+        (res) =>
+          this.setState({ flash: 'nouvel intervenant enregistré', open: true }),
+        (err) => this.setState({ flash: 'Formulaire incomplet', open: true })
+      );
+  };
+
+  // ========== UPDATE =========
+  handleUpdate = (event) => {
+    event.preventDefault();
+    let data = {
+      ...this.state,
+    };
+    fetch('/api/intervenants', {
+      method: 'PUT',
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify({ data }),
+    })
+      .then((res) => res.json())
+      .then(
+        (res) => this.setState({ flash: 'Intervenant modifié', open: true }),
+        (err) => this.setState({ flash: 'Intervenant modifié', open: true })
+      )
+      .then(
+        this.setState({
+          nom: '',
+          prenom: '',
+          tel: '',
+          email: '',
+          parcours: '',
+          metier: '',
+          citation: '',
+        })
+      );
+  };
+
+  render() {
+    const { isFromEditIntervenant } = this.props;
     return (
       <Grid
         style={{
@@ -15,8 +106,16 @@ class ProfilAdmin extends Component {
       >
         <Paper style={{ padding: 20 }} elevation={24}>
           <div>
-            <h1 style={{ textAlign: 'center' }}>Profil de l'Adminstratrice / Fondatrice</h1>
-            <form>
+            {isFromEditIntervenant ? (
+              <h1 style={{ textAlign: 'center' }}>Modifier un intervenant</h1>
+            ) : (
+              <h1 style={{ textAlign: 'center' }}>Ajouter un intervenant</h1>
+            )}
+            <form
+              onSubmit={
+                isFromEditIntervenant ? this.handleUpdate : this.handleSubmit
+              }
+            >
               <Grid container spacing={24}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -127,10 +226,17 @@ class ProfilAdmin extends Component {
           />
         </Paper>
       </Grid>
-
-
-      )
+    );
   }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      goEditIntervenant,
+    },
+    dispatch
+  );
 }
 
 function mapStateToProps(state) {
