@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import BoutonContact from '../client/BoutonContact';
 import { fetchIntervenants } from '../../actions/intervenants';
 import IntervenantsTile from './IntervenantsTile';
+import Footer from './footer/Footer';
 import './intervenants.css';
 
 class Intervenants extends Component {
@@ -102,6 +103,7 @@ class Intervenants extends Component {
             </div>
           </Grid>
         </Grid>
+        <Footer />
       </div>
     );
   }
