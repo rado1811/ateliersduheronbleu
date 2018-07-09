@@ -2,10 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { goEditIntervenant } from '../../../actions/intervenants';
-import compose from 'recompose/compose';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -19,7 +15,6 @@ import MenuList from '@material-ui/core/MenuList';
 
 const Dashboard = props => <Link to="/admin/gestion" {...props} />;
 const ContainerDashboard = props => <Link to="/admin/administration" {...props} />;
-const Profil = props => <Link to="/admin/profil" {...props} />;
 
 const drawerWidth = 150;
 
@@ -84,15 +79,6 @@ class MenuAdmin extends React.Component {
           Administration
           </MenuItem>
           <Divider />
-          <MenuItem 
-            button
-            component={Profil}
-            aria-label="Edit"
-            onClick={() => goEditIntervenant(0)}
-          >
-          Profil
-          </MenuItem>
-          <br />
         </MenuList>
       </div>
     );
@@ -148,19 +134,4 @@ MenuAdmin.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    {
-      goEditIntervenant,
-    },
-    dispatch
-  );
-}
-
-export default compose(
-  withStyles(styles,
-    { withTheme: true }),
-  connect(
-    null, mapDispatchToProps
-  )
-)(MenuAdmin);
+export default withStyles(styles, { withTheme: true })(MenuAdmin);

@@ -197,7 +197,6 @@ class DashIntervenants extends React.Component {
             <EnhancedTableHead rowCount={this.props.intervenants.length} />
             <TableBody>
               {this.props.intervenants
-                .slice(1)
                 .map((intervenant, i) => {
                   return (
                     <TableRow hover key={intervenant.id_intervenant}>
@@ -208,17 +207,23 @@ class DashIntervenants extends React.Component {
                       <TableCell component="th" scope="row" padding="none">
                         {intervenant.prenom}
                       </TableCell>
-                      <TableCell>
-                        <IconButton aria-label="Delete">
-                          <DeleteIcon
-                            onClick={() =>
-                              this.deleteIntervenants(
-                                intervenant.id_intervenant
-                              )
-                            }
-                          />
-                        </IconButton>
-                      </TableCell>
+                      { i === 0 ? (
+                        <TableCell />) : (
+                        <TableCell>
+                          <Tooltip title="Supprimer">
+                            <IconButton aria-label="Delete">
+                              <DeleteIcon
+                                onClick={() =>
+                                  this.deleteIntervenants(
+                                    intervenant.id_intervenant
+                                  )
+                                }
+                              />
+                            </IconButton>
+                          </Tooltip>
+                        </TableCell>
+                        )       
+                      }
                       <TableCell>
                         <Tooltip title="Modifier">
                           <IconButton

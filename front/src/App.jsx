@@ -11,7 +11,6 @@ import MenuAdmin from './components/admin/menuAdmin/MenuAdmin';
 import Admin from './components/admin/formulaireIntervenant/Admin';
 import Dashboard from './components/admin/interfaceGestion/Dashboard';
 import ContainerDashboard from './components/admin/interfaceAdministration/ContainerDashboard';
-import Profil from './components/admin/profil/Profil';
 
 const App = () => (
   <div>
@@ -26,7 +25,7 @@ const App = () => (
       <Route exact path="/admin/intervenant" component={Admin} />
       <Route exact path="/admin/gestion" component={Dashboard} />
       <Route exact path="/admin/administration" component={ContainerDashboard} />
-      <Route exact path="/admin/profil" component={Profil} />
+      <Route exact path="/admin/profilAdmin" component={Admin} />
     </Switch>
   </div>
 );
