@@ -197,12 +197,10 @@ class DashIntervenants extends React.Component {
             <EnhancedTableHead rowCount={this.props.intervenants.length} />
             <TableBody>
               {this.props.intervenants
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((intervenant, i) => {
                   return (
-                    <TableRow
-                      hover
-                      key={intervenant.id_intervenant}
-                    > 
+                    <TableRow hover key={intervenant.id_intervenant}> 
                       <TableCell />
                       <TableCell component="th" scope="row" padding="none">
                         {intervenant.nom}

@@ -175,7 +175,6 @@ class DashAteliers extends React.Component {
   };
 
   render() {
-    console.log(this.props.ateliers)
     const { rowsPerPage, page } = this.state;
     const { classes, goEdit } = this.props;
     const emptyRows =
