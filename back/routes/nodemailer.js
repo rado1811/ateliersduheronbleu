@@ -58,7 +58,6 @@ router.post('/', (req, res) => {
       };
     
       transporter.sendMail(mail, (err) => {
-        console.log(mailContact[0].email)
         if (err) {
           res.json({
             msg: 'fail',
