@@ -199,7 +199,10 @@ class DashIntervenants extends React.Component {
               {this.props.intervenants
                 .map((intervenant, i) => {
                   return (
-                    <TableRow hover key={intervenant.id_intervenant}>
+                    <TableRow
+                      hover
+                      key={intervenant.id_intervenant}
+                    > 
                       <TableCell />
                       <TableCell component="th" scope="row" padding="none">
                         {intervenant.nom}
@@ -208,7 +211,9 @@ class DashIntervenants extends React.Component {
                         {intervenant.prenom}
                       </TableCell>
                       { i === 0 ? (
-                        <TableCell />) : (
+                        <TableCell style={{ color : "red" }}>
+                          Administrateur
+                        </TableCell>) : (
                         <TableCell>
                           <Tooltip title="Supprimer">
                             <IconButton aria-label="Delete">

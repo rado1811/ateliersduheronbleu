@@ -111,6 +111,10 @@ class FormulaireIntervenant extends Component {
             ) : (
               <h1 style={{ textAlign: 'center' }}>Ajouter un intervenant</h1>
             )}
+            {this.state.id_intervenant === 1 ? (
+              <h1 style={{ textAlign: 'center', color: 'red' }}>Compte administrateur (ne peut être supprimé)</h1>
+            ) : null
+            }
             <form
               onSubmit={
                 isFromEditIntervenant ? this.handleUpdate : this.handleSubmit
@@ -144,6 +148,10 @@ class FormulaireIntervenant extends Component {
               </Grid>
               <Grid container spacing={24}>
                 <Grid item xs={12} sm={6}>
+                  {this.state.id_intervenant === 1 ? (
+                    <h5 style={{ color: 'red' }}>Téléphone apparaissant sur le formulaire de contact: </h5>
+                    ) : null
+                  }
                   <TextField
                     style={{ margin: 15 }}
                     required
@@ -155,6 +163,10 @@ class FormulaireIntervenant extends Component {
                   <br />
                 </Grid>
                 <Grid item xs={12} sm={6}>
+                  {this.state.id_intervenant === 1 ? (
+                    <h5 style={{ color: 'red' }}>Email de réception des formulaires client: </h5>
+                    ) : null
+                  }
                   <TextField
                     style={{ margin: 15 }}
                     required
