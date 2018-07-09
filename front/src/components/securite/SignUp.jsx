@@ -97,7 +97,6 @@ class SignUp extends Component {
             this.setState({
               flash: res.flash,
               open: true,
-              infosUser: res.user,
               redirect: true,
             });
             this.props.dispatch({
@@ -114,7 +113,7 @@ class SignUp extends Component {
           }
         );
     } else {
-      this.setState({ flash: 'Form not conform', open: true });
+      this.setState({ flash: 'Formulaire conforme', open: true });
     }
   };
 
@@ -143,7 +142,7 @@ class SignUp extends Component {
       hint = `Mot de passe fort`;
     } else {
       hint =
-        'Votre mot de passe doit contenir 6 caractères, une majuscule et 2 CARACTERES SPECIAUX';
+        'Votre mot de passe doit contenir : 7 caractères, 1 majuscule et 2 CARACTERES SPECIAUX';
     }
   };
 
@@ -155,12 +154,12 @@ class SignUp extends Component {
 
   updateFirstNameField = (event) => {
     this.setState({
-      nom: event.target.value,
+      prenom: event.target.value,
     });
   };
   updateLastNameField = (event) => {
     this.setState({
-      prenom: event.target.value,
+      nom: event.target.value,
     });
   };
 
@@ -171,22 +170,24 @@ class SignUp extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Grid container spacing={24}>
+        <Grid container spacing={24} style={{ width: 100 }}>
           <Grid item xs={12}>
             <Paper
               style={{
                 marginTop: 70,
               }}
             >
-              <h2>Sign Up !</h2>
               <form onSubmit={this.handleSubmit} style={{ margin: 40 }}>
+                <h2>Nouvel utilisateur</h2>
                 <div>
                   <TextField
                     id="name"
+                    label="Adresse mail"
                     type="email"
+                    helperText="Veuilliez inscrire votre adresse mail ici"
                     className="form-control"
                     name="email"
-                    placeholder="Email"
+                    placeholder="jean.dujardin@gmail.com"
                     onChange={this.updateEmailField}
                     fullWidth
                     margin="normal"
@@ -196,9 +197,9 @@ class SignUp extends Component {
                   {/* Mot de passe */}
                   <TextField
                     type="password"
+                    label="Nouveau mot de passe"
                     className="form-control"
                     aria-describedby="emailHelp"
-                    placeholder="New password"
                     onChange={this.updatePassWordField}
                     fullWidth
                     helperText={hint}
@@ -209,9 +210,10 @@ class SignUp extends Component {
                   {/* Vérification du mot de passe */}
                   <TextField
                     type="password"
+                    label="Vérification du mot de passe"
                     className="form-control"
                     aria-describedby="emailHelp"
-                    placeholder="Enter the same password"
+                    placeholder="Entrez le même mot de passe"
                     onChange={this.updateCheckPassWordField}
                     fullWidth
                     helperText={
@@ -227,6 +229,7 @@ class SignUp extends Component {
                   {/* Prénom */}
                   <TextField
                     type="text"
+                    label="Prénom"
                     className="form-control"
                     name="prenom"
                     placeholder="Jean"
@@ -239,6 +242,7 @@ class SignUp extends Component {
                   {/* Nom */}
                   <TextField
                     type="text"
+                    label="Nom"
                     className="form-control"
                     name="nom"
                     placeholder="Dujardin"
@@ -254,6 +258,7 @@ class SignUp extends Component {
                     value="Submit"
                     variant="raised"
                     color="secondary"
+                    style={{ margin: 30 }}
                   >
                     Hit me
                   </Button>

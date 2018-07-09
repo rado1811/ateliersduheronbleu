@@ -9,9 +9,9 @@ import AdminAtelier from './components/admin/formulaire/atelier/formulaireAtelie
 import AdminAccueil from './components/admin/menuAdmin/AdminAcceuil';
 import Admin from './components/admin/formulaireIntervenant/Admin';
 import Dashboard from './components/admin/interfaceGestion/Dashboard';
-import ContainerSecurite from './containers/securite/ContainerSecurite';
+import ContainerSecurite from './components/securite/ContainerSecurite';
 import ContainerDashboard from './components/admin/interfaceAdministration/ContainerDashboard';
-import SignIn from './containers/securite/SignIn';
+import SignIn from './components/securite/SignIn';
 
 const App = () => (
   <div>
