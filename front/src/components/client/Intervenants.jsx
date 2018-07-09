@@ -45,7 +45,7 @@ class Intervenants extends Component {
               <ListSubheader component="div" style={{ textAlign: 'center', fontSize: '1.5em' }}>La fondatrice</ListSubheader>
             </GridListTile>
             <GridListTile>
-              <img src={this.props.intervenants[0].photo} alt={this.props.intervenants[0].nom} />
+              <img src={`/images/${this.props.intervenants[0].photo}`} alt={this.props.intervenants[0].nom} />
               <GridListTileBar
                 title={this.props.intervenants[0].prenom + ' ' + this.props.intervenants[0].nom}
                 subtitle={<span>{this.props.intervenants[0].metier}</span>}
