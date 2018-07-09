@@ -56,12 +56,6 @@ app.use((err, req, res) => {
   res.status(err.status || 500);
   res.json(err);
 });
-// catch 404 and forward to error handler
-app.use((next) => {
-  const err = new Error('Not Found');
-  err.sendStatus(404);
-  next(err);
-});
 
 // Passport
 passport.use(
@@ -117,6 +111,13 @@ passport.use(
     }
   )
 );
+
+// catch 404 and forward to error handler
+app.use((next) => {
+  const err = new Error('Not Found');
+  err.sendStatus(404);
+  next(err);
+});
 
 // Handle uncaughtException
 process.on('uncaughtException', (err) => {

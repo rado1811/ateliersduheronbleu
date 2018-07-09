@@ -11,6 +11,7 @@ class AtelierDetail extends Component {
   componentDidMount() {
     this.props.fetchAteliers();
   }
+
   render() {
     return (
       <div className="AteliersDetail">
@@ -57,72 +58,72 @@ class AtelierDetail extends Component {
             </Paper>
           </div>
         ) : (
-            <div>
-              <Paper elevation={4} style={{ padding: 20 }}>
+          <div>
+            <Paper elevation={4} style={{ padding: 20 }}>
+              <Grid
+                container
+                style={{
+                  height: '80vh',
+                  width: 'auto',
+                }}
+              >
                 <Grid
-                  container
-                  style={{
-                    height: '80vh',
-                    width: 'auto',
-                  }}
+                  media="screen and (max-width: 440px)"
+                  className="image-container"
+                  item
+                  md={6}
+                  sm={1}
+                  key={this.props.ateliers.key}
                 >
-                  <Grid
-                    media="screen and (max-width: 440px)"
-                    className="image-container"
-                    item
-                    md={6}
-                    sm={1}
-                    key={this.props.ateliers.key}
-                  >
-                    <div>
-                      <img
-                        src={`/images/${this.props.ateliers.photo}`}
-                        alt="heron"
-                        style={{ height: '80vh', width: '80vw' }}
-                        className="images"
-                      />
-                    </div>
-                  </Grid>
-                  <Grid>
-                    <div
-                      className="overlay"
-                      style={{
-                        height: '20vh',
-                        width: '60vw',
-                        fontSize: 14,
-                        marginLeft: '10vw',
-                        fontFamily: 'Montserrat',
-                      }}
-                    >
-                      <h1>{this.props.ateliers.nom}</h1>
-                      <h3>
-                        <Moment format="DD/MM/YYYY">
-                          {this.props.ateliers.debut}
-                        </Moment>
-                      </h3>
-                      <b>
-                        <img
-                          src="../images/logoHeron.png"
-                          width="4%"
-                          alt="heron"
-                        />
-                        <h3>En chemin, vous trouverez :</h3>
-                      </b>
-                      <p>{this.props.ateliers.contenu}</p>
-                      <b>
-                        <h3>Programme :</h3>
-                      </b>
-                      <p>{this.props.ateliers.programme}</p>
-                      <b>
-                        <h3>Intervenants :</h3>
-                      </b>
-                      <p>{this.props.ateliers.intervenant}</p>
-                    </div>
-                  </Grid>
+                  <div>
+                    <img
+                      src={`/images/${this.props.ateliers.photo}`}
+                      alt="heron"
+                      style={{ height: '80vh', width: '80vw' }}
+                      className="images"
+                    />
+                  </div>
                 </Grid>
-              </Paper>
-            </div>
-          )}
+                <Grid>
+                  <div
+                    className="overlay"
+                    style={{
+                      height: '20vh',
+                      width: '60vw',
+                      fontSize: 14,
+                      marginLeft: '10vw',
+                      fontFamily: 'Montserrat',
+                    }}
+                  >
+                    <h1>{this.props.ateliers.nom}</h1>
+                    <h3>
+                      <Moment format="DD/MM/YYYY">
+                        {this.props.ateliers.debut}
+                      </Moment>
+                    </h3>
+                    <b>
+                      <img
+                        src="../images/logoHeron.png"
+                        width="4%"
+                        alt="heron"
+                      />
+                      <h3>En chemin, vous trouverez :</h3>
+                    </b>
+                    <p>{this.props.ateliers.contenu}</p>
+                    <b>
+                      <h3>Programme :</h3>
+                    </b>
+                    <p>{this.props.ateliers.programme}</p>
+                    <b>
+                      <h3>Intervenants :</h3>
+                    </b>
+                    <p>{this.props.ateliers.intervenant}</p>
+                  </div>
+                </Grid>
+              </Grid>
+            </Paper>
+          </div>
+        )}
       </div>
     );
   }
@@ -130,17 +131,19 @@ class AtelierDetail extends Component {
 AtelierDetail.propTypes = {
   fetchAteliers: PropTypes.func.isRequired,
   ateliers: PropTypes.shape({
+    contenu: PropTypes.string.isRequired,
+    debut: PropTypes.string.isRequired,
+    formule: PropTypes.string.isRequired,
     id_atelier: PropTypes.number.isRequired,
     id_intervenant: PropTypes.number.isRequired,
+    lieu: PropTypes.string.isRequired,
+    nb_participants: PropTypes.number.isRequired,
+    nom: PropTypes.string.isRequired,
     nom_intervenant: PropTypes.string.isRequired,
-    intervenant: PropTypes.string.isRequired,
-    debut: PropTypes.string.isRequired,
+    photo: PropTypes.string.isRequired,
+    place_disponibles: PropTypes.number.isRequired,
     prix: PropTypes.number.isRequired,
     programme: PropTypes.string.isRequired,
-    key: PropTypes.number.isRequired,
-    photo: PropTypes.string.isRequired,
-    nom: PropTypes.string.isRequired,
-    contenu: PropTypes.string.isRequired,
   }).isRequired,
 };
 

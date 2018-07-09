@@ -29,22 +29,14 @@ router.post('/signup', (req, res) => {
 router.post('/signin', (req, res) => {
   passport.authenticate('local', (err, user) => {
     if (err) {
-      console.log("erreur", err);
-      
       return res.status(500).send(`${err} dans auth/signin`);
     }
     if (!user) {
-      console.log("no user");
-      
       return res
         .status(401)
         .json({ flash: "Erreur de Mot de Passe ou d'adresse mail" });
     }
-
-
-
     const token = jwt.sign(user, 'N4bit3');
-    console.log("ok...", user, token)
     return res.json({ user, token, flash: 'Connexion validée' });
   })(req, res);
 });
