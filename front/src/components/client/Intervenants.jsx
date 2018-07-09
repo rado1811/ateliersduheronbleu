@@ -42,7 +42,7 @@ class Intervenants extends Component {
         <Grid container spacing={24}>
           <Grid item xs={12} md={4}>
             <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-              <ListSubheader component="div" style={{ textAlign: 'center'}}>La fondatrice</ListSubheader>
+              <ListSubheader component="div" style={{ textAlign: 'center', fontSize: '1.5em' }}>La fondatrice</ListSubheader>
             </GridListTile>
             <GridListTile>
               <img src={this.props.intervenants[0].photo} alt={this.props.intervenants[0].nom} />
@@ -86,7 +86,7 @@ class Intervenants extends Component {
             <div className="rootIntervenants">
               <GridList cellHeight={500}>
                 <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                  <ListSubheader component="div" style={{ textAlign: 'center', backgroundColor: 'E9E7DF'}}>Les intervenants</ListSubheader>
+                  <ListSubheader component="div" style={{ textAlign: 'center', backgroundColor: 'E9E7DF', fontSize: '1.5em' }}>Les intervenants</ListSubheader>
                 </GridListTile>
                 {this.props.intervenants.slice(1).map(intervenant => (
                   <IntervenantsTile
