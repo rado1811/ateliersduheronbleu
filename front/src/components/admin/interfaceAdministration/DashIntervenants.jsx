@@ -21,10 +21,7 @@ import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import EditIcon from '@material-ui/icons/Edit';
-import {
-  fetchIntervenants,
-  goEditIntervenant,
-} from '../../../actions/intervenants';
+import { fetchIntervenants, goEditIntervenant } from '../../../actions/intervenants';
 import Snackbar from '@material-ui/core/Snackbar';
 import { bindActionCreators } from 'redux';
 
@@ -200,7 +197,7 @@ class DashIntervenants extends React.Component {
             <EnhancedTableHead rowCount={this.props.intervenants.length} />
             <TableBody>
               {this.props.intervenants
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .slice(1)
                 .map((intervenant, i) => {
                   return (
                     <TableRow hover key={intervenant.id_intervenant}>
