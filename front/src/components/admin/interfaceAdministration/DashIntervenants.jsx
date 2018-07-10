@@ -200,7 +200,7 @@ class DashIntervenants extends React.Component {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((intervenant, i) => {
                   return (
-                    <TableRow hover key={intervenant.id_intervenant}> 
+                    <TableRow hover key={i}> 
                       <TableCell />
                       <TableCell component="th" scope="row" padding="none">
                         {intervenant.nom}
