@@ -116,22 +116,7 @@ class AtelierHome extends Component {
 }
 
 AtelierHome.propTypes = {
-  ateliers: PropTypes.arrayOf(
-    PropTypes.shape({
-      debut: PropTypes.string.isRequired,
-      formule: PropTypes.string.isRequired,
-      lieu: PropTypes.string.isRequired,
-      nb_participants: PropTypes.string.isRequired,
-      nom: PropTypes.string.isRequired,
-      photo: PropTypes.string.isRequired,
-      place_disponibles: PropTypes.number.isRequired,
-      id_atelier: PropTypes.number.isRequired,
-      id_intervenant: PropTypes.number.isRequired,
-      nom_intervenant: PropTypes.string.isRequired,
-      prix: PropTypes.number.isRequired,
-      programme: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  ateliers: PropTypes.arrayOf(Array).isRequired,
   fetchAteliers: PropTypes.func.isRequired,
 };
 

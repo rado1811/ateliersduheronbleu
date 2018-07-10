@@ -15,8 +15,8 @@ import { bindActionCreators } from 'redux';
 import compose from 'recompose/compose';
 import { selectAteliers } from '../../../actions/index';
 
-const Reserver = (props) => <Link to="/ateliers" {...props} />;
-const Atelier = (props) => <Link to="/ateliers" {...props} />;
+const Reserver = props => <Link to="/ateliers" {...props} />;
+const Atelier = props => <Link to="/ateliers" {...props} />;
 
 const styles = {
   item: {
@@ -65,7 +65,7 @@ const AtelierVignette = (props) => {
 
           <Typography component="h3">
             Places disponibles: {props.places_disponibles} <br />
-            Co-animation: {props.intervenant_prenom} {props.intervenant_nom}, Isabelle Jono
+            Co-animation: {props.intervenant_nom}, Isabelle Jono
           </Typography>
         </CardContent>
         <CardActions>
@@ -94,7 +94,6 @@ const AtelierVignette = (props) => {
 
 AtelierVignette.propTypes = {
   image: PropTypes.string.isRequired,
-  intervenant_prenom: PropTypes.string.isRequired,
   intervenant_nom: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   indexAtelier: PropTypes.number.isRequired,
@@ -106,21 +105,7 @@ AtelierVignette.propTypes = {
     card: PropTypes.string.isRequired,
     media: PropTypes.string.isRequired,
   }).isRequired,
-  ateliers: PropTypes.arrayOf(PropTypes.shape({
-    contenu: PropTypes.string.isRequired,
-    debut: PropTypes.string.isRequired,
-    formule: PropTypes.string.isRequired,
-    lieu: PropTypes.string.isRequired,
-    nb_participants: PropTypes.number.isRequired,
-    nom: PropTypes.string.isRequired,
-    photo: PropTypes.string.isRequired,
-    place_disponibles: PropTypes.number.isRequired,
-    id_atelier: PropTypes.number.isRequired,
-    id_intervenant: PropTypes.number.isRequired,
-    nom_intervenant: PropTypes.string.isRequired,
-    prix: PropTypes.number.isRequired,
-    programme: PropTypes.string.isRequired,
-  })).isRequired,
+  ateliers: PropTypes.arrayOf(Array).isRequired,
 };
 
 function mapStateToProps(state) {
