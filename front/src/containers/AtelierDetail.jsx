@@ -14,6 +14,7 @@ class AtelierDetail extends Component {
 
 
   render() {
+    console.log(this.props.ateliers)
     return (
       <div className="AteliersDetail">
         {!this.props.ateliers ? (
@@ -121,7 +122,6 @@ class AtelierDetail extends Component {
 AtelierDetail.propTypes = {
   fetchAteliers: PropTypes.func.isRequired,
   ateliers: PropTypes.shape({
-    contenu: PropTypes.string.isRequired,
     debut: PropTypes.string.isRequired,
     formule: PropTypes.string.isRequired,
     id_atelier: PropTypes.number.isRequired,
