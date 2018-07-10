@@ -2,7 +2,7 @@ import { FETCH_INTERVENANTS_BEGIN, FETCH_INTERVENANTS_SUCCESS, FETCH_INTERVENANT
 
 const initialState = {
   intervenants: [{
-    photo: '', nom: '', prenom: '', citation: '', parcours: ''
+    photo: '', nom: '', prenom: '', citation: '', parcours: '',
   }],
   loading: false,
   error: null,

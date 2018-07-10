@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import BoutonContact from '../client/BoutonContact';
 import { fetchIntervenants } from '../../actions/intervenants';
 import IntervenantsTile from './IntervenantsTile';
+import Footer from './footer/Footer';
 import './intervenants.css';
 
 class Intervenants extends Component {
@@ -41,10 +42,10 @@ class Intervenants extends Component {
         <Grid container spacing={24}>
           <Grid item xs={12} md={4}>
             <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-              <ListSubheader component="div" style={{ textAlign: 'center'}}>La fondatrice</ListSubheader>
+              <ListSubheader component="div" style={{ textAlign: 'center', fontSize: '1.5em' }}>La fondatrice</ListSubheader>
             </GridListTile>
             <GridListTile>
-              <img src={this.props.intervenants[0].photo} alt={this.props.intervenants[0].nom} />
+              <img src={`/images/${this.props.intervenants[0].photo}`} alt={this.props.intervenants[0].nom} />
               <GridListTileBar
                 title={this.props.intervenants[0].prenom + ' ' + this.props.intervenants[0].nom}
                 subtitle={<span>{this.props.intervenants[0].metier}</span>}
@@ -85,7 +86,7 @@ class Intervenants extends Component {
             <div className="rootIntervenants">
               <GridList cellHeight={500}>
                 <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                  <ListSubheader component="div" style={{ textAlign: 'center', backgroundColor: 'E9E7DF'}}>Les intervenants</ListSubheader>
+                  <ListSubheader component="div" style={{ textAlign: 'center', backgroundColor: 'E9E7DF', fontSize: '1.5em' }}>Les intervenants</ListSubheader>
                 </GridListTile>
                 {this.props.intervenants.slice(1).map(intervenant => (
                   <IntervenantsTile
@@ -102,6 +103,7 @@ class Intervenants extends Component {
             </div>
           </Grid>
         </Grid>
+        <Footer />
       </div>
     );
   }

@@ -133,8 +133,8 @@ class FormAtelier extends Component {
     })
       .then((res) => res.json())
       .then(
-        (res) => this.setState({ flash: 'Formulaire envoyé', open: true }),
-        (err) => this.setState({ flash: 'Formulaire envoyé', open: true })
+        (res) => this.setState({ flash: 'Nouvel atelier créé', open: true }),
+        (err) => this.setState({ flash: 'Formulaire incomplet', open: true })
       );
   };
   // ========== UPDATE =========
@@ -153,8 +153,8 @@ class FormAtelier extends Component {
     })
       .then((res) => res.json())
       .then(
-        (res) => this.setState({ flash: 'Formulaire modifié', open: true }),
-        (err) => this.setState({ flash: 'Formulaire modifié', open: true })
+        (res) => this.setState({ flash: 'Atelier modifié', open: true }),
+        (err) => this.setState({ flash: 'Formulaire incomplet', open: true })
       )
       .then(
         this.setState({
