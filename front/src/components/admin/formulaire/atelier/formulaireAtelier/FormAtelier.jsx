@@ -284,7 +284,7 @@ class FormAtelier extends Component {
                 <em>Selectionnez un intervenant</em>
               </MenuItem>
               {this.props.intervenants.map((item) => (
-                <MenuItem key={item.id_intervenant} value={item.id_intervenant}>
+                <MenuItem key={item.nom} value={item.nom}>
                   {item.nom} {item.prenom}
                 </MenuItem>
               ))}
