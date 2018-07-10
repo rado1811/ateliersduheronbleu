@@ -137,6 +137,7 @@ class FormAtelier extends Component {
 
     axios.post('/api/ateliers', data)
     .then(res => this.setState({ flash: 'Formulaire envoyé', open: true }));
+
   };
   // ========== UPDATE =========
   handleUpdate = (event) => {
@@ -154,8 +155,8 @@ class FormAtelier extends Component {
     })
       .then((res) => res.json())
       .then(
-        (res) => this.setState({ flash: 'Formulaire modifié', open: true }),
-        (err) => this.setState({ flash: 'Formulaire modifié', open: true })
+        (res) => this.setState({ flash: 'Atelier modifié', open: true }),
+        (err) => this.setState({ flash: 'Formulaire incomplet', open: true })
       )
       .then(
         this.setState({

@@ -21,10 +21,7 @@ import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import EditIcon from '@material-ui/icons/Edit';
-import {
-  fetchIntervenants,
-  goEditIntervenant,
-} from '../../../actions/intervenants';
+import { fetchIntervenants, goEditIntervenant } from '../../../actions/intervenants';
 import Snackbar from '@material-ui/core/Snackbar';
 import { bindActionCreators } from 'redux';
 
@@ -203,7 +200,7 @@ class DashIntervenants extends React.Component {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((intervenant, i) => {
                   return (
-                    <TableRow hover key={intervenant.id_intervenant}>
+                    <TableRow hover key={i}> 
                       <TableCell />
                       <TableCell component="th" scope="row" padding="none">
                         {intervenant.nom}
@@ -211,17 +208,25 @@ class DashIntervenants extends React.Component {
                       <TableCell component="th" scope="row" padding="none">
                         {intervenant.prenom}
                       </TableCell>
-                      <TableCell>
-                        <IconButton aria-label="Delete">
-                          <DeleteIcon
-                            onClick={() =>
-                              this.deleteIntervenants(
-                                intervenant.id_intervenant
-                              )
-                            }
-                          />
-                        </IconButton>
-                      </TableCell>
+                      { i === 0 ? (
+                        <TableCell style={{ color : "red" }}>
+                          Administrateur
+                        </TableCell>) : (
+                        <TableCell>
+                          <Tooltip title="Supprimer">
+                            <IconButton aria-label="Delete">
+                              <DeleteIcon
+                                onClick={() =>
+                                  this.deleteIntervenants(
+                                    intervenant.id_intervenant
+                                  )
+                                }
+                              />
+                            </IconButton>
+                          </Tooltip>
+                        </TableCell>
+                        )       
+                      }
                       <TableCell>
                         <Tooltip title="Modifier">
                           <IconButton
