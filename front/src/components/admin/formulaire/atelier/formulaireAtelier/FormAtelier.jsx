@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -23,11 +24,11 @@ class FormAtelier extends Component {
       contenu: '',
       formule: '',
       lieu: '',
-      photo: '',
+      photo: {},
       programme: '',
       id_atelier: '',
       id_intervenant: '',
-      places_disponibles: '',
+      place_disponibles: '',
       nom_intervenant: '',
     };
   }
@@ -46,8 +47,8 @@ class FormAtelier extends Component {
           nextProps.ateliers[nextProps.indexAtelierFromEdit].nb_participants,
         nom: this.props.ateliers[nextProps.indexAtelierFromEdit].nom,
         photo: nextProps.ateliers[nextProps.indexAtelierFromEdit].photo,
-        places_disponibles:
-          nextProps.ateliers[nextProps.indexAtelierFromEdit].places_disponibles,
+        place_disponibles:
+          nextProps.ateliers[nextProps.indexAtelierFromEdit].place_disponibles,
         prix: nextProps.ateliers[nextProps.indexAtelierFromEdit].prix,
         programme: nextProps.ateliers[nextProps.indexAtelierFromEdit].programme,
       });
@@ -89,14 +90,19 @@ class FormAtelier extends Component {
       lieu: event.target.value,
     });
   };
-  updatePhotoField = (event) => {
-    this.setState({
-      photo: event.target.value,
-    });
+  updatePhotoField = () => {
+    const inputFile = this.refs.photo;
+    const files = inputFile.files;
+    console.log(files);
+    if (files.length > 0) {
+      this.setState({
+        photo: files[0],
+      });
+    }
   };
   updatePlacesField = (event) => {
     this.setState({
-      places_disponibles: event.target.value,
+      place_disponibles: event.target.value,
     });
   };
   updateProgrammeField = (event) => {
@@ -119,23 +125,18 @@ class FormAtelier extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    let data = {
+
+    let form = {
       ...this.state,
       id_intervenant: this.state.nom_intervenant,
     };
 
-    fetch('/api/ateliers', {
-      method: 'POST',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then(
-        (res) => this.setState({ flash: 'Nouvel atelier créé', open: true }),
-        (err) => this.setState({ flash: 'Formulaire incomplet', open: true })
-      );
+    let data = new FormData();
+    data.append('file', this.state.photo);
+    data.append('form', JSON.stringify(form));
+
+    axios.post('/api/ateliers', data)
+    .then(res => this.setState({ flash: 'Nouvel atelier crée', open: true }));
   };
   // ========== UPDATE =========
   handleUpdate = (event) => {
@@ -271,13 +272,11 @@ class FormAtelier extends Component {
                 onChange={this.updateFormuleField}
               />
               <br />
-              <TextField
-                style={{ margin: 15 }}
-                name="photo"
-                label="Photo"
-                value={this.state.photo}
-                onChange={this.updatePhotoField}
-              />
+              <input 
+              type="file" 
+              ref="photo" 
+              name="photo" 
+              onChange={this.updatePhotoField.bind(this)} />
               <br />
               <br />
               <TextField
@@ -363,6 +362,7 @@ class FormAtelier extends Component {
     );
   }
 }
+
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(

@@ -67,7 +67,7 @@ class Intervenants extends Component {
                 <div className="modalIntervenants" >
                   <Avatar
                     alt="avatar intervenant"
-                    src={this.props.intervenants[0].photo}
+                    src={`/images/${this.props.intervenants[0].photo}`}
                     className="modalAvatar"
                     label="HELLO"
                   />
