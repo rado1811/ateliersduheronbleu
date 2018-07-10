@@ -59,7 +59,6 @@ class AtelierDetail extends Component {
             </Paper>
           </div>
         ) : (
-<<<<<<< HEAD
           <div>
             <Paper elevation={4} style={{ padding: 20 }}>
 
@@ -75,80 +74,45 @@ class AtelierDetail extends Component {
                     <img src={`/images/${this.props.ateliers.photo}`} alt="heron" style={{ height: '80vh', width: '80vw' }} className="images" />
                   </div>
                 </Grid>
-                <Grid >
+                <Grid>
                   <div
                     className="overlay"
                     style={{
-                            height: '20vh', width: '60vw', fontSize: 14, marginLeft: '10vw', fontFamily: 'Montserrat'
-                            ,
-                          }}
-=======
-            <div>
-              <Paper elevation={4} style={{ padding: 20 }}>
-                <Grid
-                  container
-                  style={{
-                    height: '80vh',
-                    width: 'auto',
-                  }}
-                >
-                  <Grid
-                    media="screen and (max-width: 440px)"
-                    className="image-container"
-                    item
-                    md={6}
-                    sm={1}
-                    key={this.props.ateliers.key}
->>>>>>> dev
-                  >
-                    <div>
-                      <img
-                        src={this.props.ateliers.photo}
-                        alt="heron"
-                        style={{ height: '80vh', width: '80vw' }}
-                        className="images"
-                      />
-                    </div>
-                  </Grid>
-                  <Grid>
-                    <div
-                      className="overlay"
-                      style={{
-                        height: '20vh',
+                        height: '50vh',
                         width: '60vw',
                         fontSize: 14,
-                        marginLeft: '10vw',
+                        marginLeft: '35vw',
                         fontFamily: 'Montserrat',
                       }}
-                    >
-                      <h1>{this.props.ateliers.nom}</h1>
-                      <h3>
-                        <Moment format="DD/MM/YYYY">
-                          {this.props.ateliers.debut}
-                        </Moment>
-                      </h3>
-                      <b>
-                        <img
-                          src="../images/logoHeron.png"
-                          width="4%"
-                          alt="heron"
-                        />
-                        <h3>En chemin, vous trouverez :</h3>
-                      </b>
-                      <p>{this.props.ateliers.contenu}</p>
-                      <b>
-                        <h3>Programme :</h3>
-                      </b>
-                      <p>{this.props.ateliers.programme}</p>
-                      <b>
-                        <h3>Intervenants :</h3>
-                      </b>
-                      <p>{this.props.ateliers.intervenant}</p>
-                    </div>
-                  </Grid>
+                  >
+                    <h1>{this.props.ateliers.nom}</h1>
+                    <h3>
+                      <Moment format="DD/MM/YYYY">
+                        {this.props.ateliers.debut}
+                      </Moment>
+                    </h3>
+                    <b>
+                      <img
+                        src="../images/logoHeron.png"
+                        width="4%"
+                        alt="heron"
+                      />
+                      <h3>En chemin, vous trouverez :</h3>
+                    </b>
+                    <p>{this.props.ateliers.contenu}</p>
+                    <b>
+                      <h3>Programme :</h3>
+                    </b>
+                    <p>{this.props.ateliers.programme}</p>
+                    <b>
+                      <h3>Intervenants :</h3>
+                    </b>
+                    <p>{this.props.ateliers.intervenant}</p>
+                  </div>
                 </Grid>
-              </Paper>
-            </div>
+              </Grid>
+            </Paper>
+          </div>
           )}
       </div>
     );
@@ -177,5 +141,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { fetchAteliers }
+  { fetchAteliers },
 )(AtelierDetail);

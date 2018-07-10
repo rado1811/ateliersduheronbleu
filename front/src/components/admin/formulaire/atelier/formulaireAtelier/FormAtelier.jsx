@@ -248,62 +248,61 @@ class FormAtelier extends Component {
                   <br />
                 </Grid>
               </Grid>
-            </Grid>
-            <TextField
-              fullWidth
-              multiline
-              name="contenu"
-              required
-              label="Contenu"
-              multiligne="true"
-              type="text"
-              value={this.state.contenu}
-              onChange={this.updateContenuField}
-            />
-            <br />
-            <br />
-            <TextField
-              name="formule"
-              label="Formule ?"
-              required
-              type="text"
-              value={this.state.formule}
-              onChange={this.updateFormuleField}
-            />
-            <br />
-            <input type="file"
-            ref="photo"
-            name="photo"
-            onChange={this.updatePhotoField.bind(this)} />
-            <br />
-            <br />
-            <TextField
-              name="lieu"
-              label=""
-              type="text"
-              value={this.state.lieu}
-              onChange={this.updateLieuField}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Place />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <br />
-            <br />
-            <InputLabel htmlFor="dropInput">Intervenant</InputLabel>
-            <Select
-              value={this.state.nom_intervenant}
-              onChange={this.updateIntervenantField}
-            >
-              <MenuItem value="">
-                <em>Selectionnez un intervenant</em>
-              </MenuItem>
-              {this.props.intervenants.map((item) => (
-                <MenuItem key={item.id_intervenant} value={item.id_intervenant}>
-                  {item.nom} {item.prenom}
+              <TextField
+                style={{ margin: 15 }}
+                fullWidth
+                multiline
+                name="contenu"
+                required
+                label="Contenu"
+                multiligne="true"
+                type="text"
+                value={this.state.contenu}
+                onChange={this.updateContenuField}
+              />
+              <br />
+              <br />
+              <TextField
+                style={{ margin: 15 }}
+                name="formule"
+                label="Formule ?"
+                required
+                type="text"
+                value={this.state.formule}
+                onChange={this.updateFormuleField}
+              />
+              <br />
+              <input 
+              type="file" 
+              ref="photo" 
+              name="photo" 
+              onChange={this.updatePhotoField.bind(this)} />
+              <br />
+              <br />
+              <TextField
+                style={{ margin: 15 }}
+                name="lieu"
+                label=""
+                type="text"
+                value={this.state.lieu}
+                onChange={this.updateLieuField}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Place />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <br />
+              <br />
+              <InputLabel htmlFor="dropInput">Intervenant</InputLabel>
+              <Select
+                value={this.state.nom_intervenant}
+                onChange={this.updateIntervenantField}
+              >
+                <MenuItem value="">
+                  <em>Selectionnez un intervenant</em>
                 </MenuItem>
                 {this.props.intervenants.map((item) => (
                   <MenuItem
@@ -363,6 +362,7 @@ class FormAtelier extends Component {
     );
   }
 }
+
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(

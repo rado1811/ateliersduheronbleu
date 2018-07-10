@@ -227,6 +227,12 @@ class FormulaireIntervenant extends Component {
                 onChange={this.handleChange}
               />
               <br />
+              <input 
+              type="file" 
+              ref="photo" 
+              name="photo" 
+              onChange={this.updatePhotoField.bind(this)} />
+              <br />
               <Grid style={{ textAlign: 'center' }}>
                 {isFromEditIntervenant ? (
                   <Button
@@ -242,69 +248,20 @@ class FormulaireIntervenant extends Component {
                   <ButtonFormulaireIntervenant />
                 )}
               </Grid>
-            </Grid>
-            <TextField
-              fullWidth
-              multiline
-              name="parcours"
-              type="text"
-              label="Parcours"
-              value={this.state.parcours}
-              onChange={this.handleChange}
-            />
-            <br />
-            <TextField
-              fullWidth
-              multiline
-              required
-              name="metier"
-              type="text"
-              label="Métier"
-              value={this.state.metier}
-              onChange={this.handleChange}
-            />
-            <br />
-            <TextField
-              fullWidth
-              multiline
-              name="citation"
-              type="text"
-              label="Citation"
-              value={this.state.citation}
-              onChange={this.handleChange}
-            />
-            <br />
-            <input type="file"
-            ref="photo"
-            name="photo"
-            onChange={this.updatePhotoField.bind(this)} />
-            <br />
-            <Grid style={{ textAlign: 'center' }}>
-              {isFromEditIntervenant ? (
-                <Button
-                  type="submit"
-                  value="Submit"
-                  variant="raised"
-                  color="primary"
-                >
-                  Modifier
-                </Button>
-              ) : (
-                <ButtonFormulaireIntervenant />
-              )}
-            </Grid>
-          </form>
-        </div>
-        <Snackbar
-          open={this.state.open}
-          message={this.state.flash}
-          autoHideDuration={4000}
-          onClose={this.handleToogle}
-        />
+            </form>
+          </div>
+          <Snackbar
+            open={this.state.open}
+            message={this.state.flash}
+            autoHideDuration={4000}
+            onClose={this.handleToogle}
+          />
+        </Paper>
       </Grid>
     );
   }
 }
+
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(

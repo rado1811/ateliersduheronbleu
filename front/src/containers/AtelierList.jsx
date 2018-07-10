@@ -36,15 +36,7 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
               }}
             >
               <div className="image-container">
-<<<<<<< HEAD
                 <img src={`/images/${atelier.photo}`} alt="heron" style={{ height: '10vh', width: '6vw' }} />
-=======
-                <img
-                  src={atelier.photo}
-                  alt="heron"
-                  style={{ height: '10vh', width: '6vw' }}
-                />
->>>>>>> dev
               </div>
               <div style={{ fontFamily: 'Montserrat' }}>
                 <li>

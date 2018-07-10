@@ -94,11 +94,6 @@ class TemporaryDrawer extends React.Component {
               </Button>
             </Hidden>
             <Hidden xsDown>
-              <Button color="inherit" component={MyConcept} style={{fontFamily: 'Montserrat', color : '#FFFFFF	', fontWeight: 'bold'}}>
-                Concept
-              </Button>
-            </Hidden>
-            <Hidden xsDown>
               <Button color="inherit" component={MyContact} style={{fontFamily: 'Montserrat', color : '#FFFFFF	', fontWeight: 'bold'}}>
                 Contact
               </Button>
