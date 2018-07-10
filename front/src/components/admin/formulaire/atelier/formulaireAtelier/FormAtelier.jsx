@@ -136,7 +136,7 @@ class FormAtelier extends Component {
     data.append('form', JSON.stringify(form));
 
     axios.post('/api/ateliers', data)
-    .then(res => this.setState({ flash: 'Formulaire envoyé', open: true }));
+    .then(res => this.setState({ flash: 'Nouvel atelier crée', open: true }));
   };
   // ========== UPDATE =========
   handleUpdate = (event) => {

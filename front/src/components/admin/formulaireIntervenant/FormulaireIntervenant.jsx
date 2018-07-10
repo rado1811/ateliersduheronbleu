@@ -63,7 +63,7 @@ class FormulaireIntervenant extends Component {
     data.append('form', JSON.stringify(form));
 
     axios.post('/api/intervenants', data)
-    .then(res => this.setState({ flash: 'Formulaire envoyé', open: true }));
+    .then(res => this.setState({ flash: 'Nouvel intervenant crée', open: true }));
   };
   updatePhotoField = () => {
     const inputFile = this.refs.photo;
