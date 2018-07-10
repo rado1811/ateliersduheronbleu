@@ -58,7 +58,6 @@ class FormAtelier extends Component {
     this.props.cleanEdit();
   }
 
-
   updateNomField = (event) => {
     this.setState({
       nom: event.target.value,

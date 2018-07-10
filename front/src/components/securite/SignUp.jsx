@@ -119,7 +119,7 @@ class SignUp extends Component {
 
   componentDidUpdate() {
     if (this.state.redirect) {
-      this.props.history.push('/zfesg4685f4dqsfv46es8qz4df');
+    //  this.props.history.push('/zfesg4685f4dqsfv46es8qz4df');
     }
   }
 
@@ -170,7 +170,7 @@ class SignUp extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Grid container spacing={24} style={{ width: 100 }}>
+        <Grid container spacing={24} style={{ width: "100" }}>
           <Grid item xs={12}>
             <Paper
               style={{

@@ -43,9 +43,9 @@ class AtelierHome extends Component {
         {ateliers.map((atelier, i) => (
           <AtelierVignette
             key={atelier.id_atelier}
-            name={atelier.nom}
+            name={atelier.nom_atelier}
             date={atelier.debut}
-            image={`/images/${atelier.photo}`}
+            image={`/images/${atelier.photo_atelier}`}
             intervenant={atelier.id_intervenant}
             places_disponibles={atelier.place_disponibles}
             indexAtelier={i}
