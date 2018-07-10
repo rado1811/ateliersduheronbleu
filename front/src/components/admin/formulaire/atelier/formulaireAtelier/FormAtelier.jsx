@@ -49,6 +49,7 @@ class FormAtelier extends Component {
         place_disponibles:
           nextProps.ateliers[nextProps.indexAtelierFromEdit].place_disponibles,
         prix: nextProps.ateliers[nextProps.indexAtelierFromEdit].prix,
+        contenu: nextProps.ateliers[nextProps.indexAtelierFromEdit].contenu,
         programme: nextProps.ateliers[nextProps.indexAtelierFromEdit].programme,
       });
     }
@@ -175,6 +176,7 @@ class FormAtelier extends Component {
   };
 
   render() {
+    console.log(this.props)
     const { isFromEdit } = this.props;
     return (
       <Grid

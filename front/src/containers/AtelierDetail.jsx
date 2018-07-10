@@ -107,7 +107,7 @@ class AtelierDetail extends Component {
                     <b>
                       <h3>Intervenants :</h3>
                     </b>
-                    <p>{this.props.ateliers.intervenant}</p>
+                    <p>{this.props.ateliers.prenom} {this.props.ateliers.nom}</p>
                   </div>
                 </Grid>
               </Grid>

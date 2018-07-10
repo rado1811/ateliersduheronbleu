@@ -71,7 +71,6 @@ class AtelierHome extends Component {
   }
 
   render() {
-    console.log(this.props.ateliers);
     return (
       <div>
         <div
@@ -122,7 +121,7 @@ AtelierHome.propTypes = {
       debut: PropTypes.string.isRequired,
       formule: PropTypes.string.isRequired,
       lieu: PropTypes.string.isRequired,
-      nb_participants: PropTypes.number.isRequired,
+      nb_participants: PropTypes.string.isRequired,
       nom: PropTypes.string.isRequired,
       photo: PropTypes.string.isRequired,
       place_disponibles: PropTypes.number.isRequired,
