@@ -45,8 +45,8 @@ class FormAtelier extends Component {
         lieu: nextProps.ateliers[nextProps.indexAtelierFromEdit].lieu,
         nb_participants:
           nextProps.ateliers[nextProps.indexAtelierFromEdit].nb_participants,
-        nom: this.props.ateliers[nextProps.indexAtelierFromEdit].nom,
-        photo: nextProps.ateliers[nextProps.indexAtelierFromEdit].photo,
+        nom: this.props.ateliers[nextProps.indexAtelierFromEdit].nom_atelier,
+        photo: nextProps.ateliers[nextProps.indexAtelierFromEdit].photo_atelier,
         place_disponibles:
           nextProps.ateliers[nextProps.indexAtelierFromEdit].place_disponibles,
         prix: nextProps.ateliers[nextProps.indexAtelierFromEdit].prix,
