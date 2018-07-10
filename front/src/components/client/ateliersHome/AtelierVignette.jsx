@@ -65,7 +65,7 @@ const AtelierVignette = (props) => {
 
           <Typography component="h3">
             Places disponibles: {props.places_disponibles} <br />
-            Co-animation: {props.intervenant_nom}, Isabelle Jono
+            Co-animation: {props.intervenant_prenom} {props.intervenant_nom}, Isabelle Jono
           </Typography>
         </CardContent>
         <CardActions>
@@ -94,6 +94,7 @@ const AtelierVignette = (props) => {
 
 AtelierVignette.propTypes = {
   image: PropTypes.string.isRequired,
+  intervenant_prenom: PropTypes.string.isRequired,
   intervenant_nom: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   indexAtelier: PropTypes.number.isRequired,
