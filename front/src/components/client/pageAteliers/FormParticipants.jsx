@@ -222,7 +222,7 @@ class FormParticipants extends Component {
                 type="submit"
                 value="Submit"
                 variant="raised"
-                color="secondary"
+                style={{ backgroundColor: '#B2C4CB' }}
               >
                 Envoyer
               </Button>

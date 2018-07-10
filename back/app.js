@@ -30,26 +30,28 @@ app.use('/api/intervenants', intervenant);
 app.use('/api/participant', participants);
 app.use('/api', prereservationRouter);
 app.use('/mail', nodemailer);
-// catch 404 and forward to error handler
 
 
-// error handler
 /* eslint no-unused-vars: 0 */
 app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req
+    .app
+    .get('env') === 'development'
+    ? err
+    : {};
   // render the error page
   res.status(err.status || 500);
   res.json(err);
 });
-app.use(next => {
+app.use((next) => {
   const err = new Error('Not Found');
-  err.status = 404;
+  err.sendStatus(404);
   next(err);
 });
 // Handle uncaughtException
-process.on('uncaughtException', err => {
+process.on('uncaughtException', (err) => {
   debug('Caught exception: %j', err);
   process.exit(1);
 });
