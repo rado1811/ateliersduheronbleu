@@ -38,7 +38,7 @@ class DashboardAteliers extends Component {
                 .map(atelier => (
                   <TableRow key={atelier.id_atelier}>
                     <TableCell component="th" scope="row">
-                      {atelier.nom}
+                      {atelier.nom_atelier}
                     </TableCell>
                     <TableCell numeric>{atelier.nb_participants}</TableCell>
                     <TableCell numeric>{atelier.nb_participants - atelier.place_disponibles}</TableCell>
