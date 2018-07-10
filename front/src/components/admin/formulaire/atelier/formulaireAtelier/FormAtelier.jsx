@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Place from '@material-ui/icons/Place';
 import Snackbar from '@material-ui/core/Snackbar';
-import { goEdit } from '../../../../../actions/ateliers';
+import { goEdit, cleanEdit } from '../../../../../actions/ateliers';
 import { bindActionCreators } from 'redux';
 class FormAtelier extends Component {
   constructor(props) {
@@ -44,8 +44,8 @@ class FormAtelier extends Component {
         lieu: nextProps.ateliers[nextProps.indexAtelierFromEdit].lieu,
         nb_participants:
           nextProps.ateliers[nextProps.indexAtelierFromEdit].nb_participants,
-        nom: this.props.ateliers[nextProps.indexAtelierFromEdit].nom,
-        photo: nextProps.ateliers[nextProps.indexAtelierFromEdit].photo,
+        nom: this.props.ateliers[nextProps.indexAtelierFromEdit].nom_atelier,
+        photo: nextProps.ateliers[nextProps.indexAtelierFromEdit].photo_atelier,
         places_disponibles:
           nextProps.ateliers[nextProps.indexAtelierFromEdit].places_disponibles,
         prix: nextProps.ateliers[nextProps.indexAtelierFromEdit].prix,
@@ -53,6 +53,11 @@ class FormAtelier extends Component {
       });
     }
   }
+
+  componentWillUnmount() {
+    this.props.cleanEdit();
+  }
+
 
   updateNomField = (event) => {
     this.setState({
@@ -174,6 +179,7 @@ class FormAtelier extends Component {
       );
   };
 
+ 
   render() {
     const { isFromEdit } = this.props;
     return (
@@ -368,6 +374,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       goEdit,
+      cleanEdit,
     },
     dispatch
   );

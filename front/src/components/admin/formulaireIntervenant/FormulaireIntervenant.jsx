@@ -6,7 +6,10 @@ import { connect } from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
 import { bindActionCreators } from 'redux';
 import ButtonFormulaireIntervenant from './ButtonFormulaireIntervenant';
-import { goEditIntervenant } from '../../../actions/intervenants';
+import {
+  goEditIntervenant,
+  cleanIntervenant,
+} from '../../../actions/intervenants';
 import Paper from '@material-ui/core/Paper';
 
 class FormulaireIntervenant extends Component {
@@ -41,6 +44,10 @@ class FormulaireIntervenant extends Component {
         citation: '',
       };
     }
+  }
+
+  componentWillUnmount() {
+    this.props.cleanIntervenant();
   }
 
   handleChange = (e) => {
@@ -234,6 +241,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       goEditIntervenant,
+      cleanIntervenant,
     },
     dispatch
   );

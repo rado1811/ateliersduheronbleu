@@ -200,7 +200,7 @@ class DashAteliers extends React.Component {
                     <TableRow hover key={atelier.id_atelier}>
                       <TableCell />
                       <TableCell component="th" scope="row" padding="none">
-                        {atelier.nom}
+                        {atelier.nom_atelier}
                       </TableCell>
                       <TableCell>
                         <IconButton aria-label="Delete">
