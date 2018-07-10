@@ -33,7 +33,6 @@ const styles = {
 
 const AtelierVignette = (props) => {
   const { classes } = props;
-
   return (
     <Grid
       item
@@ -106,14 +105,21 @@ AtelierVignette.propTypes = {
     card: PropTypes.string.isRequired,
     media: PropTypes.string.isRequired,
   }).isRequired,
-  ateliers: PropTypes.shape({
+  ateliers: PropTypes.arrayOf(PropTypes.shape({
+    contenu: PropTypes.string.isRequired,
+    debut: PropTypes.string.isRequired,
+    formule: PropTypes.string.isRequired,
+    lieu: PropTypes.string.isRequired,
+    nb_participants: PropTypes.number.isRequired,
+    nom: PropTypes.string.isRequired,
+    photo: PropTypes.string.isRequired,
+    place_disponibles: PropTypes.number.isRequired,
     id_atelier: PropTypes.number.isRequired,
     id_intervenant: PropTypes.number.isRequired,
     nom_intervenant: PropTypes.string.isRequired,
-    debut: PropTypes.string.isRequired,
     prix: PropTypes.number.isRequired,
     programme: PropTypes.string.isRequired,
-  }).isRequired,
+  })).isRequired,
 };
 
 function mapStateToProps(state) {

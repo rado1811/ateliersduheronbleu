@@ -1,17 +1,30 @@
+.tileIntervenants {
+  flex-wrap: wrap;
+  justify-content: space-around;
+  overflow: hidden;
+  background-color: #E9E7DF;
+  width: 450px;
+  height: 500px;
+  padding: 8px;
+}
+
+.modalIntervenants {
+  position: absolute;
+  z-index: 500;
+  background-color: #B2C4CB;
+  width: 70%;
+  height: auto;
+  padding: 16px;
+  left: 15%;
+  top: 15%;
+  box-sizing: border-box;
+  text-align: justify;
+}
+
 .rootIntervenants {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   overflow: hidden;
-  background-color: #F2F2F2;
-};
-.gridListIntervenants {
-  width: 500;
-  height: 450;
-};
-
-.rootIsabelle {
-  background-color: #F2F2F2;
-  position: sticky;
-  top: 10px;
+  background-color: #E9E7DF;
 }

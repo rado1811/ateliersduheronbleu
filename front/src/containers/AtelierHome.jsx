@@ -37,7 +37,7 @@ class AtelierHome extends Component {
       ? this.props.ateliers
       : this.props.ateliers.slice(0, 3);
     const iconButton = this.state.toggleAteliers ? <RemoveIcon /> : <AddIcon />;
-    return (    
+    return (
       <Grid id="ateliers" container spacing={16} justify="center">
         {ateliers.map((atelier, i) => (
           <AtelierVignette
@@ -115,7 +115,23 @@ class AtelierHome extends Component {
 }
 
 AtelierHome.propTypes = {
-  ateliers: PropTypes.arrayOf(Array).isRequired,
+  ateliers: PropTypes.arrayOf(
+    PropTypes.shape({
+      contenu: PropTypes.string.isRequired,
+      debut: PropTypes.string.isRequired,
+      formule: PropTypes.string.isRequired,
+      lieu: PropTypes.string.isRequired,
+      nb_participants: PropTypes.number.isRequired,
+      nom: PropTypes.string.isRequired,
+      photo: PropTypes.string.isRequired,
+      place_disponibles: PropTypes.number.isRequired,
+      id_atelier: PropTypes.number.isRequired,
+      id_intervenant: PropTypes.number.isRequired,
+      nom_intervenant: PropTypes.string.isRequired,
+      prix: PropTypes.number.isRequired,
+      programme: PropTypes.string.isRequired,
+    })
+  ).isRequired,
   fetchAteliers: PropTypes.func.isRequired,
 };
 

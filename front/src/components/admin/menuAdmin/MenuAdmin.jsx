@@ -79,10 +79,6 @@ class MenuAdmin extends React.Component {
           Administration
           </MenuItem>
           <Divider />
-          <br />
-          <Divider />
-          <MenuItem>Newletters</MenuItem>
-          <br />
         </MenuList>
       </div>
     );
