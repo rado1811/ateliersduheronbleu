@@ -42,10 +42,11 @@ class AtelierHome extends Component {
         {ateliers.map((atelier, i) => (
           <AtelierVignette
             key={atelier.id_atelier}
-            name={atelier.nom}
+            name={atelier.nom_atelier}
             date={atelier.debut}
-            image={`/images/${atelier.photo}`}
-            intervenant={atelier.id_intervenant}
+            image={`/images/${atelier.photo_atelier}`}
+            intervenant_nom={atelier.nom}
+            intervenant_prenom={atelier.prenom}
             places_disponibles={atelier.place_disponibles}
             indexAtelier={i}
           />
@@ -70,6 +71,7 @@ class AtelierHome extends Component {
   }
 
   render() {
+    console.log(this.props.ateliers);
     return (
       <div>
         <div
@@ -117,7 +119,6 @@ class AtelierHome extends Component {
 AtelierHome.propTypes = {
   ateliers: PropTypes.arrayOf(
     PropTypes.shape({
-      contenu: PropTypes.string.isRequired,
       debut: PropTypes.string.isRequired,
       formule: PropTypes.string.isRequired,
       lieu: PropTypes.string.isRequired,
