@@ -176,7 +176,6 @@ class FormAtelier extends Component {
   };
 
   render() {
-    console.log(this.props)
     const { isFromEdit } = this.props;
     return (
       <Grid
