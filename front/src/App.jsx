@@ -11,6 +11,7 @@ import MenuAdmin from './components/admin/menuAdmin/MenuAdmin';
 import Admin from './components/admin/formulaireIntervenant/Admin';
 import Dashboard from './components/admin/interfaceGestion/Dashboard';
 import ContainerDashboard from './components/admin/interfaceAdministration/ContainerDashboard';
+import CGV from './components/client/CGV/CGV';
 
 const App = () => (
   <div>
@@ -26,6 +27,7 @@ const App = () => (
       <Route exact path="/admin/gestion" component={Dashboard} />
       <Route exact path="/admin/administration" component={ContainerDashboard} />
       <Route exact path="/admin/profilAdmin" component={Admin} />
+      <Route path="/CGV" component={CGV} />
     </Switch>
   </div>
 );
