@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Place from '@material-ui/icons/Place';
 import Snackbar from '@material-ui/core/Snackbar';
-import { goEdit } from '../../../../../actions/ateliers';
+import { goEdit, cleanEdit } from '../../../../../actions/ateliers';
 import { bindActionCreators } from 'redux';
 class FormAtelier extends Component {
   constructor(props) {
@@ -55,6 +55,9 @@ class FormAtelier extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.cleanEdit();
+  }
   updateNomField = (event) => {
     this.setState({
       nom: event.target.value,
@@ -135,8 +138,11 @@ class FormAtelier extends Component {
     data.append('file', this.state.photo);
     data.append('form', JSON.stringify(form));
 
-    axios.post('/api/ateliers', data)
-    .then(res => this.setState({ flash: 'Nouvel atelier crée', open: true }));
+    axios
+      .post('/api/ateliers', data)
+      .then((res) =>
+        this.setState({ flash: 'Nouvel atelier crée', open: true })
+      );
   };
   // ========== UPDATE =========
   handleUpdate = (event) => {
@@ -272,11 +278,12 @@ class FormAtelier extends Component {
                 onChange={this.updateFormuleField}
               />
               <br />
-              <input 
-              type="file" 
-              ref="photo" 
-              name="photo" 
-              onChange={this.updatePhotoField.bind(this)} />
+              <input
+                type="file"
+                ref="photo"
+                name="photo"
+                onChange={this.updatePhotoField.bind(this)}
+              />
               <br />
               <br />
               <TextField
@@ -363,11 +370,11 @@ class FormAtelier extends Component {
   }
 }
 
-
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       goEdit,
+      cleanEdit,
     },
     dispatch
   );
