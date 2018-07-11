@@ -15,7 +15,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-
 router.get('/', (req, res) => {
   connection.query('select * from Ateliers left join Intervenants on Ateliers.id_intervenant = Intervenants.id_intervenant', (error, result) => {
     if (error) {
@@ -30,14 +29,15 @@ router.post('/', upload.single('file'), (req, res) => {
   const form = JSON.parse(req.body.form);
   const body = {
     ...form,
-    photo: req.file.filename,
+    photo_atelier: req.file.filename,
   };
 
   connection.query('INSERT INTO Ateliers SET ?', body, (errSql) => {
+    console.log('into post')
     if (errSql) {
-      console.error(errSql);
       res.send(errSql);
     } else {
+      console.log('post ok')
       res.sendStatus(200);
     }
   });

@@ -210,7 +210,7 @@ class FormParticipants extends Component {
                 </MenuItem>
                 {this.state.ateliers.map(item => (
                   <MenuItem key={item.id_atelier} value={item.id_atelier}>
-                    {item.nom}
+                    {item.nom_atelier}
                   </MenuItem>
                 ))}
               </Select>

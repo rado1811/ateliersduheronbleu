@@ -17,14 +17,14 @@ class FormAtelier extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nom: '',
+      nom_atelier: '',
       debut: '',
       nb_participants: '',
       prix: '',
       contenu: '',
       formule: '',
       lieu: '',
-      photo: {},
+      photo_atelier: {},
       programme: '',
       id_atelier: '',
       id_intervenant: '',
@@ -44,8 +44,8 @@ class FormAtelier extends Component {
         lieu: nextProps.ateliers[nextProps.indexAtelierFromEdit].lieu,
         nb_participants:
           nextProps.ateliers[nextProps.indexAtelierFromEdit].nb_participants,
-        nom: this.props.ateliers[nextProps.indexAtelierFromEdit].nom_atelier,
-        photo: nextProps.ateliers[nextProps.indexAtelierFromEdit].photo_atelier,
+        nom_atelier: this.props.ateliers[nextProps.indexAtelierFromEdit].nom_atelier,
+        photo_atelier: nextProps.ateliers[nextProps.indexAtelierFromEdit].photo_atelier,
         place_disponibles:
           nextProps.ateliers[nextProps.indexAtelierFromEdit].place_disponibles,
         prix: nextProps.ateliers[nextProps.indexAtelierFromEdit].prix,
@@ -57,7 +57,7 @@ class FormAtelier extends Component {
 
   updateNomField = (event) => {
     this.setState({
-      nom: event.target.value,
+      nom_atelier: event.target.value,
     });
   };
   updateDebutField = (event) => {
@@ -91,12 +91,12 @@ class FormAtelier extends Component {
     });
   };
   updatePhotoField = () => {
-    const inputFile = this.refs.photo;
+    const inputFile = this.refs.photo_atelier;
     const files = inputFile.files;
     console.log(files);
     if (files.length > 0) {
       this.setState({
-        photo: files[0],
+        photo_atelier: files[0],
       });
     }
   };
@@ -132,7 +132,7 @@ class FormAtelier extends Component {
     };
 
     let data = new FormData();
-    data.append('file', this.state.photo);
+    data.append('file', this.state.photo_atelier);
     data.append('form', JSON.stringify(form));
 
     axios.post('/api/ateliers', data)
@@ -159,14 +159,14 @@ class FormAtelier extends Component {
       )
       .then(
         this.setState({
-          nom: '',
+          nom_atelier: '',
           debut: '',
           nb_participants: '',
           prix: '',
           contenu: '',
           formule: '',
           lieu: '',
-          photo: '',
+          photo_atelier: '',
           programme: '',
           id_atelier: '',
           id_intervenant: '',
@@ -203,7 +203,7 @@ class FormAtelier extends Component {
                     required
                     label="Titre de l'Atelier"
                     type="text"
-                    value={this.state.nom}
+                    value={this.state.nom_atelier}
                     onChange={this.updateNomField}
                   />
                   <br />
@@ -274,7 +274,7 @@ class FormAtelier extends Component {
               <br />
               <input 
               type="file" 
-              ref="photo" 
+              ref="photo_atelier" 
               name="photo" 
               onChange={this.updatePhotoField.bind(this)} />
               <br />
