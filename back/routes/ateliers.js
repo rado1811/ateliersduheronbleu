@@ -43,6 +43,19 @@ router.post('/', upload.single('file'), (req, res) => {
   });
 });
 
+router.put('/', (req, res) => {
+  const sql = `UPDATE Ateliers SET ? WHERE id_atelier =${
+    req.body.data.id_atelier
+  }`;
+
+  connection.query(sql, req.body.data, (err) => {
+    if (err) res.send(err);
+    else {
+      res.status(200).send();
+    }
+  });
+});
+
 router.delete('/', (req, res) => {
   connection.query('DELETE FROM Ateliers WHERE id_atelier = ?', [req.body.id_atelier], (err, result) => {
     if (err) {
