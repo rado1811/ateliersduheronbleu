@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Footer from '../footer/Footer';
 
 const Conditions = () => (
-<div className="Footer" style={{ backgroundColor: 'aliceblue', padding: '100px 20px 20px 20px' }}>
+<div className="Footer" style={{ backgroundColor: '#e9e8de', padding: '100px 20px 20px 20px' }}>
     <div className="mui-container mui--text-center">
       <Grid container alignItems="center">
       <Grid item xs={12} style={{ backgroundColor: 'none', textAlign: 'justify' }}>
@@ -99,10 +99,12 @@ const Conditions = () => (
             <h3 >Portabilité des données</h3>
             <p >Portabilité des données</p>
             <p>L'Éditeur s'engage à vous offrir la possibilité de vous faire restituer l'ensemble des données vous concernant sur simple demande. L'Utilisateur se voit ainsi garantir une meilleure maîtrise de ses données, et garde la possibilité de les réutiliser. Ces données devront être fournies dans un format ouvert et aisément réutilisable.</p>
-            <Footer />
             </Grid>
+           
             </Grid>
+            
           </div>
+          <Footer />
         </div>
 );
 
