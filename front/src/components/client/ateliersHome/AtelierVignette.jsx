@@ -81,7 +81,7 @@ const AtelierVignette = (props) => {
 
 AtelierVignette.propTypes = {
   image: PropTypes.string.isRequired,
-  // intervenant_prenom: PropTypes.string.isRequired,
+  intervenant_prenom: PropTypes.string.isRequired,
   intervenant_nom: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   indexAtelier: PropTypes.number.isRequired,
