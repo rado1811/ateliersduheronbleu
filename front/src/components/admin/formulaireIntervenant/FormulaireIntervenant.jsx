@@ -7,7 +7,10 @@ import { connect } from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
 import { bindActionCreators } from 'redux';
 import ButtonFormulaireIntervenant from './ButtonFormulaireIntervenant';
-import { goEditIntervenant } from '../../../actions/intervenants';
+import {
+  goEditIntervenant,
+  cleanIntervenant,
+} from '../../../actions/intervenants';
 import Paper from '@material-ui/core/Paper';
 
 class FormulaireIntervenant extends Component {
@@ -45,6 +48,9 @@ class FormulaireIntervenant extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.cleanIntervenant();
+  }
   handleChange = (e) => {
     const change = {};
     change[e.target.name] = e.target.value;
@@ -62,8 +68,11 @@ class FormulaireIntervenant extends Component {
     data.append('file', this.state.photo);
     data.append('form', JSON.stringify(form));
 
-    axios.post('/api/intervenants', data)
-    .then(res => this.setState({ flash: 'Nouvel intervenant crée', open: true }));
+    axios
+      .post('/api/intervenants', data)
+      .then((res) =>
+        this.setState({ flash: 'Nouvel intervenant crée', open: true })
+      );
   };
   updatePhotoField = () => {
     const inputFile = this.refs.photo;
@@ -87,8 +96,9 @@ class FormulaireIntervenant extends Component {
     data.append('file', this.state.photo);
     data.append('form', JSON.stringify(form));
 
-    axios.post('/api/intervenants', data)
-    .then(res => this.setState({ flash: 'Formulaire envoyé', open: true }));
+    axios
+      .post('/api/intervenants', data)
+      .then((res) => this.setState({ flash: 'Formulaire envoyé', open: true }));
   };
   // ========== UPDATE =========
   handleUpdate = (event) => {
@@ -138,9 +148,10 @@ class FormulaireIntervenant extends Component {
               <h1 style={{ textAlign: 'center' }}>Ajouter un intervenant</h1>
             )}
             {this.state.id_intervenant === 1 ? (
-              <h1 style={{ textAlign: 'center', color: 'red' }}>Compte administrateur (ne peut être supprimé)</h1>
-            ) : null
-            }
+              <h1 style={{ textAlign: 'center', color: 'red' }}>
+                Compte administrateur (ne peut être supprimé)
+              </h1>
+            ) : null}
             <form
               onSubmit={
                 isFromEditIntervenant ? this.handleUpdate : this.handleSubmit
@@ -175,9 +186,10 @@ class FormulaireIntervenant extends Component {
               <Grid container spacing={24}>
                 <Grid item xs={12} sm={6}>
                   {this.state.id_intervenant === 1 ? (
-                    <h5 style={{ color: 'red' }}>Téléphone apparaissant sur le formulaire de contact: </h5>
-                    ) : null
-                  }
+                    <h5 style={{ color: 'red' }}>
+                      Téléphone apparaissant sur le formulaire de contact:{' '}
+                    </h5>
+                  ) : null}
                   <TextField
                     style={{ margin: 15 }}
                     required
@@ -190,9 +202,10 @@ class FormulaireIntervenant extends Component {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   {this.state.id_intervenant === 1 ? (
-                    <h5 style={{ color: 'red' }}>Email de réception des formulaires client: </h5>
-                    ) : null
-                  }
+                    <h5 style={{ color: 'red' }}>
+                      Email de réception des formulaires client:{' '}
+                    </h5>
+                  ) : null}
                   <TextField
                     style={{ margin: 15 }}
                     required
@@ -239,11 +252,12 @@ class FormulaireIntervenant extends Component {
                 onChange={this.handleChange}
               />
               <br />
-              <input 
-              type="file" 
-              ref="photo" 
-              name="photo" 
-              onChange={this.updatePhotoField.bind(this)} />
+              <input
+                type="file"
+                ref="photo"
+                name="photo"
+                onChange={this.updatePhotoField.bind(this)}
+              />
               <br />
               <Grid style={{ textAlign: 'center' }}>
                 {isFromEditIntervenant ? (
@@ -274,11 +288,11 @@ class FormulaireIntervenant extends Component {
   }
 }
 
-
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       goEditIntervenant,
+      cleanIntervenant,
     },
     dispatch
   );
