@@ -1,5 +1,4 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -12,27 +11,12 @@ import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import compose from 'recompose/compose';
 import { selectAteliers } from '../../../actions/index';
 
 const Reserver = props => <Link to="/ateliers" {...props} />;
 const Atelier = props => <Link to="/ateliers" {...props} />;
 
-const styles = {
-  item: {
-    margin: '20px',
-  },
-  card: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
-};
-
 const AtelierVignette = (props) => {
-  const { classes } = props;
   return (
     <Grid
       item
@@ -43,17 +27,20 @@ const AtelierVignette = (props) => {
       }}
     >
       <Card
-        className={classes.card}
         justify="center"
         style={{
           marginLeft: 'auto',
           marginRight: 'auto',
+          maxWidth: '345',
         }}
       >
         <CardMedia
-          className={classes.media}
           image={props.image}
           title="Héron"
+          style={{
+            height: '0',
+            paddingTop: '56.25%',
+          }}
         />
         <CardContent>
           <Typography gutterBottom variant="headline" component="h2">
@@ -94,18 +81,13 @@ const AtelierVignette = (props) => {
 
 AtelierVignette.propTypes = {
   image: PropTypes.string.isRequired,
-  intervenant_prenom: PropTypes.string.isRequired,
+  // intervenant_prenom: PropTypes.string.isRequired,
   intervenant_nom: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   indexAtelier: PropTypes.number.isRequired,
   date: PropTypes.string.isRequired,
   places_disponibles: PropTypes.number.isRequired,
   selectAteliers: PropTypes.func.isRequired,
-  classes: PropTypes.shape({
-    item: PropTypes.string.isRequired,
-    card: PropTypes.string.isRequired,
-    media: PropTypes.string.isRequired,
-  }).isRequired,
   ateliers: PropTypes.arrayOf(Array).isRequired,
 };
 
@@ -121,10 +103,4 @@ function mapDispatchToProps(dispatch) {
     dispatch,
   );
 }
-export default compose(
-  withStyles(styles),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
-)(AtelierVignette);
+export default connect(mapStateToProps, mapDispatchToProps)(AtelierVignette);

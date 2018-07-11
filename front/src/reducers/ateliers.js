@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   ateliers: [{
-    id_atelier: '', nom_atelier: '', id_intervenant: '', nom: '', debut: '', nb_participants: '', prix: '', contenu: '', formule: '', lieu: '', photo: '', place_disponibles: 0, programme: '', intervenant_prenom: '',
+    id_atelier: '', nom_atelier: '', id_intervenant: '', nom: '', debut: '', nb_participants: '', prix: '', contenu: '', formule: '', lieu: '', photo: '', place_disponibles: 0, programme: '', intervenant_prenom: '', intervenant_nom: '',
   }],
   loading: false,
   error: null,
