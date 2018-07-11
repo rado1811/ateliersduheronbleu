@@ -13,6 +13,41 @@ import ContainerSecurite from './components/securite/ContainerSecurite';
 import ContainerDashboard from './components/admin/interfaceAdministration/ContainerDashboard';
 import SignIn from './components/securite/SignIn';
 
+/* const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    fakeAuth.isAuthenticated ? (
+      <Component {...props}/>
+    ) : (
+      <Redirect to={{
+        pathname: '/zfesg4685f4dqsfv46es8qz4df',
+        state: { from: props.location }
+      }}/>
+    )
+  )}/>
+)
+ */
+/* const App = () => (
+  <div>
+    <Switch>
+      <Route exact path="/" component={AtelierHome} />
+      <Route path="/ateliers" component={Ateliers} />
+      <Route path="/intervenants" component={Intervenants} />
+      <Route path="/contact" component={Contact} />
+      <PrivateRoute path="/admin/ateliers" component={AdminAtelier} />
+      <PrivateRoute exact path="/admin/dashboard" component={AdminAccueil} />
+      <PrivateRoute exact path="/admin/intervenant" component={Admin} />
+      <PrivateRoute exact path="/admin/gestion" component={Dashboard} />
+      <Route exact path="/zfesg4685f4dqsfv46es8qz4df" component={SignIn} />
+      <Route
+        exact
+        path="/admin/administration"
+        component={ContainerDashboard}
+      />
+      <Route exact path="/admin/securite" component={ContainerSecurite} />
+    </Switch>
+  </div>
+); */
+
 const App = () => (
   <div>
     <Switch>

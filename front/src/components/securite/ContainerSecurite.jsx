@@ -7,6 +7,8 @@ class ContainerSecurite extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    console.log("container this.props",this.props)
+
   }
   render() {
     return (
@@ -15,7 +17,7 @@ class ContainerSecurite extends Component {
           <MenuAdmin />
         </Grid>
         <Grid item style={{ marginTop: 10 }}>
-          <SignUp />
+          <SignUp history={this.props.history}/>
         </Grid>
       </Grid>
     );

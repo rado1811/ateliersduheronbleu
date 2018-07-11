@@ -37,6 +37,7 @@ class SignUp extends Component {
       infosUser: false,
       redirect: false,
     };
+    console.log("singup this.props",this.props)
   }
   formSend = () => {
     let whatIsMissing = [];
@@ -94,10 +95,12 @@ class SignUp extends Component {
         .then((res) => res.json())
         .then(
           (res) => {
+            console.log(res);
             this.setState({
               flash: res.flash,
               open: true,
               redirect: true,
+              token: res.token,
             });
             this.props.dispatch({
               type: 'CREATE_SESSION',
@@ -105,6 +108,7 @@ class SignUp extends Component {
               token: res.token,
               message: res.message,
             });
+
           },
           (err) => {
             this.setState({
@@ -119,9 +123,10 @@ class SignUp extends Component {
 
   componentDidUpdate() {
     if (this.state.redirect) {
-    //  this.props.history.push('/zfesg4685f4dqsfv46es8qz4df');
+      this.props.history.push('/zfesg4685f4dqsfv46es8qz4df');
     }
   }
+  // qkmlsdjfQLSDFL@@123z
 
   updateEmailField = (event) => {
     this.setState({
@@ -170,7 +175,7 @@ class SignUp extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Grid container spacing={24} style={{ width: "100" }}>
+        <Grid container spacing={24} style={{ width: '100' }}>
           <Grid item xs={12}>
             <Paper
               style={{
