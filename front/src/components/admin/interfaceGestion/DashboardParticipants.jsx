@@ -93,7 +93,6 @@ class DashboardParticipants extends Component {
                   <TableCell>
                     <Tooltip title="Valider">
                       <IconButton mini variant="fab"
-                      title="Modifier" 
                       aria-label="edit"
                       style={{backgroundColor:'transparent', color : 'green', marginRight: 15}} 
                       onClick={() =>
