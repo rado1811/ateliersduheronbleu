@@ -37,7 +37,6 @@ class SignUp extends Component {
       infosUser: false,
       redirect: false,
     };
-    console.log("singup this.props",this.props)
   }
   formSend = () => {
     let whatIsMissing = [];
@@ -108,7 +107,6 @@ class SignUp extends Component {
               token: res.token,
               message: res.message,
             });
-
           },
           (err) => {
             this.setState({
@@ -175,15 +173,20 @@ class SignUp extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Grid container spacing={24} style={{ width: '100' }}>
-          <Grid item xs={12}>
+        <Grid container spacing={24}>
+          <Grid
+            item
+            xs={12}
+            textAlign="center"
+            style={{ maxWidth: 600, marginLeft: 'auto', marginRight: 'auto' }}
+          >
             <Paper
               style={{
                 marginTop: 70,
               }}
             >
               <form onSubmit={this.handleSubmit} style={{ margin: 40 }}>
-                <h2>Nouvel utilisateur</h2>
+                <h1>Nouvel utilisateur</h1>
                 <div>
                   <TextField
                     id="name"
@@ -192,7 +195,7 @@ class SignUp extends Component {
                     helperText="Veuilliez inscrire votre adresse mail ici"
                     className="form-control"
                     name="email"
-                    placeholder="jean.dujardin@gmail.com"
+                    placeholder="Votre adresse mail"
                     onChange={this.updateEmailField}
                     fullWidth
                     margin="normal"
@@ -237,7 +240,7 @@ class SignUp extends Component {
                     label="Prénom"
                     className="form-control"
                     name="prenom"
-                    placeholder="Jean"
+                    placeholder="Votre Prénom"
                     onChange={this.updateFirstNameField}
                     fullWidth
                     margin="normal"
@@ -250,7 +253,7 @@ class SignUp extends Component {
                     label="Nom"
                     className="form-control"
                     name="nom"
-                    placeholder="Dujardin"
+                    placeholder="Votre Nom"
                     onChange={this.updateLastNameField}
                     fullWidth
                     margin="normal"

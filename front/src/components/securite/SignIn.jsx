@@ -122,16 +122,21 @@ class SignIn extends Component {
     return (
       <div>
         <Grid container spacing={24}>
-          <Grid item xs={12}>
+          <Grid
+            item
+            xs={12}
+            textAlign="center"
+            style={{ maxWidth: 600, marginLeft: 'auto', marginRight: 'auto' }}
+          >
             <form
               action="/login"
               method="post"
               onSubmit={this.handleSubmit}
               style={{ margin: 40 }}
             >
-              <h2 style={{ marginTop: 60 }}>
+              <h1 style={{ marginTop: 60 }}>
                 Connectez vous à votre espace d'administration
-              </h2>
+              </h1>
               <div>
                 <TextField
                   id="name"
