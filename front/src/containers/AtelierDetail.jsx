@@ -12,7 +12,6 @@ class AtelierDetail extends Component {
     this.props.fetchAteliers();
   }
 
-
   render() {
     return (
       <div className="AteliersDetail">

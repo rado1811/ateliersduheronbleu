@@ -149,7 +149,7 @@ class FormParticipants extends Component {
       <div>
         <form onSubmit={this.handleSubmit} style={{ margin: 40 }}>
           <Paper elevation={4} style={{ padding: 40 }}>
-            <h2>Nouveau participant</h2>
+            <h2>Formulaire de pré-réservation</h2>
             <div>
               <TextField
                 id="email"

@@ -16,9 +16,9 @@ import { fetchIntervenants } from '../../actions/intervenants';
 import IntervenantsTile from './IntervenantsTile';
 import Footer from './footer/Footer';
 import './intervenants.css';
+import TemporaryDrawer from '../client/navbar/TemporaryDrawer';
 
 class Intervenants extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -38,25 +38,38 @@ class Intervenants extends Component {
   render() {
     return (
       <div style={{ marginTop: 60 }}>
+        <TemporaryDrawer />
         <BoutonContact />
         <Grid container spacing={24}>
           <Grid item xs={12} md={4}>
             <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-              <ListSubheader component="div" style={{ textAlign: 'center', fontSize: '1.5em' }}>La fondatrice</ListSubheader>
+              <ListSubheader
+                component="div"
+                style={{ textAlign: 'center', fontSize: '1.5em' }}
+              >
+                La fondatrice
+              </ListSubheader>
             </GridListTile>
             <GridListTile>
-              <img src={`/images/${this.props.intervenants[0].photo}`} alt={this.props.intervenants[0].nom} />
+              <img
+                src={`/images/${this.props.intervenants[0].photo}`}
+                alt={this.props.intervenants[0].nom}
+              />
               <GridListTileBar
-                title={this.props.intervenants[0].prenom + ' ' + this.props.intervenants[0].nom}
+                title={
+                  this.props.intervenants[0].prenom +
+                  ' ' +
+                  this.props.intervenants[0].nom
+                }
                 subtitle={<span>{this.props.intervenants[0].metier}</span>}
                 actionIcon={
                   <IconButton
                     style={{ color: 'white' }}
-                    onClick={() => this.handleOpen()} 
+                    onClick={() => this.handleOpen()}
                   >
                     <InfoIcon />
                   </IconButton>
-                } 
+                }
               />
               <Modal
                 aria-labelledby="simple-modal-title"
@@ -64,7 +77,7 @@ class Intervenants extends Component {
                 open={this.state.open}
                 onClose={() => this.handleClose()}
               >
-                <div className="modalIntervenants" >
+                <div className="modalIntervenants">
                   <Avatar
                     alt="avatar intervenant"
                     src={`/images/${this.props.intervenants[0].photo}`}
@@ -74,7 +87,10 @@ class Intervenants extends Component {
                   <Typography variant="title" id="modal-title">
                     {this.props.intervenants[0].citation}
                   </Typography>
-                  <Typography variant="subheading" id="simple-modal-description">
+                  <Typography
+                    variant="subheading"
+                    id="simple-modal-description"
+                  >
                     <br />
                     {this.props.intervenants[0].parcours}
                   </Typography>
@@ -85,20 +101,35 @@ class Intervenants extends Component {
           <Grid item xs={12} md={8}>
             <div className="rootIntervenants">
               <GridList cellHeight={500}>
-                <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                  <ListSubheader component="div" style={{ textAlign: 'center', backgroundColor: 'E9E7DF', fontSize: '1.5em' }}>Les intervenants</ListSubheader>
+                <GridListTile
+                  key="Subheader"
+                  cols={2}
+                  style={{ height: 'auto' }}
+                >
+                  <ListSubheader
+                    component="div"
+                    style={{
+                      textAlign: 'center',
+                      backgroundColor: 'E9E7DF',
+                      fontSize: '1.5em',
+                    }}
+                  >
+                    Les intervenants
+                  </ListSubheader>
                 </GridListTile>
-                {this.props.intervenants.slice(1).map(intervenant => (
-                  <IntervenantsTile
-                    key={intervenant.id_intervenant}
-                    photo={intervenant.photo}
-                    nom={intervenant.nom}
-                    prenom={intervenant.prenom}
-                    metier={intervenant.metier}
-                    citation={intervenant.citation}
-                    parcours={intervenant.parcours}
-                  />
-                ))}
+                {this.props.intervenants
+                  .slice(1)
+                  .map((intervenant) => (
+                    <IntervenantsTile
+                      key={intervenant.id_intervenant}
+                      photo={intervenant.photo}
+                      nom={intervenant.nom}
+                      prenom={intervenant.prenom}
+                      metier={intervenant.metier}
+                      citation={intervenant.citation}
+                      parcours={intervenant.parcours}
+                    />
+                  ))}
               </GridList>
             </div>
           </Grid>
@@ -118,4 +149,7 @@ function mapStateToProps(state) {
   return { intervenants: state.intervenants.intervenants };
 }
 
-export default connect(mapStateToProps, { fetchIntervenants })(Intervenants);
+export default connect(
+  mapStateToProps,
+  { fetchIntervenants }
+)(Intervenants);

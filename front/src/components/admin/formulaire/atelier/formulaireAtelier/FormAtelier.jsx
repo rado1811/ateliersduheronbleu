@@ -44,8 +44,10 @@ class FormAtelier extends Component {
         lieu: nextProps.ateliers[nextProps.indexAtelierFromEdit].lieu,
         nb_participants:
           nextProps.ateliers[nextProps.indexAtelierFromEdit].nb_participants,
-        nom_atelier: this.props.ateliers[nextProps.indexAtelierFromEdit].nom_atelier,
-        photo_atelier: nextProps.ateliers[nextProps.indexAtelierFromEdit].photo_atelier,
+        nom_atelier: this.props.ateliers[nextProps.indexAtelierFromEdit]
+          .nom_atelier,
+        photo_atelier:
+          nextProps.ateliers[nextProps.indexAtelierFromEdit].photo_atelier,
         place_disponibles:
           nextProps.ateliers[nextProps.indexAtelierFromEdit].place_disponibles,
         prix: nextProps.ateliers[nextProps.indexAtelierFromEdit].prix,
@@ -278,11 +280,12 @@ class FormAtelier extends Component {
                 onChange={this.updateFormuleField}
               />
               <br />
-              <input 
-              type="file" 
-              ref="photo_atelier" 
-              name="photo" 
-              onChange={this.updatePhotoField.bind(this)} />
+              <input
+                type="file"
+                ref="photo_atelier"
+                name="photo"
+                onChange={this.updatePhotoField.bind(this)}
+              />
               <br />
               <br />
               <TextField
