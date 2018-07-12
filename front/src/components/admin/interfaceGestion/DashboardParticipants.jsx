@@ -67,14 +67,10 @@ class DashboardParticipants extends Component {
     return (
       <div>
         <h1 className="text-center" style={{ marginTop: 20 }}>
-          Participants
+          Tableau de bord des participants
         </h1>
         <Paper>
-          <Table
-            style={{
-              marginTop: 50
-            }}
-          >
+          <Table>
             <TableHead>
               <TableRow>
                 <TableCell>Atelier</TableCell>

@@ -9,7 +9,7 @@ const Dashboard = () => (
     <Grid item s={2} md={2}>
       <MenuAdmin />
     </Grid>
-    <Grid item style={{ marginTop: 10 }} s={10} md={10}>
+    <Grid item style={{ marginTop: 40 }} s={10} md={10}>
       <DashboardAteliers />
       <DashboardParticipants />
     </Grid>
