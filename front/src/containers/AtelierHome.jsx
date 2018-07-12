@@ -73,43 +73,43 @@ class AtelierHome extends Component {
   render() {
     return (
       <div>
-        <div
-          className="video-container"
-          style={{
-            marginBottom: 100,
-            marginTop: -70,
-          }}
-        >
-          <video
-            id="background-video"
+          <div
+            className="video-container"
             style={{
-              height: 'auto',
-              width: '100%',
+              marginBottom: 100,
+              marginTop: -70,
             }}
-            loop
-            muted
-            autoPlay
           >
-            <source src="../images/sunwaves.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div className="overlay" style={{ fontFamily: 'Dancing Script' }}>
-          <h2>
-            {' '}
-            Ateliers "Bien-être et Créativité" 
-          </h2>
-          <h3 className="sousTitre" style={{ fontFamily: 'Dancing Script' }}>
-            {' '}
-            Le Teich
-          </h3>
-        </div>
-        <Link to="#ateliers">
-          <i className="fas fa-angle-double-down" />
-        </Link>
-        {this.getUpcomingAteliers()}
-        <BoutonContact />
-        <Footer />
+            <video
+              id="background-video"
+              style={{
+                height: 'auto',
+                width: '100%',
+              }}
+              loop
+              muted
+              autoPlay
+            >
+              <source src="../images/sunwaves.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div className="overlay" style={{ fontFamily: 'Dancing Script', fontSize: '3vw', padding: '150px' }}>
+            <h2 style={{ paddingLeft: '150px' }}>
+              {' '}
+              Ateliers "Bien-être et Créativité" 
+            </h2>
+            <h3 className="sousTitre" style={{ fontFamily: 'Dancing Script', paddingLeft: '150px' }}>
+              {' '}
+              Le Teich
+            </h3>
+          </div>
+          <Link to="#ateliers">
+            <i className="fas fa-angle-double-down" />
+          </Link>
+          {this.getUpcomingAteliers()}
+          <BoutonContact />
+          <Footer />
       </div>
     );
   }
