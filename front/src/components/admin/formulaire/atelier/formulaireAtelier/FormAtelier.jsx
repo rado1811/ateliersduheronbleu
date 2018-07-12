@@ -31,6 +31,7 @@ class FormAtelier extends Component {
       id_intervenant: '',
       place_disponibles: '',
       nom_intervenant: '',
+      setTimeOut: false,
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -130,9 +131,9 @@ class FormAtelier extends Component {
     this.setState({ open: false });
   };
 
+  // ========   AJOUT =========
   handleSubmit = (event) => {
     event.preventDefault();
-
     let form = {
       ...this.state,
       id_intervenant: this.state.nom_intervenant,
@@ -142,15 +143,19 @@ class FormAtelier extends Component {
     data.append('file', this.state.photo_atelier);
     data.append('form', JSON.stringify(form));
 
-    axios
-      .post('/api/ateliers', data)
-      .then((res) =>
-        this.setState({ flash: 'Nouvel atelier crée', open: true })
-      );
-    setTimeout(() => {
-      this.props.history.push('admin/administration');
-    }, 3000);
+    axios.post('/api/ateliers', data).then((res) =>
+      this.setState({
+        flash: 'Nouvel atelier crée',
+        open: true,
+      })
+    );
+    if (this.state.setTimeOut === true) {
+      setTimeout(() => {
+        this.props.history.push('/administration');
+      }, 2000);
+    }
   };
+
   // ========== UPDATE =========
   handleUpdate = (event) => {
     event.preventDefault();
@@ -167,13 +172,12 @@ class FormAtelier extends Component {
     })
       .then((res) => res.json())
       .then(
-        (res) => this.setState({ flash: 'Atelier modifié', open: true }),
+        (res) =>
+          this.setState({
+            flash: 'Atelier modifié',
+            open: true,
+          }),
         (err) => this.setState({ flash: 'Formulaire incomplet', open: true })
-      )
-      .then(
-        setTimeout(() => {
-          this.props.history.push('admin/administration');
-        }, 3000)
       )
       .then(
         this.setState({
@@ -191,6 +195,17 @@ class FormAtelier extends Component {
           places_disponibles: '',
         })
       );
+    if (this.state.flash === 'Atelier modifié') {
+      this.setState({
+        setTimeOut: true,
+      });
+    }
+    if (this.state.setTimeOut === true) {
+      setTimeout(() => {
+        this.props.history.push('/administration');
+      }, 2000);
+    }
+    alert(this.state.setTimeOut);
   };
 
   render() {
