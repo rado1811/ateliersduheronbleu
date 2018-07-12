@@ -13,6 +13,7 @@ import Place from '@material-ui/icons/Place';
 import Snackbar from '@material-ui/core/Snackbar';
 import { goEdit, cleanEdit } from '../../../../../actions/ateliers';
 import { bindActionCreators } from 'redux';
+
 class FormAtelier extends Component {
   constructor(props) {
     super(props);
@@ -44,8 +45,10 @@ class FormAtelier extends Component {
         lieu: nextProps.ateliers[nextProps.indexAtelierFromEdit].lieu,
         nb_participants:
           nextProps.ateliers[nextProps.indexAtelierFromEdit].nb_participants,
-        nom_atelier: this.props.ateliers[nextProps.indexAtelierFromEdit].nom_atelier,
-        photo_atelier: nextProps.ateliers[nextProps.indexAtelierFromEdit].photo_atelier,
+        nom_atelier: this.props.ateliers[nextProps.indexAtelierFromEdit]
+          .nom_atelier,
+        photo_atelier:
+          nextProps.ateliers[nextProps.indexAtelierFromEdit].photo_atelier,
         place_disponibles:
           nextProps.ateliers[nextProps.indexAtelierFromEdit].place_disponibles,
         prix: nextProps.ateliers[nextProps.indexAtelierFromEdit].prix,
@@ -58,6 +61,7 @@ class FormAtelier extends Component {
   componentWillUnmount() {
     this.props.cleanEdit();
   }
+
   updateNomField = (event) => {
     this.setState({
       nom_atelier: event.target.value,
@@ -126,6 +130,13 @@ class FormAtelier extends Component {
     this.setState({ open: false });
   };
 
+  redirect = () => {
+    this.props.history.push('/administration');
+  };
+  timeOutRedirect = () => {
+    window.setTimeout(this.redirect(), 3000);
+  };
+
   handleSubmit = (event) => {
     event.preventDefault();
 
@@ -143,6 +154,7 @@ class FormAtelier extends Component {
       .then((res) =>
         this.setState({ flash: 'Nouvel atelier crée', open: true })
       );
+    this.timeOutRedirect();
   };
   // ========== UPDATE =========
   handleUpdate = (event) => {
@@ -179,6 +191,7 @@ class FormAtelier extends Component {
           places_disponibles: '',
         })
       );
+    this.timeOutRedirect();
   };
 
   render() {
@@ -278,11 +291,12 @@ class FormAtelier extends Component {
                 onChange={this.updateFormuleField}
               />
               <br />
-              <input 
-              type="file" 
-              ref="photo_atelier" 
-              name="photo" 
-              onChange={this.updatePhotoField.bind(this)} />
+              <input
+                type="file"
+                ref="photo_atelier"
+                name="photo"
+                onChange={this.updatePhotoField.bind(this)}
+              />
               <br />
               <br />
               <TextField
@@ -310,11 +324,8 @@ class FormAtelier extends Component {
                 <MenuItem value="">
                   <em>Selectionnez un intervenant</em>
                 </MenuItem>
-                {this.props.intervenants.map((item) => (
-                  <MenuItem
-                    key={item.id_intervenant}
-                    value={item.id_intervenant}
-                  >
+                {this.props.intervenants.map((item, i) => (
+                  <MenuItem key={i} value={item.id_intervenant}>
                     {item.nom} {item.prenom}
                   </MenuItem>
                 ))}

@@ -10,12 +10,12 @@ class Admin extends Component {
   }
   render() {
     return (
-      <Grid container >
+      <Grid container>
         <Grid item md={3}>
           <MenuAdmin />
         </Grid>
         <Grid item md={9}>
-          <FormulaireIntervenant />
+          <FormulaireIntervenant history={this.props.history} />
         </Grid>
       </Grid>
     );
