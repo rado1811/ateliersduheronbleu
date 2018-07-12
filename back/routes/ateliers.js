@@ -15,8 +15,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+
 router.get('/', (req, res) => {
-  connection.query('select * from Ateliers left join Intervenants on Ateliers.id_intervenant = Intervenants.id_intervenant', (error, result) => {
+  connection.query('SELECT * FROM Ateliers', (error, result) => {
     if (error) {
       res.send(error);
     } else {
@@ -33,25 +34,28 @@ router.post('/', upload.single('file'), (req, res) => {
   };
 
   connection.query('INSERT INTO Ateliers SET ?', body, (errSql) => {
-    console.log('into post')
     if (errSql) {
+      console.error(errSql);
       res.send(errSql);
     } else {
-      console.log('post ok')
       res.sendStatus(200);
     }
   });
 });
-
-router.put('/', (req, res) => {
-  const sql = `UPDATE Ateliers SET ? WHERE id_atelier =${
-    req.body.data.id_atelier
-  }`;
-
-  connection.query(sql, req.body.data, (err) => {
-    if (err) res.send(err);
-    else {
-      res.status(200).send();
+router.put('/', upload.single('file'), (req, res) => {
+  const formulaire = JSON.parse(req.body.form);
+  const body = {
+    ...formulaire,
+    photo_atelier: req.file.filename,
+  };
+  connection.query(`UPDATE Ateliers SET ? WHERE id_atelier =${
+    formulaire.id_atelier
+  }`, body, (errSql) => {
+    if (errSql) {
+      console.error(errSql);
+      res.send(errSql);
+    } else {
+      res.sendStatus(200);
     }
   });
 });
