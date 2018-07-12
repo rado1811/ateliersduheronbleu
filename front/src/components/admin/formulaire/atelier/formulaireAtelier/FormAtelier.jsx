@@ -130,13 +130,6 @@ class FormAtelier extends Component {
     this.setState({ open: false });
   };
 
-  redirect = () => {
-    this.props.history.push('/administration');
-  };
-  timeOutRedirect = () => {
-    window.setTimeout(this.redirect(), 3000);
-  };
-
   handleSubmit = (event) => {
     event.preventDefault();
 
@@ -154,7 +147,9 @@ class FormAtelier extends Component {
       .then((res) =>
         this.setState({ flash: 'Nouvel atelier crée', open: true })
       );
-    this.timeOutRedirect();
+    setTimeout(() => {
+      this.props.history.push('admin/administration');
+    }, 3000);
   };
   // ========== UPDATE =========
   handleUpdate = (event) => {
@@ -176,6 +171,11 @@ class FormAtelier extends Component {
         (err) => this.setState({ flash: 'Formulaire incomplet', open: true })
       )
       .then(
+        setTimeout(() => {
+          this.props.history.push('admin/administration');
+        }, 3000)
+      )
+      .then(
         this.setState({
           nom_atelier: '',
           debut: '',
@@ -191,7 +191,6 @@ class FormAtelier extends Component {
           places_disponibles: '',
         })
       );
-    this.timeOutRedirect();
   };
 
   render() {
