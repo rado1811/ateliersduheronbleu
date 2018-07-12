@@ -76,7 +76,7 @@ class TemporaryDrawer extends React.Component {
               
               
             >
-              Atelier du Héron Bleu
+              Les Ateliers du Héron Bleu
             </Typography>
             <Hidden xsDown>
               <Button color="inherit" component={MyAccueil} style={{fontFamily: 'Montserrat', color : '#FFFFFF	', fontWeight: 'bold'}}>
