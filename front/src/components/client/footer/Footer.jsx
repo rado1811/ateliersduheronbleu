@@ -9,7 +9,7 @@ const Footer = () => (
       <Grid container alignItems="center">
         <Grid item xs={3} style={{ backgroundColor: 'none' }}>
           <li style={{ listStyleType: 'none', textAlign: 'center', margin: '15px' }}>
-            <NavLink to="/Ateliers" style={{ textDecoration: 'none', color: 'black' }}>CGV</NavLink>
+            <NavLink to="/CGV" style={{ textDecoration: 'none', color: 'black' }}>CGV</NavLink>
           </li>
         </Grid>
         <Grid item xs={6} style={{ backgroundColor: 'none' }}>
