@@ -16,7 +16,7 @@ import compose from 'recompose/compose';
 import { selectAteliers } from '../../../actions/index';
 
 const Reserver = (props) => <Link to="/ateliers" {...props} />;
-const Atelier = (props) => <Link to="/ateliers" {...props} />;
+const AtelierDetail = (props) => <Link to="/ateliers" {...props} />;
 
 const styles = {
   item: {
@@ -82,7 +82,7 @@ const AtelierVignette = (props) => {
             onClick={() => {
               props.selectAteliers(props.ateliers[props.indexAtelier]);
             }}
-            component={Atelier}
+            component={AtelierDetail}
           >
             En savoir plus
           </Button>
