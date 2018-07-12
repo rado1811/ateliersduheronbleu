@@ -42,10 +42,11 @@ class AtelierHome extends Component {
         {ateliers.map((atelier, i) => (
           <AtelierVignette
             key={atelier.id_atelier}
-            name={atelier.nom}
+            name={atelier.nom_atelier}
             date={atelier.debut}
-            image={`/images/${atelier.photo}`}
-            intervenant={atelier.id_intervenant}
+            image={`/images/${atelier.photo_atelier}`}
+            intervenant_nom={atelier.nom}
+            intervenant_prenom={atelier.prenom}
             places_disponibles={atelier.place_disponibles}
             indexAtelier={i}
           />
@@ -115,23 +116,7 @@ class AtelierHome extends Component {
 }
 
 AtelierHome.propTypes = {
-  ateliers: PropTypes.arrayOf(
-    PropTypes.shape({
-      contenu: PropTypes.string.isRequired,
-      debut: PropTypes.string.isRequired,
-      formule: PropTypes.string.isRequired,
-      lieu: PropTypes.string.isRequired,
-      nb_participants: PropTypes.number.isRequired,
-      nom: PropTypes.string.isRequired,
-      photo: PropTypes.string.isRequired,
-      place_disponibles: PropTypes.number.isRequired,
-      id_atelier: PropTypes.number.isRequired,
-      id_intervenant: PropTypes.number.isRequired,
-      nom_intervenant: PropTypes.string.isRequired,
-      prix: PropTypes.number.isRequired,
-      programme: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  ateliers: PropTypes.arrayOf(Array).isRequired,
   fetchAteliers: PropTypes.func.isRequired,
 };
 

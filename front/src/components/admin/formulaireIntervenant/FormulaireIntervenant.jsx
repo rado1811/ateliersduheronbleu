@@ -84,22 +84,7 @@ class FormulaireIntervenant extends Component {
       });
     }
   };
-  handleSubmit = (event) => {
-    event.preventDefault();
-
-    let form = {
-      ...this.state,
-      id_intervenant: this.state.nom_intervenant,
-    };
-
-    let data = new FormData();
-    data.append('file', this.state.photo);
-    data.append('form', JSON.stringify(form));
-
-    axios
-      .post('/api/intervenants', data)
-      .then((res) => this.setState({ flash: 'Formulaire envoyé', open: true }));
-  };
+  
   // ========== UPDATE =========
   handleUpdate = (event) => {
     event.preventDefault();

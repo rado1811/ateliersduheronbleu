@@ -71,7 +71,7 @@ class AtelierDetail extends Component {
               >
                 <Grid media="screen and (max-width: 440px)" className="image-container" item md={6} sm={1} key={this.props.ateliers.key}>
                   <div>
-                    <img src={`/images/${this.props.ateliers.photo}`} alt="heron" style={{ height: '80vh', width: '80vw' }} className="images" />
+                    <img src={`/images/${this.props.ateliers.photo_atelier}`} alt="heron" style={{ height: '80vh', width: '80vw' }} className="images" />
                   </div>
                 </Grid>
                 <Grid>
@@ -85,7 +85,7 @@ class AtelierDetail extends Component {
                         fontFamily: 'Montserrat',
                       }}
                   >
-                    <h1>{this.props.ateliers.nom}</h1>
+                    <h1>{this.props.ateliers.nom_atelier}</h1>
                     <h3>
                       <Moment format="DD/MM/YYYY">
                         {this.props.ateliers.debut}
@@ -107,7 +107,7 @@ class AtelierDetail extends Component {
                     <b>
                       <h3>Intervenants :</h3>
                     </b>
-                    <p>{this.props.ateliers.intervenant}</p>
+                    <p>{this.props.ateliers.prenom} {this.props.ateliers.nom}</p>
                   </div>
                 </Grid>
               </Grid>
@@ -121,16 +121,15 @@ class AtelierDetail extends Component {
 AtelierDetail.propTypes = {
   fetchAteliers: PropTypes.func.isRequired,
   ateliers: PropTypes.shape({
-    contenu: PropTypes.string.isRequired,
     debut: PropTypes.string.isRequired,
     formule: PropTypes.string.isRequired,
     id_atelier: PropTypes.number.isRequired,
     id_intervenant: PropTypes.number.isRequired,
     lieu: PropTypes.string.isRequired,
     nb_participants: PropTypes.number.isRequired,
-    nom: PropTypes.string.isRequired,
+    nom_atelier: PropTypes.string.isRequired,
     nom_intervenant: PropTypes.string.isRequired,
-    photo: PropTypes.string.isRequired,
+    photo_atelier: PropTypes.string.isRequired,
     place_disponibles: PropTypes.number.isRequired,
     prix: PropTypes.number.isRequired,
     programme: PropTypes.string.isRequired,
