@@ -105,13 +105,22 @@ class FormParticipants extends Component {
             })
         );
       this.setState({ flash: 'Formulaire envoyé', open: true });
-      fetch('/mail', {
+      fetch('/mail/admin', {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json',
         }),
         body: JSON.stringify(this.state),
-      }).then(res => res.json());
+      })
+        .then(res => res.json())
+        .then(fetch('/mail/participant', {
+          method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify(this.state),
+      })
+        .then(res => res.json()))
     } else {
       this.setState({ flash: 'Formulaire incomplet', open: true });
     }
