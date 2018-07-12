@@ -13,7 +13,6 @@ import { fetchAteliers } from '../actions/ateliers';
 import BoutonContact from '../components/client/BoutonContact';
 import Footer from '../components/client/footer/Footer';
 import './AtelierHome.css';
-import TemporaryDrawer from '../components/client/navbar/TemporaryDrawer';
 
 const styles = (theme) => ({
   button: {
@@ -74,11 +73,6 @@ class AtelierHome extends Component {
   render() {
     return (
       <div>
-<<<<<<< HEAD
-          <div
-            className="video-container"
-=======
-        <TemporaryDrawer />
         <div
           className="video-container"
           style={{
@@ -88,42 +82,44 @@ class AtelierHome extends Component {
         >
           <video
             id="background-video"
->>>>>>> dev
             style={{
-              marginBottom: 100,
-              marginTop: -70,
+              height: 'auto',
+              width: '100%',
             }}
+            loop
+            muted
+            autoPlay
           >
-            <video
-              id="background-video"
-              style={{
-                height: 'auto',
-                width: '100%',
-              }}
-              loop
-              muted
-              autoPlay
-            >
-              <source src="../images/sunwaves.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-          <div className="overlay" style={{ fontFamily: 'Dancing Script', fontSize: '3vw', padding: '150px' }}>
-            <h2 style={{ paddingLeft: '150px' }}>
-              {' '}
-              Ateliers "Bien-être et Créativité" 
-            </h2>
-            <h3 className="sousTitre" style={{ fontFamily: 'Dancing Script', paddingLeft: '150px' }}>
-              {' '}
-              Le Teich
-            </h3>
-          </div>
-          <Link to="#ateliers">
-            <i className="fas fa-angle-double-down" />
-          </Link>
-          {this.getUpcomingAteliers()}
-          <BoutonContact />
-          <Footer />
+            <source src="../images/sunwaves.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div
+          className="overlay"
+          style={{
+            fontFamily: 'Dancing Script',
+            fontSize: '3vw',
+            padding: '150px',
+          }}
+        >
+          <h2 style={{ paddingLeft: '150px' }}>
+            {' '}
+            Ateliers "Bien-être et Créativité"
+          </h2>
+          <h3
+            className="sousTitre"
+            style={{ fontFamily: 'Dancing Script', paddingLeft: '150px' }}
+          >
+            {' '}
+            Le Teich
+          </h3>
+        </div>
+        <Link to="#ateliers">
+          <i className="fas fa-angle-double-down" />
+        </Link>
+        {this.getUpcomingAteliers()}
+        <BoutonContact />
+        <Footer />
       </div>
     );
   }
