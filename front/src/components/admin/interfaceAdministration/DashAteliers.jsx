@@ -203,22 +203,26 @@ class DashAteliers extends React.Component {
                         {atelier.nom_atelier}
                       </TableCell>
                       <TableCell>
-                        <IconButton aria-label="Delete">
-                          <DeleteIcon
-                            onClick={() =>
-                              this.deleteAteliers(atelier.id_atelier)
-                            }
-                          />
-                        </IconButton>
+                        <Tooltip title="Supprimer">
+                          <IconButton aria-label="Delete">
+                            <DeleteIcon
+                              onClick={() =>
+                                this.deleteAteliers(atelier.id_atelier)
+                              }
+                            />
+                          </IconButton>
+                        </Tooltip>
                       </TableCell>
                       <TableCell>
-                        <IconButton
-                          component={AdminAtelier}
-                          aria-label="Edit"
-                          onClick={() => goEdit(i)}
-                        >
-                          <EditIcon />
-                        </IconButton>
+                        <Tooltip title="Modifier">
+                          <IconButton
+                            component={AdminAtelier}
+                            aria-label="Edit"
+                            onClick={() => goEdit(i)}
+                          >
+                            <EditIcon />
+                          </IconButton>
+                        </Tooltip>
                       </TableCell>
                     </TableRow>
                   );

@@ -208,7 +208,7 @@ class DashIntervenants extends React.Component {
                       <TableCell component="th" scope="row" padding="none">
                         {intervenant.prenom}
                       </TableCell>
-                      { i === 0 ? (
+                      { intervenant.id_intervenant === 1 ? (
                         <TableCell style={{ color : "red" }}>
                           Administrateur
                         </TableCell>) : (
