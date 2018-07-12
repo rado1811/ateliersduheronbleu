@@ -43,15 +43,20 @@ router.post('/', upload.single('file'), (req, res) => {
   });
 });
 
-router.put('/', (req, res) => {
-  const sql = `UPDATE Intervenants SET ? WHERE id_intervenant =${
-    req.body.data.id_intervenant
-  }`;
-
-  connection.query(sql, req.body.data, (err) => {
-    if (err) res.send(err);
-    else {
-      res.status(200).send();
+router.put('/', upload.single('file'), (req, res) => {
+  const form = JSON.parse(req.body.form);
+  const body = {
+    ...form,
+    photo: req.file.filename,
+  };
+  connection.query(`UPDATE Intervenants SET ? WHERE id_intervenant =${
+    form.id_intervenant
+  }`, body, (errSql) => {
+    if (errSql) {
+      console.error(errSql);
+      res.send(errSql);
+    } else {
+      res.sendStatus(200);
     }
   });
 });

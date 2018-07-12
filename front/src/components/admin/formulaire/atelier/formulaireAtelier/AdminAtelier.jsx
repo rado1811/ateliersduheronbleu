@@ -26,7 +26,7 @@ class AdminAtelier extends Component {
           <MenuAdmin />
         </Grid>
         <Grid item sm={6}>
-          <FormAtelier />
+          <FormAtelier history={this.props.history} />
         </Grid>
       </Grid>
     );
