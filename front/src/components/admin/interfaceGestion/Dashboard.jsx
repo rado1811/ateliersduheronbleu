@@ -5,7 +5,7 @@ import MenuAdmin from '../menuAdmin/MenuAdmin';
 import DashboardParticipants from './DashboardParticipants';
 
 const Dashboard = () => (
-  <Grid container >
+  <Grid container style={{ paddingRight: 20 }}>
     <Grid item s={2} md={2}>
       <MenuAdmin />
     </Grid>

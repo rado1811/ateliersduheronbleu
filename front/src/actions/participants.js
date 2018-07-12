@@ -34,21 +34,3 @@ export function fetchParticipants() {
       .catch(error => dispatch(fetchParticipantsFailure(error)));
   };
 }
-
-export const validerStatut = indexStatutFromEdit => ({
-  type: VALIDER_STATUT,
-  payload: { indexStatutFromEdit },
-
-});
-
-export const annulerStatut = indexStatutFromEdit => ({
-  type: ANNULER_STATUT,
-  payload: { indexStatutFromEdit },
-
-});
-
-export const supprimerStatut = indexStatutFromEdit => ({
-  type: SUPPRIMER_STATUT,
-  payload: { indexStatutFromEdit },
-
-});
