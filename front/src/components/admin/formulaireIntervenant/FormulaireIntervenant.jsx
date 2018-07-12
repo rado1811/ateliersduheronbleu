@@ -86,19 +86,22 @@ class FormulaireIntervenant extends Component {
   };
   
   // ========== UPDATE =========
-  handleUpdate = (event) => {
-    event.preventDefault();
-    let data = {
+  handleUpdate = (e) => {
+    e.preventDefault();
+
+    let form = {
       ...this.state,
     };
-    fetch('/api/intervenants', {
-      method: 'PUT',
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }),
-      body: JSON.stringify({ data }),
-    })
+
+    let data = new FormData();
+    data.append('file', this.state.photo);
+    data.append('form', JSON.stringify(form));
+
+    axios
+      .put('/api/intervenants', data)
+      .then((res) =>
+        this.setState({ flash: 'Nouvel intervenant crée', open: true })
+      )
       .then((res) => res.json())
       .then(
         (res) => this.setState({ flash: 'Intervenant modifié', open: true }),
@@ -113,6 +116,7 @@ class FormulaireIntervenant extends Component {
           parcours: '',
           metier: '',
           citation: '',
+          photo: {},
         })
       );
   };

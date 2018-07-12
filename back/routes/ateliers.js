@@ -17,7 +17,7 @@ const upload = multer({ storage });
 
 
 router.get('/', (req, res) => {
-  connection.query('select * from Ateliers left join Intervenants on Ateliers.id_intervenant = Intervenants.id_intervenant', (error, result) => {
+  connection.query('SELECT * FROM Ateliers', (error, result) => {
     if (error) {
       res.send(error);
     } else {
