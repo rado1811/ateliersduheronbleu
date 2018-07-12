@@ -20,7 +20,6 @@ class AdminAtelier extends Component {
     this.props.fetchIntervenants();
   }
   render() {
-    console.log(this.props);
     return (
       <Grid container>
         <Grid item sm={6}>
