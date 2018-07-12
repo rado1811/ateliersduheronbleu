@@ -10,7 +10,7 @@ import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import { fetchParticipants } from '../../../actions/participants';
-// 
+
 class DashboardParticipants extends Component {
   componentDidMount() {
     this.props.fetchParticipants();
@@ -40,10 +40,8 @@ class DashboardParticipants extends Component {
       body: JSON.stringify({id_participant})
     })
       .then((res) => res.send())
-      .then(
-        (res) => this.setState({ flash: 'Statut modifié', open: true }),
-        (err) => this.setState({ flash: 'Statut modifié', open: true })
-      )
+      .then((res) => this.setState({ flash: 'réservation validée', open: true }))
+      .catch((err) => err);
   };
 
   annulerStatut = (id_participant) => {
@@ -56,10 +54,8 @@ class DashboardParticipants extends Component {
       body: JSON.stringify({id_participant})
     })
       .then((res) => res.send())
-      .then(
-        (res) => this.setState({ flash: 'Statut modifié', open: true }),
-        (err) => this.setState({ flash: 'Statut modifié', open: true })
-      )
+      .then((res) => this.setState({ flash: 'Réservation annulée', open: true }))
+      .catch((err) => err);
   };
 
 
