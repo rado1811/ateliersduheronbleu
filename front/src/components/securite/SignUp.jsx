@@ -4,6 +4,7 @@ import { TextField, Button, Snackbar } from 'material-ui';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import AlertDialogSlide from '../../components/client/pageAteliers/AlertDialogSlide';
+import { connect } from 'react-redux';
 
 let hint = '';
 const faible = /[a-z]{1,5}/g;
@@ -291,4 +292,5 @@ class SignUp extends Component {
   }
 }
 
-export default withStyles(styles)(SignUp);
+export default connect(
+)(withStyles(styles)(SignUp));
