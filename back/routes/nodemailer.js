@@ -1,5 +1,6 @@
 import express from 'express';
 import nodemailer from 'nodemailer';
+import connection from '../config/db';
 
 const router = express.Router();
 
@@ -38,25 +39,34 @@ router.post('/', (req, res) => {
     objet = "Question d'un participant";
   }
   if (req.body.atelier) {
-    const atelier = req.body.id_atelier[0].nom;
+    const atelier = req.body.id_atelier[0].nom_atelier;
     content = `Bonjour,\n \nUn nouveau participant s'est pré-inscrit à l'atelier suivant : ${atelier}.\n \nVoici les coordonnées du participant :\nNom: ${nom} \nPrénom: ${prenom} \nNuméro de téléphone: ${tel} \nEmail: ${mailAdresse}\n \nCe message provient d'un envoi automatique de votre site internet, merci de ne pas y répondre`;
     objet = 'Demande de Pré-inscription';
   }
-  const mail = {
-    from: nom,
-    to: 'thibaut.cointet@gmail.com',
-    subject: objet,
-    text: content,
-  };
 
-  transporter.sendMail(mail, (err) => {
-    if (err) {
+  connection.query('SELECT email FROM Intervenants WHERE id_intervenant=1', (errorMail, mailContact) => {
+    if (errorMail) {
       res.json({
         msg: 'fail',
       });
     } else {
-      res.json({
-        msg: 'success',
+      const mail = {
+        from: nom,
+        to: mailContact[0].email,
+        subject: objet,
+        text: content,
+      };
+    
+      transporter.sendMail(mail, (err) => {
+        if (err) {
+          res.json({
+            msg: 'fail',
+          });
+        } else {
+          res.json({
+            msg: 'success',
+          });
+        }
       });
     }
   });

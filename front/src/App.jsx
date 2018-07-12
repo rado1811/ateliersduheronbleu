@@ -12,6 +12,7 @@ import Dashboard from './components/admin/interfaceGestion/Dashboard';
 import ContainerSecurite from './components/securite/ContainerSecurite';
 import ContainerDashboard from './components/admin/interfaceAdministration/ContainerDashboard';
 import SignIn from './components/securite/SignIn';
+import CGV from './components/client/cgv/CGV';
 
 const App = () => (
   <div>
@@ -31,6 +32,13 @@ const App = () => (
         component={ContainerDashboard}
       />
       <Route exact path="/admin/securite" component={ContainerSecurite} />
+      <Route
+        exact
+        path="/admin/administration"
+        component={ContainerDashboard}
+      />
+      <Route exact path="/admin/profilAdmin" component={Admin} />
+      <Route path="/CGV" component={CGV} />
     </Switch>
   </div>
 );

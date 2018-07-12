@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import BoutonContact from '../client/BoutonContact';
 import { fetchIntervenants } from '../../actions/intervenants';
 import IntervenantsTile from './IntervenantsTile';
+import Footer from './footer/Footer';
 import './intervenants.css';
 import TemporaryDrawer from '../client/navbar/TemporaryDrawer';
 
@@ -42,13 +43,16 @@ class Intervenants extends Component {
         <Grid container spacing={24}>
           <Grid item xs={12} md={4}>
             <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-              <ListSubheader component="div" style={{ textAlign: 'center' }}>
+              <ListSubheader
+                component="div"
+                style={{ textAlign: 'center', fontSize: '1.5em' }}
+              >
                 La fondatrice
               </ListSubheader>
             </GridListTile>
             <GridListTile>
               <img
-                src={this.props.intervenants[0].photo}
+                src={`/images/${this.props.intervenants[0].photo}`}
                 alt={this.props.intervenants[0].nom}
               />
               <GridListTileBar
@@ -76,7 +80,7 @@ class Intervenants extends Component {
                 <div className="modalIntervenants">
                   <Avatar
                     alt="avatar intervenant"
-                    src={this.props.intervenants[0].photo}
+                    src={`/images/${this.props.intervenants[0].photo}`}
                     className="modalAvatar"
                     label="HELLO"
                   />
@@ -104,7 +108,11 @@ class Intervenants extends Component {
                 >
                   <ListSubheader
                     component="div"
-                    style={{ textAlign: 'center', backgroundColor: 'E9E7DF' }}
+                    style={{
+                      textAlign: 'center',
+                      backgroundColor: 'E9E7DF',
+                      fontSize: '1.5em',
+                    }}
                   >
                     Les intervenants
                   </ListSubheader>
@@ -126,6 +134,7 @@ class Intervenants extends Component {
             </div>
           </Grid>
         </Grid>
+        <Footer />
       </div>
     );
   }

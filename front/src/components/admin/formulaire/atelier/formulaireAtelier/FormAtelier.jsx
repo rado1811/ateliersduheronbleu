@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -16,25 +17,24 @@ class FormAtelier extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nom: '',
+      nom_atelier: '',
       debut: '',
       nb_participants: '',
       prix: '',
       contenu: '',
       formule: '',
       lieu: '',
-      photo: '',
+      photo_atelier: {},
       programme: '',
       id_atelier: '',
       id_intervenant: '',
-      places_disponibles: '',
+      place_disponibles: '',
       nom_intervenant: '',
     };
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.isFromEdit) {
       this.setState({
-        contenu: nextProps.ateliers[nextProps.indexAtelierFromEdit].contenu,
         debut: nextProps.ateliers[nextProps.indexAtelierFromEdit].debut,
         formule: nextProps.ateliers[nextProps.indexAtelierFromEdit].formule,
         id_atelier: this.props.ateliers[nextProps.indexAtelierFromEdit]
@@ -44,11 +44,14 @@ class FormAtelier extends Component {
         lieu: nextProps.ateliers[nextProps.indexAtelierFromEdit].lieu,
         nb_participants:
           nextProps.ateliers[nextProps.indexAtelierFromEdit].nb_participants,
-        nom: this.props.ateliers[nextProps.indexAtelierFromEdit].nom_atelier,
-        photo: nextProps.ateliers[nextProps.indexAtelierFromEdit].photo_atelier,
-        places_disponibles:
-          nextProps.ateliers[nextProps.indexAtelierFromEdit].places_disponibles,
+        nom_atelier: this.props.ateliers[nextProps.indexAtelierFromEdit]
+          .nom_atelier,
+        photo_atelier:
+          nextProps.ateliers[nextProps.indexAtelierFromEdit].photo_atelier,
+        place_disponibles:
+          nextProps.ateliers[nextProps.indexAtelierFromEdit].place_disponibles,
         prix: nextProps.ateliers[nextProps.indexAtelierFromEdit].prix,
+        contenu: nextProps.ateliers[nextProps.indexAtelierFromEdit].contenu,
         programme: nextProps.ateliers[nextProps.indexAtelierFromEdit].programme,
       });
     }
@@ -57,10 +60,9 @@ class FormAtelier extends Component {
   componentWillUnmount() {
     this.props.cleanEdit();
   }
-
   updateNomField = (event) => {
     this.setState({
-      nom: event.target.value,
+      nom_atelier: event.target.value,
     });
   };
   updateDebutField = (event) => {
@@ -93,14 +95,19 @@ class FormAtelier extends Component {
       lieu: event.target.value,
     });
   };
-  updatePhotoField = (event) => {
-    this.setState({
-      photo: event.target.value,
-    });
+  updatePhotoField = () => {
+    const inputFile = this.refs.photo_atelier;
+    const files = inputFile.files;
+    console.log(files);
+    if (files.length > 0) {
+      this.setState({
+        photo_atelier: files[0],
+      });
+    }
   };
   updatePlacesField = (event) => {
     this.setState({
-      places_disponibles: event.target.value,
+      place_disponibles: event.target.value,
     });
   };
   updateProgrammeField = (event) => {
@@ -123,22 +130,20 @@ class FormAtelier extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    let data = {
+
+    let form = {
       ...this.state,
       id_intervenant: this.state.nom_intervenant,
     };
 
-    fetch('/api/ateliers', {
-      method: 'POST',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then(
-        (res) => this.setState({ flash: 'Formulaire envoyé', open: true }),
-        (err) => this.setState({ flash: 'Formulaire envoyé', open: true })
+    let data = new FormData();
+    data.append('file', this.state.photo_atelier);
+    data.append('form', JSON.stringify(form));
+
+    axios
+      .post('/api/ateliers', data)
+      .then((res) =>
+        this.setState({ flash: 'Nouvel atelier crée', open: true })
       );
   };
   // ========== UPDATE =========
@@ -157,19 +162,19 @@ class FormAtelier extends Component {
     })
       .then((res) => res.json())
       .then(
-        (res) => this.setState({ flash: 'Formulaire modifié', open: true }),
-        (err) => this.setState({ flash: 'Formulaire modifié', open: true })
+        (res) => this.setState({ flash: 'Atelier modifié', open: true }),
+        (err) => this.setState({ flash: 'Formulaire incomplet', open: true })
       )
       .then(
         this.setState({
-          nom: '',
+          nom_atelier: '',
           debut: '',
           nb_participants: '',
           prix: '',
           contenu: '',
           formule: '',
           lieu: '',
-          photo: '',
+          photo_atelier: '',
           programme: '',
           id_atelier: '',
           id_intervenant: '',
@@ -178,7 +183,6 @@ class FormAtelier extends Component {
       );
   };
 
- 
   render() {
     const { isFromEdit } = this.props;
     return (
@@ -207,7 +211,7 @@ class FormAtelier extends Component {
                     required
                     label="Titre de l'Atelier"
                     type="text"
-                    value={this.state.nom}
+                    value={this.state.nom_atelier}
                     onChange={this.updateNomField}
                   />
                   <br />
@@ -276,12 +280,11 @@ class FormAtelier extends Component {
                 onChange={this.updateFormuleField}
               />
               <br />
-              <TextField
-                style={{ margin: 15 }}
+              <input
+                type="file"
+                ref="photo_atelier"
                 name="photo"
-                label="Photo"
-                value={this.state.photo}
-                onChange={this.updatePhotoField}
+                onChange={this.updatePhotoField.bind(this)}
               />
               <br />
               <br />

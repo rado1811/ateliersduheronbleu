@@ -19,8 +19,8 @@ class FormParticipants extends Component {
       alert: false,
       messageDialogue: [],
       input: '',
-      id_atelier: [],
-      atelier: '',
+      id_atelier: '',
+      ateliers: [],
     };
   }
 
@@ -29,7 +29,7 @@ class FormParticipants extends Component {
       .then(response => response.json())
       .then(data => {
         this.setState({
-          id_atelier: data,
+          ateliers: data,
         });
       })
       .catch(err => console.error(err));
@@ -140,7 +140,7 @@ class FormParticipants extends Component {
   };
   updateAtelierField = event => {
     this.setState({
-      atelier: event.target.value,
+      id_atelier: event.target.value,
     });
   };
 
@@ -202,15 +202,15 @@ class FormParticipants extends Component {
             <div>
               <InputLabel htmlFor="dropInput">Ateliers</InputLabel>
               <Select
-                value={this.state.atelier}
-                onChange={this.updateAtelierField.bind(this)}
+                value={this.state.id_atelier}
+                onChange={this.updateAtelierField}
               >
                 <MenuItem value="">
                   <em>Ateliers</em>
                 </MenuItem>
-                {this.state.id_atelier.map(item => (
+                {this.state.ateliers.map(item => (
                   <MenuItem key={item.id_atelier} value={item.id_atelier}>
-                    {item.nom}
+                    {item.nom_atelier}
                   </MenuItem>
                 ))}
               </Select>

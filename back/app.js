@@ -7,6 +7,7 @@ import path from 'path';
 import connection from './config/db';
 import intervenant from './routes/intervenant';
 import ateliers from './routes/ateliers';
+import participants from './routes/participant';
 import prereservationRouter from './routes/prereservation';
 import nodemailer from './routes/nodemailer';
 
@@ -42,11 +43,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 /** ROUTES */
 app.use('/api/ateliers', ateliers);
 app.use('/api/intervenants', intervenant);
+app.use('/api/participant', participants);
 app.use('/api', prereservationRouter);
 app.use('/mail', nodemailer);
 app.use('/auth', auth);
 
-// error handler
 /* eslint no-unused-vars: 0 */
 app.use((err, req, res) => {
   // set locals, only providing error in development

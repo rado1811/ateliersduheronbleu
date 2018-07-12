@@ -28,20 +28,16 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
         style={{ padding: 2, maxHeight: '100vh', overflow: 'auto' }}
       >
         <p>Liste des Ateliers</p>
-        {ateliers.map((atelier) => (
+        {ateliers.map(atelier => (
           <Paper key={atelier.id_atelier} elevation={8}>
             <Button onClick={() => selectAteliers(atelier)}>
               <div className="image-container">
-                <img
-                  src={`/images/${atelier.photo}`}
-                  alt="heron"
-                  style={{ height: '10vh', width: '6vw' }}
-                />
+                <img src={`/images/${atelier.photo_atelier}`} alt="heron" style={{ height: '10vh', width: '6vw' }} />
               </div>
 
               <div style={{ fontFamily: 'Montserrat' }}>
                 <li>
-                  {atelier.nom}
+                  {atelier.nom_atelier}
                   <br />
                   <Moment format="DD/MM/YYYY">{atelier.debut}</Moment>
                 </li>

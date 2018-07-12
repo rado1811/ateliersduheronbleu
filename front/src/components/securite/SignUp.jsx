@@ -268,7 +268,7 @@ class SignUp extends Component {
                     color="secondary"
                     style={{ margin: 30 }}
                   >
-                    Hit me
+                    Valider
                   </Button>
                 </div>
               </form>
