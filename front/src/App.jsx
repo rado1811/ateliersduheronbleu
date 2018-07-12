@@ -11,7 +11,7 @@ import MenuAdmin from './components/admin/menuAdmin/MenuAdmin';
 import Admin from './components/admin/formulaireIntervenant/Admin';
 import Dashboard from './components/admin/interfaceGestion/Dashboard';
 import ContainerDashboard from './components/admin/interfaceAdministration/ContainerDashboard';
-import CGV from './components/client/cgv/CGV';
+import CGV from './components/client/CGV/CGV';
 
 const App = () => (
   <div>
