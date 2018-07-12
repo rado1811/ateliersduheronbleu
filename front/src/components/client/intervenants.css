@@ -1,25 +1,8 @@
-.rootIntervenants {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  overflow: hidden;
-  background-color: #F2F2F2;
-};
-.gridListIntervenants {
-  width: 500;
-  height: 450;
-};
-
-.rootIsabelle {
-  background-color: #F2F2F2;
-  position: sticky;
-  top: 10px;
-}
 .tileIntervenants {
   flex-wrap: wrap;
   justify-content: space-around;
   overflow: hidden;
-  background-color: #E9E7DF;
+  background-color: #e9e7df;
   width: 450px;
   height: 500px;
   padding: 8px;
@@ -28,7 +11,7 @@
 .modalIntervenants {
   position: absolute;
   z-index: 500;
-  background-color: #B2C4CB;
+  background-color: #b2c4cb;
   width: 70%;
   height: auto;
   padding: 16px;
@@ -43,5 +26,5 @@
   flex-wrap: wrap;
   justify-content: space-around;
   overflow: hidden;
-  background-color: #E9E7DF;
+  background-color: #e9e7df;
 }
