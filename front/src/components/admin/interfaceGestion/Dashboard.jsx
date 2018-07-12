@@ -5,13 +5,13 @@ import MenuAdmin from '../menuAdmin/MenuAdmin';
 import DashboardParticipants from './DashboardParticipants';
 
 const Dashboard = () => (
-  <Grid container spacing={16}>
-    <Grid item s={3} >
+  <Grid container >
+    <Grid item s={2} md={2}>
       <MenuAdmin />
     </Grid>
-    <Grid item style={{ marginTop: 10 }} >
-      <DashboardAteliers s={9} />
-      <DashboardParticipants s={9} />
+    <Grid item style={{ marginTop: 10 }} s={10} md={10}>
+      <DashboardAteliers />
+      <DashboardParticipants />
     </Grid>
   </Grid>
 );

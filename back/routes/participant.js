@@ -4,7 +4,7 @@ import connection from '../config/db';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  connection.query('SELECT * FROM Participants', (err, data) => {
+  connection.query('SELECT * FROM Participants left join Ateliers on Participants.id_atelier = Ateliers.id_atelier', (err, data) => {
     if (err) {
       res.send(err);
     } else {

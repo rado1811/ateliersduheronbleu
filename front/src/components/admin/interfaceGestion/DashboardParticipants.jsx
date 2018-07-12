@@ -64,8 +64,6 @@ class DashboardParticipants extends Component {
 
 
   render() {
-    console.log(this.props.participants)
-
     return (
       <div>
         <h1 className="text-center" style={{ marginTop: 20 }}>
