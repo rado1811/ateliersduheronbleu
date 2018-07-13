@@ -78,7 +78,7 @@ class DashboardParticipants extends Component {
                 <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody >
               {this.props.participants.map((participants) => (
                 <TableRow key={participants.id_participant}>
                   <TableCell >{participants.nom_atelier}</TableCell>
