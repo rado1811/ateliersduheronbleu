@@ -97,7 +97,7 @@ class Contact extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     if (this.formSend()) {
-      fetch('/mail', {
+      fetch('/mail/admin', {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ class Contact extends Component {
               flash: err.flash,
             })
         );
-      this.setState({ flash: 'Formulaire envoyé', open: true });
+      this.setState({ flash: 'Message envoyé', open: true });
     } else {
       this.setState({ flash: 'Formulaire incomplet', open: true });
     }

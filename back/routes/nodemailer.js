@@ -25,7 +25,7 @@ transporter.verify(error => {
   }
 });
 
-router.post('/', (req, res) => {
+router.post('/admin', (req, res) => {
   const nom = req.body.nom;
   const mailAdresse = req.body.email;
   const prenom = req.body.prenom;
@@ -56,7 +56,7 @@ router.post('/', (req, res) => {
         subject: objet,
         text: content,
       };
-    
+
       transporter.sendMail(mail, (err) => {
         if (err) {
           res.json({
@@ -67,6 +67,33 @@ router.post('/', (req, res) => {
             msg: 'success',
           });
         }
+      });
+    }
+  });
+})
+
+router.post('/participant', (req, res) => {
+  const nom = req.body.nom;
+  const mailAdresse = req.body.email;
+  const prenom = req.body.prenom;
+  const content = `Bonjour ${prenom} ${nom}  Votre réservation est confirmée. \n\nCe message provient d'un envoi automatique de votre site internet, merci de ne pas y répondre`;
+  const objet = 'confirmation pré-réservation';
+
+  const mail = {
+    from: nom,
+    to: mailAdresse,
+    subject: objet,
+    text: content,
+  };
+
+  transporter.sendMail(mail, (err) => {
+    if (err) {
+      res.json({
+        msg: 'fail',
+      });
+    } else {
+      res.json({
+        msg: 'success',
       });
     }
   });
