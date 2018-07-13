@@ -149,18 +149,22 @@ class FormAtelier extends Component {
   // ========== UPDATE =========
   handleUpdate = (event) => {
     event.preventDefault();
-    let data = {
+
+    let form = {
       ...this.state,
+      id_atelier: this.state.id_atelier,
+
     };
-    fetch('/api/ateliers', {
-      method: 'PUT',
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }),
-      body: JSON.stringify({ data }),
-    })
-      .then((res) => res.json())
+
+    let data = new FormData();
+    data.append('file', this.state.photo_atelier);
+    data.append('form', JSON.stringify(form));
+
+    axios
+      .put('/api/ateliers', data)
+      .then((res) =>
+        this.setState({ flash: 'Atelier modifié', open: true })
+      )
       .then(
         (res) => this.setState({ flash: 'Atelier modifié', open: true }),
         (err) => this.setState({ flash: 'Formulaire incomplet', open: true })
@@ -174,13 +178,15 @@ class FormAtelier extends Component {
           contenu: '',
           formule: '',
           lieu: '',
-          photo_atelier: '',
+          photo_atelier: {},
           programme: '',
           id_atelier: '',
           id_intervenant: '',
           places_disponibles: '',
         })
-      );
+      ) 
+      .then(this.props.history.push('/admin/dashboard')
+    );
   };
 
   render() {
