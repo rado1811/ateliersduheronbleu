@@ -13,6 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import Grid from '@material-ui/core/Grid';
 
+
 const Dashboard = (props) => <Link to="/admin/gestion" {...props} />;
 const ContainerDashboard = (props) => (
   <Link to="/admin/administration" {...props} />
@@ -88,7 +89,6 @@ class MenuAdmin extends React.Component {
           <MenuItem button component={Securite}>
             Sécurité
           </MenuItem>
-          <br />
           <Divider />
           <br />
           <MenuItem button component={MyAccueil}>
@@ -103,7 +103,7 @@ class MenuAdmin extends React.Component {
       <Grid container spacing={16}>
         <Grid item s={3}>
           <div>
-            <AppBar>
+            <AppBar style={{backgroundColor: '#B2C4CB'}}>
               <Toolbar>
                 <IconButton
                   color="inherit"

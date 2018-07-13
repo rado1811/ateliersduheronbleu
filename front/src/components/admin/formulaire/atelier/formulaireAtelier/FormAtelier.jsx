@@ -238,6 +238,7 @@ class FormAtelier extends Component {
               </Grid>
               <Grid container spacing={24}>
                 <Grid item xs={12} sm={6}>
+                <br />
                   <TextField
                     style={{ margin: 15 }}
                     name="nb_participants"
@@ -250,6 +251,7 @@ class FormAtelier extends Component {
                   <br />
                 </Grid>
                 <Grid item xs={12} sm={6}>
+                <br />
                   <TextField
                     style={{ margin: 15 }}
                     name="prix"
@@ -275,7 +277,9 @@ class FormAtelier extends Component {
                 onChange={this.updateContenuField}
               />
               <br />
+              <Grid container spacing={24}>
               <br />
+              <Grid item xs={12} sm={6}>
               <TextField
                 style={{ margin: 15 }}
                 name="formule"
@@ -285,6 +289,9 @@ class FormAtelier extends Component {
                 value={this.state.formule}
                 onChange={this.updateFormuleField}
               />
+              </Grid>
+              <br />
+              <Grid item xs={12} sm={6}>
               <br />
               <input
                 type="file"
@@ -292,8 +299,12 @@ class FormAtelier extends Component {
                 name="photo"
                 onChange={this.updatePhotoField.bind(this)}
               />
+              </Grid>
+              </Grid>
               <br />
+              <Grid container spacing={24}>
               <br />
+              <Grid item xs={12} sm={6}>
               <TextField
                 style={{ margin: 15 }}
                 name="lieu"
@@ -309,8 +320,10 @@ class FormAtelier extends Component {
                   ),
                 }}
               />
+              </Grid>
               <br />
               <br />
+              <Grid item xs={12} sm={6}>
               <InputLabel htmlFor="dropInput">Intervenant</InputLabel>
               <Select
                 value={this.state.nom_intervenant}
@@ -328,6 +341,8 @@ class FormAtelier extends Component {
                   </MenuItem>
                 ))}
               </Select>
+              </Grid>
+              </Grid>
               <br />
               <TextField
                 style={{ margin: 15 }}

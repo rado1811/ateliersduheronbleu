@@ -10,11 +10,11 @@ class Admin extends Component {
   }
   render() {
     return (
-      <Grid container >
-        <Grid item md={3}>
+      <Grid container style={{ paddingRight: 30 }}>
+        <Grid item md={2} s={2}>
           <MenuAdmin />
         </Grid>
-        <Grid item md={9}>
+        <Grid item md={10} s={10}>
           <FormulaireIntervenant />
         </Grid>
       </Grid>
