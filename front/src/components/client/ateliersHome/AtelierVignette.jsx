@@ -29,6 +29,7 @@ const AtelierVignette = (props) => {
       <Card
         justify="center"
         style={{
+          minHeight: '465',
           marginLeft: 'auto',
           marginRight: 'auto',
           maxWidth: '345',
@@ -43,14 +44,14 @@ const AtelierVignette = (props) => {
           }}
         />
         <CardContent>
-          <Typography gutterBottom variant="headline" component="h2" style={{ fontSize: '1.4vw' }}>
+          <Typography gutterBottom variant="headline" component="h2">
             {props.name}
           </Typography>
-          <Typography component="h3" style={{ fontSize: '1.1vw' }}>
+          <Typography component="h3">
             <Moment format="DD/MM/YYYY">{props.date}</Moment>
           </Typography>
 
-          <Typography component="h3" style={{ fontSize: '1.1vw' }}>
+          <Typography component="h3">
             Places disponibles: {props.places_disponibles} <br />
             Co-animation: {props.intervenant_prenom} {props.intervenant_nom}, Isabelle Jono
           </Typography>
@@ -58,14 +59,14 @@ const AtelierVignette = (props) => {
         <CardActions>
           <Button
             size="small"
-            style={{ backgroundColor: '#B2C4CB', color: 'white', marginLeft: '85px' }}
+            style={{ backgroundColor: '#B2C4CB', color: 'white' }}
             component={Reserver}
           >
             Pré-réserver
           </Button>
           <Button
             size="small"
-            style={{ backgroundColor: '#B2C4CB', color: 'white', marginRight: '20px' }}
+            style={{ backgroundColor: '#B2C4CB', color: 'white' }}
             onClick={() => {
               props.selectAteliers(props.ateliers[props.indexAtelier]);
             }}
