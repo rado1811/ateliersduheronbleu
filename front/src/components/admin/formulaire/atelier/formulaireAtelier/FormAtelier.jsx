@@ -184,9 +184,9 @@ class FormAtelier extends Component {
           id_intervenant: '',
           places_disponibles: '',
         })
-      ) 
+      )
       .then(this.props.history.push('/admin/dashboard')
-    );
+      );
   };
 
   render() {
@@ -207,8 +207,8 @@ class FormAtelier extends Component {
                   Modification d'un atelier
                 </h1>
               ) : (
-                <h1 style={{ textAlign: 'center' }}>Ajouter un atelier</h1>
-              )}
+                  <h1 style={{ textAlign: 'center' }}>Ajouter un atelier</h1>
+                )}
               <Grid container spacing={24}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -238,6 +238,7 @@ class FormAtelier extends Component {
               </Grid>
               <Grid container spacing={24}>
                 <Grid item xs={12} sm={6}>
+                  <br />
                   <TextField
                     style={{ margin: 15 }}
                     name="nb_participants"
@@ -250,6 +251,7 @@ class FormAtelier extends Component {
                   <br />
                 </Grid>
                 <Grid item xs={12} sm={6}>
+                  <br />
                   <TextField
                     style={{ margin: 15 }}
                     name="prix"
@@ -275,59 +277,72 @@ class FormAtelier extends Component {
                 onChange={this.updateContenuField}
               />
               <br />
+              <Grid container spacing={24}>
+                <br />
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    style={{ margin: 15 }}
+                    name="formule"
+                    label="Formule ?"
+                    required
+                    type="text"
+                    value={this.state.formule}
+                    onChange={this.updateFormuleField}
+                  />
+                </Grid>
+                <br />
+                <Grid item xs={12} sm={6}>
+                  <br />
+                  <input
+                    type="file"
+                    ref="photo_atelier"
+                    name="photo"
+                    onChange={this.updatePhotoField.bind(this)}
+                  />
+                </Grid>
+              </Grid>
               <br />
-              <TextField
-                style={{ margin: 15 }}
-                name="formule"
-                label="Formule ?"
-                required
-                type="text"
-                value={this.state.formule}
-                onChange={this.updateFormuleField}
-              />
-              <br />
-              <input
-                type="file"
-                ref="photo_atelier"
-                name="photo"
-                onChange={this.updatePhotoField.bind(this)}
-              />
-              <br />
-              <br />
-              <TextField
-                style={{ margin: 15 }}
-                name="lieu"
-                label=""
-                type="text"
-                value={this.state.lieu}
-                onChange={this.updateLieuField}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Place />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <br />
-              <br />
-              <InputLabel htmlFor="dropInput">Intervenant</InputLabel>
-              <Select
-                value={this.state.nom_intervenant}
-                onChange={this.updateIntervenantField}
-              >
-                <MenuItem value="">
-                  <em>Selectionnez un intervenant</em>
-                </MenuItem>
-                {this.props.intervenants.map((item) => (
-                  <MenuItem
-                    key={item.id_intervenant}
-                    value={item.id_intervenant}
+              <Grid container spacing={24}>
+                <br />
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    style={{ margin: 15 }}
+                    name="lieu"
+                    label=""
+                    type="text"
+                    value={this.state.lieu}
+                    onChange={this.updateLieuField}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Place />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Grid>
+                <br />
+                <br />
+                <Grid item xs={12} sm={6}>
+                  <InputLabel htmlFor="dropInput">Intervenant    </InputLabel>
+                  <Select
+                    value={this.state.nom_intervenant}
+                    onChange={this.updateIntervenantField}
                   >
-                    {item.nom} {item.prenom}
-                  </MenuItem>
-                ))}
-              </Select>
+                    <MenuItem value="">
+                      <em>Selectionnez un intervenant</em>
+                    </MenuItem>
+                    {this.props.intervenants.map((item) => (
+                      <MenuItem
+                        key={item.id_intervenant}
+                        value={item.id_intervenant}
+                      >
+                        {item.nom} {item.prenom}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </Grid>
+              </Grid>
               <br />
               <TextField
                 style={{ margin: 15 }}
@@ -344,25 +359,25 @@ class FormAtelier extends Component {
               <div>
                 {isFromEdit ? (
                   <Button
-                    style={{ margin: 15 }}
+                    style={{ backgroundColor: '#B2C4CB', color: 'white', margin: 15 }}
                     type="submit"
                     value="Submit"
                     variant="raised"
-                    color="primary"
+                    
                   >
                     Modifier
                   </Button>
                 ) : (
-                  <Button
-                    style={{ margin: 15 }}
-                    type="submit"
-                    value="Submit"
-                    variant="raised"
-                    color="primary"
-                  >
-                    Enregistrer
+                    <Button
+                      style={{ backgroundColor: '#B2C4CB', color: 'white', margin: 15 }}
+                      type="submit"
+                      value="Submit"
+                      variant="raised"
+                      
+                    >
+                      Enregistrer
                   </Button>
-                )}
+                  )}
               </div>
             </form>
             <Snackbar

@@ -88,8 +88,8 @@ class DashboardParticipants extends Component {
           Tableau de bord des participants
         </h1>
         <Paper>
-          <Table>
-            <TableHead>
+          <Table >
+            <TableHead style={{backgroundColor: '#B2C4CB', color : '#000000'}}>
               <TableRow>
                 <TableCell>Atelier</TableCell>
                 <TableCell >Nom</TableCell>
@@ -97,6 +97,7 @@ class DashboardParticipants extends Component {
                 <TableCell >Email</TableCell>
                 <TableCell >Téléphone</TableCell>
                 <TableCell >Statut</TableCell>
+                <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -112,7 +113,7 @@ class DashboardParticipants extends Component {
                     <Tooltip title="Valider">
                       <IconButton mini variant="fab"
                       aria-label="edit"
-                      style={{backgroundColor:'transparent', color : 'green', marginRight: 15}} 
+                      style={{backgroundColor:'transparent', color : 'green'}} 
                       onClick={() =>
                         this.validerStatut(participant)
                       }>
@@ -129,7 +130,7 @@ class DashboardParticipants extends Component {
                     </Tooltip>
                     <Tooltip title="Supprimer">
                       <IconButton mini variant="fab" aria-label="edit"
-                      style={{backgroundColor:'transparent', color : 'black', marginRight: 15}}
+                      style={{backgroundColor:'transparent', color : 'black'}}
                       onClick={() =>
                         this.supprimerStatut(participant.id_participant)
                       }>

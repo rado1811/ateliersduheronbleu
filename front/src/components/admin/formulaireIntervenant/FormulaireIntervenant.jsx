@@ -251,11 +251,11 @@ class FormulaireIntervenant extends Component {
               <Grid style={{ textAlign: 'center' }}>
                 {isFromEditIntervenant ? (
                   <Button
-                    style={{ margin: 15 }}
+                    style={{ backgroundColor: '#B2C4CB', color: 'white', margin: 15 }}
                     type="submit"
                     value="Submit"
                     variant="raised"
-                    color="primary"
+                    
                   >
                     Modifier
                   </Button>

@@ -10,11 +10,11 @@ class ContainerSecurite extends Component {
   }
   render() {
     return (
-      <Grid container spacing={16}>
-        <Grid item s={3}>
+      <Grid container spacing={40}>
+        <Grid item s={2}>
           <MenuAdmin />
         </Grid>
-        <Grid item style={{ marginTop: 10 }}>
+        <Grid item s={2} style={{ marginTop: 10 }}>
           <SignUp history={this.props.history} />
         </Grid>
       </Grid>

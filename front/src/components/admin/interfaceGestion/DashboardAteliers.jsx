@@ -17,10 +17,10 @@ class DashboardAteliers extends Component {
   render() {
     return (
       <div>
-        <h1 className="text-center" style={{ marginTop: 20 }}>Tableau de bord des ateliers</h1>
+        <h1 className="text-center" style={{ marginTop: 30 }}>Tableau de bord des ateliers</h1>
         <Paper>
           <Table>
-            <TableHead>
+            <TableHead style={{backgroundColor: '#B2C4CB', color : '#000000'}}>
               <TableRow>
                 <TableCell>Nom de l'atelier</TableCell>
                 <TableCell numeric>Places prevus</TableCell>
