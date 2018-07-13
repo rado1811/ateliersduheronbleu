@@ -247,8 +247,7 @@ class Contact extends Component {
                     onClick={this.handleSubmit}
                     type="submit"
                     value="Submit"
-                    color="secondary"
-                    style={{ textAlign: 'center' }}
+                    style={{ textAlign: 'center', backgroundColor: '#B2C4CB', color: 'white' }}
                     variant="raised"
                   >
                     Envoyer
