@@ -324,7 +324,7 @@ class FormAtelier extends Component {
               <br />
               <br />
               <Grid item xs={12} sm={6}>
-              <InputLabel htmlFor="dropInput">Intervenant</InputLabel>
+              <InputLabel htmlFor="dropInput">Intervenant    </InputLabel>
               <Select
                 value={this.state.nom_intervenant}
                 onChange={this.updateIntervenantField}
