@@ -1,4 +1,6 @@
-const activeAteliers = (state = null, action) => {
+
+
+const activeAteliers = (state = {}, action) => {
   switch (action.type) {
     case 'ATELIERS_SELECTED':
       return action.ateliers;

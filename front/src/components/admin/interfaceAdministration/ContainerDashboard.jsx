@@ -15,13 +15,13 @@ class ContainerDashboard extends Component {
   render() {
     return (
       <Grid container spacing={16}>
-        <Grid item s={4} >
+        <Grid item s={4}>
           <MenuAdmin />
         </Grid>
-        <Grid item style={{ marginTop: 10 }} >
+        <Grid item style={{ marginTop: 10 }}>
           <DashAteliers s={4} />
         </Grid>
-        <Grid item style={{ marginTop: 10 }} >
+        <Grid item style={{ marginTop: 10 }}>
           <DashIntervenants s={4} />
         </Grid>
       </Grid>
@@ -29,4 +29,7 @@ class ContainerDashboard extends Component {
   }
 }
 
-export default connect(null, { fetchAteliers, fetchIntervenants })(ContainerDashboard);
+export default connect(
+  null,
+  { fetchAteliers, fetchIntervenants }
+)(ContainerDashboard);

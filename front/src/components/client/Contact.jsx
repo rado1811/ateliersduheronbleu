@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import compose from 'recompose/compose';
+import { fetchIntervenants } from '../../actions/intervenants';
 import { TextField, Button, Snackbar } from 'material-ui';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import AlertDialogSlide from './pageAteliers/AlertDialogSlide';
+import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Footer from '../client/footer/Footer';
+import TemporaryDrawer from '../client/navbar/TemporaryDrawer';
+import AlertDialogSlide from './pageAteliers/AlertDialogSlide';
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -38,6 +43,10 @@ class Contact extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.fetchIntervenants();
+  }
+
   formSend = () => {
     let whatIsMissing = [];
     if (this.state.email === '') {
@@ -63,7 +72,7 @@ class Contact extends Component {
     }
   };
 
-  showDialogueBox = whatIsMissing => {
+  showDialogueBox = (whatIsMissing) => {
     this.setState({
       messageDialogue: whatIsMissing,
       alert: true,
@@ -81,60 +90,60 @@ class Contact extends Component {
     this.setState({ open: !this.state.open });
   };
 
-  handleChange = name => event => {
+  handleChange = (name) => (event) => {
     this.setState({ [name]: event.target.checked });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     if (this.formSend()) {
-      fetch('/mail', {
+      fetch('/mail/admin', {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json',
         }),
         body: JSON.stringify(this.state),
       })
-        .then(res => res.json())
+        .then((res) => res.json())
         .then(
-          res =>
+          (res) =>
             this.setState({
               flash: res.flash,
               open: true,
             }),
-          err =>
+          (err) =>
             this.setState({
               flash: err.flash,
             })
         );
-      this.setState({ flash: 'Formulaire envoyé', open: true });
+      this.setState({ flash: 'Message envoyé', open: true });
     } else {
       this.setState({ flash: 'Formulaire incomplet', open: true });
     }
   };
 
-  updateEmailField = event => {
+  updateEmailField = (event) => {
     this.setState({
       email: event.target.value,
     });
   };
 
-  updateFirstNameField = event => {
+  updateFirstNameField = (event) => {
     this.setState({
       prenom: event.target.value,
     });
   };
-  updateLastNameField = event => {
+  updateLastNameField = (event) => {
     this.setState({
       nom: event.target.value,
     });
   };
-  updatePhoneField = event => {
+  updatePhoneField = (event) => {
     this.setState({
       tel: event.target.value,
     });
   };
-  updateMessageField = event => {
+  updateMessageField = (event) => {
     this.setState({
       message: event.target.value,
     });
@@ -144,6 +153,7 @@ class Contact extends Component {
     const { classes } = this.props;
     return (
       <div>
+        <TemporaryDrawer />
         <Paper
           elevation={4}
           style={{
@@ -165,7 +175,7 @@ class Contact extends Component {
               <form
                 className={classes.container}
                 onSubmit={this.handleSubmit}
-                style={{ margin: 40 }}
+                style={{ margin: 30, marginTop: 10 }}
               >
                 <h2 style={{ textAlign: 'center' }}>Une question ?</h2>
                 <TextField
@@ -237,20 +247,29 @@ class Contact extends Component {
                     onClick={this.handleSubmit}
                     type="submit"
                     value="Submit"
-                    color="secondary"
-                    style={{ textAlign: 'center' }}
+                    style={{ textAlign: 'center', backgroundColor: '#B2C4CB', color: 'white' }}
                     variant="raised"
                   >
                     Envoyer
                   </Button>
                 </div>
+                <div style={{ marginTop: '20px' }}>
+                  <Typography variant="title">
+                    Vous pouvez également nous contacter par téléphone au <br />
+                    {this.props.intervenants[0].tel}
+                  </Typography>
+                </div>
               </form>
             </Grid>
             <Grid item xs={12} sm={6} style={{ width: '80' }}>
               <img
-                style={{ height: 'auto', maxWidth: '80' }}
-                src="https://images.unsplash.com/photo-1520534827997-83397f6aac19?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=48b0b26b5f8b4acfed3b9d11e3181d92&auto=format&fit=crop&w=500&q=60"
-                alt="groupe"
+                style={{
+                  height: 'auto',
+                  width: '100%',
+                  backgroundSize: 'contain',
+                }}
+                src={`/images/envol.jpg`}
+                alt="heron"
               />
             </Grid>
           </Grid>
@@ -272,4 +291,14 @@ class Contact extends Component {
   }
 }
 
-export default withStyles(styles)(Contact);
+function mapStateToProps(state) {
+  return { intervenants: state.intervenants.intervenants };
+}
+
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    { fetchIntervenants }
+  )
+)(Contact);

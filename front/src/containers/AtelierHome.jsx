@@ -13,8 +13,9 @@ import { fetchAteliers } from '../actions/ateliers';
 import BoutonContact from '../components/client/BoutonContact';
 import Footer from '../components/client/footer/Footer';
 import './AtelierHome.css';
+import TemporaryDrawer from '../components/client/navbar/TemporaryDrawer';
 
-const styles = theme => ({
+const styles = (theme) => ({
   button: {
     margin: theme.spacing.unit,
   },
@@ -28,27 +29,33 @@ class AtelierHome extends Component {
     };
   }
 
-  componentDidMount() { 
+  componentDidMount() {
     this.props.fetchAteliers();
   }
 
   getUpcomingAteliers() {
-    const ateliers = (this.state.toggleAteliers)
-      ? this.props.ateliers : this.props.ateliers.slice(0, 3);
-    const iconButton = (this.state.toggleAteliers) ? <RemoveIcon /> : <AddIcon />;
+    const ateliers = this.state.toggleAteliers
+      ? this.props.ateliers
+      : this.props.ateliers.slice(0, 3);
+    const iconButton = this.state.toggleAteliers ? <RemoveIcon /> : <AddIcon />;
     return (
       <Grid id="ateliers" container spacing={16} justify="center">
-        {ateliers.map(atelier => (<AtelierVignette
-          key={atelier.id_atelier}
-          name={atelier.nom}
-          date={atelier.debut}
-          image={atelier.photo}
-          intervenant={atelier.id_intervenant}
-          places_disponibles={atelier.place_disponibles}
-        />))}
+        {ateliers.map((atelier, i) => (
+          <AtelierVignette
+            key={atelier.id_atelier}
+            name={atelier.nom_atelier}
+            date={atelier.debut}
+            image={`/images/${atelier.photo_atelier}`}
+            intervenant_nom={atelier.nom}
+            intervenant_prenom={atelier.prenom}
+            places_disponibles={atelier.place_disponibles}
+            indexAtelier={i}
+          />
+        ))}
         <Button
           variant="fab"
           color="primary"
+          style={{ backgroundColor: '#B2C4CB' }}
           onClick={() => this.toggleAteliers()}
         >
           {iconButton}
@@ -67,29 +74,37 @@ class AtelierHome extends Component {
   render() {
     return (
       <div>
+        <TemporaryDrawer />
         <div
           className="video-container"
           style={{
-          marginBottom: 100,
-          marginTop: 60,
-        }}
+            marginBottom: 100,
+            marginTop: -70,
+          }}
         >
           <video
             id="background-video"
             style={{
-            height: 'auto',
-            width: '100%',
-          }}
+              height: 'auto',
+              width: '100%',
+            }}
             loop
             muted
             autoPlay
           >
-            <source src="../images/video.mp4" type="video/mp4" />
+            <source src="../images/sunwaves.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
         <div className="overlay">
-          <p>Ateliers "Bien-être et Créativité"</p>
+          <p style={{ fontFamily: 'Montserrat' }}>
+            {' '}
+            Ateliers "Bien-être et Créativité"
+          </p>
+          <p className="sousTitre" style={{ fontFamily: 'Montserrat' }}>
+            {' '}
+            Le Teich
+          </p>
         </div>
         <Link to="#ateliers">
           <i className="fas fa-angle-double-down" />
@@ -113,5 +128,8 @@ function mapStateToProps(state) {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { fetchAteliers }),
+  connect(
+    mapStateToProps,
+    { fetchAteliers }
+  )
 )(AtelierHome);

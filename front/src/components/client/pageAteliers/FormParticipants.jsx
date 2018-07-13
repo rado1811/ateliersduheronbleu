@@ -19,8 +19,8 @@ class FormParticipants extends Component {
       alert: false,
       messageDialogue: [],
       input: '',
-      id_atelier: [],
-      atelier: '',
+      id_atelier: '',
+      ateliers: [],
     };
   }
 
@@ -29,7 +29,7 @@ class FormParticipants extends Component {
       .then(response => response.json())
       .then(data => {
         this.setState({
-          id_atelier: data,
+          ateliers: data,
         });
       })
       .catch(err => console.error(err));
@@ -82,36 +82,54 @@ class FormParticipants extends Component {
     this.setState({ [name]: event.target.checked });
   };
 
+  postNewParticipant() {
+    const that = this;
+    fetch('/api/participant', {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(this.state),
+    })
+    .then(res => res.json())
+    .then(res => {
+        // Nouveau participant enregistré
+        that.sendMailToAdmin(res.id);
+        that.sendMailToParticipant(res.id);
+    });
+  }
+
+  sendMailToParticipant(id) {
+    fetch('/mail/participant/preresa', {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify({
+        id_participant: id,
+        id_atelier: this.state.id_atelier,
+      }),
+    });
+  }
+
+  sendMailToAdmin(id) {
+    fetch('/mail/admin', {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify({
+        id_participant: id,
+        id_atelier: this.state.id_atelier,
+      }),
+    });
+  }
+
   handleSubmit = event => {
     event.preventDefault();
     if (this.formSend()) {
-      fetch('/api/participant', {
-        method: 'POST',
-        headers: new Headers({
-          'Content-Type': 'application/json',
-        }),
-        body: JSON.stringify(this.state),
-      })
-        .then(res => res.json())
-        .then(
-          res =>
-            this.setState({
-              flash: res.flash,
-              open: true,
-            }),
-          err =>
-            this.setState({
-              flash: err.flash,
-            })
-        );
+      this.postNewParticipant();
       this.setState({ flash: 'Formulaire envoyé', open: true });
-      fetch('/mail', {
-        method: 'POST',
-        headers: new Headers({
-          'Content-Type': 'application/json',
-        }),
-        body: JSON.stringify(this.state),
-      }).then(res => res.json());
     } else {
       this.setState({ flash: 'Formulaire incomplet', open: true });
     }
@@ -140,7 +158,7 @@ class FormParticipants extends Component {
   };
   updateAtelierField = event => {
     this.setState({
-      atelier: event.target.value,
+      id_atelier: event.target.value,
     });
   };
 
@@ -149,7 +167,7 @@ class FormParticipants extends Component {
       <div>
         <form onSubmit={this.handleSubmit} style={{ margin: 40 }}>
           <Paper elevation={4} style={{ padding: 40 }}>
-            <h2>Nouveau participant</h2>
+            <h2>Formulaire de pré-réservation</h2>
             <div>
               <TextField
                 id="email"
@@ -202,15 +220,15 @@ class FormParticipants extends Component {
             <div>
               <InputLabel htmlFor="dropInput">Ateliers</InputLabel>
               <Select
-                value={this.state.atelier}
-                onChange={this.updateAtelierField.bind(this)}
+                value={this.state.id_atelier}
+                onChange={this.updateAtelierField}
               >
                 <MenuItem value="">
                   <em>Ateliers</em>
                 </MenuItem>
-                {this.state.id_atelier.map(item => (
+                {this.state.ateliers.map(item => (
                   <MenuItem key={item.id_atelier} value={item.id_atelier}>
-                    {item.nom}
+                    {item.nom_atelier}
                   </MenuItem>
                 ))}
               </Select>
@@ -222,7 +240,7 @@ class FormParticipants extends Component {
                 type="submit"
                 value="Submit"
                 variant="raised"
-                color="secondary"
+                style={{ backgroundColor: '#B2C4CB' }}
               >
                 Envoyer
               </Button>

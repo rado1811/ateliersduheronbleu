@@ -17,13 +17,10 @@ class DashboardAteliers extends Component {
   render() {
     return (
       <div>
-        <h1 className="text-center" style={{ marginTop: 20 }}>Tableau de bord des ateliers</h1>
+        <h1 className="text-center" style={{ marginTop: 30 }}>Tableau de bord des ateliers</h1>
         <Paper>
-          <Table style={{
-            marginTop: 50,
-          }}
-          >
-            <TableHead>
+          <Table>
+            <TableHead style={{backgroundColor: '#B2C4CB', color : '#000000'}}>
               <TableRow>
                 <TableCell>Nom de l'atelier</TableCell>
                 <TableCell numeric>Places prevus</TableCell>
@@ -38,7 +35,7 @@ class DashboardAteliers extends Component {
                 .map(atelier => (
                   <TableRow key={atelier.id_atelier}>
                     <TableCell component="th" scope="row">
-                      {atelier.nom}
+                      {atelier.nom_atelier}
                     </TableCell>
                     <TableCell numeric>{atelier.nb_participants}</TableCell>
                     <TableCell numeric>{atelier.nb_participants - atelier.place_disponibles}</TableCell>
