@@ -19,10 +19,7 @@ class DashboardAteliers extends Component {
       <div>
         <h1 className="text-center" style={{ marginTop: 20 }}>Tableau de bord des ateliers</h1>
         <Paper>
-          <Table style={{
-            marginTop: 50,
-          }}
-          >
+          <Table>
             <TableHead>
               <TableRow>
                 <TableCell>Nom de l'atelier</TableCell>
