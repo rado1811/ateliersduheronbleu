@@ -68,6 +68,7 @@ const AtelierVignette = (props) => {
             style={{ backgroundColor: '#B2C4CB', color: 'white', marginRight: '20px' }}
             onClick={() => {
               props.selectAteliers(props.ateliers[props.indexAtelier]);
+              window.scrollTo(0, 0);
             }}
             component={Atelier}
           >
