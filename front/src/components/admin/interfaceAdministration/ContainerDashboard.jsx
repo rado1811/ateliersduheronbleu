@@ -19,10 +19,10 @@ class ContainerDashboard extends Component {
           <MenuAdmin />
         </Grid>
         <Grid item style={{ marginTop: 10 }}>
-          <DashAteliers s={4} history={this.props.history} />
+          <DashAteliers s={4} />
         </Grid>
         <Grid item style={{ marginTop: 10 }}>
-          <DashIntervenants s={4} history={this.props.history} />
+          <DashIntervenants s={4} />
         </Grid>
       </Grid>
     );

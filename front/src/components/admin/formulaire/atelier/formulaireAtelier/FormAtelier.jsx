@@ -31,7 +31,6 @@ class FormAtelier extends Component {
       id_intervenant: '',
       place_disponibles: '',
       nom_intervenant: '',
-      setTimeOut: false,
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -149,28 +148,27 @@ class FormAtelier extends Component {
         open: true,
       })
     );
-    if (this.state.setTimeOut === true) {
-      setTimeout(() => {
-        this.props.history.push('/administration');
-      }, 2000);
-    }
+    setTimeout(() => {
+      this.props.history.push('/admin/administration');
+    }, 2000);
   };
 
   // ========== UPDATE =========
   handleUpdate = (event) => {
     event.preventDefault();
-    let data = {
+
+    let form = {
       ...this.state,
+      id_atelier: this.state.id_atelier,
     };
-    fetch('/api/ateliers', {
-      method: 'PUT',
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }),
-      body: JSON.stringify({ data }),
-    })
-      .then((res) => res.json())
+
+    let data = new FormData();
+    data.append('file', this.state.photo_atelier);
+    data.append('form', JSON.stringify(form));
+
+    axios
+      .put('/api/ateliers', data)
+      .then((res) => this.setState({ flash: 'Atelier modifié', open: true }))
       .then(
         (res) =>
           this.setState({
@@ -178,34 +176,29 @@ class FormAtelier extends Component {
             open: true,
           }),
         (err) => this.setState({ flash: 'Formulaire incomplet', open: true })
-      )
-      .then(
-        this.setState({
-          nom_atelier: '',
-          debut: '',
-          nb_participants: '',
-          prix: '',
-          contenu: '',
-          formule: '',
-          lieu: '',
-          photo_atelier: '',
-          programme: '',
-          id_atelier: '',
-          id_intervenant: '',
-          places_disponibles: '',
-        })
       );
-    if (this.state.flash === 'Atelier modifié') {
+    this.setState({
+      clearForm: true,
+    });
+    if (this.state.clearForm) {
       this.setState({
-        setTimeOut: true,
+        nom_atelier: '',
+        debut: '',
+        nb_participants: '',
+        prix: '',
+        contenu: '',
+        formule: '',
+        lieu: '',
+        photo_atelier: {},
+        programme: '',
+        id_atelier: '',
+        id_intervenant: '',
+        places_disponibles: '',
       });
     }
-    if (this.state.setTimeOut === true) {
-      setTimeout(() => {
-        this.props.history.push('/administration');
-      }, 2000);
-    }
-    alert(this.state.setTimeOut);
+    setTimeout(() => {
+      this.props.history.push('/administration');
+    }, 2000);
   };
 
   render() {
@@ -257,6 +250,7 @@ class FormAtelier extends Component {
               </Grid>
               <Grid container spacing={24}>
                 <Grid item xs={12} sm={6}>
+                  <br />
                   <TextField
                     style={{ margin: 15 }}
                     name="nb_participants"
@@ -269,6 +263,7 @@ class FormAtelier extends Component {
                   <br />
                 </Grid>
                 <Grid item xs={12} sm={6}>
+                  <br />
                   <TextField
                     style={{ margin: 15 }}
                     name="prix"
@@ -294,56 +289,72 @@ class FormAtelier extends Component {
                 onChange={this.updateContenuField}
               />
               <br />
+              <Grid container spacing={24}>
+                <br />
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    style={{ margin: 15 }}
+                    name="formule"
+                    label="Formule ?"
+                    required
+                    type="text"
+                    value={this.state.formule}
+                    onChange={this.updateFormuleField}
+                  />
+                </Grid>
+                <br />
+                <Grid item xs={12} sm={6}>
+                  <br />
+                  <input
+                    type="file"
+                    ref="photo_atelier"
+                    name="photo"
+                    onChange={this.updatePhotoField.bind(this)}
+                  />
+                </Grid>
+              </Grid>
               <br />
-              <TextField
-                style={{ margin: 15 }}
-                name="formule"
-                label="Formule ?"
-                required
-                type="text"
-                value={this.state.formule}
-                onChange={this.updateFormuleField}
-              />
-              <br />
-              <input
-                type="file"
-                ref="photo_atelier"
-                name="photo"
-                onChange={this.updatePhotoField.bind(this)}
-              />
-              <br />
-              <br />
-              <TextField
-                style={{ margin: 15 }}
-                name="lieu"
-                label=""
-                type="text"
-                value={this.state.lieu}
-                onChange={this.updateLieuField}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Place />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <br />
-              <br />
-              <InputLabel htmlFor="dropInput">Intervenant</InputLabel>
-              <Select
-                value={this.state.nom_intervenant}
-                onChange={this.updateIntervenantField}
-              >
-                <MenuItem value="">
-                  <em>Selectionnez un intervenant</em>
-                </MenuItem>
-                {this.props.intervenants.map((item, i) => (
-                  <MenuItem key={i} value={item.id_intervenant}>
-                    {item.nom} {item.prenom}
-                  </MenuItem>
-                ))}
-              </Select>
+              <Grid container spacing={24}>
+                <br />
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    style={{ margin: 15 }}
+                    name="lieu"
+                    label=""
+                    type="text"
+                    value={this.state.lieu}
+                    onChange={this.updateLieuField}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Place />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Grid>
+                <br />
+                <br />
+                <Grid item xs={12} sm={6}>
+                  <InputLabel htmlFor="dropInput">Intervenant </InputLabel>
+                  <Select
+                    value={this.state.nom_intervenant}
+                    onChange={this.updateIntervenantField}
+                  >
+                    <MenuItem value="">
+                      <em>Selectionnez un intervenant</em>
+                    </MenuItem>
+                    {this.props.intervenants.map((item) => (
+                      <MenuItem
+                        key={item.id_intervenant}
+                        value={item.id_intervenant}
+                      >
+                        {item.nom} {item.prenom}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </Grid>
+              </Grid>
               <br />
               <TextField
                 style={{ margin: 15 }}
@@ -360,21 +371,27 @@ class FormAtelier extends Component {
               <div>
                 {isFromEdit ? (
                   <Button
-                    style={{ margin: 15 }}
+                    style={{
+                      backgroundColor: '#B2C4CB',
+                      color: 'white',
+                      margin: 15,
+                    }}
                     type="submit"
                     value="Submit"
                     variant="raised"
-                    color="primary"
                   >
                     Modifier
                   </Button>
                 ) : (
                   <Button
-                    style={{ margin: 15 }}
+                    style={{
+                      backgroundColor: '#B2C4CB',
+                      color: 'white',
+                      margin: 15,
+                    }}
                     type="submit"
                     value="Submit"
                     variant="raised"
-                    color="primary"
                   >
                     Enregistrer
                   </Button>

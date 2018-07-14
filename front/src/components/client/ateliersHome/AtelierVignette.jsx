@@ -43,14 +43,14 @@ const AtelierVignette = (props) => {
           }}
         />
         <CardContent>
-          <Typography gutterBottom variant="headline" component="h2">
+          <Typography gutterBottom variant="headline" component="h2" style={{ fontSize: '1.4vw' }}>
             {props.name}
           </Typography>
-          <Typography component="h3">
+          <Typography component="h3" style={{ fontSize: '1.1vw' }}>
             <Moment format="DD/MM/YYYY">{props.date}</Moment>
           </Typography>
 
-          <Typography component="h3">
+          <Typography component="h3" style={{ fontSize: '1.1vw' }}>
             Places disponibles: {props.places_disponibles} <br />
             Co-animation: {props.intervenant_prenom} {props.intervenant_nom}, Isabelle Jono
           </Typography>
@@ -58,16 +58,17 @@ const AtelierVignette = (props) => {
         <CardActions>
           <Button
             size="small"
-            style={{ backgroundColor: '#B2C4CB', color: 'white' }}
+            style={{ backgroundColor: '#B2C4CB', color: 'white', marginLeft: '85px' }}
             component={Reserver}
           >
             Pré-réserver
           </Button>
           <Button
             size="small"
-            style={{ backgroundColor: '#B2C4CB', color: 'white' }}
+            style={{ backgroundColor: '#B2C4CB', color: 'white', marginRight: '20px' }}
             onClick={() => {
               props.selectAteliers(props.ateliers[props.indexAtelier]);
+              window.scrollTo(0, 0);
             }}
             component={Atelier}
           >
