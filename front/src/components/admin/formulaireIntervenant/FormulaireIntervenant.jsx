@@ -122,6 +122,9 @@ class FormulaireIntervenant extends Component {
           photo: {},
         })
       );
+      setTimeout(() => {
+        this.props.history.push('/admin/administration');
+      }, 2000);
   };
 
   render() {
@@ -247,6 +250,7 @@ class FormulaireIntervenant extends Component {
               <input
                 type="file"
                 ref="photo"
+                required
                 name="photo"
                 onChange={this.updatePhotoField.bind(this)}
               />

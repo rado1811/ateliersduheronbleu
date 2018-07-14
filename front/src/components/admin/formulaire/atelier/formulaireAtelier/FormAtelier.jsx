@@ -307,6 +307,7 @@ class FormAtelier extends Component {
                   <br />
                   <input
                     type="file"
+                    required
                     ref="photo_atelier"
                     name="photo"
                     onChange={this.updatePhotoField.bind(this)}
