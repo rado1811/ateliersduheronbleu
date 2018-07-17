@@ -168,14 +168,14 @@ class Contact extends Component {
               item
               xs={12}
               sm={6}
-              container
+              item
               alignItems="center"
               style={{ height: '100%' }}
             >
               <form
                 className={classes.container}
                 onSubmit={this.handleSubmit}
-                style={{ margin: 30, marginTop: 10 }}
+                style={{ margin: 'auto', marginTop: 10 }}
               >
                 <h2 style={{ textAlign: 'center' }}>Une question ?</h2>
                 <TextField
@@ -183,7 +183,7 @@ class Contact extends Component {
                   name="message"
                   label="Entrez votre texte"
                   multiline
-                  fullWidth
+                  width='100'
                   rows="4"
                   placeholder="Je souhaiterais savoir..."
                   margin="normal"

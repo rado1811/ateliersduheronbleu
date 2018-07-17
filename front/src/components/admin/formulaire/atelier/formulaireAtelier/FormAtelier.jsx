@@ -197,7 +197,7 @@ class FormAtelier extends Component {
       });
     }
     setTimeout(() => {
-      this.props.history.push('/administration');
+      this.props.history.push('admin/administration');
     }, 2000);
   };
 
