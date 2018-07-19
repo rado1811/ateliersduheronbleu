@@ -96,15 +96,25 @@ class AtelierHome extends Component {
             Your browser does not support the video tag.
           </video>
         </div>
-        <div className="overlay">
-          <p style={{ fontFamily: 'Montserrat' }}>
+        <div
+          className="overlay"
+          style={{
+            fontFamily: 'Dancing Script',
+            fontSize: '3vw',
+            padding: '150px',
+          }}
+        >
+          <h2 style={{ paddingLeft: '150px' }}>
             {' '}
             Ateliers "Bien-être et Créativité"
-          </p>
-          <p className="sousTitre" style={{ fontFamily: 'Montserrat' }}>
+          </h2>
+          <h3
+            className="sousTitre"
+            style={{ fontFamily: 'Dancing Script', paddingLeft: '150px' }}
+          >
             {' '}
             Le Teich
-          </p>
+          </h3>
         </div>
         <Link to="#ateliers">
           <i className="fas fa-angle-double-down" />
