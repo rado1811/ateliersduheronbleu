@@ -257,7 +257,7 @@ class FormAtelier extends Component {
                     required
                     label="Nombre Participants :"
                     type="number"
-                    inputProps={{ min: '0', max: '10', step: '1' }}
+                    inputProps={{ min: '0', max: '100', step: '1' }}
                     value={this.state.nb_participants}
                     onChange={this.updateNbField}
                   />
