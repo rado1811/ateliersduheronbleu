@@ -12,7 +12,6 @@ const Footer = () => (
 -            <NavLink to="/CGV" style={{ textDecoration: 'none', color: 'black' }} onClick={() => {
 -              window.scrollTo(0, 0);
 -            }}>CGV</NavLink>
-+            <NavLink to="/CGV" style={{ textDecoration: 'none', color: 'black' }}>CGV</NavLink>
       </li>
     </Grid>
         <Grid item xs={6} style={{ backgroundColor: 'none' }}>
