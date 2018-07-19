@@ -30,7 +30,8 @@ class DashboardParticipants extends Component {
       .catch((err) => err);
   };
 
-  validerStatut = (id_participant) => {
+  validerStatut = (participant) => {
+    const {id_participant, id_atelier} = participant;    
     fetch('/api/participant/valider', {
       method: 'PUT',
       headers: {
@@ -39,12 +40,23 @@ class DashboardParticipants extends Component {
       },
       body: JSON.stringify({id_participant})
     })
-      .then((res) => res.send())
-      .then((res) => this.setState({ flash: 'réservation validée', open: true }))
-      .catch((err) => err);
+    .then((res) => {
+      fetch('/mail/participant/confirme', {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify({
+          id_participant,
+          id_atelier,
+        }),
+      });
+      this.setState({ flash: 'réservation validée', open: true });
+    });
   };
 
-  annulerStatut = (id_participant) => {
+  annulerStatut = (participant) => {
+    const {id_participant, id_atelier} = participant;    
     fetch('/api/participant/annuler', {
       method: 'PUT',
       headers: {
@@ -53,9 +65,19 @@ class DashboardParticipants extends Component {
       },
       body: JSON.stringify({id_participant})
     })
-      .then((res) => res.send())
-      .then((res) => this.setState({ flash: 'Réservation annulée', open: true }))
-      .catch((err) => err);
+    .then((res) => {
+      fetch('/mail/participant/annule', {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify({
+          id_participant,
+          id_atelier,
+        }),
+      });
+      this.setState({ flash: 'Réservation annulée', open: true });
+    });
   };
 
 
@@ -66,8 +88,8 @@ class DashboardParticipants extends Component {
           Tableau de bord des participants
         </h1>
         <Paper>
-          <Table>
-            <TableHead>
+          <Table >
+            <TableHead style={{backgroundColor: '#B2C4CB', color : '#000000'}}>
               <TableRow>
                 <TableCell>Atelier</TableCell>
                 <TableCell >Nom</TableCell>
@@ -75,24 +97,25 @@ class DashboardParticipants extends Component {
                 <TableCell >Email</TableCell>
                 <TableCell >Téléphone</TableCell>
                 <TableCell >Statut</TableCell>
+                <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.props.participants.map((participants) => (
-                <TableRow key={participants.id_participant}>
-                  <TableCell >{participants.nom_atelier}</TableCell>
-                  <TableCell >{participants.nom}</TableCell>
-                  <TableCell >{participants.prenom}</TableCell>
-                  <TableCell >{participants.email}</TableCell>
-                  <TableCell >{participants.tel}</TableCell>
-                  <TableCell >{participants.statut}</TableCell>
+              {this.props.participants.map(participant => (
+                <TableRow key={participant.id_participant}>
+                  <TableCell >{participant.nom_atelier}</TableCell>
+                  <TableCell >{participant.nom}</TableCell>
+                  <TableCell >{participant.prenom}</TableCell>
+                  <TableCell >{participant.email}</TableCell>
+                  <TableCell >{participant.tel}</TableCell>
+                  <TableCell >{participant.statut}</TableCell>
                   <TableCell>
                     <Tooltip title="Valider">
                       <IconButton mini variant="fab"
                       aria-label="edit"
-                      style={{backgroundColor:'transparent', color : 'green', marginRight: 15}} 
+                      style={{backgroundColor:'transparent', color : 'green'}} 
                       onClick={() =>
-                        this.validerStatut(participants.id_participant)
+                        this.validerStatut(participant)
                       }>
                         <Icon>done</Icon>
                       </IconButton>
@@ -101,15 +124,15 @@ class DashboardParticipants extends Component {
                       <IconButton mini variant="fab" 
                       aria-label="Annuler"
                       style={{backgroundColor:'transparent', color : 'red', marginRight: 15}}
-                      onClick={() => {this.annulerStatut(participants.id_participant)}}>
+                      onClick={() => {this.annulerStatut(participant)}}>
                         <Icon>clear</Icon>
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Supprimer">
                       <IconButton mini variant="fab" aria-label="edit"
-                      style={{backgroundColor:'transparent', color : 'black', marginRight: 15}}
+                      style={{backgroundColor:'transparent', color : 'black'}}
                       onClick={() =>
-                        this.supprimerStatut(participants.id_participant)
+                        this.supprimerStatut(participant.id_participant)
                       }>
                       <Icon>delete_sweep</Icon>
                     </IconButton>

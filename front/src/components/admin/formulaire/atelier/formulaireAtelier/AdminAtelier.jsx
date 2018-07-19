@@ -21,11 +21,11 @@ class AdminAtelier extends Component {
   }
   render() {
     return (
-      <Grid container>
-        <Grid item sm={6}>
+      <Grid container style={{ paddingRight: 30 }}>
+        <Grid item md={2} s={2}>
           <MenuAdmin />
         </Grid>
-        <Grid item sm={6}>
+        <Grid item md={10} s={10}>
           <FormAtelier history={this.props.history} />
         </Grid>
       </Grid>

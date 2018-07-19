@@ -17,7 +17,7 @@ function ButtonFormulaireIntervenant(props) {
     <Button
       type="submit"
       variant="raised"
-      color="primary"
+      style={{ backgroundColor: '#B2C4CB', color: 'white', margin: 15 }}
       className={classes.button}
     >
       Valider

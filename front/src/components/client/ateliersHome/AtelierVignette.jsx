@@ -53,7 +53,7 @@ const AtelierVignette = (props) => {
 
           <Typography component="h3">
             Places disponibles: {props.places_disponibles} <br />
-            Co-animation: {props.intervenant_prenom} {props.intervenant_nom}, Isabelle Jono
+            Co-animation: {props.intervenant_nom}
           </Typography>
         </CardContent>
         <CardActions>
@@ -69,6 +69,7 @@ const AtelierVignette = (props) => {
             style={{ backgroundColor: '#B2C4CB', color: 'white' }}
             onClick={() => {
               props.selectAteliers(props.ateliers[props.indexAtelier]);
+              window.scrollTo(0, 0);
             }}
             component={Atelier}
           >

@@ -82,36 +82,54 @@ class FormParticipants extends Component {
     this.setState({ [name]: event.target.checked });
   };
 
+  postNewParticipant() {
+    const that = this;
+    fetch('/api/participant', {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(this.state),
+    })
+    .then(res => res.json())
+    .then(res => {
+        // Nouveau participant enregistré
+        that.sendMailToAdmin(res.id);
+        that.sendMailToParticipant(res.id);
+    });
+  }
+
+  sendMailToParticipant(id) {
+    fetch('/mail/participant/preresa', {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify({
+        id_participant: id,
+        id_atelier: this.state.id_atelier,
+      }),
+    });
+  }
+
+  sendMailToAdmin(id) {
+    fetch('/mail/admin', {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify({
+        id_participant: id,
+        id_atelier: this.state.id_atelier,
+      }),
+    });
+  }
+
   handleSubmit = event => {
     event.preventDefault();
     if (this.formSend()) {
-      fetch('/api/participant', {
-        method: 'POST',
-        headers: new Headers({
-          'Content-Type': 'application/json',
-        }),
-        body: JSON.stringify(this.state),
-      })
-        .then(res => res.json())
-        .then(
-          res =>
-            this.setState({
-              flash: res.flash,
-              open: true,
-            }),
-          err =>
-            this.setState({
-              flash: err.flash,
-            })
-        );
+      this.postNewParticipant();
       this.setState({ flash: 'Formulaire envoyé', open: true });
-      fetch('/mail', {
-        method: 'POST',
-        headers: new Headers({
-          'Content-Type': 'application/json',
-        }),
-        body: JSON.stringify(this.state),
-      }).then(res => res.json());
     } else {
       this.setState({ flash: 'Formulaire incomplet', open: true });
     }

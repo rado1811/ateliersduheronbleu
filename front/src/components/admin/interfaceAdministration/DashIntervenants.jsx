@@ -104,6 +104,7 @@ let EnhancedTableToolbar = (props) => {
       <div className={classes.actions}>
         <Tooltip title="Ajouter">
           <Button
+            style={{ backgroundColor: '#B2C4CB', color: 'white'}}
             mini
             variant="fab"
             color="primary"
