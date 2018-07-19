@@ -13,6 +13,7 @@ import { fetchAteliers } from '../actions/ateliers';
 import BoutonContact from '../components/client/BoutonContact';
 import Footer from '../components/client/footer/Footer';
 import './AtelierHome.css';
+import TemporaryDrawer from '../components/client/navbar/TemporaryDrawer';
 
 const styles = (theme) => ({
   button: {
@@ -73,6 +74,7 @@ class AtelierHome extends Component {
   render() {
     return (
       <div>
+        <TemporaryDrawer />
         <div
           className="video-container"
           style={{
