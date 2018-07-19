@@ -75,7 +75,7 @@ class FormulaireIntervenant extends Component {
       );
       setTimeout(() => {
         this.props.history.push('/admin/administration');
-      }, 2000);
+      }, 2500);
   };
   updatePhotoField = () => {
     const inputFile = this.refs.photo;
@@ -124,7 +124,7 @@ class FormulaireIntervenant extends Component {
       );
       setTimeout(() => {
         this.props.history.push('/admin/administration');
-      }, 2000);
+      }, 2500);
   };
 
   render() {

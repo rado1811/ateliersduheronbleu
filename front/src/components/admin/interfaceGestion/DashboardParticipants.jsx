@@ -145,7 +145,7 @@ class DashboardParticipants extends Component {
                         onClick={() => {
                           {
                             this.annulerStatut(participant);
-                          }
+                          };
                           {
                             setTimeout(() => {
                               this.props.history.push('/admin/');
@@ -168,7 +168,7 @@ class DashboardParticipants extends Component {
                         onClick={() => {
                           {
                             this.supprimerStatut(participant.id_participant);
-                          }
+                          };
                           {
                             setTimeout(() => {
                               this.props.history.push('/admin/');

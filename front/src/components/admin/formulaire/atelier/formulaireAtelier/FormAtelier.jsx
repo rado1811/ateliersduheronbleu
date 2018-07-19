@@ -150,7 +150,7 @@ class FormAtelier extends Component {
     );
     setTimeout(() => {
       this.props.history.push('/admin/administration');
-    }, 2000);
+    }, 2500);
   };
 
   // ========== UPDATE =========
@@ -198,7 +198,7 @@ class FormAtelier extends Component {
     }
     setTimeout(() => {
       this.props.history.push('/admin/administration');
-    }, 2000);
+    }, 2500);
   };
 
   render() {
@@ -340,6 +340,7 @@ class FormAtelier extends Component {
                   <InputLabel htmlFor="dropInput">Intervenant </InputLabel>
                   <Select
                     value={this.state.nom_intervenant}
+                    required
                     onChange={this.updateIntervenantField}
                   >
                     <MenuItem value="">
