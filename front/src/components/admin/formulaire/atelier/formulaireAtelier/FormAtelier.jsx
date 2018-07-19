@@ -168,20 +168,11 @@ class FormAtelier extends Component {
 
     axios
       .put('/api/ateliers', data)
-      .then((res) => this.setState({ flash: 'Atelier modifié', open: true }))
       .then(
-        (res) =>
-          this.setState({
-            flash: 'Atelier modifié',
-            open: true,
-          }),
-        (err) => this.setState({ flash: 'Formulaire incomplet', open: true })
-      );
-    this.setState({
-      clearForm: true,
-    });
-    if (this.state.clearForm) {
-      this.setState({
+        (res) => this.setState({ flash: 'Atelier modifié', open: true }),
+      )
+      .then(
+        this.setState({
         nom_atelier: '',
         debut: '',
         nb_participants: '',
@@ -194,8 +185,8 @@ class FormAtelier extends Component {
         id_atelier: '',
         id_intervenant: '',
         places_disponibles: '',
-      });
-    }
+      })
+    )
     setTimeout(() => {
       this.props.history.push('/admin/administration');
     }, 2500);

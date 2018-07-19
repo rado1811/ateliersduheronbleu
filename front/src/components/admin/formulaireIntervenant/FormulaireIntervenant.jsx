@@ -102,13 +102,8 @@ class FormulaireIntervenant extends Component {
 
     axios
       .put('/api/intervenants', data)
-      .then((res) =>
-        this.setState({ flash: 'Nouvel intervenant crée', open: true })
-      )
-      .then((res) => res.json())
       .then(
         (res) => this.setState({ flash: 'Intervenant modifié', open: true }),
-        (err) => this.setState({ flash: 'Intervenant modifié', open: true })
       )
       .then(
         this.setState({
