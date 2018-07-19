@@ -4,9 +4,6 @@ import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
 import Paper from '@material-ui/core/Paper';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Place from '@material-ui/icons/Place';
@@ -328,24 +325,16 @@ class FormAtelier extends Component {
                 <br />
                 <br />
                 <Grid item xs={12} sm={6}>
-                  <InputLabel htmlFor="dropInput">Intervenant </InputLabel>
-                  <Select
-                    value={this.state.nom_intervenant}
-                    required
-                    onChange={this.updateIntervenantField}
-                  >
-                    <MenuItem value="">
-                      <em>Selectionnez un intervenant</em>
-                    </MenuItem>
-                    {this.props.intervenants.map((item) => (
-                      <MenuItem
-                        key={item.id_intervenant}
-                        value={item.id_intervenant}
-                      >
-                        {item.nom} {item.prenom}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                <TextField
+                style={{ margin: 15 }}
+                fullWidth
+                multiline
+                name="id_intervenant"
+                label="Intervenants"
+                type="text"
+                value={this.state.nom_intervenant}
+                onChange={this.updateIntervenantField}
+              />
                 </Grid>
               </Grid>
               <br />
