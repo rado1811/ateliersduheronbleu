@@ -23,24 +23,25 @@ class DashboardParticipants extends Component {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({id_participant}),
+      body: JSON.stringify({ id_participant }),
     })
       .then((res) => res)
-      .then((res) => this.setState({ flash: 'participant supprimé', open: true }))
+      .then((res) =>
+        this.setState({ flash: 'participant supprimé', open: true })
+      )
       .catch((err) => err);
   };
 
   validerStatut = (participant) => {
-    const {id_participant, id_atelier} = participant;    
+    const { id_participant, id_atelier } = participant;
     fetch('/api/participant/valider', {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({id_participant})
-    })
-    .then((res) => {
+      body: JSON.stringify({ id_participant }),
+    }).then((res) => {
       fetch('/mail/participant/confirme', {
         method: 'POST',
         headers: new Headers({
@@ -56,16 +57,15 @@ class DashboardParticipants extends Component {
   };
 
   annulerStatut = (participant) => {
-    const {id_participant, id_atelier} = participant;    
+    const { id_participant, id_atelier } = participant;
     fetch('/api/participant/annuler', {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({id_participant})
-    })
-    .then((res) => {
+      body: JSON.stringify({ id_participant }),
+    }).then((res) => {
       fetch('/mail/participant/annule', {
         method: 'POST',
         headers: new Headers({
@@ -80,7 +80,6 @@ class DashboardParticipants extends Component {
     });
   };
 
-
   render() {
     return (
       <div>
@@ -88,58 +87,99 @@ class DashboardParticipants extends Component {
           Tableau de bord des participants
         </h1>
         <Paper>
-          <Table >
-            <TableHead style={{backgroundColor: '#B2C4CB', color : '#000000'}}>
+          <Table>
+            <TableHead style={{ backgroundColor: '#B2C4CB', color: '#000000' }}>
               <TableRow>
                 <TableCell>Atelier</TableCell>
-                <TableCell >Nom</TableCell>
-                <TableCell >Prénom</TableCell>
-                <TableCell >Email</TableCell>
-                <TableCell >Téléphone</TableCell>
-                <TableCell >Statut</TableCell>
+                <TableCell>Nom</TableCell>
+                <TableCell>Prénom</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Téléphone</TableCell>
+                <TableCell>Statut</TableCell>
                 <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.props.participants.map(participant => (
+              {this.props.participants.map((participant) => (
                 <TableRow key={participant.id_participant}>
-                  <TableCell >{participant.nom_atelier}</TableCell>
-                  <TableCell >{participant.nom}</TableCell>
-                  <TableCell >{participant.prenom}</TableCell>
-                  <TableCell >{participant.email}</TableCell>
-                  <TableCell >{participant.tel}</TableCell>
-                  <TableCell >{participant.statut}</TableCell>
+                  <TableCell>{participant.nom_atelier}</TableCell>
+                  <TableCell>{participant.nom}</TableCell>
+                  <TableCell>{participant.prenom}</TableCell>
+                  <TableCell>{participant.email}</TableCell>
+                  <TableCell>{participant.tel}</TableCell>
+                  <TableCell>{participant.statut}</TableCell>
                   <TableCell>
                     <Tooltip title="Valider">
-                      <IconButton mini variant="fab"
-                      aria-label="edit"
-                      style={{backgroundColor:'transparent', color : 'green'}} 
-                      onClick={() =>
-                        this.validerStatut(participant)
-                      }>
+                      <IconButton
+                        mini
+                        variant="fab"
+                        aria-label="edit"
+                        style={{
+                          backgroundColor: 'transparent',
+                          color: 'green',
+                        }}
+                        onClick={() => {
+                          {
+                            this.validerStatut(participant);
+                          }
+                          {
+                            setTimeout(() => {
+                              this.props.history.push('/admin/gestion');
+                            }, 2000);
+                          }
+                        }}
+                      >
                         <Icon>done</Icon>
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Annuler">
-                      <IconButton mini variant="fab" 
-                      aria-label="Annuler"
-                      style={{backgroundColor:'transparent', color : 'red', marginRight: 15}}
-                      onClick={() => {this.annulerStatut(participant)}}>
+                      <IconButton
+                        mini
+                        variant="fab"
+                        aria-label="Annuler"
+                        style={{
+                          backgroundColor: 'transparent',
+                          color: 'red',
+                          marginRight: 15,
+                        }}
+                        onClick={() => {
+                          {
+                            this.annulerStatut(participant);
+                          };
+                          {
+                            setTimeout(() => {
+                              this.props.history.push('/admin/');
+                            }, 2000);
+                          }
+                        }}
+                      >
                         <Icon>clear</Icon>
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Supprimer">
-                      <IconButton mini variant="fab" aria-label="edit"
-                      style={{backgroundColor:'transparent', color : 'black'}}
-                      onClick={() =>
-                        this.supprimerStatut(participant.id_participant)
-                      }>
-                      <Icon>delete_sweep</Icon>
-                    </IconButton>
+                      <IconButton
+                        mini
+                        variant="fab"
+                        aria-label="edit"
+                        style={{
+                          backgroundColor: 'transparent',
+                          color: 'black',
+                        }}
+                        onClick={() => {
+                          {
+                            this.supprimerStatut(participant.id_participant);
+                          };
+                          {
+                            setTimeout(() => {
+                              this.props.history.push('/admin/');
+                            }, 2000);
+                          }
+                        }}
+                      >
+                        <Icon>delete_sweep</Icon>
+                      </IconButton>
                     </Tooltip>
                   </TableCell>
-                
-                
                 </TableRow>
               ))}
             </TableBody>

@@ -163,32 +163,34 @@ class Contact extends Component {
             marginRight: 40,
           }}
         >
+          <h2 style={{ textAlign: 'center' }}>Une question ?</h2>
           <Grid container spacing={24} align="center">
             <Grid
               item
               xs={12}
               sm={6}
-              container
+              item
               alignItems="center"
               style={{ height: '100%' }}
             >
               <form
                 className={classes.container}
                 onSubmit={this.handleSubmit}
-                style={{ margin: 30, marginTop: 10 }}
+                style={{ margin: 'auto', marginTop: 10 }}
               >
-                <h2 style={{ textAlign: 'center' }}>Une question ?</h2>
-                <TextField
-                  id="multiline-static"
-                  name="message"
-                  label="Entrez votre texte"
-                  multiline
-                  fullWidth
-                  rows="4"
-                  placeholder="Je souhaiterais savoir..."
-                  margin="normal"
-                  onChange={this.updateMessageField}
-                />
+                <Grid item md={6}>
+                  <TextField
+                    id="multiline-static"
+                    name="message"
+                    label="Entrez votre texte"
+                    multiline
+                    fullWidth
+                    rows="4"
+                    placeholder="Je souhaiterais savoir..."
+                    margin="normal"
+                    onChange={this.updateMessageField}
+                  />
+                </Grid>
                 <Grid container>
                   <div>
                     <TextField
@@ -208,7 +210,7 @@ class Contact extends Component {
                       className={classes.textField}
                       label="Nom"
                       name="nom"
-                      placeholder="Leroy"
+                      placeholder="Leroys"
                       onChange={this.updateLastNameField}
                       fullWidth
                       margin="normal"
@@ -235,7 +237,7 @@ class Contact extends Component {
                       className={classes.textField}
                       label="Email"
                       name="email"
-                      placeholder="victor.leroy@gmail.com"
+                      placeholder="addresse@gmail.com"
                       onChange={this.updateEmailField}
                       fullWidth
                       margin="normal"
@@ -247,21 +249,25 @@ class Contact extends Component {
                     onClick={this.handleSubmit}
                     type="submit"
                     value="Submit"
-                    style={{ textAlign: 'center', backgroundColor: '#B2C4CB', color: 'white' }}
+                    style={{
+                      textAlign: 'center',
+                      backgroundColor: '#B2C4CB',
+                      color: 'white',
+                    }}
                     variant="raised"
                   >
                     Envoyer
                   </Button>
                 </div>
-                <div style={{ marginTop: '20px' }}>
-                  <Typography variant="title">
-                    Vous pouvez également nous contacter par téléphone au <br />
-                    {this.props.intervenants[0].tel}
-                  </Typography>
-                </div>
               </form>
+              <div style={{ marginTop: '20px' }}>
+                <Typography variant="title" style={{ margin: 'auto' }}>
+                  Vous pouvez également nous contacter par téléphone au <br />
+                  {this.props.intervenants[0].tel}
+                </Typography>
+              </div>
             </Grid>
-            <Grid item xs={12} sm={6} style={{ width: '80' }}>
+            <Grid item xs={12} sm={6}>
               <img
                 style={{
                   height: 'auto',
