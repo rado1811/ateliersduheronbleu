@@ -252,11 +252,12 @@ class FormAtelier extends Component {
                 <Grid item xs={12} sm={6}>
                   <br />
                   <TextField
-                    style={{ margin: 15 }}
+                    style={{ margin: 15, width: 200 }}
                     name="nb_participants"
                     required
                     label="Nombre Participants :"
                     type="number"
+                    inputProps={{ min: '0', max: '10', step: '1' }}
                     value={this.state.nb_participants}
                     onChange={this.updateNbField}
                   />
@@ -278,12 +279,11 @@ class FormAtelier extends Component {
               </Grid>
               <TextField
                 style={{ margin: 15 }}
-                fullWidth
                 multiline
+                fullWidth
                 name="contenu"
                 required
                 label="Contenu"
-                multiligne="true"
                 type="text"
                 value={this.state.contenu}
                 onChange={this.updateContenuField}
