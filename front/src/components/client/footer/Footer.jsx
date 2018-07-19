@@ -6,14 +6,14 @@ import './footer.css';
 const Footer = () => (
   <div className="Footer" style={{ backgroundColor: 'none', padding: '50px 20px 20px 20px' }}>
     <div className="mui-container mui--text-center">
-      <Grid container alignItems="center">
-        <Grid item xs={3} style={{ backgroundColor: 'none' }}>
-          <li style={{ listStyleType: 'none', textAlign: 'center', margin: '15px' }}>
-            <NavLink to="/CGV" style={{ textDecoration: 'none', color: 'black' }} onClick={() => {
-              window.scrollTo(0, 0);
-            }}>CGV</NavLink>
-          </li>
-        </Grid>
+    <Grid container alignItems="center">
+    <Grid item xs={3} style={{ backgroundColor: 'none' }}>
+      <li style={{ listStyleType: 'none', textAlign: 'center', margin: '15px' }}>
+-            <NavLink to="/CGV" style={{ textDecoration: 'none', color: 'black' }} onClick={() => {
+-              window.scrollTo(0, 0);
+-            }}>Politique de Confidentialité</NavLink>
+      </li>
+    </Grid>
         <Grid item xs={6} style={{ backgroundColor: 'none' }}>
           <li style={{ listStyleType: 'none', textAlign: 'center', color: 'black' }}>
             <a href="https://www.reserve-ornithologique-du-teich.com/" target="_blank" rel="noreferrer noopener" style={{ textDecoration: 'none', color: 'black' }}>

@@ -52,7 +52,7 @@ const AtelierVignette = (props) => {
 
           <Typography component="h3" style={{ fontSize: '1.1vw' }}>
             Places disponibles: {props.places_disponibles} <br />
-            Co-animation: {props.intervenant_prenom} {props.intervenant_nom}, Isabelle Jono
+            Co-animation: {props.intervenant_nom}
           </Typography>
         </CardContent>
         <CardActions>

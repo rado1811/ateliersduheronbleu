@@ -324,23 +324,16 @@ class FormAtelier extends Component {
                 <br />
                 <br />
                 <Grid item xs={12} sm={6}>
-                  <InputLabel htmlFor="dropInput">Intervenant    </InputLabel>
-                  <Select
-                    value={this.state.nom_intervenant}
-                    onChange={this.updateIntervenantField}
-                  >
-                    <MenuItem value="">
-                      <em>Selectionnez un intervenant</em>
-                    </MenuItem>
-                    {this.props.intervenants.map((item) => (
-                      <MenuItem
-                        key={item.id_intervenant}
-                        value={item.id_intervenant}
-                      >
-                        {item.nom} {item.prenom}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                <TextField
+                style={{ margin: 15 }}
+                fullWidth
+                multiline
+                name="id_intervenant"
+                label="Intervenants"
+                type="text"
+                value={this.state.nom_intervenant}
+                onChange={this.updateIntervenantField}
+              />
                 </Grid>
               </Grid>
               <br />
