@@ -87,6 +87,7 @@ class AtelierHome extends Component {
             style={{
               height: 'auto',
               width: '100%',
+              zindex: '0',
             }}
             loop
             muted

@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectAteliers } from '../../../actions/index';
 
-const Reserver = props => <Link to="/ateliers" {...props} />;
+const Reserver = props => <Link to="#formParticipants" {...props} />;
 const Atelier = props => <Link to="/ateliers" {...props} />;
 
 const AtelierVignette = (props) => {
