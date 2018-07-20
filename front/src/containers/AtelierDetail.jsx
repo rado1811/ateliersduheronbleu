@@ -38,7 +38,7 @@ class AtelierDetail extends Component {
                 >
                   <div>
                     <img
-                      src="../images/landing.jpg"
+                      src="../images/logoHeron.png"
                       alt="heron"
                       style={{ height: '80vh', width: '80vw' }}
                       className="images2"
