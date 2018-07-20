@@ -165,7 +165,7 @@ class FormParticipants extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit} style={{ margin: 40 }}>
+        <form id="formParticipants" onSubmit={this.handleSubmit} style={{ margin: 40 }}>
           <Paper elevation={4} style={{ padding: 40 }}>
             <h2>Formulaire de pré-réservation</h2>
             <div>

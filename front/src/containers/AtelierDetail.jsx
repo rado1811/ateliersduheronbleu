@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Grid from 'material-ui/Grid';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 import Moment from 'react-moment';
 import { fetchAteliers } from '../actions/ateliers';
 import './AteliersDetails.css';
+
+const Reserver = props => <Link to="#formParticipants" {...props} />;
 
 class AtelierDetail extends Component {
   componentDidMount() {
@@ -34,7 +38,7 @@ class AtelierDetail extends Component {
                 >
                   <div>
                     <img
-                      src="../images/landing.jpg"
+                      src="../images/logoHeron.png"
                       alt="heron"
                       style={{ height: '80vh', width: '80vw' }}
                       className="images2"
@@ -106,8 +110,15 @@ class AtelierDetail extends Component {
                     <b>
                       <h3>Intervenants :</h3>
                     </b>
-                    <p>{this.props.ateliers.prenom} {this.props.ateliers.nom}</p>
+                    <p>{this.props.ateliers.nom_intervenant}</p>
                   </div>
+                  <Button
+                    size="small"
+                    style={{ backgroundColor: '#B2C4CB', color: 'white' }}
+                    component={Reserver}
+                  >
+                    Pré-réserver
+                  </Button>
                 </Grid>
               </Grid>
             </Paper>
@@ -132,6 +143,7 @@ AtelierDetail.propTypes = {
     place_disponibles: PropTypes.number.isRequired,
     prix: PropTypes.number.isRequired,
     programme: PropTypes.string.isRequired,
+    contenu: PropTypes.string.isRequired,
   }).isRequired,
 };
 

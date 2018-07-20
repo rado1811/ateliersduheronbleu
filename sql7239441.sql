@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : sql7.freemysqlhosting.net
--- Généré le :  lun. 04 juin 2018 à 13:16
+-- Généré le :  mar. 17 juil. 2018 à 07:57
 -- Version du serveur :  5.5.58-0ubuntu0.14.04.1
 -- Version de PHP :  7.0.30-0ubuntu0.16.04.1
 
@@ -30,26 +30,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `Ateliers` (
   `id_atelier` int(11) NOT NULL,
-  `nom` varchar(100) DEFAULT NULL,
-  `id_intervenant` int(11) DEFAULT NULL,
-  `debut` datetime DEFAULT NULL,
-  `Nb_participants` int(11) DEFAULT NULL,
-  `Prix` int(11) DEFAULT NULL,
+  `nom_atelier` varchar(200) DEFAULT NULL,
+  `id_intervenant` int(11) NOT NULL,
+  `nom_intervenant` varchar(70) NOT NULL,
+  `debut` date DEFAULT NULL,
+  `nb_participants` int(11) DEFAULT NULL,
+  `prix` int(11) DEFAULT NULL,
   `contenu` varchar(1000) DEFAULT NULL,
-  `formule` varchar(50) DEFAULT NULL,
-  `lieu` varchar(50) DEFAULT NULL,
-  `photo` varchar(100) DEFAULT NULL,
-  `Places_disponibles` int(11) DEFAULT NULL,
-  `Programme` varchar(3000) DEFAULT NULL
+  `formule` varchar(1000) DEFAULT NULL,
+  `lieu` varchar(500) DEFAULT NULL,
+  `photo_atelier` varchar(200) DEFAULT NULL,
+  `place_disponibles` int(11) DEFAULT NULL,
+  `programme` varchar(5000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `Ateliers`
---
-
-INSERT INTO `Ateliers` (`id_atelier`, `nom`, `id_intervenant`, `debut`, `Nb_participants`, `Prix`, `contenu`, `formule`, `lieu`, `photo`, `Places_disponibles`, `Programme`) VALUES
-(4, 'bien etre', 1, '2018-05-30 00:00:00', 32, 200, 'hello', 'week end', 'teich', 'undefined', NULL, NULL),
-(14, 'week end teich', NULL, '2018-05-31 00:00:00', 8, 150, 'parc', 'week end', 'pessac', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -62,34 +55,19 @@ CREATE TABLE `Intervenants` (
   `nom` varchar(50) DEFAULT NULL,
   `prenom` varchar(50) DEFAULT NULL,
   `tel` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `parcours` varchar(200) DEFAULT NULL,
-  `photo` varchar(50) DEFAULT NULL,
-  `metier` varchar(50) DEFAULT NULL
+  `email` varchar(100) DEFAULT NULL,
+  `metier` varchar(1000) DEFAULT NULL,
+  `parcours` varchar(5000) DEFAULT NULL,
+  `citation` varchar(1000) DEFAULT NULL,
+  `photo` varchar(400) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `Intervenants`
 --
 
-INSERT INTO `Intervenants` (`id_intervenant`, `nom`, `prenom`, `tel`, `email`, `parcours`, `photo`, `metier`) VALUES
-(0, '', '', '', '', '', '', ''),
-(1, '0', '664173338', '0', '0', 'chene', 'photo', 'dev'),
-(2, 'dupuy', 'paul', '0664173338', 'toto@gmail.fr', 'etudiant', 'portrait', 'dev'),
-(3, 'chene', 'frederic', '01338888', 'john@doe.fr', 'DEA', 'picto', 'dev');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `Newsletter`
---
-
-CREATE TABLE `Newsletter` (
-  `id_newsletter` int(11) NOT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `objet` varchar(50) DEFAULT NULL,
-  `contenu` varchar(1000) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `Intervenants` (`id_intervenant`, `nom`, `prenom`, `tel`, `email`, `metier`, `parcours`, `citation`, `photo`) VALUES
+(1, 'Jono', 'Isabelle', '06 28 01 06 59', 'wildphenix33@gmail.com', 'Psychologue - Thérapeute - Consultante', 'Quand elle n\'est pas contrainte, bridée, endommagée dans son expression simple et entière par des éléments internes ou externes: \nNos distorsions de pensées, nos traumatismes psycho-émotionnels non résolus, nos blessures physiques et psychiques non soignées..entretiennent voire déclenchent les défaillances de notre système de fonctionnement global (Mental, psychique, corporel, spirituel même). \n\n\"Retrouver la Santé\".. c\'est prendre un chemin, certes difficile parfois,mais déjà emprunté - qui se trouve au plus près de soi et du \"Tout\",dans l\'inconditionnel: le chemin de notre liberté à être, à penser, à ressentir, à exprimer ce qui est juste et bon pour soi et pour tous (sans contradictions, équivoques ou sacrifices dans la relation mais dans \"l\'Entièreté\").\n\nLe chemin pour y parvenir est propre à chacun: lâcher les peurs,les je \"dois-il-faut\", les a-priori, apprendre à ne plus faire pour faire, à se reposer, gérer le stress, s\'autoriser à, prendre sa place..enfin, tout ce qui peut aider à libérer un organisme, un \"être\" dans la contrainte et la restriction par rapport au \"souffle de vie\".\n\nLe thérapeute est formé pour \"prendre soin\", il est au service du \"vivant\" pour qu\'il se manifeste en chacun.Il créé les conditions optimales pour que ces forces vitales agissent quelque soit la technique qu\'il utilise. \n\nLa qualité de sa \"Présence\" auprès du patient (Ecoute, Neutralité, Bienveillance,Tranquillité, Respect) est déjà une condition optimale. \n\nAucune méthode thérapeutique n\'est meilleure qu\'une autre, vous seul pourriez dire si celle-ci ou celle-là vous convient - La \"mise en mouvement\" vers un mieux être, un soulagement, un équilibre, un apaisement.. que cette démarche choisie suscite à court, moyen ou long terme vous appartient.\n\nCe que je propose à mes patients va prendre en compte cette dimension globale de l\'être, quelque soit sa modalité d\'expression (verbale et/ou psycho-somatique).', 'La Santé est notre pleine potentialité - Elle est inhérente à la Vie.', 'isabelle.jpg');
 
 -- --------------------------------------------------------
 
@@ -102,28 +80,24 @@ CREATE TABLE `Participants` (
   `nom` varchar(50) DEFAULT NULL,
   `prenom` varchar(50) DEFAULT NULL,
   `tel` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL
+  `email` varchar(50) DEFAULT NULL,
+  `id_atelier` int(11) NOT NULL,
+  `statut` varchar(50) NOT NULL DEFAULT 'Préréserver',
+  `nom_ateliers` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `Participants`
---
-
-INSERT INTO `Participants` (`id_participant`, `nom`, `prenom`, `tel`, `email`) VALUES
-(1, 'undefined', 'undefined', 'undefined', 'undefined');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Reservations`
+-- Structure de la table `Utilisateurs2`
 --
 
-CREATE TABLE `Reservations` (
-  `id_reservation` int(11) NOT NULL,
-  `id_atelier` int(11) DEFAULT NULL,
-  `id_intervenant` int(11) DEFAULT NULL,
-  `id_participant` int(11) DEFAULT NULL,
-  `statut` varchar(20) DEFAULT NULL
+CREATE TABLE `Utilisateurs2` (
+  `id` int(11) NOT NULL,
+  `email` varchar(90) DEFAULT NULL,
+  `password` varchar(90) DEFAULT NULL,
+  `prenom` varchar(90) DEFAULT NULL,
+  `nom` varchar(90) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -135,34 +109,30 @@ CREATE TABLE `Reservations` (
 --
 ALTER TABLE `Ateliers`
   ADD PRIMARY KEY (`id_atelier`),
-  ADD KEY `id_intervenant` (`id_intervenant`);
+  ADD KEY `nom_intervenant` (`nom_intervenant`),
+  ADD KEY `nom_ateliers` (`nom_atelier`);
 
 --
 -- Index pour la table `Intervenants`
 --
 ALTER TABLE `Intervenants`
-  ADD PRIMARY KEY (`id_intervenant`);
-
---
--- Index pour la table `Newsletter`
---
-ALTER TABLE `Newsletter`
-  ADD PRIMARY KEY (`id_newsletter`);
+  ADD PRIMARY KEY (`id_intervenant`),
+  ADD KEY `nom` (`nom`);
 
 --
 -- Index pour la table `Participants`
 --
 ALTER TABLE `Participants`
-  ADD PRIMARY KEY (`id_participant`);
+  ADD PRIMARY KEY (`id_participant`),
+  ADD KEY `id_atelier` (`id_atelier`),
+  ADD KEY `nom_ateliers` (`nom_ateliers`);
 
 --
--- Index pour la table `Reservations`
+-- Index pour la table `Utilisateurs2`
 --
-ALTER TABLE `Reservations`
-  ADD PRIMARY KEY (`id_reservation`),
-  ADD KEY `id_atelier` (`id_atelier`),
-  ADD KEY `id_intervenant` (`id_intervenant`),
-  ADD KEY `id_participant` (`id_participant`);
+ALTER TABLE `Utilisateurs2`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -172,40 +142,22 @@ ALTER TABLE `Reservations`
 -- AUTO_INCREMENT pour la table `Ateliers`
 --
 ALTER TABLE `Ateliers`
-  MODIFY `id_atelier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_atelier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
 --
--- AUTO_INCREMENT pour la table `Newsletter`
+-- AUTO_INCREMENT pour la table `Intervenants`
 --
-ALTER TABLE `Newsletter`
-  MODIFY `id_newsletter` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Intervenants`
+  MODIFY `id_intervenant` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 --
 -- AUTO_INCREMENT pour la table `Participants`
 --
 ALTER TABLE `Participants`
-  MODIFY `id_participant` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_participant` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 --
--- AUTO_INCREMENT pour la table `Reservations`
+-- AUTO_INCREMENT pour la table `Utilisateurs2`
 --
-ALTER TABLE `Reservations`
-  MODIFY `id_reservation` int(11) NOT NULL AUTO_INCREMENT;
---
--- Contraintes pour les tables déchargées
---
-
---
--- Contraintes pour la table `Ateliers`
---
-ALTER TABLE `Ateliers`
-  ADD CONSTRAINT `Ateliers_ibfk_1` FOREIGN KEY (`id_intervenant`) REFERENCES `Intervenants` (`id_intervenant`);
-
---
--- Contraintes pour la table `Reservations`
---
-ALTER TABLE `Reservations`
-  ADD CONSTRAINT `Reservations_ibfk_1` FOREIGN KEY (`id_atelier`) REFERENCES `Ateliers` (`id_atelier`),
-  ADD CONSTRAINT `Reservations_ibfk_2` FOREIGN KEY (`id_intervenant`) REFERENCES `Intervenants` (`id_intervenant`),
-  ADD CONSTRAINT `Reservations_ibfk_3` FOREIGN KEY (`id_participant`) REFERENCES `Participants` (`id_participant`);
-COMMIT;
+ALTER TABLE `Utilisateurs2`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -4,15 +4,13 @@ import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
 import Paper from '@material-ui/core/Paper';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Place from '@material-ui/icons/Place';
 import Snackbar from '@material-ui/core/Snackbar';
 import { goEdit, cleanEdit } from '../../../../../actions/ateliers';
 import { bindActionCreators } from 'redux';
+
 class FormAtelier extends Component {
   constructor(props) {
     super(props);
@@ -60,6 +58,7 @@ class FormAtelier extends Component {
   componentWillUnmount() {
     this.props.cleanEdit();
   }
+
   updateNomField = (event) => {
     this.setState({
       nom_atelier: event.target.value,
@@ -128,9 +127,9 @@ class FormAtelier extends Component {
     this.setState({ open: false });
   };
 
+  // ========   AJOUT =========
   handleSubmit = (event) => {
     event.preventDefault();
-
     let form = {
       ...this.state,
       id_intervenant: this.state.nom_intervenant,
@@ -140,12 +139,17 @@ class FormAtelier extends Component {
     data.append('file', this.state.photo_atelier);
     data.append('form', JSON.stringify(form));
 
-    axios
-      .post('/api/ateliers', data)
-      .then((res) =>
-        this.setState({ flash: 'Nouvel atelier crée', open: true })
-      );
+    axios.post('/api/ateliers', data).then((res) =>
+      this.setState({
+        flash: 'Nouvel atelier crée',
+        open: true,
+      })
+    );
+    setTimeout(() => {
+      this.props.history.push('/admin/administration');
+    }, 2500);
   };
+
   // ========== UPDATE =========
   handleUpdate = (event) => {
     event.preventDefault();
@@ -153,7 +157,6 @@ class FormAtelier extends Component {
     let form = {
       ...this.state,
       id_atelier: this.state.id_atelier,
-
     };
 
     let data = new FormData();
@@ -162,31 +165,28 @@ class FormAtelier extends Component {
 
     axios
       .put('/api/ateliers', data)
-      .then((res) =>
-        this.setState({ flash: 'Atelier modifié', open: true })
-      )
       .then(
         (res) => this.setState({ flash: 'Atelier modifié', open: true }),
-        (err) => this.setState({ flash: 'Formulaire incomplet', open: true })
       )
       .then(
         this.setState({
-          nom_atelier: '',
-          debut: '',
-          nb_participants: '',
-          prix: '',
-          contenu: '',
-          formule: '',
-          lieu: '',
-          photo_atelier: {},
-          programme: '',
-          id_atelier: '',
-          id_intervenant: '',
-          places_disponibles: '',
-        })
-      )
-      .then(this.props.history.push('/admin/dashboard')
-      );
+        nom_atelier: '',
+        debut: '',
+        nb_participants: '',
+        prix: '',
+        contenu: '',
+        formule: '',
+        lieu: '',
+        photo_atelier: {},
+        programme: '',
+        id_atelier: '',
+        id_intervenant: '',
+        places_disponibles: '',
+      })
+    )
+    setTimeout(() => {
+      this.props.history.push('/admin/administration');
+    }, 2500);
   };
 
   render() {
@@ -207,8 +207,8 @@ class FormAtelier extends Component {
                   Modification d'un atelier
                 </h1>
               ) : (
-                  <h1 style={{ textAlign: 'center' }}>Ajouter un atelier</h1>
-                )}
+                <h1 style={{ textAlign: 'center' }}>Ajouter un atelier</h1>
+              )}
               <Grid container spacing={24}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -240,11 +240,12 @@ class FormAtelier extends Component {
                 <Grid item xs={12} sm={6}>
                   <br />
                   <TextField
-                    style={{ margin: 15 }}
+                    style={{ margin: 15, width: 200 }}
                     name="nb_participants"
                     required
                     label="Nombre Participants :"
                     type="number"
+                    inputProps={{ min: '0', max: '100', step: '1' }}
                     value={this.state.nb_participants}
                     onChange={this.updateNbField}
                   />
@@ -266,12 +267,11 @@ class FormAtelier extends Component {
               </Grid>
               <TextField
                 style={{ margin: 15 }}
-                fullWidth
                 multiline
+                fullWidth
                 name="contenu"
                 required
                 label="Contenu"
-                multiligne="true"
                 type="text"
                 value={this.state.contenu}
                 onChange={this.updateContenuField}
@@ -295,6 +295,7 @@ class FormAtelier extends Component {
                   <br />
                   <input
                     type="file"
+                    required
                     ref="photo_atelier"
                     name="photo"
                     onChange={this.updatePhotoField.bind(this)}
@@ -324,23 +325,16 @@ class FormAtelier extends Component {
                 <br />
                 <br />
                 <Grid item xs={12} sm={6}>
-                  <InputLabel htmlFor="dropInput">Intervenant    </InputLabel>
-                  <Select
-                    value={this.state.nom_intervenant}
-                    onChange={this.updateIntervenantField}
-                  >
-                    <MenuItem value="">
-                      <em>Selectionnez un intervenant</em>
-                    </MenuItem>
-                    {this.props.intervenants.map((item) => (
-                      <MenuItem
-                        key={item.id_intervenant}
-                        value={item.id_intervenant}
-                      >
-                        {item.nom} {item.prenom}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                <TextField
+                style={{ margin: 15 }}
+                fullWidth
+                multiline
+                name="id_intervenant"
+                label="Intervenants"
+                type="text"
+                value={this.state.nom_intervenant}
+                onChange={this.updateIntervenantField}
+              />
                 </Grid>
               </Grid>
               <br />
@@ -359,25 +353,31 @@ class FormAtelier extends Component {
               <div>
                 {isFromEdit ? (
                   <Button
-                    style={{ backgroundColor: '#B2C4CB', color: 'white', margin: 15 }}
+                    style={{
+                      backgroundColor: '#B2C4CB',
+                      color: 'white',
+                      margin: 15,
+                    }}
                     type="submit"
                     value="Submit"
                     variant="raised"
-                    
                   >
                     Modifier
                   </Button>
                 ) : (
-                    <Button
-                      style={{ backgroundColor: '#B2C4CB', color: 'white', margin: 15 }}
-                      type="submit"
-                      value="Submit"
-                      variant="raised"
-                      
-                    >
-                      Enregistrer
+                  <Button
+                    style={{
+                      backgroundColor: '#B2C4CB',
+                      color: 'white',
+                      margin: 15,
+                    }}
+                    type="submit"
+                    value="Submit"
+                    variant="raised"
+                  >
+                    Enregistrer
                   </Button>
-                  )}
+                )}
               </div>
             </form>
             <Snackbar
