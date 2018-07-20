@@ -23,7 +23,7 @@ class AdminAccueil extends Component {
               }}
             >
               <img
-                src={`/images/envol.jpg`}
+                src={`/images/heron.png`}
                 style={{ width: '100', height: 'auto' }}
                 alt="héron d'Isabelle Jono"
               />
