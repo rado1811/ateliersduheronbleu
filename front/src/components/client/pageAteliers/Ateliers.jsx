@@ -28,7 +28,7 @@ const Ateliers = () => (
         align="center"
       >
         <Grid item xs={12} style={{ background: '#F2F2F2' }}>
-          <FormParticipants />
+          <FormParticipants href='formParticipants'/>
         </Grid>
       </Grid>
     </div>

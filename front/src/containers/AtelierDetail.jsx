@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 import PropTypes from 'prop-types';
 import Grid from 'material-ui/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -9,7 +9,6 @@ import Moment from 'react-moment';
 import { fetchAteliers } from '../actions/ateliers';
 import './AteliersDetails.css';
 
-const Reserver = props => <Link to="/ateliers#formParticipants" {...props} />;
 
 class AtelierDetail extends Component {
   componentDidMount() {
@@ -100,27 +99,31 @@ class AtelierDetail extends Component {
                         width="4%"
                         alt="heron"
                       />
-                      <h3>En chemin, vous trouverez :</h3>
-                    </b>
-                    <p>{this.props.ateliers.contenu}</p>
-                    <b>
-                      <h3>Programme :</h3>
-                    </b>
-                    <p>{this.props.ateliers.programme}</p>
-                    <b>
+                      <b>
+                        <h3>Programme :</h3>
+                      </b>
+                      <p>{this.props.ateliers.programme}</p>
+                      <b>
+                        <h3>En chemin, vous trouverez :</h3>
+                      </b>
+                      <p>{this.props.ateliers.contenu}</p>
                       <h3>Intervenants :</h3>
                     </b>
                     <p>{this.props.ateliers.nom_intervenant}</p>
+                    <h3>Prix :</h3>
+                    <p>{this.props.prix}</p>
                   </div>
-                  <Button
-                    size="small"
-                    style={{ backgroundColor: '#B2C4CB', color: 'white' }}
-                    component={Reserver}
-                  >
-                    Pré-réserver
-                  </Button>
                 </Grid>
               </Grid>
+              <Link to="ateliers#formParticipants" style={{ textDecoration: 'none' }}>
+                <Button
+                  size="small"
+                  style={{ backgroundColor: '#B2C4CB', color: 'white', textDecoration: 'none' }}
+                >
+                    Pré-réserver
+                </Button>
+              </Link>
+
             </Paper>
           </div>
           )}
