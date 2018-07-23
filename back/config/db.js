@@ -8,6 +8,16 @@ const connection = mysql.createConnection({
   database: 'sql7239441',
 });
 
+// BASE DE DONNEES LOCALE
+
+/* const connection = mysql.createConnection({
+  multipleStatements: true,
+  host     : 'localhost',
+  user     : 'root',
+  password : 'Nz1rm1995.',
+  database : 'films'
+}); */
+
 connection.connect((err) => {
   if (!err) {
     console.log('Database is connected');
