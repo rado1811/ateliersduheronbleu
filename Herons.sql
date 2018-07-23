@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Lun 23 Juillet 2018 à 09:39
+-- Généré le :  Lun 23 Juillet 2018 à 09:49
 -- Version du serveur :  5.7.22-0ubuntu0.16.04.1
 -- Version de PHP :  7.0.30-0ubuntu0.16.04.1
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `films`
+-- Base de données :  `Herons`
 --
 
 -- --------------------------------------------------------
