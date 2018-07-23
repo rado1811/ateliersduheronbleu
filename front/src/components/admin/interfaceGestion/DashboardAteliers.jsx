@@ -36,6 +36,7 @@ class DashboardAteliers extends Component {
                 .ateliers
                 .map(atelier => (
                   <RowAtelier
+                    key={atelier.id_atelier}
                     idAtelier={atelier.id_atelier}
                     nomAtelier={atelier.nom_atelier}
                     nbParticipants={atelier.nb_participants}
