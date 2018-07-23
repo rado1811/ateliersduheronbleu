@@ -121,6 +121,14 @@ Concernant les routes de la partie back, voici la description de l'API fournie :
         Cet email confirme la pré-réservation
         Un deuxième est ensuite envoyé si cette dernière est confirmée ou annulée
 
+*/AUTH
+
+        /auth/auth/signup - POST 
+        Enregistrement d'un compte Administrateur 
+
+        /auth/auth/signin - POST
+        Authentification de l'administrateur
+
 
 EXECUTION DE LA DOCUMENTATION LOCALEMENT / UTILISATION
 
