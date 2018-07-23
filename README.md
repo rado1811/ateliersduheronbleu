@@ -1,4 +1,4 @@
-<h1>Projet 3 - Les Ateliers du Héron Bleu</h1>
+<h1>- Les Ateliers du Héron Bleu -</h1>
 
 Réalisation d'un site pour une psychologue souhaitant lancer une activité d'ateliers bien être.
 
@@ -63,52 +63,52 @@ Concernant les routes de la partie back, voici la description de l'API fournie :
 
 */INTERVENANT : 
 
-        /intervenant - GET
+        /api/intervenant - GET
         Affiche la liste de tous les intervenants
 
-        /intervenant - POST
+        /api/intervenant - POST
         Ajoute un nouvel intervenant
 
-        /intervenant/:id - PUT
+        /api/intervenant/:id - PUT
         Modifie les informations d'un intervenant
 
-        /intervenant - DELETE
+        /api/intervenant - DELETE
         Supprime un intervenant
 
 */ATELIERS : 
 
-        /ateliers - GET
+        /api/ateliers - GET
         Affiche la liste de tous les ateliers
 
-        /ateliers - POST
+        /api/ateliers - POST
         Ajoute un nouvel atelier
 
-        /ateliers/:id - PUT
+        /api/ateliers/:id - PUT
         Modifie les informations d'un atelier
 
-        /ateliers - DELETE
+        /api/ateliers - DELETE
         Supprime un atelier
 
 */PARTCIPANTS
 
-        /participants - GET
+        /api/participants - GET
         Affiche la liste de tous les participants
 
-        /participants - POST
+        /api/participants - POST
         Ajoute un nouveau participant
 
-        /participants/:id/valider - PUT
+        /api/participants/:id/valider - PUT
         Modifie le statut d'un participant : réservation validée
 
-        /participants/:id/annuler - PUT
+        /api/participants/:id/annuler - PUT
         Modifie le statut d'un participant : réservation annulée
 
-        /participants - DELETE
+        /api/participants - DELETE
         Supprime un participant
 
 */PRERESERVATION
 
-        /prereservation/particpants - GET
+        /api/prereservation/particpants - GET
         Affiche les participants qui ont pré-réservés un(des) atelier(s)
         
 */NODEMAILER
