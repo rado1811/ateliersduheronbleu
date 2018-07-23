@@ -107,17 +107,17 @@ router.post('/participant/:option', (req, res) => {
       switch(option) {
         case "preresa": 
         subject = 'Confirmation pré-réservation';
-        content = `Bonjour ${result.prenom} ${result.nom}. \n\nVotre pré-réservation est confirmée pour l'atelier ${result.nom_atelier}. \n\nCe message provient d'un envoi automatique de votre site internet, merci de ne pas y répondre`;
+        content = `Bonjour ${result.prenom} ${result.nom}. \n\nVotre pré-réservation est confirmée pour l'atelier ${result.nom_atelier}. \n\nCe message provient d'un envoi automatique, merci de ne pas y répondre`;
         break;
 
         case "confirme":
         subject = 'Confirmation de la réservation';
-        content = `Bonjour ${result.prenom} ${result.nom}. \n\nVotre réservation est confirmée. \n\nCe message provient d'un envoi automatique de votre site internet, merci de ne pas y répondre`;
+        content = `Bonjour ${result.prenom} ${result.nom}. \n\nVotre réservation est confirmée. \n\nCe message provient d'un envoi automatique, merci de ne pas y répondre`;
         break;
 
         case "annule":
         subject = 'Annulation de la réservation';
-        content = `Bonjour ${result.prenom} ${result.nom}. \n\nVotre réservation est annulée. \n\nCe message provient d'un envoi automatique de votre site internet, merci de ne pas y répondre`;
+        content = `Bonjour ${result.prenom} ${result.nom}. \n\nVotre réservation est annulée. \n\nCe message provient d'un envoi automatique, merci de ne pas y répondre`;
         break;
       }
       sendMail(res, '', result.email, subject, content);
