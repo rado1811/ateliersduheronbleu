@@ -33,7 +33,7 @@ class FormAtelier extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.isFromEdit) {
       this.setState({
-        debut: nextProps.ateliers[nextProps.indexAtelierFromEdit].debut,
+        debut: nextProps.ateliers[nextProps.indexAtelierFromEdit].debut.split("T")[0],
         formule: nextProps.ateliers[nextProps.indexAtelierFromEdit].formule,
         id_atelier: this.props.ateliers[nextProps.indexAtelierFromEdit]
           .id_atelier,
