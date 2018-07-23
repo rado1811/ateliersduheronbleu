@@ -12,6 +12,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { fetchParticipants } from '../../../actions/participants';
 
 class DashboardParticipants extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {  }
+    }
+  
   componentDidMount() {
     this.props.fetchParticipants();
   }
@@ -25,9 +30,8 @@ class DashboardParticipants extends Component {
       },
       body: JSON.stringify({ id_participant }),
     })
-      .then((res) => res)
       .then((res) =>
-        this.setState({ flash: 'participant supprimé', open: true })
+        this.setState({ state: this.state })
       )
       .catch((err) => err);
   };
@@ -52,7 +56,7 @@ class DashboardParticipants extends Component {
           id_atelier,
         }),
       });
-      this.setState({ flash: 'réservation validée', open: true });
+      this.setState({ state: this.state });
     });
   };
 
@@ -76,7 +80,7 @@ class DashboardParticipants extends Component {
           id_atelier,
         }),
       });
-      this.setState({ flash: 'Réservation annulée', open: true });
+      this.forceUpdate();
     });
   };
 
@@ -122,11 +126,6 @@ class DashboardParticipants extends Component {
                           {
                             this.validerStatut(participant);
                           }
-                          {
-                            setTimeout(() => {
-                              this.props.history.push('/admin/gestion');
-                            }, 2000);
-                          }
                         }}
                       >
                         <Icon>done</Icon>
@@ -146,11 +145,6 @@ class DashboardParticipants extends Component {
                           {
                             this.annulerStatut(participant);
                           };
-                          {
-                            setTimeout(() => {
-                              this.props.history.push('/admin/');
-                            }, 2000);
-                          }
                         }}
                       >
                         <Icon>clear</Icon>
@@ -171,7 +165,7 @@ class DashboardParticipants extends Component {
                           };
                           {
                             setTimeout(() => {
-                              this.props.history.push('/admin/');
+                              this.props.history.push('/admin/gestion');
                             }, 2000);
                           }
                         }}
