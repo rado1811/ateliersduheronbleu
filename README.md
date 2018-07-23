@@ -20,7 +20,7 @@ DEMARRAGE RAPIDE / INSTALLATION DU PROJET
 Cloner le repo : git clone https://github.com/WildCodeSchool/bdx-0218-js-heronsbleus.git
 Ouvrir le projet, se déplacer dans le dossier back et faire un "npm install" afin d'installer toutes les dépendances nécessaires. 
 Répétez l'opération pour le dossier front.  
-Bien vérifier que "npm install" à bien été prit en compte côté Back et côté Front du projet.
+Bien vérifier que "npm install" à bien été pris en compte côté Back et côté Front du projet.
 
 VISUALISATION DU PROJET 
 
@@ -31,7 +31,7 @@ bdx-0218-js-heronsbleus
        ├── bin
        ├── config
        ├── node_modules
-       ├── puclic
+       ├── public
        ├── routes
        ├── tmp
        ├── babelrc
@@ -57,23 +57,67 @@ bdx-0218-js-heronsbleus
 DOCUMENTATION API :
 
 Concernant les routes de la partie back, voici la description de l'API fournie :
-Voici un exemple pour les routes des intervenants, mais nous retrouvons la même API sur 
- /ateliers
-                                                                                        /participants
-                                                                                        /prereservation
-                                                                                        /nodemailer
 
- /intervenant - GET
-Affiche la liste de toutes les intervenants
+*/INTERVENANT : 
 
- /intervenant - POST
-Ajoute un nouvel intervenant
+        /intervenant - GET
+        Affiche la liste de tous les intervenants
 
- /intervenant/:id - PUT
-Modifie les informations d'un intervenant
+        /intervenant - POST
+        Ajoute un nouvel intervenant
 
- /intervenant - DELETE
-Supprime un intervenant
+        /intervenant/:id - PUT
+        Modifie les informations d'un intervenant
+
+        /intervenant - DELETE
+        Supprime un intervenant
+
+*/ATELIERS : 
+
+        /ateliers - GET
+        Affiche la liste de tous les ateliers
+
+        /ateliers - POST
+        Ajoute un nouvel atelier
+
+        /ateliers/:id - PUT
+        Modifie les informations d'un atelier
+
+        /ateliers - DELETE
+        Supprime un atelier
+
+*/PARTCIPANTS
+
+        /participants - GET
+        Affiche la liste de tous les participants
+
+        /participants - POST
+        Ajoute un nouveau participant
+
+        /participants/:id/valider - PUT
+        Modifie le status d'un participant : pré-réservation validée
+
+        /participants/:id/annuler - PUT
+        Modifie le status d'un participant : pré-réservation annulée
+
+        /participants - DELETE
+        Supprime un participant
+
+*/PRERESERVATION
+
+        /prereservation/particpants - GET
+        Affiche les participants qui ont pré-réservés un(des) atelier(s)
+        
+*/NODEMAILER
+
+        /nodemailer/admin - POST
+        Envoie un email à l'administrateur afin de l'informer d'une pré-réservation sur un atelier
+        
+        /nodemailer/participant/:option - POST
+        Envoie un email informant le participant de son status 
+        Cet email confirme la pré-réservation
+        Un deuxième est ensuite envoyé si cette dernière est confirmée ou annulée
+
 
 EXECUTION DE LA DOCUMENTATION LOCALEMENT / UTILISATION
 
