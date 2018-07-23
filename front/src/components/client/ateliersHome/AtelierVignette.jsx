@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectAteliers } from '../../../actions/index';
 
-const Reserver = props => <Link to="#formParticipants" {...props} />;
+const Reserver = props => <Link to="/ateliers#formParticipants" {...props} />;
 const Atelier = props => <Link to="/ateliers" {...props} />;
 
 const AtelierVignette = (props) => {
@@ -29,7 +29,7 @@ const AtelierVignette = (props) => {
       <Card
         justify="center"
         style={{
-          minHeight: '465',
+          minHeight: '65vh',
           marginLeft: 'auto',
           marginRight: 'auto',
           maxWidth: '345',

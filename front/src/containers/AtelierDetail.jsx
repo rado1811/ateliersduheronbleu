@@ -9,7 +9,7 @@ import Moment from 'react-moment';
 import { fetchAteliers } from '../actions/ateliers';
 import './AteliersDetails.css';
 
-const Reserver = props => <Link to="#formParticipants" {...props} />;
+const Reserver = props => <Link to="/ateliers#formParticipants" {...props} />;
 
 class AtelierDetail extends Component {
   componentDidMount() {
