@@ -98,10 +98,10 @@ Concernant les routes de la partie back, voici la description de l'API fournie :
         Ajoute un nouveau participant
 
         /participants/:id/valider - PUT
-        Modifie le status d'un participant : pré-réservation validée
+        Modifie le statut d'un participant : réservation validée
 
         /participants/:id/annuler - PUT
-        Modifie le status d'un participant : pré-réservation annulée
+        Modifie le statut d'un participant : réservation annulée
 
         /participants - DELETE
         Supprime un participant
@@ -117,7 +117,7 @@ Concernant les routes de la partie back, voici la description de l'API fournie :
         Envoie un email à l'administrateur afin de l'informer d'une pré-réservation sur un atelier
         
         /nodemailer/participant/:option - POST
-        Envoie un email informant le participant de son status 
+        Envoie un email informant le participant de son statut 
         Cet email confirme la pré-réservation
         Un deuxième est ensuite envoyé si cette dernière est confirmée ou annulée
 
