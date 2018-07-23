@@ -18,7 +18,8 @@ TABLE DES MATIERES :
 DEMARRAGE RAPIDE / INSTALLATION DU PROJET 
 
 Cloner le repo : git clone https://github.com/WildCodeSchool/bdx-0218-js-heronsbleus.git
-Ouvrir la console dans le projet, et installer avec npm : "npm install" à la racine du projet
+Ouvrir le projet, se déplacer dans le dossier back et faire un "npm install" afin d'installer toutes les dépendances nécessaires. 
+Répétez l'opération pour le dossier front.  
 Bien vérifier que "npm install" à bien été prit en compte côté Back et côté Front du projet.
 
 VISUALISATION DU PROJET 
