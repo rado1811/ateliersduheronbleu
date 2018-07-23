@@ -112,7 +112,7 @@ class TemporaryDrawer extends React.Component {
               <ListItemText />
             </ListItem>
             <ListItem button component={MyAteliers}>
-              Atelier
+              Ateliers
               <ListItemText />
             </ListItem>
             <ListItem button component={MyIntervenants}>

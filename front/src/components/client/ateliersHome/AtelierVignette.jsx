@@ -29,7 +29,7 @@ const AtelierVignette = (props) => {
       <Card
         justify="center"
         style={{
-          minHeight: '465',
+          minHeight: '65vh',
           marginLeft: 'auto',
           marginRight: 'auto',
           maxWidth: '345',
