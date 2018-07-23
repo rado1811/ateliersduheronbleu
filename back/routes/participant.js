@@ -13,6 +13,16 @@ router.get('/', (req, res) => {
   });
 });
 
+router.get('/reserve', (req, res) => {
+  connection.query('SELECT * FROM Participants left join Ateliers on Participants.id_atelier = Ateliers.id_atelier where Participants.statut != "annulé"', (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(data);
+    }
+  });
+});
+
 router.post('/', (req, res) => {
   const select = `INSERT INTO Participants (email, tel, prenom, nom, id_atelier) VALUES 
     ('${req.body.email}', '${req.body.tel}', '${req.body.prenom}', '${req.body.nom}', '${req.body.id_atelier}');`;

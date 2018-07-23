@@ -7,7 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { fetchAteliers } from '../../../actions/ateliers';
-
+import RowAtelier from './RowAtelier';
 
 class DashboardAteliers extends Component {
   componentDidMount() {
@@ -20,7 +20,7 @@ class DashboardAteliers extends Component {
         <h1 className="text-center" style={{ marginTop: 30 }}>Tableau de bord des ateliers</h1>
         <Paper>
           <Table>
-            <TableHead style={{backgroundColor: '#B2C4CB', color : '#000000'}}>
+            <TableHead style={{ backgroundColor: '#B2C4CB', color : '#000000'}}>
               <TableRow>
                 <TableCell>Nom de l'atelier</TableCell>
                 <TableCell numeric>Places prevus</TableCell>
@@ -33,14 +33,12 @@ class DashboardAteliers extends Component {
                 .props
                 .ateliers
                 .map(atelier => (
-                  <TableRow key={atelier.id_atelier}>
-                    <TableCell component="th" scope="row">
-                      {atelier.nom_atelier}
-                    </TableCell>
-                    <TableCell numeric>{atelier.nb_participants}</TableCell>
-                    <TableCell numeric>{atelier.nb_participants - atelier.place_disponibles}</TableCell>
-                    <TableCell numeric>{atelier.place_disponibles}</TableCell>
-                  </TableRow>
+                  <RowAtelier
+                    key={atelier.id_atelier}
+                    idAtelier={atelier.id_atelier}
+                    nomAtelier={atelier.nom_atelier}
+                    nbParticipants={atelier.nb_participants}
+                  />
                 ))}
             </TableBody>
           </Table>
@@ -51,7 +49,10 @@ class DashboardAteliers extends Component {
 }
 
 function mapStateToProps(state) {
-  return { ateliers: state.ateliers.ateliers };
+  return {
+    ateliers: state.ateliers.ateliers,
+    participants: state.participants.participants,
+  };
 }
 
 export default connect(mapStateToProps, { fetchAteliers })(DashboardAteliers);

@@ -31,3 +31,4 @@ export function fetchParticipants() {
       .catch(error => dispatch(fetchParticipantsFailure(error)));
   };
 }
+
