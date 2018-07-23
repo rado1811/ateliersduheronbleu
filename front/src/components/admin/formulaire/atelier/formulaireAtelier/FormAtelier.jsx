@@ -375,7 +375,7 @@ class FormAtelier extends Component {
                     value="Submit"
                     variant="raised"
                   >
-                    Enregistrer
+                    Valider
                   </Button>
                 )}
               </div>
