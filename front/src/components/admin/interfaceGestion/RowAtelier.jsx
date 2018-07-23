@@ -12,7 +12,7 @@ class RowAtelier extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchInscrits();
     this.getParticipantsCount();
   }
