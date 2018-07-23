@@ -40,6 +40,7 @@ class RowAtelier extends Component {
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
     inscrits: state.inscrits.inscrits,

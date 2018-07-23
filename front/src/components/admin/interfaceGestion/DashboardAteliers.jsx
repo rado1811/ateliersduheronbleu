@@ -9,9 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import { fetchAteliers } from '../../../actions/ateliers';
 import RowAtelier from './RowAtelier';
 
-
 class DashboardAteliers extends Component {
-
   componentDidMount() {
     this.props.fetchAteliers();
   }
