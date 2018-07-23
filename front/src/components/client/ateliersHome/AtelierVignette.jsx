@@ -52,7 +52,6 @@ const AtelierVignette = (props) => {
           </Typography>
 
           <Typography component="h3">
-            Places disponibles: {props.places_disponibles} <br />
             Co-animation: {props.intervenant_nom}
           </Typography>
         </CardContent>
