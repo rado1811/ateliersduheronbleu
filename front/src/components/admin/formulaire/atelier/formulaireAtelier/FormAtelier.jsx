@@ -33,12 +33,14 @@ class FormAtelier extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.isFromEdit) {
       this.setState({
-        debut: nextProps.ateliers[nextProps.indexAtelierFromEdit].debut.split("T")[0],
+        debut: nextProps.ateliers[nextProps.indexAtelierFromEdit].debut.split(
+          'T'
+        )[0],
         formule: nextProps.ateliers[nextProps.indexAtelierFromEdit].formule,
         id_atelier: this.props.ateliers[nextProps.indexAtelierFromEdit]
           .id_atelier,
-        id_intervenant: this.props.ateliers[nextProps.indexAtelierFromEdit]
-          .id_intervenant,
+        nom_intervenant: this.props.ateliers[nextProps.indexAtelierFromEdit]
+          .nom_intervenant,
         lieu: nextProps.ateliers[nextProps.indexAtelierFromEdit].lieu,
         nb_participants:
           nextProps.ateliers[nextProps.indexAtelierFromEdit].nb_participants,
@@ -165,25 +167,23 @@ class FormAtelier extends Component {
 
     axios
       .put('/api/ateliers', data)
-      .then(
-        (res) => this.setState({ flash: 'Atelier modifié', open: true }),
-      )
+      .then((res) => this.setState({ flash: 'Atelier modifié', open: true }))
       .then(
         this.setState({
-        nom_atelier: '',
-        debut: '',
-        nb_participants: '',
-        prix: '',
-        contenu: '',
-        formule: '',
-        lieu: '',
-        photo_atelier: {},
-        programme: '',
-        id_atelier: '',
-        id_intervenant: '',
-        places_disponibles: '',
-      })
-    )
+          nom_atelier: '',
+          debut: '',
+          nb_participants: '',
+          prix: '',
+          contenu: '',
+          formule: '',
+          lieu: '',
+          photo_atelier: {},
+          programme: '',
+          id_atelier: '',
+          id_intervenant: '',
+          places_disponibles: '',
+        })
+      );
     setTimeout(() => {
       this.props.history.push('/admin/administration');
     }, 2500);
@@ -325,16 +325,16 @@ class FormAtelier extends Component {
                 <br />
                 <br />
                 <Grid item xs={12} sm={6}>
-                <TextField
-                style={{ margin: 15 }}
-                fullWidth
-                multiline
-                name="id_intervenant"
-                label="Intervenants"
-                type="text"
-                value={this.state.nom_intervenant}
-                onChange={this.updateIntervenantField}
-              />
+                  <TextField
+                    style={{ margin: 15 }}
+                    fullWidth
+                    multiline
+                    name="nom_intervenant"
+                    label="Intervenants"
+                    type="text"
+                    value={this.state.nom_intervenant}
+                    onChange={this.updateIntervenantField}
+                  />
                 </Grid>
               </Grid>
               <br />
@@ -375,7 +375,7 @@ class FormAtelier extends Component {
                     value="Submit"
                     variant="raised"
                   >
-                    Enregistrer
+                    Valider
                   </Button>
                 )}
               </div>
