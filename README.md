@@ -131,7 +131,7 @@ Concernant les routes de la partie back, voici la description de l'API fournie :
 EXECUTION DE LA DOCUMENTATION LOCALEMENT / UTILISATION
 
 <p>1 - Ouvrir un terminal au niveau de /front</p>
-<p>2 - Exécuter "npm start-with-back".</p>
+<p>2 - Exécuter "npm start".</p>
 <p>Vous pouvez alors voir votre connexion à la base de donnée et surveiller que le serveur se connecte bien.</p>
 <p>3 - Ouvrez http://localhost:3000 dans votre navigateur.</p>
 
