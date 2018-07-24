@@ -164,14 +164,8 @@ class Contact extends Component {
           }}
         >
           <h2 style={{ textAlign: 'center' }}>Une question ?</h2>
-          <Grid container spacing={24} align="center">
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              alignItems="center"
-              style={{ height: '100%' }}
-            >
+          <Grid container spacing={24} alignItems="center" align="center">
+            <Grid item xs={12} sm={6} style={{ height: '100%' }}>
               <form
                 className={classes.container}
                 onSubmit={this.handleSubmit}

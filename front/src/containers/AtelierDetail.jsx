@@ -16,6 +16,7 @@ class AtelierDetail extends Component {
   }
 
   render() {
+    console.log(this.props.ateliers.debut)
     return (
       <div className="AteliersDetail">
         {!this.props.ateliers ? (
