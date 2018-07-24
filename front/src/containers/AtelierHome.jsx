@@ -3,6 +3,7 @@ import { HashLink as Link } from 'react-router-hash-link';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import MediaQuery from 'react-responsive';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -73,57 +74,74 @@ class AtelierHome extends Component {
 
   render() {
     return (
-      <div>
-        <TemporaryDrawer />
-        <div
-          className="video-container"
-          style={{
-            marginBottom: 100,
-            marginTop: -70,
-          }}
-        >
-          <video
-            id="background-video"
+        <div>
+          <TemporaryDrawer />
+            <MediaQuery query="(min-device-width: 1224px)">
+              <div
+                className="video-container"
+                style={{
+                marginBottom: 100,
+                marginTop: -70,
+                }}
+              >
+                <div>You are a tablet or mobile phone</div>
+                <video
+                  id="background-video"
+                  style={{
+                    height: 'auto',
+                    width: '100%',
+                    zindex: '0',
+                  }}
+                  loop
+                  muted
+                  autoPlay
+                >
+                  <source src="../images/sunwaves.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </MediaQuery>
+          <MediaQuery query="(max-device-width: 1224px)">
+            <div
+              className="video-container"
+              style={{
+              }}
+            >
+              <img
+                src="../images/home.jpg"
+                alt="heron"
+                style={{ height: '100vh', width: '100vw' }}
+                className="images2"
+              />
+            </div>
+          </MediaQuery>
+          <div
+            className="overlay"
             style={{
-              height: 'auto',
-              width: '100%',
-              zindex: '0',
+              fontFamily: 'Dancing Script',
+              fontSize: '3vw',
+              padding: '150px',
             }}
-            loop
-            muted
-            autoPlay
           >
-            <source src="../images/sunwaves.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div
-          className="overlay"
-          style={{
-            fontFamily: 'Dancing Script',
-            fontSize: '3vw',
-            padding: '150px',
-          }}
-        >
           <h2 style={{ paddingLeft: '150px' }}>
             {' '}
             Ateliers "Bien-être et Créativité"
           </h2>
-          <h3
-            className="sousTitre"
-            style={{ fontFamily: 'Dancing Script', paddingLeft: '150px' }}
-          >
-            {' '}
+            <h3
+              className="sousTitre"
+              style={{ fontFamily: 'Dancing Script', paddingLeft: '150px' }}
+            >
+              {' '}
             Le Teich
-          </h3>
+            </h3>
+          </div>
+          <Link to="#ateliers">
+            <i className="fas fa-angle-double-down" />
+          </Link>
+          {this.getUpcomingAteliers()}
+          <BoutonContact />
+          <Footer />
         </div>
-        <Link to="#ateliers">
-          <i className="fas fa-angle-double-down" />
-        </Link>
-        {this.getUpcomingAteliers()}
-        <BoutonContact />
-        <Footer />
-      </div>
     );
   }
 }
