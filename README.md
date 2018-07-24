@@ -18,9 +18,7 @@ TABLE DES MATIERES :
 DEMARRAGE RAPIDE / INSTALLATION DU PROJET 
 
 Cloner le repo : git clone https://github.com/WildCodeSchool/bdx-0218-js-heronsbleus.git
-<p> Ouvrir le projet, se déplacer dans le dossier back et faire un "npm install" afin d'installer toutes les dépendances nécessaires.</p>
-<p>Répétez l'opération pour le dossier front.</p>  
-<p>Bien vérifier que "npm install" à bien été pris en compte côté Back et côté Front du projet.</p>
+<p> Ouvrir le projet, se déplacer dans le dossier front et faire un "npm install" afin d'installer toutes les dépendances nécessaires.</p>
 
 VISUALISATION DU PROJET 
 
@@ -28,18 +26,6 @@ VISUALISATION DU PROJET
 
 ```
 bdx-0218-js-heronsbleus
-└── back
-     ├── bin
-     ├── config
-     ├── node_modules
-     ├── public
-     ├── routes
-     ├── tmp
-     ├── babelrc
-     ├── eslintrc
-     ├── app.js
-     ├── package-lock.json
-     └── package.json
 
 └── front
      ├── node_modules
@@ -53,6 +39,18 @@ bdx-0218-js-heronsbleus
 └── package-lock.json
 └── README.md
 └── sql7239441.sql
+└── back
+     ├── bin
+     ├── config
+     ├── node_modules
+     ├── public
+     ├── routes
+     ├── tmp
+     ├── babelrc
+     ├── eslintrc
+     ├── app.js
+     ├── package-lock.json
+     └── package.json
 
 ```
 
@@ -132,8 +130,8 @@ Concernant les routes de la partie back, voici la description de l'API fournie :
 
 EXECUTION DE LA DOCUMENTATION LOCALEMENT / UTILISATION
 
-<p>1 - Ouvrir deux consoles (une pour le serveur côté Back, une autre pour le Front)</p>
-<p>2 - Exécuter "npm start" dans chaque console afin de générer nos documents.</p>
+<p>1 - Ouvrir un terminal au niveau de /front</p>
+<p>2 - Exécuter "npm start-with-back".</p>
 <p>Vous pouvez alors voir votre connexion à la base de donnée et surveiller que le serveur se connecte bien.</p>
 <p>3 - Ouvrez http://localhost:3000 dans votre navigateur.</p>
 
