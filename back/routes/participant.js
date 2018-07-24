@@ -42,7 +42,7 @@ router.put('/valider', (req, res) => {
       console.error(err);
       res.sendStatus(500);
     } else {
-      res.sendStatus(200);
+      res.json({status: 'validé'});
     }
   });
 });
@@ -52,20 +52,22 @@ router.put('/annuler', (req, res) => {
     req.body.id_participant
     }`;
   connection.query(sql, req.body.data, (err) => {
-    if (err) res.send(err);
-    else {
-      res.send();
+    if (err) {
+      console.error(err);
+      res.sendStatus(500);
+    } else {
+      res.json({status: 'annulé'});
     }
   });
 });
 
 
 router.delete('/', (req, res) => {
-  connection.query('DELETE FROM Participants WHERE id_participant = ?', [req.body.id_participant], (err, result) => {
+  connection.query('DELETE FROM Participants WHERE id_participant = ?', [req.body.id_participant], (err) => {
     if (err) {
-      res.status(500).end();
+      res.sendStatus(500);
     } else {
-      res.end('atelier supprimé');
+      res.sendStatus(200);
     }
   });
 });
