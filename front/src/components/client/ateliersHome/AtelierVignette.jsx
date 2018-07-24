@@ -82,11 +82,9 @@ const AtelierVignette = (props) => {
 
 AtelierVignette.propTypes = {
   image: PropTypes.string.isRequired,
-  intervenant_nom: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   indexAtelier: PropTypes.number.isRequired,
   date: PropTypes.string.isRequired,
-  places_disponibles: PropTypes.number.isRequired,
   selectAteliers: PropTypes.func.isRequired,
   ateliers: PropTypes.arrayOf(Array).isRequired,
 };
