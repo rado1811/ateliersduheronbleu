@@ -169,7 +169,6 @@ class Contact extends Component {
               item
               xs={12}
               sm={6}
-              item
               alignItems="center"
               style={{ height: '100%' }}
             >

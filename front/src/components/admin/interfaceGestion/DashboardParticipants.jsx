@@ -12,13 +12,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { fetchParticipants, updateParticipant, deleteParticipant } from '../../../actions/participants';
 
 class DashboardParticipants extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-
-      }
-    }
-  
   componentDidMount() {
     this.props.fetchParticipants();
   }
@@ -163,11 +156,6 @@ class DashboardParticipants extends Component {
                         }}
                         onClick={() => {
                             this.supprimerStatut(participant.id_participant);
-                          {
-                            setTimeout(() => {
-                              this.props.history.push('/admin/gestion');
-                            }, 2000);
-                          }
                         }}
                       >
                         <Icon>delete_sweep</Icon>

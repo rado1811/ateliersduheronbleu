@@ -9,15 +9,13 @@ const connection = mysql.createConnection({
 });
 
 // BASE DE DONNEES LOCALE
-/*
-const connection = mysql.createConnection({
-  multipleStatements: true,
-  host: 'localhost',
-  user: 'root',
-  password: '****',
-  database: 'Herons',
-});
-*/
+// const connection = mysql.createConnection({
+//   multipleStatements: true,
+//   host: 'localhost',
+//   user: 'root',
+//   password: 'Nz1rm1995.',
+//   database: 'Herons',
+// });
 
 connection.connect((err) => {
   if (!err) {
