@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
@@ -13,15 +13,11 @@ class RowAtelier extends Component {
   }
 
   componentWillMount() {
-    axios.get(`/api/participant/count/${this.props.idAtelier}`)
-    .then(res => {
+    axios.get(`/api/participant/count/${this.props.idAtelier}`).then((res) => {
       this.setState({
         total: res.data.total,
       });
     });
-
-    //this.props.fetchInscrits();
-    //this.getParticipantsCount();
   }
 
   render() {
@@ -40,5 +36,9 @@ class RowAtelier extends Component {
     );
   }
 }
+
+RowAtelier.propTypes = {
+  nbParticipants: PropTypes.number.isRequired,
+};
 
 export default RowAtelier;

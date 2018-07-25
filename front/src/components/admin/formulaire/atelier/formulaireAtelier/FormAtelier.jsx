@@ -26,6 +26,7 @@ class FormAtelier extends Component {
       programme: '',
       id_intervenant: 0,
       nom_intervenant: '',
+      place_disponibles: '',
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -52,7 +53,6 @@ class FormAtelier extends Component {
         contenu: nextProps.ateliers[nextProps.indexAtelierFromEdit].contenu,
         programme: nextProps.ateliers[nextProps.indexAtelierFromEdit].programme,
       });
-      console.log(this.state.debut);
     }
   }
 
@@ -98,7 +98,6 @@ class FormAtelier extends Component {
   updatePhotoField = () => {
     const inputFile = this.refs.photo_atelier;
     const files = inputFile.files;
-    console.log(files);
     if (files.length > 0) {
       this.setState({
         photo_atelier: files[0],
@@ -200,7 +199,11 @@ class FormAtelier extends Component {
       >
         <Paper style={{ padding: 20 }} elevation={24}>
           <div>
-            <form onSubmit={isFromEdit ? this.handleUpdateAtelier : this.handleSubmitAtelier}>
+            <form
+              onSubmit={
+                isFromEdit ? this.handleUpdateAtelier : this.handleSubmitAtelier
+              }
+            >
               {isFromEdit ? (
                 <h1 style={{ textAlign: 'center' }}>
                   Modification d'un atelier
