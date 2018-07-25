@@ -15,7 +15,7 @@ import Footer from '../components/client/footer/Footer';
 import './AtelierHome.css';
 import TemporaryDrawer from '../components/client/navbar/TemporaryDrawer';
 
-const styles = (theme) => ({
+const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
   },
@@ -34,12 +34,13 @@ class AtelierHome extends Component {
   }
 
   getUpcomingAteliers() {
-    const ateliers = this.state.toggleAteliers
+    const ateliers = (this.props.ateliers.length > 0 && this.state.toggleAteliers)
       ? this.props.ateliers
       : this.props.ateliers.slice(0, 3);
     const iconButton = this.state.toggleAteliers ? <RemoveIcon /> : <AddIcon />;
+
     return (
-      <Grid id="ateliers" container spacing={16} justify="center">
+      <Grid id="ateliers" container justify="center">
         {ateliers.map((atelier, i) => (
           <AtelierVignette
             key={atelier.id_atelier}
@@ -52,14 +53,17 @@ class AtelierHome extends Component {
             indexAtelier={i}
           />
         ))}
-        <Button
-          variant="fab"
-          color="primary"
-          style={{ backgroundColor: '#B2C4CB' }}
-          onClick={() => this.toggleAteliers()}
-        >
-          {iconButton}
-        </Button>
+
+        <div className="fullwidth">
+          <Button
+            variant="fab"
+            color="primary"
+            style={{ backgroundColor: '#B2C4CB' }}
+            onClick={() => this.toggleAteliers()}
+          >
+            {iconButton}
+          </Button>
+        </div>
       </Grid>
     );
   }
@@ -73,73 +77,71 @@ class AtelierHome extends Component {
 
   render() {
     return (
-        <div>
-          <TemporaryDrawer />
-            <MediaQuery query="(min-device-width: 1224px)">
-              <div
-                className="video-container"
-                style={{
-                marginBottom: 100,
-                marginTop: -70,
-                }}
-              >
-                <div>You are a tablet or mobile phone</div>
-                <video
-                  id="background-video"
-                  style={{
-                    height: 'auto',
-                    width: '100%',
-                    zindex: '0',
-                  }}
-                  loop
-                  muted
-                  autoPlay
-                >
-                  <source src="../images/sunwaves.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            </MediaQuery>
-          <MediaQuery query="(max-device-width: 1224px)">
-            <div
-              className="video-container"
-              style={{
-              }}
-            >
-              <img
-                src="../images/home.jpg"
-                alt="heron"
-                style={{ height: '100vh', width: '100vw' }}
-                className="images2"
-              />
-            </div>
-          </MediaQuery>
+      <div>
+        <TemporaryDrawer />
+        <MediaQuery query="(min-device-width: 1224px)">
           <div
-            className="overlay"
+            className="video-container"
             style={{
-              fontFamily: 'Dancing Script',
-              fontSize: '3vw',
-              padding: '150px',
+              marginBottom: 100,
+              marginTop: -70,
             }}
           >
+            <div>You are a tablet or mobile phone</div>
+            <video
+              id="background-video"
+              style={{
+                height: 'auto',
+                width: '100%',
+                zindex: '0',
+              }}
+              loop
+              muted
+              autoPlay
+            >
+              <source src="../images/sunwaves.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </MediaQuery>
+        <MediaQuery query="(max-device-width: 1224px)">
+          <div
+            className="video-container"
+            style={{
+            }}
+          >
+            <img
+              src="../images/home.jpg"
+              alt="heron"
+              style={{ height: '100vh', width: '100vw' }}
+              className="images2"
+            />
+          </div>
+        </MediaQuery>
+        <div
+          className="overlay"
+          style={{
+            fontFamily: 'Dancing Script',
+            fontSize: '3vw',
+            padding: '150px',
+          }}
+        >
           <h2 style={{ paddingLeft: '150px' }}>
-            {' '}
             Ateliers "Bien-être et Créativité"
           </h2>
-            <h3
-              className="sousTitre"
-              style={{ fontFamily: 'Dancing Script', paddingLeft: '150px' }}
-            >
-              {' '}
+          <h3
+            className="sousTitre"
+            style={{ fontFamily: 'Dancing Script', paddingLeft: '150px' }}
+          >
             Le Teich
-            </h3>
-          </div>
-          <Link to="#ateliers">
-            <i className="fas fa-angle-double-down" />
-          </Link>
-          {this.getUpcomingAteliers()}
-          <Footer />
+          </h3>
         </div>
+        <Link to="#ateliers">
+          <i className="fas fa-angle-double-down" />
+        </Link>
+        {this.getUpcomingAteliers()}
+        <Footer />
+      </div>
     );
   }
 }
