@@ -1,22 +1,22 @@
 import mysql from 'mysql';
 
- const connection = mysql.createConnection({
-  multipleStatements: true,
-  host: 'sql7.freemysqlhosting.net',
-  user: 'sql7239441',
-  password: 'lI1KZJjzVK',
-  database: 'sql7239441',
-});
+//  const connection = mysql.createConnection({
+//   multipleStatements: true,
+//   host: 'sql7.freemysqlhosting.net',
+//   user: 'sql7239441',
+//   password: 'lI1KZJjzVK',
+//   database: 'sql7239441',
+// });
  
 // BASE DE DONNEES LOCALE
-/* const connection = mysql.createConnection({
+const connection = mysql.createConnection({
   multipleStatements: true,
   host: 'localhost',
   user: 'root',
-  password: 'Nz1rm1995.',
-  database: 'Herons',
+  password: 'GASCAR5121mada!',
+  database: 'herons',
 });
- */
+
 connection.connect((err) => {
   if (!err) {
     console.log('Database is connected');
