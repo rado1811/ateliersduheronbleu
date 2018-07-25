@@ -15,14 +15,26 @@ const styles = (theme) => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  spaceFields: {
+    justifyContent: 'space-between',
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200,
+    width: 250,
+  },
+  textArea: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
   },
   menu: {
     width: 200,
+  },
+  submit: {
+    width: '100%',
+    marginTop: 20,
   },
 });
 
@@ -171,8 +183,9 @@ class Contact extends Component {
                 onSubmit={this.handleSubmit}
                 style={{ margin: 'auto', marginTop: 10 }}
               >
-                <Grid item md={6}>
+                <Grid container className={classes.spaceFields}>
                   <TextField
+                    className={classes.textArea}
                     id="multiline-static"
                     name="message"
                     label="Entrez votre texte"
@@ -184,8 +197,7 @@ class Contact extends Component {
                     onChange={this.updateMessageField}
                   />
                 </Grid>
-                <Grid container>
-                  <div>
+                <Grid container className={classes.spaceFields}>
                     <TextField
                       type="text"
                       className={classes.textField}
@@ -196,8 +208,6 @@ class Contact extends Component {
                       fullWidth
                       margin="normal"
                     />
-                  </div>
-                  <div>
                     <TextField
                       type="text"
                       className={classes.textField}
@@ -208,10 +218,8 @@ class Contact extends Component {
                       fullWidth
                       margin="normal"
                     />
-                  </div>
                 </Grid>
-                <Grid container>
-                  <div>
+                <Grid container className={classes.spaceFields}>
                     <TextField
                       type="text"
                       className={classes.textField}
@@ -222,8 +230,6 @@ class Contact extends Component {
                       fullWidth
                       margin="normal"
                     />
-                  </div>
-                  <div>
                     <TextField
                       id="email"
                       type="email"
@@ -235,9 +241,8 @@ class Contact extends Component {
                       fullWidth
                       margin="normal"
                     />
-                  </div>
                 </Grid>
-                <div>
+                <div className={classes.submit}>
                   <Button
                     onClick={this.handleSubmit}
                     type="submit"
