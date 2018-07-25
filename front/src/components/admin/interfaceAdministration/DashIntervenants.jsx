@@ -215,15 +215,19 @@ class DashIntervenants extends React.Component {
                         </TableCell>) : (
                         <TableCell>
                           <Tooltip title="Supprimer">
-                            <IconButton aria-label="Delete">
-                              <DeleteIcon
-                                onClick={() =>
-                                  this.deleteIntervenants(
-                                    intervenant.id_intervenant
-                                  )
-                                }
-                              />
-                            </IconButton>
+                            <form>
+                              <IconButton 
+                                aria-label="Delete"
+                                type='submit'>
+                                <DeleteIcon
+                                  onClick={() =>
+                                    this.deleteIntervenants(
+                                      intervenant.id_intervenant
+                                    )
+                                  }
+                                />
+                              </IconButton>
+                            </form>
                           </Tooltip>
                         </TableCell>
                         )       

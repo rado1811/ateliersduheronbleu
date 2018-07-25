@@ -57,7 +57,7 @@ class FormulaireIntervenant extends Component {
     this.setState(change);
   };
 
-  handleSubmit = (e) => {
+  handleSubmitIntervenant = (e) => {
     e.preventDefault();
 
     let form = {
@@ -89,7 +89,7 @@ class FormulaireIntervenant extends Component {
   };
 
   // ========== UPDATE =========
-  handleUpdate = (e) => {
+  handleUpdateIntervenant = (e) => {
     e.preventDefault();
 
     let form = {
@@ -144,7 +144,7 @@ class FormulaireIntervenant extends Component {
             ) : null}
             <form
               onSubmit={
-                isFromEditIntervenant ? this.handleUpdate : this.handleSubmit
+                isFromEditIntervenant ? this.handleUpdateIntervenant : this.handleSubmitIntervenant
               }
             >
               <Grid container spacing={24}>

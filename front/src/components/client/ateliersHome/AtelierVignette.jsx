@@ -13,82 +13,77 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { selectAteliers } from '../../../actions/index';
 
-const Reserver = props => <Link to="#formParticipants" {...props} />;
+const Reserver = props => <Link to="/ateliers/#formParticipants" {...props} />;
 const Atelier = props => <Link to="/ateliers" {...props} />;
 
-const AtelierVignette = (props) => {
-  return (
-    <Grid
-      item
-      md={4}
-      sm={12}
+const AtelierVignette = props => (
+  <Grid
+    item
+    md={4}
+    sm={12}
+    style={{
+      padding: 10,
+    }}
+  >
+    <Card
+      justify="center"
       style={{
-        padding: 10,
+        minHeight: '65vh',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        maxWidth: '345',
       }}
     >
-      <Card
-        justify="center"
+      <CardMedia
+        image={props.image}
+        title="Héron"
         style={{
-          minHeight: '465',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          maxWidth: '345',
+          height: '0',
+          paddingTop: '56.25%',
         }}
-      >
-        <CardMedia
-          image={props.image}
-          title="Héron"
-          style={{
-            height: '0',
-            paddingTop: '56.25%',
-          }}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="headline" component="h2">
-            {props.name}
-          </Typography>
-          <Typography component="h3">
-            <Moment format="DD/MM/YYYY">{props.date}</Moment>
-          </Typography>
+      />
+      <CardContent>
+        <Typography style={{ height: 64 }} gutterBottom variant="headline" component="h2">
+          {props.name}
+        </Typography>
+        <Typography component="h3">
+          <Moment format="DD/MM/YYYY">{props.date}</Moment>
+        </Typography>
 
-          <Typography component="h3">
-            Places disponibles: {props.places_disponibles} <br />
-            Co-animation: {props.intervenant_nom}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button
-            size="small"
-            style={{ backgroundColor: '#B2C4CB', color: 'white' }}
-            component={Reserver}
-          >
-            Pré-réserver
-          </Button>
-          <Button
-            size="small"
-            style={{ backgroundColor: '#B2C4CB', color: 'white' }}
-            onClick={() => {
-              props.selectAteliers(props.ateliers[props.indexAtelier]);
-              window.scrollTo(0, 0);
-            }}
-            component={Atelier}
-          >
-            En savoir plus
-          </Button>
-        </CardActions>
-      </Card>
-    </Grid>
-  );
-};
+        <Typography component="h3">
+          Co-animation: {props.intervenant_nom}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button
+          size="small"
+          style={{ backgroundColor: '#B2C4CB', color: 'white' }}
+          component={Reserver}
+        >
+          Pré-réserver
+        </Button>
+        <Button
+          size="small"
+          style={{ backgroundColor: '#B2C4CB', color: 'white' }}
+          onClick={() => {
+            props.selectAteliers(props.ateliers[props.indexAtelier]);
+            window.scrollTo(0, 0);
+          }}
+          component={Atelier}
+        >
+          En savoir plus
+        </Button>
+      </CardActions>
+    </Card>
+  </Grid>
+);
 
 AtelierVignette.propTypes = {
   image: PropTypes.string.isRequired,
-  intervenant_prenom: PropTypes.string.isRequired,
-  intervenant_nom: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   indexAtelier: PropTypes.number.isRequired,
+  intervenant_nom: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  places_disponibles: PropTypes.number.isRequired,
   selectAteliers: PropTypes.func.isRequired,
   ateliers: PropTypes.arrayOf(Array).isRequired,
 };

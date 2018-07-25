@@ -33,12 +33,14 @@ class FormAtelier extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.isFromEdit) {
       this.setState({
-        debut: nextProps.ateliers[nextProps.indexAtelierFromEdit].debut,
+        debut: nextProps.ateliers[nextProps.indexAtelierFromEdit].debut.split(
+          'T'
+        )[0],
         formule: nextProps.ateliers[nextProps.indexAtelierFromEdit].formule,
         id_atelier: this.props.ateliers[nextProps.indexAtelierFromEdit]
           .id_atelier,
-        id_intervenant: this.props.ateliers[nextProps.indexAtelierFromEdit]
-          .id_intervenant,
+        nom_intervenant: this.props.ateliers[nextProps.indexAtelierFromEdit]
+          .nom_intervenant,
         lieu: nextProps.ateliers[nextProps.indexAtelierFromEdit].lieu,
         nb_participants:
           nextProps.ateliers[nextProps.indexAtelierFromEdit].nb_participants,
@@ -128,7 +130,7 @@ class FormAtelier extends Component {
   };
 
   // ========   AJOUT =========
-  handleSubmit = (event) => {
+  handleSubmitAtelier = (event) => {
     event.preventDefault();
     let form = {
       ...this.state,
@@ -151,7 +153,7 @@ class FormAtelier extends Component {
   };
 
   // ========== UPDATE =========
-  handleUpdate = (event) => {
+  handleUpdateAtelier = (event) => {
     event.preventDefault();
 
     let form = {
@@ -165,25 +167,23 @@ class FormAtelier extends Component {
 
     axios
       .put('/api/ateliers', data)
-      .then(
-        (res) => this.setState({ flash: 'Atelier modifié', open: true }),
-      )
+      .then((res) => this.setState({ flash: 'Atelier modifié', open: true }))
       .then(
         this.setState({
-        nom_atelier: '',
-        debut: '',
-        nb_participants: '',
-        prix: '',
-        contenu: '',
-        formule: '',
-        lieu: '',
-        photo_atelier: {},
-        programme: '',
-        id_atelier: '',
-        id_intervenant: '',
-        places_disponibles: '',
-      })
-    )
+          nom_atelier: '',
+          debut: '',
+          nb_participants: '',
+          prix: '',
+          contenu: '',
+          formule: '',
+          lieu: '',
+          photo_atelier: {},
+          programme: '',
+          id_atelier: '',
+          id_intervenant: '',
+          places_disponibles: '',
+        })
+      );
     setTimeout(() => {
       this.props.history.push('/admin/administration');
     }, 2500);
@@ -201,7 +201,7 @@ class FormAtelier extends Component {
       >
         <Paper style={{ padding: 20 }} elevation={24}>
           <div>
-            <form onSubmit={isFromEdit ? this.handleUpdate : this.handleSubmit}>
+            <form onSubmit={isFromEdit ? this.handleUpdateAtelier : this.handleSubmitAtelier}>
               {isFromEdit ? (
                 <h1 style={{ textAlign: 'center' }}>
                   Modification d'un atelier
@@ -209,10 +209,9 @@ class FormAtelier extends Component {
               ) : (
                 <h1 style={{ textAlign: 'center' }}>Ajouter un atelier</h1>
               )}
-              <Grid container spacing={24}>
-                <Grid item xs={12} sm={6}>
+              <Grid container spacing={24} style={{ padding: 15 }}>
                   <TextField
-                    style={{ margin: 15 }}
+                    style={{ width: '100%', margin: 15 }}
                     name="nom"
                     required
                     label="Titre de l'Atelier"
@@ -221,24 +220,23 @@ class FormAtelier extends Component {
                     onChange={this.updateNomField}
                   />
                   <br />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <br />
+              </Grid>
+              <Grid container spacing={24}>
+                <Grid item xs={12} sm={4}>
                   <TextField
                     style={{ margin: 15 }}
                     name="debut"
                     required
-                    label=""
+                    label="Date de début :"
+                    InputLabelProps={{
+                      shrink: true
+                    }}
                     type="date"
                     value={this.state.debut}
                     onChange={this.updateDebutField}
                   />
-                  <br />
                 </Grid>
-              </Grid>
-              <Grid container spacing={24}>
-                <Grid item xs={12} sm={6}>
-                  <br />
+                <Grid item xs={12} sm={4}>
                   <TextField
                     style={{ margin: 15, width: 200 }}
                     name="nb_participants"
@@ -249,10 +247,8 @@ class FormAtelier extends Component {
                     value={this.state.nb_participants}
                     onChange={this.updateNbField}
                   />
-                  <br />
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                  <br />
+                <Grid item xs={12} sm={4}>
                   <TextField
                     style={{ margin: 15 }}
                     name="prix"
@@ -262,7 +258,6 @@ class FormAtelier extends Component {
                     value={this.state.prix}
                     onChange={this.updatePrixField}
                   />
-                  <br />
                 </Grid>
               </Grid>
               <TextField
@@ -325,16 +320,16 @@ class FormAtelier extends Component {
                 <br />
                 <br />
                 <Grid item xs={12} sm={6}>
-                <TextField
-                style={{ margin: 15 }}
-                fullWidth
-                multiline
-                name="id_intervenant"
-                label="Intervenants"
-                type="text"
-                value={this.state.nom_intervenant}
-                onChange={this.updateIntervenantField}
-              />
+                  <TextField
+                    style={{ margin: 15 }}
+                    fullWidth
+                    multiline
+                    name="nom_intervenant"
+                    label="Intervenants"
+                    type="text"
+                    value={this.state.nom_intervenant}
+                    onChange={this.updateIntervenantField}
+                  />
                 </Grid>
               </Grid>
               <br />
@@ -375,7 +370,7 @@ class FormAtelier extends Component {
                     value="Submit"
                     variant="raised"
                   >
-                    Enregistrer
+                    Valider
                   </Button>
                 )}
               </div>

@@ -11,7 +11,6 @@ import InfoIcon from '@material-ui/icons/Info';
 import Avatar from '@material-ui/core/Avatar';
 import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
-import BoutonContact from '../client/BoutonContact';
 import { fetchIntervenants } from '../../actions/intervenants';
 import IntervenantsTile from './IntervenantsTile';
 import Footer from './footer/Footer';
@@ -39,7 +38,6 @@ class Intervenants extends Component {
     return (
       <div style={{ marginTop: 60 }}>
         <TemporaryDrawer />
-        <BoutonContact />
         <Grid container spacing={24}>
           <Grid item xs={12} md={4}>
             <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>

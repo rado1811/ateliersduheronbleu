@@ -3,6 +3,7 @@ import { HashLink as Link } from 'react-router-hash-link';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import MediaQuery from 'react-responsive';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -10,12 +11,11 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AtelierVignette from '../components/client/ateliersHome/AtelierVignette';
 import { fetchAteliers } from '../actions/ateliers';
-import BoutonContact from '../components/client/BoutonContact';
 import Footer from '../components/client/footer/Footer';
 import './AtelierHome.css';
 import TemporaryDrawer from '../components/client/navbar/TemporaryDrawer';
 
-const styles = (theme) => ({
+const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
   },
@@ -34,12 +34,13 @@ class AtelierHome extends Component {
   }
 
   getUpcomingAteliers() {
-    const ateliers = this.state.toggleAteliers
+    const ateliers = (this.props.ateliers.length > 0 && this.state.toggleAteliers)
       ? this.props.ateliers
       : this.props.ateliers.slice(0, 3);
     const iconButton = this.state.toggleAteliers ? <RemoveIcon /> : <AddIcon />;
+
     return (
-      <Grid id="ateliers" container spacing={16} justify="center">
+      <Grid id="ateliers" container justify="center">
         {ateliers.map((atelier, i) => (
           <AtelierVignette
             key={atelier.id_atelier}
@@ -52,14 +53,17 @@ class AtelierHome extends Component {
             indexAtelier={i}
           />
         ))}
-        <Button
-          variant="fab"
-          color="primary"
-          style={{ backgroundColor: '#B2C4CB' }}
-          onClick={() => this.toggleAteliers()}
-        >
-          {iconButton}
-        </Button>
+
+        <div className="fullwidth">
+          <Button
+            variant="fab"
+            color="primary"
+            style={{ backgroundColor: '#B2C4CB' }}
+            onClick={() => this.toggleAteliers()}
+          >
+            {iconButton}
+          </Button>
+        </div>
       </Grid>
     );
   }
@@ -75,28 +79,45 @@ class AtelierHome extends Component {
     return (
       <div>
         <TemporaryDrawer />
-        <div
-          className="video-container"
-          style={{
-            marginBottom: 100,
-            marginTop: -70,
-          }}
-        >
-          <video
-            id="background-video"
+        <MediaQuery query="(min-device-width: 1224px)">
+          <div
+            className="video-container"
             style={{
-              height: 'auto',
-              width: '100%',
-              zindex: '0',
+              marginBottom: 100,
+              marginTop: -70,
             }}
-            loop
-            muted
-            autoPlay
           >
-            <source src="../images/sunwaves.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
+            <div>You are a tablet or mobile phone</div>
+            <video
+              id="background-video"
+              style={{
+                height: 'auto',
+                width: '100%',
+                zindex: '0',
+              }}
+              loop
+              muted
+              autoPlay
+            >
+              <source src="../images/sunwaves.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </MediaQuery>
+        <MediaQuery query="(max-device-width: 1224px)">
+          <div
+            className="video-container"
+            style={{
+            }}
+          >
+            <img
+              src="../images/home.jpg"
+              alt="heron"
+              style={{ height: '100vh', width: '100vw' }}
+              className="images2"
+            />
+          </div>
+        </MediaQuery>
         <div
           className="overlay"
           style={{
@@ -106,14 +127,12 @@ class AtelierHome extends Component {
           }}
         >
           <h2 style={{ paddingLeft: '150px' }}>
-            {' '}
             Ateliers "Bien-être et Créativité"
           </h2>
           <h3
             className="sousTitre"
             style={{ fontFamily: 'Dancing Script', paddingLeft: '150px' }}
           >
-            {' '}
             Le Teich
           </h3>
         </div>
@@ -121,7 +140,6 @@ class AtelierHome extends Component {
           <i className="fas fa-angle-double-down" />
         </Link>
         {this.getUpcomingAteliers()}
-        <BoutonContact />
         <Footer />
       </div>
     );

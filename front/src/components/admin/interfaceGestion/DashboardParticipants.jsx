@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
-import { fetchParticipants } from '../../../actions/participants';
+import { fetchParticipants, updateParticipant, deleteParticipant } from '../../../actions/participants';
 
 class DashboardParticipants extends Component {
   componentDidMount() {
@@ -25,10 +25,9 @@ class DashboardParticipants extends Component {
       },
       body: JSON.stringify({ id_participant }),
     })
-      .then((res) => res)
-      .then((res) =>
-        this.setState({ flash: 'participant supprimé', open: true })
-      )
+      .then(() =>{
+        this.props.deleteParticipant(id_participant);
+      })
       .catch((err) => err);
   };
 
@@ -41,7 +40,9 @@ class DashboardParticipants extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ id_participant }),
-    }).then((res) => {
+    })
+    .then(res => res.json())
+    .then((res) => {
       fetch('/mail/participant/confirme', {
         method: 'POST',
         headers: new Headers({
@@ -52,7 +53,7 @@ class DashboardParticipants extends Component {
           id_atelier,
         }),
       });
-      this.setState({ flash: 'réservation validée', open: true });
+      this.props.updateParticipant(id_participant, res.status);
     });
   };
 
@@ -65,7 +66,9 @@ class DashboardParticipants extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ id_participant }),
-    }).then((res) => {
+    })
+    .then(res => res.json())
+    .then((res) => {
       fetch('/mail/participant/annule', {
         method: 'POST',
         headers: new Headers({
@@ -76,7 +79,7 @@ class DashboardParticipants extends Component {
           id_atelier,
         }),
       });
-      this.setState({ flash: 'Réservation annulée', open: true });
+      this.props.updateParticipant(id_participant, res.status);
     });
   };
 
@@ -119,14 +122,7 @@ class DashboardParticipants extends Component {
                           color: 'green',
                         }}
                         onClick={() => {
-                          {
                             this.validerStatut(participant);
-                          }
-                          {
-                            setTimeout(() => {
-                              this.props.history.push('/admin/gestion');
-                            }, 2000);
-                          }
                         }}
                       >
                         <Icon>done</Icon>
@@ -143,14 +139,7 @@ class DashboardParticipants extends Component {
                           marginRight: 15,
                         }}
                         onClick={() => {
-                          {
                             this.annulerStatut(participant);
-                          };
-                          {
-                            setTimeout(() => {
-                              this.props.history.push('/admin/');
-                            }, 2000);
-                          }
                         }}
                       >
                         <Icon>clear</Icon>
@@ -166,14 +155,7 @@ class DashboardParticipants extends Component {
                           color: 'black',
                         }}
                         onClick={() => {
-                          {
                             this.supprimerStatut(participant.id_participant);
-                          };
-                          {
-                            setTimeout(() => {
-                              this.props.history.push('/admin/');
-                            }, 2000);
-                          }
                         }}
                       >
                         <Icon>delete_sweep</Icon>
@@ -200,5 +182,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { fetchParticipants }
+  { fetchParticipants, updateParticipant, deleteParticipant }
 )(DashboardParticipants);

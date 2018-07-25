@@ -24,6 +24,13 @@ const styles = {
     width: 'auto',
   },
 };
+
+const buttonStyle = {
+  fontFamily: 'Montserrat',
+  color: '#FFFFFF',
+  fontWeight: 'bold',
+};
+
 /*
 ======= ROUTING =========
 */
@@ -39,62 +46,81 @@ class TemporaryDrawer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      top: false,
       left: false,
-      bottom: false,
-      right: false,
     };
   }
 
-  toggleDrawer = (side, open) => () => {
+  toggleDrawer(side, open) {
     this.setState({
       [side]: open,
     });
-  };
+  }
 
   render() {
     const { classes } = this.props;
     return (
       <div>
-        <AppBar position="fixed" style={{marginBottom: 10, backgroundColor: '#B2C4CB', color : '#000000'}} >
+        <AppBar
+          position="fixed"
+          style={{ marginBottom: 10, backgroundColor: '#B2C4CB', color: '#000000' }}
+        >
           <Toolbar>
             <Hidden smUp>
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
-                onClick={this.toggleDrawer('left', true)}
+                onClick={() => this.toggleDrawer('left', true)}
               >
                 <MenuIcon />
               </IconButton>
             </Hidden>
             <Typography
               variant="title"
-              style={{ flex: 1, fontFamily: 'Montserrat', color : '#FFFFFF	', fontWeight: 'bold' }}
+              style={{
+                flex: 1,
+                fontFamily: 'Montserrat',
+                color: '#FFFFFF',
+                fontWeight: 'bold',
+              }}
               color="inherit"
               noWrap
               component={MyAccueil}
-              
-              
             >
               Les Ateliers du Héron Bleu
             </Typography>
             <Hidden xsDown>
-              <Button color="inherit" component={MyAccueil} style={{fontFamily: 'Montserrat', color : '#FFFFFF	', fontWeight: 'bold'}}>
+              <Button
+                color="inherit"
+                component={MyAccueil}
+                style={buttonStyle}
+              >
                 Accueil
               </Button>
             </Hidden>
             <Hidden xsDown>
-              <Button color="inherit" component={MyAteliers} style={{fontFamily: 'Montserrat', color : '#FFFFFF	', fontWeight: 'bold'}}>
+              <Button
+                color="inherit"
+                component={MyAteliers}
+                style={buttonStyle}
+              >
                 Ateliers
               </Button>
             </Hidden>
             <Hidden xsDown>
-              <Button color="inherit" component={MyIntervenants} style={{fontFamily: 'Montserrat', color : '#FFFFFF	', fontWeight: 'bold'}}>
+              <Button
+                color="inherit"
+                component={MyIntervenants}
+                style={buttonStyle}
+              >
                 Intervenants
               </Button>
             </Hidden>
             <Hidden xsDown>
-              <Button color="inherit" component={MyContact} style={{fontFamily: 'Montserrat', color : '#FFFFFF	', fontWeight: 'bold'}}>
+              <Button
+                color="inherit"
+                component={MyContact}
+                style={buttonStyle}
+              >
                 Contact
               </Button>
             </Hidden>
@@ -102,7 +128,7 @@ class TemporaryDrawer extends React.Component {
         </AppBar>
         <Drawer
           open={this.state.left}
-          onClose={this.toggleDrawer('left', false)}
+          onClose={() => this.toggleDrawer('left', false)}
         >
           <div className={classes.drawerHeader} />
           <Divider />
@@ -112,7 +138,7 @@ class TemporaryDrawer extends React.Component {
               <ListItemText />
             </ListItem>
             <ListItem button component={MyAteliers}>
-              Atelier
+              Ateliers
               <ListItemText />
             </ListItem>
             <ListItem button component={MyIntervenants}>
@@ -131,7 +157,7 @@ class TemporaryDrawer extends React.Component {
 }
 
 TemporaryDrawer.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default withStyles(styles)(TemporaryDrawer);
