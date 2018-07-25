@@ -19,6 +19,8 @@ DEMARRAGE RAPIDE / INSTALLATION DU PROJET
 
 Cloner le repo : git clone https://github.com/WildCodeSchool/bdx-0218-js-heronsbleus.git
 <p> Ouvrir le projet, se déplacer dans le dossier front et faire un "npm install" afin d'installer toutes les dépendances nécessaires.</p>
+<p>Faire la même chose dans le dossier back.</p>
+
 
 VISUALISATION DU PROJET 
 
@@ -132,6 +134,7 @@ EXECUTION DE LA DOCUMENTATION LOCALEMENT / UTILISATION
 
 <p>1 - Ouvrir un terminal au niveau de /front</p>
 <p>2 - Exécuter "npm start".</p>
+<p>2 - Faire la même procédure au niveau de /back.</p>
 <p>Vous pouvez alors voir votre connexion à la base de donnée et surveiller que le serveur se connecte bien.</p>
 <p>3 - Ouvrez http://localhost:3000 dans votre navigateur.</p>
 
