@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Moment from 'react-moment';
 import Paper from '@material-ui/core/Paper';
-import BoutonContact from '../components/client/BoutonContact';
 import { selectAteliers } from '../actions/index';
 import './AteliersDetails.css';
 
@@ -16,7 +15,6 @@ const AteliersList = ({ ateliers, selectAteliers }) => (
       paddingTop: 0,
     }}
   >
-    <BoutonContact />
     <div
       style={{
         width: '100%',

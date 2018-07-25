@@ -11,7 +11,6 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AtelierVignette from '../components/client/ateliersHome/AtelierVignette';
 import { fetchAteliers } from '../actions/ateliers';
-import BoutonContact from '../components/client/BoutonContact';
 import Footer from '../components/client/footer/Footer';
 import './AtelierHome.css';
 import TemporaryDrawer from '../components/client/navbar/TemporaryDrawer';
@@ -139,7 +138,6 @@ class AtelierHome extends Component {
             <i className="fas fa-angle-double-down" />
           </Link>
           {this.getUpcomingAteliers()}
-          <BoutonContact />
           <Footer />
         </div>
     );
