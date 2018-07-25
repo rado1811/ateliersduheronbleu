@@ -1,50 +1,44 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import { fetchInscrits } from '../../../actions/inscrits';
 
 class RowAtelier extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nbinscrits: 0,
+      total: 0,
     };
   }
 
   componentWillMount() {
-    this.props.fetchInscrits();
-    this.getParticipantsCount();
-  }
+    axios.get(`/api/participant/count/${this.props.idAtelier}`)
+    .then(res => {
+      this.setState({
+        total: res.data.total,
+      });
+    });
 
-  getParticipantsCount() {
-    let nbInscrits = this.state.nbinscrits;
-    for (let i = 0; i < this.props.inscrits.length; i++) {
-      if (this.props.inscrits[i].id_atelier === this.props.idAtelier ) {
-        nbInscrits += 1;
-      }
-    }
-    this.setState({ nbinscrits: nbInscrits });
+    //this.props.fetchInscrits();
+    //this.getParticipantsCount();
   }
 
   render() {
+    const nbTotal = this.props.nbParticipants;
+    const totalInscrits = this.state.total;
+    const nbRestant = nbTotal - totalInscrits;
     return (
       <TableRow key={this.props.idAtelier}>
         <TableCell component="th" scope="row">
           {this.props.nomAtelier}
         </TableCell>
-        <TableCell numeric>{this.props.nbParticipants}</TableCell>
-        <TableCell numeric>{this.state.nbinscrits}</TableCell>
-        <TableCell numeric>{this.props.nbParticipants - this.state.nbinscrits}</TableCell>
+        <TableCell numeric>{nbTotal}</TableCell>
+        <TableCell numeric>{totalInscrits}</TableCell>
+        <TableCell numeric>{nbRestant}</TableCell>
       </TableRow>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    inscrits: state.inscrits.inscrits,
-  };
-}
-
-export default connect(mapStateToProps, { fetchInscrits })(RowAtelier);
+export default RowAtelier;
