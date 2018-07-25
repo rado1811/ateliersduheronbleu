@@ -164,5 +164,21 @@ Amélie Barboteau
 
 BONNE VISITE 
 
+BUGS:
+- Responsivité page Ateliers
+- compteur du dashboard avec le nombre de places réservées ne se met pas à jour automatique lors de la modification des statuts des participants
+- AtelierDetail.jsx => Photo par défaut sur la page Ateliers ne s'affiche pas
+- Console BACK => GET /images/undefined 500 0.699 ms - 1429
+TypeError: Cannot set property 'message' of undefined
+at C:/Users/RADO1/Desktop/NEW Heron Bleu/bdx-0218-js-heronsbleus/back/app.js:54:3
+- console FRONT => GET http://localhost:3000/images/undefined 500 (Internal Server Error)
+- Delete d'un atelier / d'un intervenant ne supprime pas les photos correspondantes dans front/public/images
+- Modif et Ajout ateliers / intervenants => statut 200 aléatoire mais modifs toujours prises en compte
+
+FONCTIONS MANQUANTES
+- Securisation des routes Front et Back
+- Envoi de mail de rappel 10 jours avant l'atelierdoc
+- récupérer le mot de passe administrateur
+
 
 
