@@ -130,7 +130,7 @@ class FormAtelier extends Component {
   };
 
   // ========   AJOUT =========
-  handleSubmit = (event) => {
+  handleSubmitAtelier = (event) => {
     event.preventDefault();
     let form = {
       ...this.state,
@@ -153,7 +153,7 @@ class FormAtelier extends Component {
   };
 
   // ========== UPDATE =========
-  handleUpdate = (event) => {
+  handleUpdateAtelier = (event) => {
     event.preventDefault();
 
     let form = {
@@ -201,7 +201,7 @@ class FormAtelier extends Component {
       >
         <Paper style={{ padding: 20 }} elevation={24}>
           <div>
-            <form onSubmit={isFromEdit ? this.handleUpdate : this.handleSubmit}>
+            <form onSubmit={isFromEdit ? this.handleUpdateAtelier : this.handleSubmitAtelier}>
               {isFromEdit ? (
                 <h1 style={{ textAlign: 'center' }}>
                   Modification d'un atelier
