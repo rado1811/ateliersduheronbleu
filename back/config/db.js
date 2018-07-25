@@ -13,7 +13,7 @@ import mysql from 'mysql';
   multipleStatements: true,
   host: 'localhost',
   user: 'root',
-  password: 'HERONbleu0!.',
+  password: 'Nz1rm1995.',
   database: 'Herons',
 });
  */
