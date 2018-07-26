@@ -12,7 +12,7 @@ import Footer from '../client/footer/Footer';
 import TemporaryDrawer from '../client/navbar/TemporaryDrawer';
 import AlertDialogSlide from './pageAteliers/AlertDialogSlide';
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -60,7 +60,7 @@ class Contact extends Component {
     this.props.fetchIntervenants();
   }
 
-  formSend() {
+  formSend = () => {
     const whatIsMissing = [];
     if (this.state.email === '') {
       whatIsMissing.push('Adresse mail');
@@ -82,27 +82,27 @@ class Contact extends Component {
       return false;
     }
     return true;
-  }
+  };
 
-  showDialogueBox(whatIsMissing) {
+  showDialogueBox = (whatIsMissing) => {
     this.setState({
       messageDialogue: whatIsMissing,
       alert: true,
     });
-  }
+  };
 
-  hideDialogueBox() {
+  hideDialogueBox = () => {
     this.setState({
       alert: false,
       messageDialogue: [],
     });
-  }
+  };
 
-  handleToogle() {
+  handleToogle = () => {
     this.setState({ open: !this.state.open });
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     if (this.formSend()) {
@@ -113,7 +113,7 @@ class Contact extends Component {
         }),
         body: JSON.stringify(this.state),
       })
-        .then(res => res.json())
+        .then((res) => res.json())
         .then(
           (res) => {
             this.setState({
@@ -125,43 +125,43 @@ class Contact extends Component {
             this.setState({
               flash: err.flash,
             });
-          },
+          }
         );
       this.setState({ flash: 'Message envoyé', open: true });
     } else {
       this.setState({ flash: 'Formulaire incomplet', open: true });
     }
-  }
+  };
 
-  updateEmailField(event) {
+  updateEmailField = (event) => {
     this.setState({
       email: event.target.value,
     });
-  }
+  };
 
-  updateFirstNameField(event) {
+  updateFirstNameField = (event) => {
     this.setState({
       prenom: event.target.value,
     });
-  }
+  };
 
-  updateLastNameField(event) {
+  updateLastNameField = (event) => {
     this.setState({
       nom: event.target.value,
     });
-  }
+  };
 
-  updatePhoneField(event) {
+  updatePhoneField = (event) => {
     this.setState({
       tel: event.target.value,
     });
-  }
+  };
 
-  updateMessageField(event) {
+  updateMessageField = (event) => {
     this.setState({
       message: event.target.value,
     });
-  }
+  };
 
   render() {
     const { classes } = this.props;
@@ -311,6 +311,6 @@ export default compose(
   withStyles(styles),
   connect(
     mapStateToProps,
-    { fetchIntervenants },
-  ),
+    { fetchIntervenants }
+  )
 )(Contact);

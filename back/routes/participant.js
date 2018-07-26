@@ -13,15 +13,17 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get('/reserve', (req, res) => {
-  connection.query('SELECT * FROM Participants left join Ateliers on Participants.id_atelier = Ateliers.id_atelier where Participants.statut != "annulé"', (err, data) => {
+router.get('/count/:id', (req, res) => {
+  const query = `SELECT count(id_participant) as total FROM Participants left join Ateliers on Participants.id_atelier = Ateliers.id_atelier where Ateliers.id_atelier = ${req.params.id} AND Participants.statut != "annulé"`
+  connection.query(query, (err, data) => {
     if (err) {
       res.send(err);
     } else {
-      res.json(data);
+      const total = data[0].total;
+      res.json({ total });
     }
   });
-});
+})
 
 router.post('/', (req, res) => {
   const select = `INSERT INTO Participants (email, tel, prenom, nom, id_atelier) VALUES 
